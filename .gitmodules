@@ -1,0 +1,6 @@
+[submodule "submodules/x-sheep-puzzles"]
+	path = submodules/x-sheep-puzzles
+	url = git@github.com:x-sheep/puzzles-unreleased.git
+[submodule "submodules/simon-tatham-puzzles"]
+	path = submodules/simon-tatham-puzzles
+	url = https://git.tartarus.org/simon/puzzles.git
