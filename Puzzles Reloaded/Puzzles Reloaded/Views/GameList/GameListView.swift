@@ -39,9 +39,8 @@ struct GameListView: View {
         configureToolbarDisplay()
     }
     
+    // MARK: Toolbar Design Configuration
     func configureToolbarDisplay() {
-        
-        print("Configuring Toolbar beep boop")
         
         let navbarAppearance = UINavigationBarAppearance()
         navbarAppearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
@@ -95,7 +94,8 @@ struct GameListView: View {
                             }
                         }
                     }
-                    .listStyle(SidebarListStyle())
+                    //.listStyle(SidebarListStyle())
+                    //.listStyle(.plain)
                     
                     
                 }
@@ -135,11 +135,12 @@ struct GameListView: View {
                     
                 }
             }
+            // MARK: Game Manager Setup Task
             .onAppear {
                 // Function creates the games list and attaches/creates the user settings to each game!
                 // Thoughts: Should this be moved to the root PuzzlesApp file?
-                gameManager.setupData(with: modelContext)
-                //gameManager.createGamesList(with: modelContext)
+                
+                gameManager.createGamesList(with: modelContext)
             }
             .sheet(isPresented: $settingsPageDisplayed) {
                 SettingsView()

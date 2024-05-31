@@ -20,6 +20,8 @@ struct PuzzleInteractionsView: UIViewRepresentable {
     var limitToBounds = true
     
     var allowSingleFingerPanning: Bool
+    var puzzleTilesize: Int // TODO: Remove these two values? May not be needed.
+    var adjustTapsToTilesize: Bool
 
 
     // A closure to call when touch data has arrived

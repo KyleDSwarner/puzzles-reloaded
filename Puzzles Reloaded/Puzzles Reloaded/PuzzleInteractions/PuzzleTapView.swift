@@ -49,6 +49,8 @@ class PuzzleTapView: UIView {
         isUserInteractionEnabled = true
     }
     
+    // MARK: Tap Scale Adjustment Functions
+    
     /*
         Determine the current scaling factor of the image on the screen compared to the requested puzzle size.
      */
@@ -65,6 +67,9 @@ class PuzzleTapView: UIView {
         
         let adjustedPoint = CGPoint(x: point.x / scaleFactorX(), y: point.y / scaleFactorY())
         
+        //
+        let tilesize = frontend?.puzzleTilesize ?? 0
+        
         //print("Scale: \(Float(scaleFactor)) old X: \(point.x) new X: \(adjustedPoint.x)")
         return adjustedPoint
     }
@@ -73,6 +78,7 @@ class PuzzleTapView: UIView {
         
     }
     
+    // MARK: Keypresses
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         // TODO - manage keyboard commands. WASD, Ctrl+S, etc
         let keycode = PuzzleKeycodes.SOLVE
@@ -80,19 +86,17 @@ class PuzzleTapView: UIView {
         
     }
 
+    // MARK: Touch Started
     // Triggered when a touch starts.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touches BEGAIN")
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         
         let adjustedLocation = adjustedTapLocation(point: location)
-        print(adjustedLocation)
         
-        print(self.frame.size) // SO, this gives us the ACTUAL size of the frame (393x393), which we need to adapt to the requested size of the puzzle (256 or 512) to build an ADJUSTED LOCATION to pass to the midend
+        // send(location, forEvent: .started)
         
-        send(location, forEvent: .started)
-        
+        // MARK: Long Press Trigger
         // If there's no long press configured, don't start the timer!
         if frontend?.controlOption.longPress != nil {
             //TODO: Adjustable timer interval?
@@ -120,9 +124,9 @@ class PuzzleTapView: UIView {
          */
     }
 
+    // MARK: Touch Dragging
     // Triggered when an existing touch moves.
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("Touches MOVED \(touches.count)")
         guard let touch = touches.first else { return }
         
         // End the long press timer if it isn't already
@@ -158,9 +162,10 @@ class PuzzleTapView: UIView {
         self.frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: command!.drag)
         
         
-        send(location, forEvent: .moved)
+        //send(location, forEvent: .moved)
     }
 
+    // MARK: Touch Finished
     // Triggered when the user lifts a finger.
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }

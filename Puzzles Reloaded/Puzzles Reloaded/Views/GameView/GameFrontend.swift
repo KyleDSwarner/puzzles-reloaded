@@ -26,6 +26,7 @@ class Frontend {
     var imageManager: PuzzleImageManager?
     var statusbarText: String = ""
     var gameId: String = ""
+    var puzzleTilesize: Int = 0
     
     var puzzleImage: CGImage?
     
@@ -55,6 +56,7 @@ class Frontend {
         let dimensions = midend.initGame() // Initialize the game and find the correct image boundaries
         self.imageManager = PuzzleImageManager(width: dimensions.x, height: dimensions.y) // Adding 10 to y dimensions to even out items that line riiiight up to the top of the puzzle
         midend.drawPuzzle() // Actually draw the puzzle, once the image manager knows its size & is ready to go.
+        self.puzzleTilesize = midend.getTilesize()
         
         //print("777 FORCE FULL REFRESH 777")
         //self.imageManager?.forceRefresh()
@@ -66,7 +68,7 @@ class Frontend {
     func refreshImage() {
         //print("Refreshing Image")
         self.puzzleImage = imageManager?.toImage()
-        updateFrontendFlags()
+        updateFrontendFlags() // We still need this to ensure we update undo/redo buttons, etc when the puzzle state changes.
     }
     
     func undoMove() {
@@ -94,7 +96,7 @@ class Frontend {
         self.canSolve = midend.isPuzzleAutoSolvable()
         
         //withAnimation(.easeInOut(duration: 2.0)) {
-            self.puzzleStatus = midend.getPuzzleStatus()
+        self.puzzleStatus = midend.getPuzzleStatus()
         //}
         
     }

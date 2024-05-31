@@ -93,6 +93,7 @@ struct GameView: View {
     @State private var displayingGameMenu = false
     @State private var displayingGameTypeMenu = false
     @State private var displayNewGameButton = false
+    @State private var displayRestartButton = false
     @State private var enableCompletionAnimation = false
     @State private var anchor: CGPoint = .zero
     
@@ -156,7 +157,8 @@ struct GameView: View {
                                 .scaledToFit()
                                 .padding(5)
                                 .overlay {
-                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $anchor, puzzleFrontend: frontend, limitToBounds: false, allowSingleFingerPanning: game.game.allowSingleFingerPanning) { point in
+                                    // MARK: Puzzle Interactions & Gestures
+                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $anchor, puzzleFrontend: frontend, limitToBounds: false, allowSingleFingerPanning: game.game.allowSingleFingerPanning, puzzleTilesize: frontend.puzzleTilesize, adjustTapsToTilesize: true) { point in // TODO: Adjust Taps from puzzle config
                                         print(point)
                                     }
                                     //GestureTransformView(transform: $transform)
@@ -204,38 +206,56 @@ struct GameView: View {
             
             Spacer()
             
-            
-            HStack {
-                if(frontend.gameHasStatusbar) {
-                    Text(frontend.statusbarText)
+            // MARK: Statusbar & Button Popups
+            VStack {
+                Spacer()
+                HStack {
+                    if(frontend.gameHasStatusbar) {
+                        Text(frontend.statusbarText)
+                            .padding(5)
+                            .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+                    }
+                    
+                    if displayNewGameButton {
+                        Button("New Game") {
+                            frontend.beginGame() // New Game Rename?
+                        }
                         .padding(5)
                         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
-                }
-                
-                if displayNewGameButton {
-                    Button("New Game") {
-                        frontend.beginGame() // New Game Rename?
+                        //.transition(AnyTransition.opacity.combined(with: .slide))
                     }
-                    .padding(5)
-                    .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
-                    //.transition(AnyTransition.opacity.combined(with: .slide))
+                    
+                    if displayRestartButton {
+                        Button("Restart") {
+                            frontend.midend.restartGame()
+                        }
+                        .padding(5)
+                        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+                        //.transition(AnyTransition.opacity.combined(with: .slide))
+                    }
                 }
             }
-            .frame(minHeight: 40) // <-- Keep a minimum height on this stack to prevent puzzle resizing when the new game button appears
+            .frame(height: 80) // <-- Keep a minimum height on this stack to prevent puzzle resizing when the new game button appears
+            // MARK: New Game & Restart Button Popup Config
             .onChange(of: frontend.puzzleStatus) { old, new in
                 // When the game is solved, animate the appearance of the new game button
-                if(new == .SOLVED) {
+                if(new == .SOLVED || new == .UNSOLVABLE) {
                     withAnimation(.smooth(duration: 0.5)) {
                         self.displayNewGameButton = true
+                        
+                        if new == .UNSOLVABLE {
+                            self.displayRestartButton = true
+                        }
                     }
                 }
                 else {
                     // New games shouldn't animate the disappearance
                     self.displayNewGameButton = false
+                    self.displayRestartButton = false
                 }
             }
             
-            
+            // MARK: Game Controls View
             HStack(alignment: .center) {
                 LazyGameControlsView(controlOption: $frontend.controlOption, touchControls: touchControls, buttonControls: game.game.buttonControls, numericButtonsFunction: game.game.numericButtonsBuilder, gameId: frontend.gameId, buttonPressFunction: emitButtonPress)
             }
@@ -256,13 +276,17 @@ struct GameView: View {
         
         //.toolbarBackground(Color.gray, for: .bottomBar)
         //.toolbarBackground(.visible, for: .bottomBar)
+        // MARK: Help Page Sheet
         .sheet(isPresented: $helpPageDisplayed) {
             GameHelpView(gameHelpData: game.game.helpPage)
         }
+        // MARK: Settings Page Sheet
         .sheet(isPresented: $settingsPageDisplayed) {
             SettingsView()
         }
+        // MARK: Toolbar
         .toolbar {
+            // MARK: Top Toolbar
             ToolbarItem(placement: .topBarLeading) {
                 Button("Back") {
                     cleanupAndBack()
@@ -281,6 +305,8 @@ struct GameView: View {
                 }
                 
             }
+            
+            // MARK: Bottom Toolbar
             ToolbarItemGroup(placement: .bottomBar) {
                 Menu("Open Game Menu", systemImage: "menucard") {
                     Button("New Game") {
@@ -368,6 +394,8 @@ struct GameView: View {
                 
                 Spacer()
                 
+                
+                // MARK: Game Presets Menu
                 Menu() {
                     ForEach(frontend.gamePresets) { preset in
                         Button() {
@@ -393,6 +421,8 @@ struct GameView: View {
                 .menuOrder(.fixed)
             }
         }
+        
+        // MARK: On Appear: Configure Frontend & Start Game
         .onAppear {
             //testBed()
             //let drawingapi = DrawingAPI()

@@ -53,7 +53,7 @@ class PuzzleImageManager {
     }
     
     func drawText(text: String, x: Int, y: Int, fontsize: Int, horizontalAlignment: TextHorizontalAlignment, verticalAlignment: TextVerticalAlignment, color: CGColor) {
-        // print("Draw Text: Printing '\(text)' at \(x)x\(y)")
+        //print("Draw Text: Printing '\(text)' at \(x)x\(y), color \(color.components)")
         
         var xPosition = CGFloat(x)
         var yPosition = CGFloat(y)
@@ -129,6 +129,7 @@ class PuzzleImageManager {
     }
     
     func drawPolygon(coordinates: [CGPoint], outlineColor: CGColor, fillColor: CGColor?) {
+        // print("Drawing Polygon")
         bitmap.beginPath()
         bitmap.move(to: coordinates[0])
         
@@ -152,9 +153,11 @@ class PuzzleImageManager {
     }
     
     func drawRectangle(x: Int, y: Int, width: Int, height: Int, fillColor: CGColor) {
+        //print("Drawing Rectangle of size \(width)x\(height) as \(x)x\(y) Rect Color \(fillColor.components)")
         bitmap.setFillColor(fillColor)
         //bitmap?.addRect(CGRect(x: x, y: y, width: width, height: height))
         bitmap.fill([CGRect(x: x, y: y, width: width, height: height)])
+        
     }
     
     func drawCircle(x: Int, y: Int, radius: Int, outlineColor: CGColor, fillColor: CGColor?) {

@@ -13,6 +13,12 @@ extension Puzzles {
     static var puzzlesXsheep: [GameConfig] {[
         puzzle_abcd,
         puzzle_ascent,
+        puzzle_boats,
+        puzzle_bricks,
+        puzzle_clusters,
+        puzzle_mathrax,
+        puzzle_rome,
+        puzzle_salad,
         puzzle_spokes,
         puzzle_sticks
     ]}
@@ -40,6 +46,62 @@ extension Puzzles {
         //let numButtons = Int(gameId.split(separator: ":")[0])
         return Puzzles.createButtonControls(numButtons ?? 0, keycodes: Puzzles.AlphaButtons)
     })
+    
+    // MARK: Ascent
+    static let puzzle_ascent = GameConfig(
+        name: "Ascent",
+        descritpion: "captain kirk is climbing a mountain, why is he climbing that mountain?",
+        imageName: "ascent",
+        game: ascent
+    )
+    
+    // MARK: Boats
+    static let puzzle_boats = GameConfig(
+        name: "Boats",
+        descritpion: "row row row your this",
+        imageName: "boats",
+        game: boats
+    )
+    
+    // MARK: Bricks
+    static let puzzle_bricks = GameConfig(
+        name: "Bricks",
+        descritpion: "build a building",
+        imageName: "bricks",
+        game: bricks
+    )
+    
+    // MARK: Clusters
+    static let puzzle_clusters = GameConfig(
+        name: "Clusters",
+        descritpion: "clustered!",
+        imageName: "clusters",
+        game: clusters
+    )
+    
+    // MARK: Mathrax
+    static let puzzle_mathrax = GameConfig(
+        name: "Mathrax",
+        descritpion: "Place each number according to the arithmetic clues",
+        imageName: "mathrax",
+        game: mathrax
+    )
+    
+    // MARK: Rome
+    static let puzzle_rome = GameConfig(
+        name: "Rome",
+        descritpion: "Fill the grid with arrows leadning to a goal",
+        imageName: "rome",
+        game: rome
+    )
+    
+    // MARK: Salad
+    static let puzzle_salad = GameConfig(
+        name: "Salad",
+        descritpion: "Place each character once in every row and column. Some squares remain empty",
+        imageName: "salad",
+        game: salad
+    )
     
     // MARK: Spokes
     static let puzzle_spokes = GameConfig(

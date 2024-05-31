@@ -10,21 +10,59 @@ import Foundation
 
 extension Puzzles {
     static var puzzlesAtoM: [GameConfig] {[
-        puzzle_abcd,
-        puzzle_ascent,
+        puzzle_blackbox,
+        puzzle_bridges,
+        puzzle_cube,
+        puzzle_dominosa,
+        puzzle_fifteen,
+        puzzle_flood,
+        puzzle_intertia,
+        puzzle_keen,
+        puzzle_lightup,
+        puzzle_magnets,
+        puzzle_map,
+        puzzle_mines
     ]}
 }
 
 extension Puzzles {
     
-
+    // MARK: Blackbox
+    static let puzzle_blackbox = GameConfig(
+        name: "Blackbox",
+        descritpion: "Find the hidden balls in the box by bouncing laser beams off them",
+        imageName: "blackbox",
+        game: blackbox
+    )
     
-    // MARK: Ascent
-    static let puzzle_ascent = GameConfig(
-        name: "Ascent",
-        descritpion: "captain kirk is climbing a mountain, why is he climbing that mountain?",
-        imageName: "ascent",
-        game: ascent
+    // MARK: Bridges
+    static let puzzle_bridges = GameConfig(
+        name: "Bridges",
+        descritpion: "Connect all the islands with a network of bridges.",
+        imageName: "bridges",
+        game: bridges
+    )
+    
+    // MARK: Cube
+    static let puzzle_cube = GameConfig(
+        name: "cube",
+        descritpion: "Pick up all the blue squares by rolling the cube over them",
+        game: cube)
+    
+    // MARK: Dominosa
+    static let puzzle_dominosa = GameConfig(
+        name: "Dominosa",
+        descritpion: "Tile the rectangle with a full set of dominoes",
+        imageName: "dominosa",
+        game: dominosa
+    )
+    
+    // MARK: Fifteen
+    static let puzzle_fifteen = GameConfig(
+        name: "Fifteen",
+        descritpion: "Slide the tiles around to arrange them into order",
+        imageName: "fifteen",
+        game: fifteen
     )
     
     // MARK: Flood
@@ -38,7 +76,7 @@ extension Puzzles {
     static let puzzle_intertia = GameConfig(
         name: "Intertia",
         descritpion: "get your mass in gear",
-        imageName: "intertia",
+        imageName: "inertia",
         game: inertia,
         allowSingleFingerPanning: false
     )

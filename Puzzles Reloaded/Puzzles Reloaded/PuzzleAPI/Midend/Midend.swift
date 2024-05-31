@@ -104,6 +104,10 @@ class Midend {
         return "no-game-id-found"
     }
     
+    func getTilesize() -> Int {
+        return Int(midend_tilesize(self.midendPointer))
+    }
+    
     func createMidend(frontend: inout Frontend) {
         
         guard let gameRef = game else {

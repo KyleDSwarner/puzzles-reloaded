@@ -21,7 +21,7 @@ struct GameListGridItem: View {
                 //    .fill(Color.primary)
                 Image("\(game.game.imageName)")
                     .resizable()
-                
+                    
                 //.padding(2)
                     .scaledToFit()
                     .padding(2)

@@ -10,16 +10,6 @@
 		923E63E32C00B9210027DF54 /* PuzzlesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63E22C00B9210027DF54 /* PuzzlesApp.swift */; };
 		923E63E72C00B9220027DF54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 923E63E62C00B9220027DF54 /* Assets.xcassets */; };
 		923E63EB2C00B9220027DF54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 923E63EA2C00B9220027DF54 /* Preview Assets.xcassets */; };
-		923E640E2C00B94E0027DF54 /* abcd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63F12C00B94E0027DF54 /* abcd.swift */; };
-		923E640F2C00B94E0027DF54 /* Ascent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63F22C00B94E0027DF54 /* Ascent.swift */; };
-		923E64102C00B94E0027DF54 /* Blackbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63F32C00B94E0027DF54 /* Blackbox.swift */; };
-		923E64112C00B94E0027DF54 /* Boats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63F42C00B94E0027DF54 /* Boats.swift */; };
-		923E64122C00B94E0027DF54 /* Bricks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63F52C00B94E0027DF54 /* Bricks.swift */; };
-		923E64132C00B94E0027DF54 /* Bridges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63F62C00B94E0027DF54 /* Bridges.swift */; };
-		923E64142C00B94E0027DF54 /* Clusters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63F72C00B94E0027DF54 /* Clusters.swift */; };
-		923E64162C00B94E0027DF54 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63F92C00B94E0027DF54 /* Cube.swift */; };
-		923E64172C00B94E0027DF54 /* Dominosa.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63FA2C00B94E0027DF54 /* Dominosa.swift */; };
-		923E64182C00B94E0027DF54 /* Fifteen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63FB2C00B94E0027DF54 /* Fifteen.swift */; };
 		923E64192C00B94E0027DF54 /* Filling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63FC2C00B94E0027DF54 /* Filling.swift */; };
 		923E641A2C00B94E0027DF54 /* Flip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63FD2C00B94E0027DF54 /* Flip.swift */; };
 		923E641B2C00B94E0027DF54 /* Galaxies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63FE2C00B94E0027DF54 /* Galaxies.swift */; };
@@ -68,7 +58,6 @@
 		923E64732C00B9E40027DF54 /* GameListUserConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E646E2C00B9E30027DF54 /* GameListUserConfig.swift */; };
 		923E64742C00B9E40027DF54 /* CodableWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E646F2C00B9E30027DF54 /* CodableWrapper.swift */; };
 		923E64752C00B9E40027DF54 /* Game-UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64702C00B9E40027DF54 /* Game-UserSettings.swift */; };
-		923E64762C00B9E40027DF54 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64712C00B9E40027DF54 /* Item.swift */; };
 		923E64852C00BE620027DF54 /* penrose-legacy.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E647F2C00BE620027DF54 /* penrose-legacy.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		923E64862C00BE620027DF54 /* penrose.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64812C00BE620027DF54 /* penrose.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		923E64912C00BE940027DF54 /* cube.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64892C00BE940027DF54 /* cube.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -84,7 +73,7 @@
 		923E64AB2C00BED00027DF54 /* unruly.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64A12C00BED00027DF54 /* unruly.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		923E64AC2C00BED00027DF54 /* undead.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64A22C00BED00027DF54 /* undead.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		923E64AD2C00BED00027DF54 /* tents.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64A32C00BED00027DF54 /* tents.c */; settings = {COMPILER_FLAGS = "-w"; }; };
-		923E64AE2C00BED00027DF54 /* untangle.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64A42C00BED00027DF54 /* untangle.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		923E64AE2C00BED00027DF54 /* untangle.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64A42C00BED00027DF54 /* untangle.c */; settings = {COMPILER_FLAGS = "-w -include Untangle-Config.h"; }; };
 		923E64AF2C00BED00027DF54 /* sixteen.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64A52C00BED00027DF54 /* sixteen.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		923E64B02C00BED00027DF54 /* solo.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64A62C00BED00027DF54 /* solo.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		923E64B12C00BED00027DF54 /* towers.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64A72C00BED00027DF54 /* towers.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -159,16 +148,6 @@
 		923E63E62C00B9220027DF54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		923E63E82C00B9220027DF54 /* Puzzles_Reloaded.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Puzzles_Reloaded.entitlements; sourceTree = "<group>"; };
 		923E63EA2C00B9220027DF54 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		923E63F12C00B94E0027DF54 /* abcd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = abcd.swift; sourceTree = "<group>"; };
-		923E63F22C00B94E0027DF54 /* Ascent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ascent.swift; sourceTree = "<group>"; };
-		923E63F32C00B94E0027DF54 /* Blackbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blackbox.swift; sourceTree = "<group>"; };
-		923E63F42C00B94E0027DF54 /* Boats.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boats.swift; sourceTree = "<group>"; };
-		923E63F52C00B94E0027DF54 /* Bricks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bricks.swift; sourceTree = "<group>"; };
-		923E63F62C00B94E0027DF54 /* Bridges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridges.swift; sourceTree = "<group>"; };
-		923E63F72C00B94E0027DF54 /* Clusters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clusters.swift; sourceTree = "<group>"; };
-		923E63F92C00B94E0027DF54 /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
-		923E63FA2C00B94E0027DF54 /* Dominosa.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dominosa.swift; sourceTree = "<group>"; };
-		923E63FB2C00B94E0027DF54 /* Fifteen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fifteen.swift; sourceTree = "<group>"; };
 		923E63FC2C00B94E0027DF54 /* Filling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filling.swift; sourceTree = "<group>"; };
 		923E63FD2C00B94E0027DF54 /* Flip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flip.swift; sourceTree = "<group>"; };
 		923E63FE2C00B94E0027DF54 /* Galaxies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Galaxies.swift; sourceTree = "<group>"; };
@@ -217,7 +196,6 @@
 		923E646E2C00B9E30027DF54 /* GameListUserConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameListUserConfig.swift; sourceTree = "<group>"; };
 		923E646F2C00B9E30027DF54 /* CodableWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableWrapper.swift; sourceTree = "<group>"; };
 		923E64702C00B9E40027DF54 /* Game-UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Game-UserSettings.swift"; sourceTree = "<group>"; };
-		923E64712C00B9E40027DF54 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		923E647E2C00BE620027DF54 /* Puzzles Reloaded-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Puzzles Reloaded-Bridging-Header.h"; sourceTree = "<group>"; };
 		923E647F2C00BE620027DF54 /* penrose-legacy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "penrose-legacy.c"; path = "../../submodules/simon-tatham-puzzles/penrose-legacy.c"; sourceTree = "<group>"; };
 		923E64802C00BE620027DF54 /* penrose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = penrose.h; path = "../../submodules/simon-tatham-puzzles/penrose.h"; sourceTree = "<group>"; };
@@ -312,6 +290,7 @@
 		923E65372C00DCB60027DF54 /* HelpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpModel.swift; sourceTree = "<group>"; };
 		923E65392C00E7D50027DF54 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		923E653B2C00EC290027DF54 /* generated-games.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "generated-games.h"; sourceTree = "<group>"; };
+		92C527442C062A7400F421D6 /* Untangle-Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Untangle-Config.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,9 +334,9 @@
 				923E646F2C00B9E30027DF54 /* CodableWrapper.swift */,
 				923E64702C00B9E40027DF54 /* Game-UserSettings.swift */,
 				923E646E2C00B9E30027DF54 /* GameListUserConfig.swift */,
-				923E64712C00B9E40027DF54 /* Item.swift */,
 				923E647E2C00BE620027DF54 /* Puzzles Reloaded-Bridging-Header.h */,
 				923E653B2C00EC290027DF54 /* generated-games.h */,
+				92C527442C062A7400F421D6 /* Untangle-Config.h */,
 				923E64792C00BDCE0027DF54 /* Submodules */,
 				923E63E62C00B9220027DF54 /* Assets.xcassets */,
 				923E63E82C00B9220027DF54 /* Puzzles_Reloaded.entitlements */,
@@ -381,16 +360,6 @@
 				923E64042C00B94E0027DF54 /* PuzzlesAtoM.swift */,
 				923E652B2C00D62A0027DF54 /* PuzzlesNtoZ.swift */,
 				923E652D2C00D6DF0027DF54 /* PuzzlesXSheep.swift */,
-				923E63F12C00B94E0027DF54 /* abcd.swift */,
-				923E63F22C00B94E0027DF54 /* Ascent.swift */,
-				923E63F32C00B94E0027DF54 /* Blackbox.swift */,
-				923E63F42C00B94E0027DF54 /* Boats.swift */,
-				923E63F52C00B94E0027DF54 /* Bricks.swift */,
-				923E63F62C00B94E0027DF54 /* Bridges.swift */,
-				923E63F72C00B94E0027DF54 /* Clusters.swift */,
-				923E63F92C00B94E0027DF54 /* Cube.swift */,
-				923E63FA2C00B94E0027DF54 /* Dominosa.swift */,
-				923E63FB2C00B94E0027DF54 /* Fifteen.swift */,
 				923E63FC2C00B94E0027DF54 /* Filling.swift */,
 				923E63FD2C00B94E0027DF54 /* Flip.swift */,
 				923E63FE2C00B94E0027DF54 /* Galaxies.swift */,
@@ -451,22 +420,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		923E64482C00B97A0027DF54 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		923E644F2C00B97A0027DF54 /* PuzzleInteractions */ = {
 			isa = PBXGroup;
 			children = (
-				923E64482C00B97A0027DF54 /* New Group */,
-				923E64492C00B97A0027DF54 /* GestureNavigationCoordinator.swift */,
-				923E644A2C00B97A0027DF54 /* HapticEffects.swift */,
-				923E644B2C00B97A0027DF54 /* PuzzleInteractionCodes.swift */,
 				923E644C2C00B97A0027DF54 /* PuzzleInteractionsView.swift */,
+				923E64492C00B97A0027DF54 /* GestureNavigationCoordinator.swift */,
 				923E644D2C00B97A0027DF54 /* PuzzleTapView.swift */,
+				923E644B2C00B97A0027DF54 /* PuzzleInteractionCodes.swift */,
+				923E644A2C00B97A0027DF54 /* HapticEffects.swift */,
 				923E644E2C00B97A0027DF54 /* SoundEffects.swift */,
 			);
 			path = PuzzleInteractions;
@@ -735,12 +696,10 @@
 				923E64BA2C00BEED0027DF54 /* rect.c in Sources */,
 				923E64D82C00BF490027DF54 /* midend.c in Sources */,
 				923E64C42C00BF120027DF54 /* pattern.c in Sources */,
-				923E64132C00B94E0027DF54 /* Bridges.swift in Sources */,
 				923E64A92C00BED00027DF54 /* twiddle.c in Sources */,
 				923E64FB2C00C00A0027DF54 /* spokes.c in Sources */,
 				923E64732C00B9E40027DF54 /* GameListUserConfig.swift in Sources */,
 				923E64852C00BE620027DF54 /* penrose-legacy.c in Sources */,
-				923E64162C00B94E0027DF54 /* Cube.swift in Sources */,
 				923E64272C00B94E0027DF54 /* Unequal.swift in Sources */,
 				923E64F82C00C00A0027DF54 /* sticks.c in Sources */,
 				923E65212C00C7880027DF54 /* dominosa.c in Sources */,
@@ -754,11 +713,9 @@
 				923E64552C00B97A0027DF54 /* SoundEffects.swift in Sources */,
 				923E651E2C00C7880027DF54 /* mosaic.c in Sources */,
 				923E65252C00C81E0027DF54 /* tdq.c in Sources */,
-				923E64112C00B94E0027DF54 /* Boats.swift in Sources */,
 				923E64E72C00BFBA0027DF54 /* map.c in Sources */,
 				923E64C62C00BF120027DF54 /* pearl.c in Sources */,
 				923E64E52C00BFBA0027DF54 /* inertia.c in Sources */,
-				923E640F2C00B94E0027DF54 /* Ascent.swift in Sources */,
 				923E64692C00B9890027DF54 /* GameView.swift in Sources */,
 				923E646A2C00B9890027DF54 /* LazyGameControlsView.swift in Sources */,
 				923E643F2C00B96E0027DF54 /* SettingsView.swift in Sources */,
@@ -767,11 +724,9 @@
 				923E64BC2C00BEF40027DF54 /* range.c in Sources */,
 				923E652C2C00D62A0027DF54 /* PuzzlesNtoZ.swift in Sources */,
 				923E64E32C00BFBA0027DF54 /* keen.c in Sources */,
-				923E64182C00B94E0027DF54 /* Fifteen.swift in Sources */,
 				923E645E2C00B9840027DF54 /* GameListView.swift in Sources */,
 				923E64942C00BE940027DF54 /* bridges.c in Sources */,
 				923E64662C00B9890027DF54 /* GameControlsView.swift in Sources */,
-				923E64142C00B94E0027DF54 /* Clusters.swift in Sources */,
 				923E64912C00BE940027DF54 /* cube.c in Sources */,
 				923E64B12C00BED00027DF54 /* towers.c in Sources */,
 				923E64862C00BE620027DF54 /* penrose.c in Sources */,
@@ -822,7 +777,6 @@
 				923E64242C00B94E0027DF54 /* Tents.swift in Sources */,
 				923E64672C00B9890027DF54 /* GameFrontend.swift in Sources */,
 				923E64312C00B9680027DF54 /* Midend-GameConfig.swift in Sources */,
-				923E64122C00B94E0027DF54 /* Bricks.swift in Sources */,
 				923E65292C00C86A0027DF54 /* sort.c in Sources */,
 				923E64402C00B96E0027DF54 /* UserPreferences.swift in Sources */,
 				923E64262C00B94E0027DF54 /* Undead.swift in Sources */,
@@ -833,17 +787,14 @@
 				923E645B2C00B9840027DF54 /* GameContextMenu.swift in Sources */,
 				923E64AC2C00BED00027DF54 /* undead.c in Sources */,
 				923E64B22C00BED00027DF54 /* tracks.c in Sources */,
-				923E640E2C00B94E0027DF54 /* abcd.swift in Sources */,
 				923E64282C00B94E0027DF54 /* Unruly.swift in Sources */,
 				923E65232C00C7B40027DF54 /* dsf.c in Sources */,
-				923E64102C00B94E0027DF54 /* Blackbox.swift in Sources */,
 				923E64322C00B9680027DF54 /* Midend.swift in Sources */,
 				923E64AA2C00BED00027DF54 /* unequal.c in Sources */,
 				923E64FE2C00C00A0027DF54 /* bricks.c in Sources */,
 				923E64742C00B9E40027DF54 /* CodableWrapper.swift in Sources */,
 				923E64352C00B9680027DF54 /* PuzzleSettings.swift in Sources */,
 				923E64212C00B94E0027DF54 /* PuzzlesAtoM.swift in Sources */,
-				923E64762C00B9E40027DF54 /* Item.swift in Sources */,
 				923E64512C00B97A0027DF54 /* HapticEffects.swift in Sources */,
 				923E646B2C00B9890027DF54 /* PuzzleImageManager.swift in Sources */,
 				923E64AB2C00BED00027DF54 /* unruly.c in Sources */,
@@ -868,7 +819,6 @@
 				923E64932C00BE940027DF54 /* flood.c in Sources */,
 				923E64292C00B94E0027DF54 /* Untangle.swift in Sources */,
 				923E641E2C00B94E0027DF54 /* Mosaic.swift in Sources */,
-				923E64172C00B94E0027DF54 /* Dominosa.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,7 +22,7 @@ struct GameListLargeItem: View {
     
     var body: some View {
         NavigationLink(value: game) {
-            HStack {
+            HStack(alignment: .top) {
                 /*
                 if editMode?.wrappedValue.isEditing == true {
                     Image(systemName: "star")
@@ -32,15 +32,24 @@ struct GameListLargeItem: View {
                         }
                 }
                  */
-                Image(gameConfig.imageName)
+                VStack {
+                    Image(gameConfig.imageName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 75, height: 75)
+                    Spacer()
+                }
+                .padding(.vertical, 5)
+               
+                
                 VStack(alignment: .leading) {
                     Text(gameConfig.name)
                         .font(.title)
                     Text(gameConfig.description)
-                        .font(.callout)
+                        .font(.subheadline)
                     Spacer()
                 }
-                .padding(5)
+                
             }
         }
         .swipeActions(allowsFullSwipe: false) {

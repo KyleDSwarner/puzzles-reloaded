@@ -9,6 +9,23 @@
 import Foundation
 
 extension Puzzles {
+    static var puzzlesNtoZ: [GameConfig] {[
+        puzzle_netslide,
+        puzzle_pattern,
+        puzzle_pearl,
+        puzzle_pegs,
+        puzzle_range,
+        puzzle_rectangles,
+        puzzle_singles,
+        puzzle_sixteen,
+        puzzle_slant,
+        puzzle_solo,
+        puzzle_tracks,
+        puzzle_twiddle
+    ]}
+}
+
+extension Puzzles {
     
     // MARK: Netslide
     static let puzzle_netslide = GameConfig(

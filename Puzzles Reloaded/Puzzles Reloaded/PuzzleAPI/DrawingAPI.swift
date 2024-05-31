@@ -9,6 +9,9 @@
 import Foundation
 import CoreGraphics
 
+/**
+ Enums used as part of text drawing to simplify the drawing interface (instead of Int32 values)
+ */
 enum TextHorizontalAlignment {
     case LEFT, CENTER, RIGHT
 }
@@ -18,23 +21,29 @@ enum TextVerticalAlignment {
 }
 
 
-// Puzzles defines an opaque `blitter` type; it is provided here.
+/**
+ Our implementation for a Blitter type - this is used as part of new/save/load/free blitter, which is used to store & redraw sections of the puzzle.
+ */
 class Blitter {
     let w: Int
     let h: Int
     var x: Int
     var y: Int
-    var ox: Int // ???
-    var oy: Int // ???
+    var xAdjustment: Int
+    var yAdjustment: Int
+    var widthAdjusted: Int
+    var heightAdjusted: Int
     var img: CGImage?
     
     init(w: Int32, h: Int32) {
         self.w = Int(w)
         self.h = Int(h)
-        self.x = 42
-        self.y = 42
-        self.ox = -1
-        self.oy = -1
+        self.x = 0
+        self.y = 0
+        self.xAdjustment = 0
+        self.yAdjustment = 0
+        self.widthAdjusted = 0
+        self.heightAdjusted = 0
         self.img = nil
     }
 }
@@ -45,6 +54,10 @@ class DrawingAPI {
         
     }
     
+    /**
+     Builds the drawing API that is passed to the puzzles app via the midend.
+     Note that the methods referenced below are all set globally - this is needed as a swift limitation for our interactions with the C code.
+     */
     static func constructAPI() -> drawing_api {
         return drawing_api(
             draw_text: drawTextWrapper,
@@ -76,6 +89,9 @@ class DrawingAPI {
         )
     }
     
+    /**
+     Wrap the above drawing API as a pointer, as needed for the midend construction interface.
+     */
     static func asPointer() -> UnsafeMutablePointer<drawing_api> {
         let drawingApiPointer = UnsafeMutablePointer<drawing_api>.allocate(capacity: 1)
         drawingApiPointer.pointee = constructAPI()
@@ -84,8 +100,17 @@ class DrawingAPI {
     
 }
 
+// MARK: Global X/Y Dimensions
 // These dimension variables are mutable & set globally to make it easy for the C & Swift code to interact better with each other.
+
+/**
+ X Dimension of the puzzle image, globally set for easy usage across the swift & C code.
+ */
 var puzzleDimensionsX: Int = 512
+
+/**
+ Y Dimension of the puzzle image, globally set for easy usage across the swift & C code.
+ */
 var puzzleDimensionsY: Int = 512
 
 //MARK: Helpers for the drawing functions
@@ -131,8 +156,9 @@ func adjustedYAsFloat(_ y: Float) -> Int {
     return puzzleDimensionsY - Int(y)
 }
 
-//MARK: Global drawing functions
 // These functions must be global in order to be referenced via C pointers (as required by the puzzle API)
+
+// MARK: Text Drawing Methods
 
 func drawTextWrapper(frontend: UnsafeMutableRawPointer?, x: Int32, y: Int32, fontType: Int32, fontSize: Int32, align: Int32, color: Int32, textPointer: UnsafePointer<CChar>?) {
     
@@ -157,6 +183,7 @@ func drawTextWrapper(frontend: UnsafeMutableRawPointer?, x: Int32, y: Int32, fon
      ALIGN_HRIGHT
         Indicates that x is aligned with the right-hand end of the text.
      */
+    
     switch (align & (ALIGN_HLEFT | ALIGN_HCENTRE | ALIGN_HRIGHT)) {
     case ALIGN_HCENTRE:
         horizontalAlignment = .CENTER
@@ -181,19 +208,58 @@ func drawTextWrapper(frontend: UnsafeMutableRawPointer?, x: Int32, y: Int32, fon
         horizontalAlignment: horizontalAlignment,
         verticalAlignment: verticalAlignment,
         color: getColorByIndex(frontend: frontend, colorIndex: color))
+    
+    // Force update resolves issues seen in Unequal where the image was being updated before new text was drawn, but not after.
+    forceImageUpdate(frontend: frontend)
 }
 
+/**
+ Text fallback is used to handle UTF-8 strings that may not be handled by some platforms. It typically returns two values, the UTF-8 one and a fallback ASCII value.
+ iOS can handle the UTF-8 values just fine - so we should be able to just grab the first item.
+ */
+func textFallback(frontend: UnsafeMutableRawPointer?, strings: UnsafePointer<UnsafePointer<CChar>?>?, numStrings: Int32) -> UnsafeMutablePointer<CChar>? {
+    
+    guard let unwrappedStrings = strings else {
+        return nil
+    }
+    
+    guard numStrings > 0 else {
+        return nil
+    }
+    
+    // We should always be able to grab the first object in the list..
+    // However, Swift will automatically deallocate the provided pointers; We can't use them directly as this causes issues when the puzzles code tries to free the memory itself.
+    // This creates our own copy of the string & provides it as a self-allocated pointer that swift won't automatically free up.
+    let string = String(cString: unwrappedStrings[0]!)
+    
+    // Convert the Swift String to a null-terminated C string
+    let cString = string.cString(using: .utf8)!
 
+    // Allocate memory for the C string and copy the contents
+    let pointer = UnsafeMutablePointer<CChar>.allocate(capacity: cString.count)
+    
+    // Loop over the cString array and allocate the pointer with the bytes of the UTF-8 String
+    for index in 0..<cString.count {
+        pointer[index] = cString[index]
+    }
 
-//<#T##((UnsafeMutableRawPointer?, Int32, Int32, Int32, Int32, Int32) -> Void)!##((UnsafeMutableRawPointer?, Int32, Int32, Int32, Int32, Int32) -> Void)!##(UnsafeMutableRawPointer?, Int32, Int32, Int32, Int32, Int32) -> Void#>
-// static void ios_draw_rect(void *handle, int x, int y, int w, int h, int colour)
+    return pointer
+}
+
+// MARK: Lines & Shapes Drawing Methods
+
+/**
+ Draw a rectangle on the image with the provided size, position, and color
+ */
 func drawRect(frontend: UnsafeMutableRawPointer?, x: Int32, y: Int32, width: Int32, height: Int32, color: Int32) {
     let fillColor = getColorByIndex(frontend: frontend, colorIndex: color)
     
     getImageManager(frontend: frontend).drawRectangle(x: Int(x), y: adjustedY(y, height: height), width: Int(width), height: Int(height), fillColor: fillColor)
 }
-// <#T##((UnsafeMutableRawPointer?, Int32, Int32, Int32, Int32, Int32) -> Void)!##((UnsafeMutableRawPointer?, Int32, Int32, Int32, Int32, Int32) -> Void)!##(UnsafeMutableRawPointer?, Int32, Int32, Int32, Int32, Int32) -> Void#>
-// static void ios_draw_line(void *handle, int x1, int y1, int x2, int y2, int colour)
+
+/**
+ Draw a line on the puzzle image given two points and color. The thickness of this line is always consistent.
+ */
 func drawLine(frontend: UnsafeMutableRawPointer?, x1: Int32, y1: Int32, x2: Int32, y2: Int32, color: Int32) {
     // print("Draw Line: Called")
     
@@ -217,10 +283,8 @@ func drawThickLine(frontend: UnsafeMutableRawPointer?, thickness: Float, x1: Flo
         thickness: thickness)
 }
 
-/*
- static void ios_draw_polygon(void *handle, int *coords, int npoints,
-                              int fillcolour, int outlinecolour)
- <#T##((UnsafeMutableRawPointer?, UnsafePointer<Int32>?, Int32, Int32, Int32) -> Void)!##((UnsafeMutableRawPointer?, UnsafePointer<Int32>?, Int32, Int32, Int32) -> Void)!##(UnsafeMutableRawPointer?, UnsafePointer<Int32>?, Int32, Int32, Int32) -> Void#>
+/**
+ Draw a polygon shape using an array of points and the outline color. A fill color can optionally be provided.
  */
 func drawPolygon(frontend: UnsafeMutableRawPointer?, coordinates: UnsafePointer<Int32>?, nPoints: Int32, fillColor: Int32, outlineColor: Int32) {
     //print("Draw Polygon Called, outlineColor: \(Int(outlineColor)), fill Color: \(Int(fillColor))")
@@ -229,37 +293,19 @@ func drawPolygon(frontend: UnsafeMutableRawPointer?, coordinates: UnsafePointer<
     
     var points: [CGPoint] = []
     
-    // SUPPOSEDLY, we can `advance` the pointer to get at the list of objects. The pointer SHOULD know the size to advance by because it is scoped to the object type already.
+    // Iterate over the array of values to construct an array of CGPoints
     for i in 0..<numPoints {
         let newPoint = CGPoint(x: Int(coordinates?[i*2] ?? 0), y: adjustedY(coordinates?[i*2+1] ?? 0))
         points.append(newPoint)
-        //print("Point \(i), x at [\(i*2)): \(coordinates?[i*2]), y at [\(i*2 + 1)]: \(coordinates?[i*2+1]))")
-        //let objPointer = coordinates.unsafelyUnwrapped.advanced(by: i)
-        //let object = objPointer.pointee // Access the object at the current pointer position
-        
     }
     
     let outlineColor = getColorByIndex(frontend: frontend, colorIndex: outlineColor)
     let fillColor: CGColor? = fillColor != -1 ? getColorByIndex(frontend: frontend, colorIndex: fillColor) : nil // The fill color will occasionally come back as -1, indicating there should be no fill.
     
     getImageManager(frontend: frontend).drawPolygon(coordinates: points, outlineColor: outlineColor, fillColor: fillColor)
-    //let imageManager = retrieveFrontendFromPointer(frontend).gameView.imageManager
-    //imageManager.drawPolygon(coordinates: points2)
-    //print(points)
-}
-
-func unwrapPointerToArray<T>(pointer: UnsafePointer<T>, numObjects: Int32) -> [T] {
-    var returnArray: [T] = []
     
-    for i in 0..<Int(numObjects) {
-        let objPointer = pointer.advanced(by: i) // Should we unwrap the pointer for us here?
-        let object = objPointer.pointee // Access the object at the current pointer position
-        print(object)
-        returnArray.append(object)
-    }
-            
-    return returnArray
-            
+    // force update resolves some images with drawing polygons during drag events, such as the arrow movements in signpost.
+    forceImageUpdate(frontend: frontend)
 }
 
 func drawCircle(frontend: UnsafeMutableRawPointer?, cx: Int32, cy: Int32, radius: Int32, fillColor: Int32, outlineColor: Int32) {
@@ -270,15 +316,28 @@ func drawCircle(frontend: UnsafeMutableRawPointer?, cx: Int32, cy: Int32, radius
         fillColor: fillColor != -1 ? getColorByIndex(frontend: frontend, colorIndex: fillColor) : nil)
 }
 
+// MARK: Drawing Update Methods
+
 func drawUpdate(frontend: UnsafeMutableRawPointer?, x: Int32, y: Int32, w: Int32, h: Int32) {
-    // This function informs the frontend what sections have been updated in order to run a targeted refresh of the UI.
-    // I don't like this process as it's more CPU intensive to do so - but seems to fix some bugs in some potentially "poorly optimized" games (looking at you, tents!)
+    
+    // The intention of this function is to update only a section of the puzzle image based on need. However, iOS is pretty effecient in spitting out new bitmaps,
+    // So instead, any update to the image is immediately reflected, and this function is a no-op.
+    
+    // There are a few potential bugs in implementing the puzzle this way (lines in Tents, for example), so this may need to be revisited in the future.
     
     //print("!!! Called: Draw Update: x:\(Int(x)) y:\(Int(y)) size \(Int(w))x\(Int(h))")
-    getImageManager(frontend: frontend).updateRect(x: Int(x), y: adjustedY(y, height: h), width: Int(w), height: Int(h))
-    retrieveFrontendFromPointer(frontend).refreshImage() // Unsure which way will work best!
-    ///TODO Is there a way to get CGContext & Image to honor updating just the provided area?
+    //getImageManager(frontend: frontend).updateRect(x: Int(x), y: adjustedY(y, height: h), width: Int(w), height: Int(h))
+    retrieveFrontendFromPointer(frontend).refreshImage()
 }
+
+/**
+ To resolve some bugs, it's occasionally needed to force a drawing update to ensure it renders correctly.
+ */
+func forceImageUpdate(frontend: UnsafeMutableRawPointer?) {
+    retrieveFrontendFromPointer(frontend).refreshImage()
+}
+
+// MARK: Clipping Methods
 
 func clip(frontendPointer: UnsafeMutableRawPointer?, x: Int32, y: Int32, width: Int32, height: Int32) {
     //print("Called: Clip")
@@ -290,14 +349,12 @@ func unclip(frontend: UnsafeMutableRawPointer?) {
     getImageManager(frontend: frontend).unclip()
 }
 
-func startDraw(frontend: UnsafeMutableRawPointer?) {
-        //print("Called: Start Draw")
-}
 
-func endDraw(frontend: UnsafeMutableRawPointer?) {
-        //print("Called: End Draw")
-}
+// MARK: Status Bar Methods
 
+/**
+ Save & serve the updated text for the status bar.
+ */
 func statusBar(frontend: UnsafeMutableRawPointer?, text: UnsafePointer<CChar>?) {
     
     guard let unwrappedText = text else {
@@ -312,14 +369,13 @@ func statusBar(frontend: UnsafeMutableRawPointer?, text: UnsafePointer<CChar>?) 
     unwrappedFrontend.statusbarText = statusText
 }
 
+// MARK: Blitter Functions
 
 /**
     newBlitter creates an object intended to store a fragment of the generated image in memory. This object can be used to periodically save the state of the image to 'replay' it, often during animations, to prevent artifacting.
     This function is typically called _before the image is drawn_ and establishes the width & height of the image that will be needed.
  */
 func newBlitter(frontend: UnsafeMutableRawPointer?, w: Int32, h: Int32) -> OpaquePointer? {
-    //Create & Return a new 'blitter'
-    print("Creating Blitter w:\(Int(w)) h:\(Int(h))")
     
     let blitter = Blitter(w: w, h: h)
     
@@ -334,7 +390,6 @@ func newBlitter(frontend: UnsafeMutableRawPointer?, w: Int32, h: Int32) -> Opaqu
     Deallocate a generated blitter.
  */
 func freeBlitter(fontend: UnsafeMutableRawPointer?, blitterPointer: OpaquePointer?) {
-    print("Freeing Blitter")
     
     let blitterRef = UnsafePointer<Blitter>(blitterPointer)
     
@@ -345,89 +400,95 @@ func freeBlitter(fontend: UnsafeMutableRawPointer?, blitterPointer: OpaquePointe
 }
 
 /**
-saveBlitter stores a fragment of the current puzzle image in memeory.
+ saveBlitter stores a fragment of the current puzzle image in memeory.
  The width and height were already provided during `newBlitter`, this function provides the x & y coordinates of where that section should be taken.
  */
 func saveBlitter(frontend: UnsafeMutableRawPointer?, blitterPointer: OpaquePointer?, x: Int32, y: Int32) {
-    print("BBBBBBB Saving Blitter! X:\(Int(x)) Y:\(Int(y))")
-    
-    //Unmanaged<Blitter>.fromOpaque(UnsafeRawPointer(b)).takeRetainedValue()
-    
+    // print("--- Saving Blitter! X:\(Int(x)) Y:\(Int(y)) --- ")
     
     let intermediatePointer = UnsafePointer<Blitter>(blitterPointer)
     
     if let blitter = intermediatePointer?.pointee {
-        print ("Found Blitter: w:\(blitter.w) h:\(blitter.h) x:\(blitter.x) y:\(blitter.y)")
         
+        // When a blitter is created near the edge of the puzzle screen, the sizing of the image and it's x/y position changes, causing visual issues
+        // To resolve, we look for the intersection
+        let puzzleRect = CGRect(x: 0, y: 0, width: puzzleDimensionsX, height: puzzleDimensionsY)
+        let visibleArea = puzzleRect.intersection(CGRect(x: CGFloat(x), y: CGFloat(y), width: CGFloat(blitter.w), height: CGFloat(blitter.h)))
         
-        // TODO: There are provisions in the puzzle documentation for when x y overflows from bounds. I haven't seen the need for it _yet_
+        guard !visibleArea.isNull else {
+            // print("Blitter: No overlap, exiting")
+            blitter.img = nil
+            return
+        }
+        
+        // Store the diff between the original values & actual
+        let xAdjustment = Int(visibleArea.origin.x) - Int(x)
+        let yAdjustment = Int(visibleArea.origin.y) - Int(y)
+        
         
         // Note that unlike all other calls, the Y value here is NOT inverted. Image cropping appears to have an inverted Y axis vs. drawing methods, so we DO NOT invert here.
-        //
-       let image = getImageManager(frontend: frontend).getImageFragment(x: Int(x), y: Int(y), width: blitter.w, height: blitter.h)
+        // This uses the bounds and positioning of the intersection - most times, it will be the same, but on the edges they'll be slightly different.
+        let image = getImageManager(frontend: frontend).getImageFragment(x: Int(visibleArea.origin.x), y: Int(visibleArea.origin.y), width: Int(visibleArea.width), height: Int(visibleArea.height))
+        
+        // Store the provided image for use later when loading!
         blitter.img = image
         
-        // Save the positions the image was retreived from in the blitter. These may be needed later!
+        // Save the info we used to obtain the image; This will all be needed later when reloading the image.
         blitter.x = Int(x)
         blitter.y = Int(y)
+        blitter.widthAdjusted = Int(visibleArea.width)
+        blitter.heightAdjusted = Int(visibleArea.height)
+        blitter.xAdjustment = xAdjustment
+        blitter.yAdjustment = yAdjustment
+        
     }
     
     
 }
 
+/**
+ Reload a fragment of the puzzle image to the provided coordinates.
+ You'll see this called during animations of items sliding across the screen or in response to a drag event.
+ */
 func loadBlitter(frontend: UnsafeMutableRawPointer?, blitterPointer: OpaquePointer?, x: Int32, y: Int32) {
+    // print("-- Loading Blitter... --")
     let intermediatePointer = UnsafePointer<Blitter>(blitterPointer)
     
     if let blitter = intermediatePointer?.pointee {
-        print ("Redrawing Blitter: w:\(blitter.w) h:\(blitter.h) at x:\(Int(x)) y:\(Int(y))")
         
-        if x == BLITTER_FROMSAVED {
-            print("Drawing from SAVED VALUES")
+        guard blitter.img != nil else {
+            print("Loading Blitter: No image, exiting")
+            return
         }
         
         // The x & y values either be placement positions OR the special value 'BLITTER_FROMSAVED'
         // When this occurs, restore the saved image to the location it was originally taken from.
-        let xPosition = x == BLITTER_FROMSAVED ? blitter.x : Int(x)
-        let yPosition = y == BLITTER_FROMSAVED ? blitter.y : adjustedY(y, height: Int32(blitter.h))
+        var xPosition = x == BLITTER_FROMSAVED ? blitter.x : Int(x)
+        var yPosition = y == BLITTER_FROMSAVED ? blitter.y : Int(y)
         
+        // Apply the adjustments from above to account for out-of-bounds drawing.
+        xPosition += blitter.xAdjustment
+        yPosition += blitter.yAdjustment
+        
+        // You DO still need to invert y when placing the image back on the grid, as the drawing API uses bottom-left origin vs the crop's top-left.
+        // Note: Very important that this only be done AFTER you apply the above adjustment.
+        yPosition = adjustedY(Int32(yPosition), height: Int32(blitter.heightAdjusted))
         
         // Provide the stored image in the blitter for redraw to the main image
-        // you DO still need to invert y when placing the image back on the grid, as the drawing API uses bottom-left origin vs the crop's top-left.
-        getImageManager(frontend: frontend).placeImageFragment(image: blitter.img, x: xPosition, y: yPosition, width: blitter.w, height: blitter.h)
+        getImageManager(frontend: frontend).placeImageFragment(image: blitter.img, x: xPosition, y: yPosition, width: blitter.widthAdjusted, height: blitter.heightAdjusted)
         
     }
 }
 
-func textFallback(frontend: UnsafeMutableRawPointer?, strings: UnsafePointer<UnsafePointer<CChar>?>?, numStrings: Int32) -> UnsafeMutablePointer<CChar>? {
-    
-    guard let unwrappedStrings = strings else {
-        return nil
-    }
-    
-    guard numStrings > 0 else {
-        return nil
-    }
-    
-    // Text fallback is used to handle UTF-8 strings that may not be handled by some platforms. It typically returns two values, the UTF-8 one and a fallback ASCII value.
-    // iOS can handle the UTF-8 values just fine - so we should be able to just grab the first item.
-    
-    // However, Swift will automatically deallocate the provided pointers; We can't use them directly as this causes issues when the puzzles code tries to free the memory itself.
-    // This creates our own copy of the string & provides it as a self-allocated pointer that swift wonI't automatically free up.
-    let string = String(cString: unwrappedStrings[0]!)
-    
-    // Convert the Swift String to a null-terminated C string
-    let cString = string.cString(using: .utf8)!
 
-    // Allocate memory for the C string and copy the contents
-    let pointer = UnsafeMutablePointer<CChar>.allocate(capacity: cString.count)
-    
-    // Loop over the cString array and allocate the pointer with the bytes of the UTF-8 String
-    for index in 0..<cString.count {
-        pointer[index] = cString[index]
-    }
 
-    return pointer
-    
-    
+// MARK: Unused Functions
+// These functions aren't needed for our implementation, but they still need to be present for the puzzle code to function
+
+func startDraw(frontend: UnsafeMutableRawPointer?) {
+        //print("Called: Start Draw")
 }
 
+func endDraw(frontend: UnsafeMutableRawPointer?) {
+        //print("Called: End Draw")
+}

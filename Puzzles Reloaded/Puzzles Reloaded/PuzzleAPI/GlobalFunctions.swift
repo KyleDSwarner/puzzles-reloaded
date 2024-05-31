@@ -30,7 +30,6 @@ func frontend_default_colour(frontend: OpaquePointer, output: UnsafeMutablePoint
     // output[0] = output[1] = output[2] = 0.8f; ???
 }
 
-// get_random_seed(<#T##randseed: UnsafeMutablePointer<UnsafeMutableRawPointer?>!##UnsafeMutablePointer<UnsafeMutableRawPointer?>!#>, <#T##randseedsize: UnsafeMutablePointer<Int32>!##UnsafeMutablePointer<Int32>!#>)
 @_cdecl("get_random_seed")
 func get_random_seed(randseed: UnsafeMutablePointer<UnsafeMutableRawPointer?>, randSeedSize: UnsafeMutablePointer<Int32>) {
     print("Requesting Random Seed")
