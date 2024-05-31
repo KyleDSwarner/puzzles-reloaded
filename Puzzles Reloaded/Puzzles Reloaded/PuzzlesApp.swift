@@ -16,7 +16,6 @@ struct PuzzlesApp: App {
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
             GameListConfig.self
             //AppSettings.self
         ])
