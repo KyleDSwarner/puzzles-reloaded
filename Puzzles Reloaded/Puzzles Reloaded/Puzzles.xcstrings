@@ -45,10 +45,24 @@
 
     },
     "galaxies_name" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Galaxies"
+          }
+        }
+      }
     },
     "guess_name" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guess"
+          }
+        }
+      }
     },
     "loopy_controls" : {
 
@@ -60,7 +74,14 @@
 
     },
     "loopy_name" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loopy"
+          }
+        }
+      }
     },
     "mosaic_controls" : {
 
@@ -72,7 +93,14 @@
 
     },
     "mosaic_name" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mosaic"
+          }
+        }
+      }
     },
     "net_controls" : {
 
@@ -84,7 +112,14 @@
 
     },
     "net_name" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Net"
+          }
+        }
+      }
     },
     "samegame_controls" : {
 
@@ -96,7 +131,14 @@
 
     },
     "samegame_name" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Samegame"
+          }
+        }
+      }
     },
     "signpost_controls" : {
       "comment" : "Control Info for the puzzle 'signpost'",
@@ -152,7 +194,14 @@
 
     },
     "tents_name" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tents"
+          }
+        }
+      }
     },
     "towers_controls" : {
 
@@ -164,7 +213,14 @@
 
     },
     "towers_name" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Towers"
+          }
+        }
+      }
     },
     "undead_controls" : {
       "comment" : "Control info for the game 'undead'"
@@ -176,7 +232,15 @@
       "comment" : "Instructions for the game 'undead'"
     },
     "undead_name" : {
-      "comment" : "Display name for the game 'undead'"
+      "comment" : "Display name for the game 'undead'",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undead"
+          }
+        }
+      }
     },
     "unruly_controls" : {
       "extractionState" : "manual",

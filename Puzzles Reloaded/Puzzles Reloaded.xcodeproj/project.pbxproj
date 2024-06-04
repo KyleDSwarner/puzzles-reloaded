@@ -34,7 +34,6 @@
 		923E645C2C00B9840027DF54 /* GameListGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64572C00B9840027DF54 /* GameListGridItem.swift */; };
 		923E645D2C00B9840027DF54 /* GameListILargeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64582C00B9840027DF54 /* GameListILargeItem.swift */; };
 		923E645E2C00B9840027DF54 /* GameListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64592C00B9840027DF54 /* GameListView.swift */; };
-		923E64662C00B9890027DF54 /* GameControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E645F2C00B9890027DF54 /* GameControlsView.swift */; };
 		923E64672C00B9890027DF54 /* GameFrontend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64602C00B9890027DF54 /* GameFrontend.swift */; };
 		923E64682C00B9890027DF54 /* GamePresetMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64612C00B9890027DF54 /* GamePresetMenu.swift */; };
 		923E64692C00B9890027DF54 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64622C00B9890027DF54 /* GameView.swift */; };
@@ -42,7 +41,7 @@
 		923E646B2C00B9890027DF54 /* PuzzleImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64642C00B9890027DF54 /* PuzzleImageManager.swift */; };
 		923E64732C00B9E40027DF54 /* GameListUserConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E646E2C00B9E30027DF54 /* GameListUserConfig.swift */; };
 		923E64742C00B9E40027DF54 /* CodableWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E646F2C00B9E30027DF54 /* CodableWrapper.swift */; };
-		923E64752C00B9E40027DF54 /* Game-UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64702C00B9E40027DF54 /* Game-UserSettings.swift */; };
+		923E64752C00B9E40027DF54 /* GameConfig-UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64702C00B9E40027DF54 /* GameConfig-UserSettings.swift */; };
 		923E64852C00BE620027DF54 /* penrose-legacy.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E647F2C00BE620027DF54 /* penrose-legacy.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		923E64862C00BE620027DF54 /* penrose.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64812C00BE620027DF54 /* penrose.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		923E64912C00BE940027DF54 /* cube.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64892C00BE940027DF54 /* cube.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -156,7 +155,6 @@
 		923E64572C00B9840027DF54 /* GameListGridItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameListGridItem.swift; sourceTree = "<group>"; };
 		923E64582C00B9840027DF54 /* GameListILargeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameListILargeItem.swift; sourceTree = "<group>"; };
 		923E64592C00B9840027DF54 /* GameListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameListView.swift; sourceTree = "<group>"; };
-		923E645F2C00B9890027DF54 /* GameControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameControlsView.swift; sourceTree = "<group>"; };
 		923E64602C00B9890027DF54 /* GameFrontend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameFrontend.swift; sourceTree = "<group>"; };
 		923E64612C00B9890027DF54 /* GamePresetMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePresetMenu.swift; sourceTree = "<group>"; };
 		923E64622C00B9890027DF54 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -164,7 +162,7 @@
 		923E64642C00B9890027DF54 /* PuzzleImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleImageManager.swift; sourceTree = "<group>"; };
 		923E646E2C00B9E30027DF54 /* GameListUserConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameListUserConfig.swift; sourceTree = "<group>"; };
 		923E646F2C00B9E30027DF54 /* CodableWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableWrapper.swift; sourceTree = "<group>"; };
-		923E64702C00B9E40027DF54 /* Game-UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Game-UserSettings.swift"; sourceTree = "<group>"; };
+		923E64702C00B9E40027DF54 /* GameConfig-UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameConfig-UserSettings.swift"; sourceTree = "<group>"; };
 		923E647E2C00BE620027DF54 /* Puzzles Reloaded-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Puzzles Reloaded-Bridging-Header.h"; sourceTree = "<group>"; };
 		923E647F2C00BE620027DF54 /* penrose-legacy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "penrose-legacy.c"; path = "../../submodules/simon-tatham-puzzles/penrose-legacy.c"; sourceTree = "<group>"; };
 		923E64802C00BE620027DF54 /* penrose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = penrose.h; path = "../../submodules/simon-tatham-puzzles/penrose.h"; sourceTree = "<group>"; };
@@ -292,18 +290,16 @@
 		923E63E12C00B9210027DF54 /* Puzzles Reloaded */ = {
 			isa = PBXGroup;
 			children = (
+				923E63E22C00B9210027DF54 /* PuzzlesApp.swift */,
 				923E646C2C00B9A30027DF54 /* Views */,
 				923E64302C00B9680027DF54 /* PuzzleAPI */,
 				923E64442C00B9740027DF54 /* Model */,
 				923E644F2C00B97A0027DF54 /* PuzzleInteractions */,
 				923E643B2C00B96E0027DF54 /* Settings */,
 				923E640D2C00B94E0027DF54 /* Puzzles */,
-				923E63E22C00B9210027DF54 /* PuzzlesApp.swift */,
 				923E646F2C00B9E30027DF54 /* CodableWrapper.swift */,
 				92B55D512C0F410900517280 /* Localizable.xcstrings */,
 				92B55D532C0F46A500517280 /* Puzzles.xcstrings */,
-				923E64702C00B9E40027DF54 /* Game-UserSettings.swift */,
-				923E646E2C00B9E30027DF54 /* GameListUserConfig.swift */,
 				923E647E2C00BE620027DF54 /* Puzzles Reloaded-Bridging-Header.h */,
 				923E653B2C00EC290027DF54 /* generated-games.h */,
 				92C527442C062A7400F421D6 /* Untangle-Config.h */,
@@ -359,7 +355,6 @@
 			children = (
 				923E64362C00B96E0027DF54 /* SettingsConstants.swift */,
 				923E64382C00B96E0027DF54 /* SettingsModel.swift */,
-				923E64392C00B96E0027DF54 /* SettingsView.swift */,
 				923E643A2C00B96E0027DF54 /* UserPreferences.swift */,
 			);
 			path = Settings;
@@ -370,6 +365,8 @@
 			children = (
 				923E64412C00B9740027DF54 /* Game.swift */,
 				923E64422C00B9740027DF54 /* GameConfig.swift */,
+				923E64702C00B9E40027DF54 /* GameConfig-UserSettings.swift */,
+				923E646E2C00B9E30027DF54 /* GameListUserConfig.swift */,
 				923E64432C00B9740027DF54 /* GameManager.swift */,
 			);
 			path = Model;
@@ -403,7 +400,6 @@
 			isa = PBXGroup;
 			children = (
 				923E64622C00B9890027DF54 /* GameView.swift */,
-				923E645F2C00B9890027DF54 /* GameControlsView.swift */,
 				923E64602C00B9890027DF54 /* GameFrontend.swift */,
 				923E64612C00B9890027DF54 /* GamePresetMenu.swift */,
 				923E64632C00B9890027DF54 /* LazyGameControlsView.swift */,
@@ -419,6 +415,7 @@
 				923E645A2C00B9840027DF54 /* GameList */,
 				923E64652C00B9890027DF54 /* GameView */,
 				923E652F2C00D7490027DF54 /* HelpView */,
+				92B55D572C0F6F0800517280 /* SettingsView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -564,6 +561,14 @@
 			path = HelpView;
 			sourceTree = "<group>";
 		};
+		92B55D572C0F6F0800517280 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				923E64392C00B96E0027DF54 /* SettingsView.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -658,7 +663,7 @@
 				923E64BE2C00BEFD0027DF54 /* random.c in Sources */,
 				923E64332C00B9680027DF54 /* DrawingAPI.swift in Sources */,
 				923E64202C00B94E0027DF54 /* PuzzleConfig.swift in Sources */,
-				923E64752C00B9E40027DF54 /* Game-UserSettings.swift in Sources */,
+				923E64752C00B9E40027DF54 /* GameConfig-UserSettings.swift in Sources */,
 				923E64552C00B97A0027DF54 /* SoundEffects.swift in Sources */,
 				923E651E2C00C7880027DF54 /* mosaic.c in Sources */,
 				923E65252C00C81E0027DF54 /* tdq.c in Sources */,
@@ -675,7 +680,6 @@
 				923E64E32C00BFBA0027DF54 /* keen.c in Sources */,
 				923E645E2C00B9840027DF54 /* GameListView.swift in Sources */,
 				923E64942C00BE940027DF54 /* bridges.c in Sources */,
-				923E64662C00B9890027DF54 /* GameControlsView.swift in Sources */,
 				923E64912C00BE940027DF54 /* cube.c in Sources */,
 				923E64B12C00BED00027DF54 /* towers.c in Sources */,
 				923E64862C00BE620027DF54 /* penrose.c in Sources */,

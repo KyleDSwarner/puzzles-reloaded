@@ -75,7 +75,7 @@ extension Puzzles {
     // MARK: Filling
     static let puzzle_filling = GameConfig(
         name: String(localized: "filling_name", table: "Puzzles", comment: "Display name for the game 'filling'"),
-        description: String(localized: "filling_description", table: "Puzzles", comment: "Short description for the game 'filling"),
+        description: String(localized: "filling_description", table: "Puzzles", comment: "Short description for the game 'filling'"),
         instructions: String(localized: "filling_instructions", table: "Puzzles"),
         controlInfo: String(localized: "filling_controls", table: "Puzzles"),
         imageName: "filling",
