@@ -32,7 +32,10 @@ class GameConfig: Identifiable, Hashable {
     var description: String
     var isExperimental: Bool
     
-    var helpPage: HelpModel?
+    var instructions: String?
+    var controlInfo: String?
+    var customParamInfo: String?
+    var userParamInfo: String?
     
     var touchControls: [ControlConfig]
     var buttonControls: [ControlConfig]
@@ -43,24 +46,42 @@ class GameConfig: Identifiable, Hashable {
     var allowSingleFingerPanning: Bool // <-- Games that require dragging to select multiple boxes will need two-finger panning.
     var displayClearButtonInToolbar: Bool // <-- Many games need a clear button, this boolean adds it to the toolbar, next to undo/redo
     
-    var game: game // The reference to the game representation from the c code.
+    var internalGame: game // The reference to the game representation from the c code.
     
-    init(name: String, descritpion: String, imageName: String = "", helpPage: HelpModel? = nil, game: game, isExperimental: Bool = false, allowSingleFingerPanning: Bool = false, displayClearButtonInToolbar: Bool = false, touchControls: [ControlConfig] = [], buttonControls: [ControlConfig] = [], overflowMenuControls: [ControlConfig] = []) {
-        self.name = name
-        self.description = descritpion
-        self.imageName = !imageName.isEmpty ? imageName : name //TODO: Clean this up once we fix up all the other games.
-        self.helpPage = helpPage
-        self.isExperimental = isExperimental
-        self.game = game
+    init(
+        name: String,
+        description: String,
+        instructions: String? = nil,
+        controlInfo: String? = nil,
+        customParamInfo: String? = nil,
+        userParamInfo: String? = nil,
+        imageName: String,
+        internalGame: game,
+        isExperimental: Bool = false,
+        allowSingleFingerPanning: Bool = false,
+        displayClearButtonInToolbar: Bool = false,
+        touchControls: [ControlConfig] = [],
+        buttonControls: [ControlConfig] = [],
+        overflowMenuControls: [ControlConfig] = []) {
+            
+            self.name = name
+            self.description = description
+            self.instructions = instructions
+            self.controlInfo = controlInfo
+            self.customParamInfo = customParamInfo
+            self.userParamInfo = userParamInfo
         
-        self.displayClearButtonInToolbar = displayClearButtonInToolbar
-        self.allowSingleFingerPanning = allowSingleFingerPanning
-        self.touchControls = touchControls
-        self.buttonControls = buttonControls
-        self.overflowMenuControls = overflowMenuControls
-        
-        self.numericButtonsBuilder = { _ in []}
-        
+            self.imageName = imageName
+            self.isExperimental = isExperimental
+            self.internalGame = internalGame
+            
+            self.displayClearButtonInToolbar = displayClearButtonInToolbar
+            self.allowSingleFingerPanning = allowSingleFingerPanning
+            self.touchControls = touchControls
+            self.buttonControls = buttonControls
+            self.overflowMenuControls = overflowMenuControls
+            
+            self.numericButtonsBuilder = { _ in []}
     }
     
     func numericButtonsBuilder(_ numericButtonsBuilder: @escaping NumButtonsFunction) -> Self {
@@ -72,5 +93,17 @@ class GameConfig: Identifiable, Hashable {
         !touchControls.isEmpty || !buttonControls.isEmpty
     }
     
-    static let exampleGame = GameConfig(name: "net", descritpion: "Example Text", game: net)
+    static let exampleGame = GameConfig(
+        name: "Example Game",
+        description: "Example Text",
+        instructions: """
+        Here are some long form game instructions. These will tend to get pretty wordy!
+
+        Multiple lines go here. Anyway, how are you today? I hope everything is great.
+        """,
+        controlInfo: "Controls go here. Left click, right click, all that jazz.",
+        customParamInfo: "Information about custom parameters go here",
+        userParamInfo: "Information about user parameters go here",
+        imageName: "signpost",
+        internalGame: net)
 }

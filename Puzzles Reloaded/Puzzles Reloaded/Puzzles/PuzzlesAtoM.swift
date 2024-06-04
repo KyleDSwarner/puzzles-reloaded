@@ -15,13 +15,19 @@ extension Puzzles {
         puzzle_cube,
         puzzle_dominosa,
         puzzle_fifteen,
+        puzzle_filling,
+        puzzle_flip,
         puzzle_flood,
+        puzzle_galaxies,
+        puzzle_guess,
         puzzle_intertia,
         puzzle_keen,
         puzzle_lightup,
+        puzzle_loopy,
         puzzle_magnets,
         puzzle_map,
-        puzzle_mines
+        puzzle_mines,
+        puzzle_mosaic
     ]}
 }
 
@@ -30,63 +36,110 @@ extension Puzzles {
     // MARK: Blackbox
     static let puzzle_blackbox = GameConfig(
         name: "Blackbox",
-        descritpion: "Find the hidden balls in the box by bouncing laser beams off them",
+        description: "Find the hidden balls in the box by bouncing laser beams off them",
         imageName: "blackbox",
-        game: blackbox
+        internalGame: blackbox
     )
     
     // MARK: Bridges
     static let puzzle_bridges = GameConfig(
         name: "Bridges",
-        descritpion: "Connect all the islands with a network of bridges.",
+        description: "Connect all the islands with a network of bridges.",
         imageName: "bridges",
-        game: bridges
+        internalGame: bridges
     )
     
     // MARK: Cube
     static let puzzle_cube = GameConfig(
         name: "cube",
-        descritpion: "Pick up all the blue squares by rolling the cube over them",
-        game: cube)
+        description: "Pick up all the blue squares by rolling the cube over them",
+        imageName: "cube",
+        internalGame: cube)
     
     // MARK: Dominosa
     static let puzzle_dominosa = GameConfig(
         name: "Dominosa",
-        descritpion: "Tile the rectangle with a full set of dominoes",
+        description: "Tile the rectangle with a full set of dominoes",
         imageName: "dominosa",
-        game: dominosa
+        internalGame: dominosa
     )
     
     // MARK: Fifteen
     static let puzzle_fifteen = GameConfig(
         name: "Fifteen",
-        descritpion: "Slide the tiles around to arrange them into order",
+        description: "Slide the tiles around to arrange them into order",
         imageName: "fifteen",
-        game: fifteen
+        internalGame: fifteen
+    )
+    
+    // MARK: Filling
+    static let puzzle_filling = GameConfig(
+        name: String(localized: "filling_name", table: "Puzzles", comment: "Display name for the game 'filling'"),
+        description: String(localized: "filling_description", table: "Puzzles", comment: "Short description for the game 'filling"),
+        instructions: String(localized: "filling_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "filling_controls", table: "Puzzles"),
+        imageName: "filling",
+        internalGame: filling,
+        displayClearButtonInToolbar: true
+    ).numericButtonsBuilder({ gameId in
+        // Filling always displays all 10 number buttons as any number can be used at any size.
+        // The game ID doesn't provide any additional information -> 13x9:5a6b777a4b455b7a7765e5b8c4a3a4a9c8a6b3a8a9a5d2724b9d63e8d3b3a7b433a82b2e3b9c53b
+        return Puzzles.createButtonControls(10)
+    })
+    
+    // MARK: Flip
+    static let puzzle_flip = GameConfig(
+        name: "flip",
+        description: "Flip groups of squares to light them all up at once",
+        imageName: "flip",
+        internalGame: flip
     )
     
     // MARK: Flood
     static let puzzle_flood = GameConfig(
         name: "flood",
-        descritpion: "oh no a flood",
-        game: flood
+        description: "oh no a flood",
+        imageName: "flood",
+        internalGame: flood
+    )
+    
+    // MARK: Galaxies
+    static let puzzle_galaxies = GameConfig(
+        name: String(localized: "galaxies_name", table: "Puzzles"),
+        description: String(localized: "galaxies_description", table: "Puzzles"),
+        instructions: String(localized: "galaxies_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "galaxies_controls", table: "Puzzles"),
+        imageName: "galaxies",
+        internalGame: galaxies,
+        allowSingleFingerPanning: false
+    )
+    
+    // MARK: Guess
+    static let puzzle_guess = GameConfig(
+        name: String(localized: "guess_name", table: "Puzzles"),
+        description: String(localized: "galaxies_description", table: "Puzzles"),
+        instructions: String(localized: "galaxies_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "galaxies_controls", table: "Puzzles"),
+        imageName: "guess",
+        internalGame: guess,
+        allowSingleFingerPanning: false
     )
     
     // MARK: Inertia
     static let puzzle_intertia = GameConfig(
         name: "Intertia",
-        descritpion: "get your mass in gear",
+        description: "get your mass in gear",
         imageName: "inertia",
-        game: inertia,
+        internalGame: inertia,
         allowSingleFingerPanning: false
     )
     
     // MARK: Keen
     static let puzzle_keen = GameConfig(
         name: "Keen",
-        descritpion: "Goodbye Galaxy",
+        description: "Goodbye Galaxy",
         imageName: "keen",
-        game: keen,
+        internalGame: keen,
         allowSingleFingerPanning: false,
         displayClearButtonInToolbar: true
     ).numericButtonsBuilder({gameId in
@@ -103,25 +156,36 @@ extension Puzzles {
     // MARK: Light Up
     static let puzzle_lightup = GameConfig(
         name: "Light Up",
-        descritpion: "like a flashlight",
+        description: "like a flashlight",
         imageName: "lightup",
-        game: lightup
+        internalGame: lightup
+    )
+    
+    // MARK: Loopy
+    static let puzzle_loopy = GameConfig(
+        name: String(localized: "loopy_name", table: "Puzzles"),
+        description: String(localized: "loopy_description", table: "Puzzles"),
+        instructions: String(localized: "loopy_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "loopy_controls", table: "Puzzles"),
+        imageName: "loopy",
+        internalGame: loopy,
+        allowSingleFingerPanning: true
     )
     
     // MARK: Magnets
     static let puzzle_magnets = GameConfig(
         name: "Magnets",
-        descritpion: "my kind of personality",
+        description: "my kind of personality",
         imageName: "magnets",
-        game: magnets
+        internalGame: magnets
     )
     
     // MARK: MAP
     static let puzzle_map = GameConfig(
         name: "Map",
-        descritpion: "East? I thought you said 'Weast'",
+        description: "East? I thought you said 'Weast'",
         imageName: "map",
-        game: map,
+        internalGame: map,
         allowSingleFingerPanning: false,
         overflowMenuControls: [
             ControlConfig(label: "Add Labels", command: ButtonPress(for: "L"))
@@ -131,10 +195,20 @@ extension Puzzles {
     // MARK: Mines
     static let puzzle_mines = GameConfig(
         name: "Mines",
-        descritpion: "kaboom",
+        description: "kaboom",
         imageName: "mines",
-        game: mines,
+        internalGame: mines,
         allowSingleFingerPanning: true
+    )
+    
+    // MARK: Mosaic
+    static let puzzle_mosaic = GameConfig(
+        name: String(localized: "mosaic_name", table: "Puzzles"),
+        description: String(localized: "mosaic_description", table: "Puzzles"),
+        instructions: String(localized: "mosaic_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "mosaic_controls", table: "Puzzles"),
+        imageName: "mosaic",
+        internalGame: mosaic
     )
     
 }

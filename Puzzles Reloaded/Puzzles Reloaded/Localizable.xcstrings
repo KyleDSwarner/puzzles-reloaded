@@ -1,0 +1,168 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lld" : {
+
+    },
+    "5 Numeric Buttons" : {
+
+    },
+    "8 Numeric Buttons" : {
+
+    },
+    "9 Numeric Buttons" : {
+
+    },
+    "10 Numeric Buttons" : {
+
+    },
+    "16 Hex Buttons" : {
+
+    },
+    "25 Hex Buttons" : {
+
+    },
+    "31 Hex Buttons" : {
+
+    },
+    "All Games" : {
+
+    },
+    "Auto (Follow Device)" : {
+
+    },
+    "Auto-Solve" : {
+
+    },
+    "Back" : {
+
+    },
+    "Clear Selected Field" : {
+
+    },
+    "Controls" : {
+      "comment" : "Heading for the 'controls' section on help page"
+    },
+    "Custom" : {
+
+    },
+    "Dark" : {
+
+    },
+    "Done" : {
+
+    },
+    "Enable games that may be incomplete or broken" : {
+
+    },
+    "Enable Haptic Feedback" : {
+
+    },
+    "Enter Game ID" : {
+
+    },
+    "Experimental Games" : {
+
+    },
+    "Favorite" : {
+
+    },
+    "Favorites" : {
+
+    },
+    "filling_description" : {
+      "comment" : "Short description for the game 'filling"
+    },
+    "Game Parameters" : {
+      "comment" : "Heading for the 'game parameters' section on the help page"
+    },
+    "Game Size & Options" : {
+
+    },
+    "Hello, World!" : {
+
+    },
+    "Help" : {
+
+    },
+    "Hidden Games" : {
+
+    },
+    "Hide" : {
+
+    },
+    "Key" : {
+      "extractionState" : "manual"
+    },
+    "Light" : {
+
+    },
+    "Net Segment Selector" : {
+
+    },
+    "Net Segment Selector with Shift" : {
+
+    },
+    "New Game" : {
+
+    },
+    "New Game by Random Seed" : {
+
+    },
+    "Open Game Menu" : {
+
+    },
+    "Pattern Controls" : {
+
+    },
+    "Puzzle View" : {
+
+    },
+    "Puzzles" : {
+
+    },
+    "Redo previous move" : {
+
+    },
+    "Restart" : {
+
+    },
+    "Restart Game" : {
+
+    },
+    "Selector" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Sounds" : {
+
+    },
+    "Test Item!" : {
+
+    },
+    "Theme" : {
+
+    },
+    "Undead Controls" : {
+
+    },
+    "Undo previous move" : {
+
+    },
+    "Unfavorite" : {
+
+    },
+    "Unhide" : {
+
+    },
+    "Unruly Controls" : {
+
+    },
+    "User Preferences" : {
+      "comment" : "Heading for the 'user parameters' section on the game help page"
+    }
+  },
+  "version" : "1.0"
+}

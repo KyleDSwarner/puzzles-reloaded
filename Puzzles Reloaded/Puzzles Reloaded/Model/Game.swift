@@ -43,6 +43,6 @@ import SwiftData
         self.game.isExperimental
     }
     
-    static var exampleGameModel = Game(game: GameConfig(name: "net", descritpion: "Test Game, this is a cool game", game: net), settings: GameListConfig(gameName: "abcd"))
+    static var exampleGameModel = Game(game: GameConfig.exampleGame, settings: GameListConfig(gameName: "abcd"))
     
 }

@@ -7,117 +7,92 @@
 //
 
 import SwiftUI
-import Down // Import Down framework
 
 struct GameHelpView: View {
     
-    let gameHelpData: HelpModel?
-    var markdownText: AttributedString = ""
+    @Environment(\.dismiss) var dismiss
     
-    let markdownFileName = "abcd" // Name of your Markdown file
+    let game: GameConfig
 
-    init(gameHelpData: HelpModel?) {
-        self.gameHelpData = gameHelpData
-        
-        /*
-        if let filePath = Bundle.main.path(forResource: markdownFileName, ofType: "md") {
-            do {
-                let contents = try String(contentsOfFile: filePath)
-                print("Contents!")
-
-                print(markdownText)
-                //AttributedString(mark)
-                let astr = try! AttributedString(markdown: contents, options: AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true, ))
-                
-                markdownText = astr
-            } catch {
-                print("Error reading Markdown file:", error)
-            }
-        } else {
-            print("Markdown file not found.")
-        }
-         */
-        
+    init(game: GameConfig) {
+        self.game = game
     }
     
     var body: some View {
         
-        VStack(alignment: .leading) {
-            ScrollView {
-                Text("ABCD").font(.title)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Text(gameHelpData?.gameDescription ?? "No Help Text Found")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .multilineTextAlignment(.leading)
-                
-                Spacer(minLength: 20)
-                
-                Text("Controls").font(.title2)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Text(gameHelpData?.gameControls ?? "No Controls Text Found")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .multilineTextAlignment(.leading)
-            }
+        NavigationStack {
             
-            .padding(15)
-        }
-        .frame(maxWidth: .infinity)
-        
-        /*
-        VStack {
-            Text(markdownText)
-        }
-         */
-        
-        /*
-        if let markdown = readMarkdownFile(named: markdownFileName),
-           let attributedString = parseMarkdownContent(markdown) {
-            return Text("\(attributedString)")
-                .padding()
-        } else {
-            return Text("Failed to load Markdown content.")
-                .padding()
-        }
-         */
-    }
-    
-    func readMarkdownFile(named fileName: String) -> String? {
-        if let filePath = Bundle.main.path(forResource: fileName, ofType: "md") {
-            do {
-                let contents = try String(contentsOfFile: filePath)
-                return contents
-            } catch {
-                print("Error reading Markdown file:", error)
-                return nil
+                ScrollView {
+                    
+                    VStack(alignment: .leading) {
+                    
+                    Text(game.name).font(.largeTitle)
+                    
+                    HStack {
+                        Image("\(game.imageName)-base")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: 250, maxHeight: 250)
+                        Spacer()
+                    }
+                    .padding(.bottom, 15)
+                    
+                        if let instructions = game.instructions {
+                            Text(instructions)
+                                .multilineTextAlignment(.leading)
+                        }
+                    
+                    
+                    if let controlInfo = game.controlInfo {
+                        Spacer(minLength: 20)
+                        Divider()
+                        
+                        Text("Controls", comment: "Heading for the 'controls' section on help page").font(.title2)
+                            .padding(.bottom, 5)
+                        Text(controlInfo)
+                            .multilineTextAlignment(.leading)
+                    }
+                    
+                    
+                    if let customParamText = game.customParamInfo {
+                        Spacer(minLength: 20)
+                        Divider()
+                        
+                        Text("Game Parameters", comment: "Heading for the 'game parameters' section on the help page").font(.title2)
+                            .padding(.bottom, 5)
+                        Text(customParamText)
+                            .multilineTextAlignment(.leading)
+                    }
+                    
+                    if let userParamInfo = game.userParamInfo {
+                        Spacer(minLength: 20)
+                        Divider()
+                        
+                        Text("User Preferences", comment: "Heading for the 'user parameters' section on the game help page").font(.title2)
+                            .padding(.bottom, 5)
+                        Text(userParamInfo)
+                            .multilineTextAlignment(.leading)
+                    }
+                }
+                .padding(15)
+                .navigationTitle("Help")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            dismiss()
+                        } label: {
+                            Text("Done")
+                        }
+                    }
+                    
+                }
             }
-        } else {
-            print("Markdown file not found.")
-            return nil
         }
     }
     
-    
-
-    func parseMarkdownContent(_ markdown: String) -> NSAttributedString? {
-        let down = Down(markdownString: markdown)
-        do {
-            let attributedString = try down.toAttributedString()
-            print(attributedString)
-            return attributedString
-        } catch {
-            print("Error parsing Markdown content:", error)
-            return nil
-        }
-    }
 }
 
 #Preview {
-    let helpData: HelpModel = HelpModel(gameDescription: """
-      Whazzup This is a cool game what do you think about it? I like peanuts apparently I mean they're pretty good but why did I say that?
-      do you like peanuts? I do
-      """, gameControls: """
-    - Do something here
-    1. I like you.
-    """)
-    return GameHelpView(gameHelpData: helpData)
+    GameHelpView(game: GameConfig.exampleGame)
 }

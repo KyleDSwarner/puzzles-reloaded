@@ -1,0 +1,238 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "filling_controls" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To play Filling, simply click the mouse in any empty square and then type a digit on the keyboard to fill that square. By dragging the mouse, you can select multiple squares to fill with a single keypress. If you make a mistake, click the mouse in the incorrect square and press 0, Space, Backspace or Enter to clear it again (or use the Undo feature).\n\nYou can also move around the grid with the cursor keys; typing a digit will fill the square containing the cursor with that number; typing 0 will clear it. You can also select multiple squares for numbering or clearing with the return and arrow keys, before typing a digit to fill or clear the highlighted squares (as above). The space bar adds and removes single squares to and from the selection. Backspace and escape remove all squares from the selection."
+          }
+        }
+      }
+    },
+    "filling_description" : {
+      "comment" : "Short description for the game 'filling"
+    },
+    "filling_instructions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have a grid of squares, some of which contain digits, and the rest of which are empty. Your job is to fill in digits in the empty squares, in such a way that each connected region of squares all containing the same digit has an area equal to that digit.\n\n(‘Connected region’, for the purposes of this game, does not count diagonally separated squares as adjacent.)\n\nFor example, it follows that no square can contain a zero, and that two adjacent squares cannot both contain a one. No region has an area greater than 9 (because then its area would not be a single digit).\n\nCredit for this puzzle goes to [Nikoli](https://www.nikoli.co.jp/en/puzzles/fillomino/)\n\nFilling was contributed to this collection by Jonas Kölker."
+          }
+        }
+      }
+    },
+    "filling_name" : {
+      "comment" : "Display name for the game 'filling'",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filling"
+          }
+        }
+      }
+    },
+    "galaxies_controls" : {
+
+    },
+    "galaxies_description" : {
+
+    },
+    "galaxies_instructions" : {
+
+    },
+    "galaxies_name" : {
+
+    },
+    "guess_name" : {
+
+    },
+    "loopy_controls" : {
+
+    },
+    "loopy_description" : {
+
+    },
+    "loopy_instructions" : {
+
+    },
+    "loopy_name" : {
+
+    },
+    "mosaic_controls" : {
+
+    },
+    "mosaic_description" : {
+
+    },
+    "mosaic_instructions" : {
+
+    },
+    "mosaic_name" : {
+
+    },
+    "net_controls" : {
+
+    },
+    "net_description" : {
+
+    },
+    "net_instructions" : {
+
+    },
+    "net_name" : {
+
+    },
+    "samegame_controls" : {
+
+    },
+    "samegame_description" : {
+
+    },
+    "samegame_instructions" : {
+
+    },
+    "samegame_name" : {
+
+    },
+    "signpost_controls" : {
+      "comment" : "Control Info for the puzzle 'signpost'",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To play Signpost, you connect squares together by dragging from one square to another, indicating that they are adjacent in the sequence. Drag with the left button from a square to its successor, or with the right button from a square to its predecessor.\n\nIf you connect together two squares in this way and one of them has a number in it, the appropriate number will appear in the other square. If you connect two non-numbered squares, they will be assigned temporary algebraic labels: on the first occasion, they will be labelled ‘a’ and ‘a+1’, and then ‘b’ and ‘b+1’, and so on. Connecting more squares on to the ends of such a chain will cause them all to be labelled with the same letter.\n\nWhen you left-click or right-click in a square, the legal squares to connect it to will be shown.\n\nThe arrow in each square starts off black, and goes grey once you connect the square to its successor. Also, each square which needs a predecessor has a small dot in the bottom left corner, which vanishes once you link a square to it. So your aim is always to connect a square with a black arrow to a square with a dot.\n\nTo remove any links for a particular square (both incoming and outgoing), left-drag it off the grid. To remove a whole chain, right-drag any square in the chain off the grid."
+          }
+        }
+      }
+    },
+    "signpost_desc" : {
+      "comment" : "Short Description for the puzzle 'signpost'",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect the squares into a path following the arrows"
+          }
+        }
+      }
+    },
+    "signpost_instructions" : {
+      "comment" : "Instructions for the puzzle 'signpost'",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have a grid of squares; each square (except the last one) contains an arrow, and some squares also contain numbers. Your job is to connect the squares to form a continuous list of numbers starting at 1 and linked in the direction of the arrows – so the arrow inside the square with the number 1 will point to the square containing the number 2, which will point to the square containing the number 3, etc. Each square can be any distance away from the previous one, as long as it is somewhere in the direction of the arrow.\n\nBy convention the first and last numbers are shown; one or more interim numbers may also appear at the beginning.\n\nCredit for this puzzle goes to Janko [17], who call it ‘Pfeilpfad’ (‘arrow path’).\n\nSignpost was contributed to this collection by James Harvey.\n\n[17] http://janko.at/Raetsel/Pfeilpfad/index.htm"
+          }
+        }
+      }
+    },
+    "signpost_name" : {
+      "comment" : "Display name for the puzzle 'signpost'",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signpost"
+          }
+        }
+      }
+    },
+    "tents_controls" : {
+
+    },
+    "tents_description" : {
+
+    },
+    "tents_instructions" : {
+
+    },
+    "tents_name" : {
+
+    },
+    "towers_controls" : {
+
+    },
+    "towers_description" : {
+
+    },
+    "towers_instructions" : {
+
+    },
+    "towers_name" : {
+
+    },
+    "undead_controls" : {
+      "comment" : "Control info for the game 'undead'"
+    },
+    "undead_description" : {
+      "comment" : "Short description for the game 'undead'"
+    },
+    "undead_instructions" : {
+      "comment" : "Instructions for the game 'undead'"
+    },
+    "undead_name" : {
+      "comment" : "Display name for the game 'undead'"
+    },
+    "unruly_controls" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To play Unruly, click *the mouse* in a **square** to change its colour. Left-clicking an empty square will turn it black, and right-clicking will turn it white. Keep clicking the same button to cycle through the three possible states for the square. If you middle-click in a square it will be reset to empty.\n\nYou can also use the cursor keys to move around the grid. Pressing the return or space keys will turn an empty square black or white respectively (and then cycle the colors in the same way as the mouse buttons), and pressing Backspace will reset a square to empty."
+          }
+        }
+      }
+    },
+    "unruly_description" : {
+
+    },
+    "unruly_instructions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are given a grid of squares, which you must colour either black or white. Some squares are provided as clues; the rest are left for you to fill in. Each row and column must contain the same number of black and white squares, and no row or column may contain three consecutive squares of the same colour.\n\nThis puzzle type was invented by Adolfo Zanellati, under the name ‘Tohu wa Vohu’. \n\nUnruly was contributed to this collection by Lennard Sprong."
+          }
+        }
+      }
+    },
+    "unruly_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unruly"
+          }
+        }
+      }
+    },
+    "untangle_controls" : {
+      "comment" : "Description of controls for the game 'untangle'"
+    },
+    "untangle_description" : {
+      "comment" : "Short Description for the game 'untangle'"
+    },
+    "untangle_instructions" : {
+      "comment" : "Game instructions for 'untangle'"
+    },
+    "untangle_name" : {
+      "comment" : "Display name for the game 'untangle'",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Untangle"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

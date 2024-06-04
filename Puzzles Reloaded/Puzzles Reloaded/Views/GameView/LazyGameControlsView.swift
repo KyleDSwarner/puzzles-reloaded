@@ -253,50 +253,50 @@ struct LazyGameControlsView: View, Equatable {
         var body: some View {
             ScrollView {
                 VStack(spacing: 30) {
-                    Text("Net Segment Selector")
+                    Text(verbatim: "Net Segment Selector")
                     LazyGameControlsView(controlOption: $controlConfig, touchControls: Puzzles.puzzle_net.touchControls, buttonControls: Puzzles.puzzle_net.buttonControls, gameId: "5x5:89812e93b6e4dd9db75a22148", buttonPressFunction: buttonPressFunction).equatable()
                     
                     Divider()
                     
-                    Text("Net Segment Selector with Shift")
+                    Text(verbatim: "Net Segment Selector with Shift")
                     LazyGameControlsView(controlOption: $controlConfig, touchControls: Puzzles.puzzle_net.touchControls, buttonControls: Puzzles.puzzle_net.buttonControls, gameId: "5x5w:28563856986235976", buttonPressFunction: buttonPressFunction).equatable()
                     
                     Divider()
                     
-                    Text("Pattern Controls")
+                    Text(verbatim: "Pattern Controls")
                     LazyGameControlsView(controlOption: $controlConfig, touchControls: Puzzles.puzzle_pattern.touchControls, buttonPressFunction: buttonPressFunction).equatable()
                     
                     Divider()
                     
-                    Text("5 Numeric Buttons")
+                    Text(verbatim: "5 Numeric Buttons")
                     LazyGameControlsView(controlOption: $controlConfig, buttonControls: Puzzles.puzzle_towers.buttonControls, numericButtonsFunction: Puzzles.puzzle_towers.numericButtonsBuilder, gameId: "5:3/2/2/3/45/5/3/2/2//2/2", buttonPressFunction: buttonPressFunction).equatable()
                     Divider()
                     
-                    Text("8 Numeric Buttons")
+                    Text(verbatim: "8 Numeric Buttons")
                     LazyGameControlsView(controlOption: $controlConfig, buttonControls: Puzzles.puzzle_towers.buttonControls, numericButtonsFunction: Puzzles.puzzle_towers.numericButtonsBuilder, gameId: "8:3/2/2/3/45/5/3/2/2//2/2", buttonPressFunction: buttonPressFunction).equatable()
                     Divider()
-                    Text("9 Numeric Buttons")
+                    Text(verbatim: "9 Numeric Buttons")
                     LazyGameControlsView(controlOption: $controlConfig, buttonControls: Puzzles.puzzle_towers.buttonControls, numericButtonsFunction: Puzzles.puzzle_towers.numericButtonsBuilder, gameId: "9:3/2/2/3/45/5/3/2/2//2/2", buttonPressFunction: buttonPressFunction).equatable()
                     Divider()
-                    Text("10 Numeric Buttons")
+                    Text(verbatim: "10 Numeric Buttons")
                     LazyGameControlsView(controlOption: $controlConfig, buttonControls: Puzzles.puzzle_towers.buttonControls, numericButtonsFunction: Puzzles.puzzle_towers.numericButtonsBuilder, gameId: "10:3/2/2/3/45/5/3/2/2//2/2", buttonPressFunction: buttonPressFunction).equatable()
                     Divider()
-                    Text("16 Hex Buttons")
+                    Text(verbatim: "16 Hex Buttons")
                     LazyGameControlsView(controlOption: $controlConfig, buttonControls: Puzzles.puzzle_solo.buttonControls, numericButtonsFunction: Puzzles.puzzle_solo.numericButtonsBuilder, gameId: "4x4:3/2/2/3/45/5/3/2/2//2/2", buttonPressFunction: buttonPressFunction).equatable()
                     Divider()
-                    Text("25 Hex Buttons")
+                    Text(verbatim: "25 Hex Buttons")
                     LazyGameControlsView(controlOption: $controlConfig, buttonControls: Puzzles.puzzle_solo.buttonControls, numericButtonsFunction: Puzzles.puzzle_solo.numericButtonsBuilder, gameId: "25j:3/2/2/3/45/5/3/2/2//2/2", buttonPressFunction: buttonPressFunction).equatable()
                     Divider()
-                    Text("31 Hex Buttons")
+                    Text(verbatim: "31 Hex Buttons")
                     LazyGameControlsView(controlOption: $controlConfig, buttonControls: Puzzles.puzzle_solo.buttonControls, numericButtonsFunction: Puzzles.puzzle_solo.numericButtonsBuilder, gameId: "31j:3/2/2/3/45/5/3/2/2//2/2", buttonPressFunction: buttonPressFunction).equatable()
                     Divider()
-                    Text("35 Hex Buttons (Maximum)")
+                    Text(verbatim: "35 Hex Buttons (Maximum)")
                     LazyGameControlsView(controlOption: $controlConfig, buttonControls: Puzzles.puzzle_solo.buttonControls, numericButtonsFunction: Puzzles.puzzle_solo.numericButtonsBuilder, gameId: "35j:3/2/2/3/45/5/3/2/2//2/2", buttonPressFunction: buttonPressFunction).equatable()
                     Divider()
-                    Text("Unruly Controls")
+                    Text(verbatim: "Unruly Controls")
                     LazyGameControlsView(controlOption: $controlConfig, touchControls: Puzzles.puzzle_unruly.touchControls, buttonPressFunction: buttonPressFunction).equatable()
                     Divider()
-                    Text("Undead Controls")
+                    Text(verbatim: "Undead Controls")
                     LazyGameControlsView(controlOption: $controlConfig, buttonControls: Puzzles.puzzle_undead.buttonControls, buttonPressFunction: buttonPressFunction).equatable()
                     Divider()
                 }

@@ -10,23 +10,8 @@
 		923E63E32C00B9210027DF54 /* PuzzlesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63E22C00B9210027DF54 /* PuzzlesApp.swift */; };
 		923E63E72C00B9220027DF54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 923E63E62C00B9220027DF54 /* Assets.xcassets */; };
 		923E63EB2C00B9220027DF54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 923E63EA2C00B9220027DF54 /* Preview Assets.xcassets */; };
-		923E64192C00B94E0027DF54 /* Filling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63FC2C00B94E0027DF54 /* Filling.swift */; };
-		923E641A2C00B94E0027DF54 /* Flip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63FD2C00B94E0027DF54 /* Flip.swift */; };
-		923E641B2C00B94E0027DF54 /* Galaxies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63FE2C00B94E0027DF54 /* Galaxies.swift */; };
-		923E641C2C00B94E0027DF54 /* Guess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63FF2C00B94E0027DF54 /* Guess.swift */; };
-		923E641D2C00B94E0027DF54 /* Loopy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64002C00B94E0027DF54 /* Loopy.swift */; };
-		923E641E2C00B94E0027DF54 /* Mosaic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64012C00B94E0027DF54 /* Mosaic.swift */; };
-		923E641F2C00B94E0027DF54 /* Net.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64022C00B94E0027DF54 /* Net.swift */; };
 		923E64202C00B94E0027DF54 /* PuzzleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64032C00B94E0027DF54 /* PuzzleConfig.swift */; };
 		923E64212C00B94E0027DF54 /* PuzzlesAtoM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64042C00B94E0027DF54 /* PuzzlesAtoM.swift */; };
-		923E64222C00B94E0027DF54 /* SameGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64052C00B94E0027DF54 /* SameGame.swift */; };
-		923E64232C00B94E0027DF54 /* Signpost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64062C00B94E0027DF54 /* Signpost.swift */; };
-		923E64242C00B94E0027DF54 /* Tents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64072C00B94E0027DF54 /* Tents.swift */; };
-		923E64252C00B94E0027DF54 /* Towers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64082C00B94E0027DF54 /* Towers.swift */; };
-		923E64262C00B94E0027DF54 /* Undead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64092C00B94E0027DF54 /* Undead.swift */; };
-		923E64272C00B94E0027DF54 /* Unequal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E640A2C00B94E0027DF54 /* Unequal.swift */; };
-		923E64282C00B94E0027DF54 /* Unruly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E640B2C00B94E0027DF54 /* Unruly.swift */; };
-		923E64292C00B94E0027DF54 /* Untangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E640C2C00B94E0027DF54 /* Untangle.swift */; };
 		923E64312C00B9680027DF54 /* Midend-GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642A2C00B9680027DF54 /* Midend-GameConfig.swift */; };
 		923E64322C00B9680027DF54 /* Midend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642B2C00B9680027DF54 /* Midend.swift */; };
 		923E64332C00B9680027DF54 /* DrawingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642D2C00B9680027DF54 /* DrawingAPI.swift */; };
@@ -136,10 +121,9 @@
 		923E652C2C00D62A0027DF54 /* PuzzlesNtoZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E652B2C00D62A0027DF54 /* PuzzlesNtoZ.swift */; };
 		923E652E2C00D6DF0027DF54 /* PuzzlesXSheep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E652D2C00D6DF0027DF54 /* PuzzlesXSheep.swift */; };
 		923E65312C00D75E0027DF54 /* GameHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E65302C00D75E0027DF54 /* GameHelpView.swift */; };
-		923E65342C00D8D90027DF54 /* Down in Frameworks */ = {isa = PBXBuildFile; productRef = 923E65332C00D8D90027DF54 /* Down */; };
-		923E65362C00D9970027DF54 /* abcd.md in Resources */ = {isa = PBXBuildFile; fileRef = 923E65352C00D9970027DF54 /* abcd.md */; };
-		923E65382C00DCB60027DF54 /* HelpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E65372C00DCB60027DF54 /* HelpModel.swift */; };
 		923E653A2C00E7D50027DF54 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E65392C00E7D50027DF54 /* ContentView.swift */; };
+		92B55D522C0F410900517280 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D512C0F410900517280 /* Localizable.xcstrings */; };
+		92B55D542C0F46A500517280 /* Puzzles.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D532C0F46A500517280 /* Puzzles.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -148,23 +132,8 @@
 		923E63E62C00B9220027DF54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		923E63E82C00B9220027DF54 /* Puzzles_Reloaded.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Puzzles_Reloaded.entitlements; sourceTree = "<group>"; };
 		923E63EA2C00B9220027DF54 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		923E63FC2C00B94E0027DF54 /* Filling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filling.swift; sourceTree = "<group>"; };
-		923E63FD2C00B94E0027DF54 /* Flip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flip.swift; sourceTree = "<group>"; };
-		923E63FE2C00B94E0027DF54 /* Galaxies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Galaxies.swift; sourceTree = "<group>"; };
-		923E63FF2C00B94E0027DF54 /* Guess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Guess.swift; sourceTree = "<group>"; };
-		923E64002C00B94E0027DF54 /* Loopy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loopy.swift; sourceTree = "<group>"; };
-		923E64012C00B94E0027DF54 /* Mosaic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mosaic.swift; sourceTree = "<group>"; };
-		923E64022C00B94E0027DF54 /* Net.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Net.swift; sourceTree = "<group>"; };
 		923E64032C00B94E0027DF54 /* PuzzleConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleConfig.swift; sourceTree = "<group>"; };
 		923E64042C00B94E0027DF54 /* PuzzlesAtoM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzlesAtoM.swift; sourceTree = "<group>"; };
-		923E64052C00B94E0027DF54 /* SameGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SameGame.swift; sourceTree = "<group>"; };
-		923E64062C00B94E0027DF54 /* Signpost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signpost.swift; sourceTree = "<group>"; };
-		923E64072C00B94E0027DF54 /* Tents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tents.swift; sourceTree = "<group>"; };
-		923E64082C00B94E0027DF54 /* Towers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Towers.swift; sourceTree = "<group>"; };
-		923E64092C00B94E0027DF54 /* Undead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Undead.swift; sourceTree = "<group>"; };
-		923E640A2C00B94E0027DF54 /* Unequal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unequal.swift; sourceTree = "<group>"; };
-		923E640B2C00B94E0027DF54 /* Unruly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unruly.swift; sourceTree = "<group>"; };
-		923E640C2C00B94E0027DF54 /* Untangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Untangle.swift; sourceTree = "<group>"; };
 		923E642A2C00B9680027DF54 /* Midend-GameConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Midend-GameConfig.swift"; sourceTree = "<group>"; };
 		923E642B2C00B9680027DF54 /* Midend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Midend.swift; sourceTree = "<group>"; };
 		923E642D2C00B9680027DF54 /* DrawingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingAPI.swift; sourceTree = "<group>"; };
@@ -286,10 +255,10 @@
 		923E652B2C00D62A0027DF54 /* PuzzlesNtoZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlesNtoZ.swift; sourceTree = "<group>"; };
 		923E652D2C00D6DF0027DF54 /* PuzzlesXSheep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlesXSheep.swift; sourceTree = "<group>"; };
 		923E65302C00D75E0027DF54 /* GameHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHelpView.swift; sourceTree = "<group>"; };
-		923E65352C00D9970027DF54 /* abcd.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = abcd.md; path = "../../../../submodules/x-sheep-puzzles/docs/abcd.md"; sourceTree = "<group>"; };
-		923E65372C00DCB60027DF54 /* HelpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpModel.swift; sourceTree = "<group>"; };
 		923E65392C00E7D50027DF54 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		923E653B2C00EC290027DF54 /* generated-games.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "generated-games.h"; sourceTree = "<group>"; };
+		92B55D512C0F410900517280 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		92B55D532C0F46A500517280 /* Puzzles.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Puzzles.xcstrings; sourceTree = "<group>"; };
 		92C527442C062A7400F421D6 /* Untangle-Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Untangle-Config.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -298,7 +267,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				923E65342C00D8D90027DF54 /* Down in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +300,8 @@
 				923E640D2C00B94E0027DF54 /* Puzzles */,
 				923E63E22C00B9210027DF54 /* PuzzlesApp.swift */,
 				923E646F2C00B9E30027DF54 /* CodableWrapper.swift */,
+				92B55D512C0F410900517280 /* Localizable.xcstrings */,
+				92B55D532C0F46A500517280 /* Puzzles.xcstrings */,
 				923E64702C00B9E40027DF54 /* Game-UserSettings.swift */,
 				923E646E2C00B9E30027DF54 /* GameListUserConfig.swift */,
 				923E647E2C00BE620027DF54 /* Puzzles Reloaded-Bridging-Header.h */,
@@ -360,21 +330,6 @@
 				923E64042C00B94E0027DF54 /* PuzzlesAtoM.swift */,
 				923E652B2C00D62A0027DF54 /* PuzzlesNtoZ.swift */,
 				923E652D2C00D6DF0027DF54 /* PuzzlesXSheep.swift */,
-				923E63FC2C00B94E0027DF54 /* Filling.swift */,
-				923E63FD2C00B94E0027DF54 /* Flip.swift */,
-				923E63FE2C00B94E0027DF54 /* Galaxies.swift */,
-				923E63FF2C00B94E0027DF54 /* Guess.swift */,
-				923E64002C00B94E0027DF54 /* Loopy.swift */,
-				923E64012C00B94E0027DF54 /* Mosaic.swift */,
-				923E64022C00B94E0027DF54 /* Net.swift */,
-				923E64052C00B94E0027DF54 /* SameGame.swift */,
-				923E64062C00B94E0027DF54 /* Signpost.swift */,
-				923E64072C00B94E0027DF54 /* Tents.swift */,
-				923E64082C00B94E0027DF54 /* Towers.swift */,
-				923E64092C00B94E0027DF54 /* Undead.swift */,
-				923E640A2C00B94E0027DF54 /* Unequal.swift */,
-				923E640B2C00B94E0027DF54 /* Unruly.swift */,
-				923E640C2C00B94E0027DF54 /* Untangle.swift */,
 			);
 			path = Puzzles;
 			sourceTree = "<group>";
@@ -605,8 +560,6 @@
 			isa = PBXGroup;
 			children = (
 				923E65302C00D75E0027DF54 /* GameHelpView.swift */,
-				923E65352C00D9970027DF54 /* abcd.md */,
-				923E65372C00DCB60027DF54 /* HelpModel.swift */,
 			);
 			path = HelpView;
 			sourceTree = "<group>";
@@ -628,7 +581,6 @@
 			);
 			name = "Puzzles Reloaded";
 			packageProductDependencies = (
-				923E65332C00D8D90027DF54 /* Down */,
 			);
 			productName = "Puzzles Reloaded";
 			productReference = 923E63DF2C00B9210027DF54 /* Puzzles Reloaded.app */;
@@ -661,7 +613,6 @@
 			);
 			mainGroup = 923E63D62C00B9210027DF54;
 			packageReferences = (
-				923E65322C00D8D90027DF54 /* XCRemoteSwiftPackageReference "Down" */,
 			);
 			productRefGroup = 923E63E02C00B9210027DF54 /* Products */;
 			projectDirPath = "";
@@ -677,8 +628,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				923E65362C00D9970027DF54 /* abcd.md in Resources */,
+				92B55D542C0F46A500517280 /* Puzzles.xcstrings in Resources */,
 				923E63EB2C00B9220027DF54 /* Preview Assets.xcassets in Resources */,
+				92B55D522C0F410900517280 /* Localizable.xcstrings in Resources */,
 				923E63E72C00B9220027DF54 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -691,7 +643,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				923E651F2C00C7880027DF54 /* guess.c in Sources */,
-				923E64232C00B94E0027DF54 /* Signpost.swift in Sources */,
 				923E64FF2C00C00A0027DF54 /* ascent.c in Sources */,
 				923E64BA2C00BEED0027DF54 /* rect.c in Sources */,
 				923E64D82C00BF490027DF54 /* midend.c in Sources */,
@@ -700,7 +651,6 @@
 				923E64FB2C00C00A0027DF54 /* spokes.c in Sources */,
 				923E64732C00B9E40027DF54 /* GameListUserConfig.swift in Sources */,
 				923E64852C00BE620027DF54 /* penrose-legacy.c in Sources */,
-				923E64272C00B94E0027DF54 /* Unequal.swift in Sources */,
 				923E64F82C00C00A0027DF54 /* sticks.c in Sources */,
 				923E65212C00C7880027DF54 /* dominosa.c in Sources */,
 				923E643C2C00B96E0027DF54 /* SettingsConstants.swift in Sources */,
@@ -709,7 +659,6 @@
 				923E64332C00B9680027DF54 /* DrawingAPI.swift in Sources */,
 				923E64202C00B94E0027DF54 /* PuzzleConfig.swift in Sources */,
 				923E64752C00B9E40027DF54 /* Game-UserSettings.swift in Sources */,
-				923E641C2C00B94E0027DF54 /* Guess.swift in Sources */,
 				923E64552C00B97A0027DF54 /* SoundEffects.swift in Sources */,
 				923E651E2C00C7880027DF54 /* mosaic.c in Sources */,
 				923E65252C00C81E0027DF54 /* tdq.c in Sources */,
@@ -735,7 +684,6 @@
 				923E64D62C00BF490027DF54 /* loopgen.c in Sources */,
 				923E650F2C00C7030027DF54 /* divvy.c in Sources */,
 				923E64FC2C00C00A0027DF54 /* clusters.c in Sources */,
-				923E641B2C00B94E0027DF54 /* Galaxies.swift in Sources */,
 				923E64502C00B97A0027DF54 /* GestureNavigationCoordinator.swift in Sources */,
 				923E65082C00C25D0027DF54 /* flip.c in Sources */,
 				923E651C2C00C7880027DF54 /* mines.c in Sources */,
@@ -747,12 +695,10 @@
 				923E64DD2C00BF580027DF54 /* latin.c in Sources */,
 				923E649C2C00BEB60027DF54 /* grid.c in Sources */,
 				923E64B62C00BEE20027DF54 /* signpost.c in Sources */,
-				923E641A2C00B94E0027DF54 /* Flip.swift in Sources */,
 				923E64342C00B9680027DF54 /* GlobalFunctions.swift in Sources */,
 				923E64682C00B9890027DF54 /* GamePresetMenu.swift in Sources */,
 				923E65062C00C25D0027DF54 /* filling.c in Sources */,
 				923E650D2C00C6E50027DF54 /* drawing.c in Sources */,
-				923E64192C00B94E0027DF54 /* Filling.swift in Sources */,
 				923E65012C00C00A0027DF54 /* salad.c in Sources */,
 				923E652E2C00D6DF0027DF54 /* PuzzlesXSheep.swift in Sources */,
 				923E64922C00BE940027DF54 /* blackbox.c in Sources */,
@@ -762,32 +708,26 @@
 				923E649E2C00BEBC0027DF54 /* findloop.c in Sources */,
 				923E64D52C00BF490027DF54 /* matching.c in Sources */,
 				923E645C2C00B9840027DF54 /* GameListGridItem.swift in Sources */,
-				923E641F2C00B94E0027DF54 /* Net.swift in Sources */,
 				923E64AE2C00BED00027DF54 /* untangle.c in Sources */,
 				923E64C32C00BF120027DF54 /* pegs.c in Sources */,
 				923E643E2C00B96E0027DF54 /* SettingsModel.swift in Sources */,
 				923E64CC2C00BF2D0027DF54 /* netslide.c in Sources */,
 				923E64F62C00C00A0027DF54 /* seismic.c in Sources */,
 				923E64D72C00BF490027DF54 /* malloc.c in Sources */,
-				923E65382C00DCB60027DF54 /* HelpModel.swift in Sources */,
 				923E653A2C00E7D50027DF54 /* ContentView.swift in Sources */,
 				923E64472C00B9740027DF54 /* GameManager.swift in Sources */,
 				923E64FA2C00C00A0027DF54 /* boats.c in Sources */,
 				923E64992C00BEA30027DF54 /* combi.c in Sources */,
-				923E64242C00B94E0027DF54 /* Tents.swift in Sources */,
 				923E64672C00B9890027DF54 /* GameFrontend.swift in Sources */,
 				923E64312C00B9680027DF54 /* Midend-GameConfig.swift in Sources */,
 				923E65292C00C86A0027DF54 /* sort.c in Sources */,
 				923E64402C00B96E0027DF54 /* UserPreferences.swift in Sources */,
-				923E64262C00B94E0027DF54 /* Undead.swift in Sources */,
 				923E65272C00C84F0027DF54 /* printing.c in Sources */,
-				923E641D2C00B94E0027DF54 /* Loopy.swift in Sources */,
 				923E65072C00C25D0027DF54 /* galaxies.c in Sources */,
 				923E651D2C00C7880027DF54 /* magnets.c in Sources */,
 				923E645B2C00B9840027DF54 /* GameContextMenu.swift in Sources */,
 				923E64AC2C00BED00027DF54 /* undead.c in Sources */,
 				923E64B22C00BED00027DF54 /* tracks.c in Sources */,
-				923E64282C00B94E0027DF54 /* Unruly.swift in Sources */,
 				923E65232C00C7B40027DF54 /* dsf.c in Sources */,
 				923E64322C00B9680027DF54 /* Midend.swift in Sources */,
 				923E64AA2C00BED00027DF54 /* unequal.c in Sources */,
@@ -803,7 +743,6 @@
 				923E64C82C00BF1C0027DF54 /* nullgame.c in Sources */,
 				923E645D2C00B9840027DF54 /* GameListILargeItem.swift in Sources */,
 				923E650B2C00C4AC0027DF54 /* tree234.c in Sources */,
-				923E64222C00B94E0027DF54 /* SameGame.swift in Sources */,
 				923E64B92C00BEED0027DF54 /* samegame.c in Sources */,
 				923E64CB2C00BF2D0027DF54 /* net.c in Sources */,
 				923E63E32C00B9210027DF54 /* PuzzlesApp.swift in Sources */,
@@ -814,11 +753,8 @@
 				923E64DA2C00BF4F0027DF54 /* laydomino.c in Sources */,
 				923E64F92C00C00A0027DF54 /* mathrax.c in Sources */,
 				923E64462C00B9740027DF54 /* GameConfig.swift in Sources */,
-				923E64252C00B94E0027DF54 /* Towers.swift in Sources */,
 				923E65002C00C00A0027DF54 /* crossing.c in Sources */,
 				923E64932C00BE940027DF54 /* flood.c in Sources */,
-				923E64292C00B94E0027DF54 /* Untangle.swift in Sources */,
-				923E641E2C00B94E0027DF54 /* Mosaic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1050,25 +986,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		923E65322C00D8D90027DF54 /* XCRemoteSwiftPackageReference "Down" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/johnxnguyen/Down";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		923E65332C00D8D90027DF54 /* Down */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 923E65322C00D8D90027DF54 /* XCRemoteSwiftPackageReference "Down" */;
-			productName = Down;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 923E63D72C00B9210027DF54 /* Project object */;
 }

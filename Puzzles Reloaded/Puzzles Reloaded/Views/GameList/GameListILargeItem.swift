@@ -37,7 +37,6 @@ struct GameListLargeItem: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 75, height: 75)
-                    Spacer()
                 }
                 .padding(.vertical, 5)
                
@@ -47,10 +46,10 @@ struct GameListLargeItem: View {
                         .font(.title)
                     Text(gameConfig.description)
                         .font(.subheadline)
-                    Spacer()
                 }
                 
             }
+            //.border(.blue)
         }
         .swipeActions(allowsFullSwipe: false) {
             GameContextMenu(game: game)

@@ -8,85 +8,6 @@
 
 import SwiftUI
 
-struct AnimatedPuzzleImage: ViewModifier {
-    let translation: CGAffineTransform
-    let enablePuzzleCompleteAnimation: Bool
-    let anchor: CGPoint
-    
-    var translationOffset: CGSize {
-        print("Animation enabled: tx:\(translation.tx), ty: \(translation.ty)")
-        return enablePuzzleCompleteAnimation ? CGSize(width: translation.tx * translation.a, height: translation.ty * translation.a) : .zero
-    }
-    
-    var translationScale: CGFloat {
-        enablePuzzleCompleteAnimation ? translation.a : 1.0
-    }
-    
-    func body(content: Content) -> some View {
-            content
-            .scaleEffect(translationScale, anchor: .topLeading)
-            .offset(translationOffset)
-                
-    }
-}
-
-struct ModdedPuzzleImage: ViewModifier {
-    let translation: CGAffineTransform
-    var lockedAnchor: CGPoint = .zero
-    var anchor: CGPoint
-    
-    var anchorz: CGPoint {
-        
-        if !anchor.x.isEqual(to: lockedAnchor.x) && !anchor.y.isEqual(to: lockedAnchor.y) {
-            print("Ancor Update: \(anchor.x) \(anchor.y)")
-            print("X Diff: \(lockedAnchor.x) ... \(anchor.x) = \(lockedAnchor.x - anchor.x)")
-            print("y Diff: \(lockedAnchor.y) ... \(anchor.y) = \(lockedAnchor.y - anchor.y)")
-            
-            //lockedAnchor = CGPoint(x: lockedAnchor.x - anchor.x, y: lockedAnchor.x - anchor.x)
-        }
-    
-        return CGPoint(x: lockedAnchor.x - anchor.x, y: lockedAnchor.x - anchor.x)
-    }
-    
-    func body(content: Content) -> some View {
-        content
-            .offset(x: anchorz.x, y: anchorz.y)
-            .scaleEffect(translation.a)
-            .offset(x: translation.tx - anchorz.x, y: translation.ty - anchorz.y)
-    }
-}
-
-
-struct InteractablePuzzleImage: ViewModifier {
-    let translation: CGAffineTransform
-    let enablePuzzleCompleteAnimation: Bool
-    
-    var translationValue: CGAffineTransform {
-        if(!enablePuzzleCompleteAnimation) {
-            print("Interation enabled: tx:\(translation.tx), ty: \(translation.ty)")
-        }
-        
-        return enablePuzzleCompleteAnimation ? .identity : translation
-    }
-    
-    func body(content: Content) -> some View {
-        content.transformEffect(translationValue)
-    }
-}
-
-struct TranslatedImage: ViewModifier {
-    
-    let translation: CGAffineTransform
-    let anchor: CGPoint
-    let enablePuzzleCompleteAnimation: Bool
-    
-    func body(content: Content) -> some View {
-        content
-            .modifier(InteractablePuzzleImage(translation: translation, enablePuzzleCompleteAnimation: enablePuzzleCompleteAnimation))
-            .modifier(AnimatedPuzzleImage(translation: translation, enablePuzzleCompleteAnimation: enablePuzzleCompleteAnimation, anchor: anchor))
-    }
-}
-
 struct GameView: View {
     @Environment(\.dismiss) var dismiss
     
@@ -128,7 +49,7 @@ struct GameView: View {
     
     init(game: Game) {
         self.game = game
-        frontend.midend.setGame(game.game.game) //lol
+        frontend.midend.setGame(game.game.internalGame) //lol
         
         if(!game.game.touchControls.isEmpty) {
             frontend.controlOption = game.game.touchControls.first!
@@ -278,7 +199,7 @@ struct GameView: View {
         //.toolbarBackground(.visible, for: .bottomBar)
         // MARK: Help Page Sheet
         .sheet(isPresented: $helpPageDisplayed) {
-            GameHelpView(gameHelpData: game.game.helpPage)
+            GameHelpView(game: game.game)
         }
         // MARK: Settings Page Sheet
         .sheet(isPresented: $settingsPageDisplayed) {
