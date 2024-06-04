@@ -297,7 +297,7 @@
 				923E644F2C00B97A0027DF54 /* PuzzleInteractions */,
 				923E643B2C00B96E0027DF54 /* Settings */,
 				923E640D2C00B94E0027DF54 /* Puzzles */,
-				923E646F2C00B9E30027DF54 /* CodableWrapper.swift */,
+				92B55D582C0F95B200517280 /* Utils */,
 				92B55D512C0F410900517280 /* Localizable.xcstrings */,
 				92B55D532C0F46A500517280 /* Puzzles.xcstrings */,
 				923E647E2C00BE620027DF54 /* Puzzles Reloaded-Bridging-Header.h */,
@@ -567,6 +567,14 @@
 				923E64392C00B96E0027DF54 /* SettingsView.swift */,
 			);
 			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		92B55D582C0F95B200517280 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				923E646F2C00B9E30027DF54 /* CodableWrapper.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

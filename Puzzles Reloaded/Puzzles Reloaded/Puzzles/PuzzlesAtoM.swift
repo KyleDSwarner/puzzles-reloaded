@@ -131,9 +131,9 @@ extension Puzzles {
     // MARK: Guess
     static let puzzle_guess = GameConfig(
         name: String(localized: "guess_name", table: "Puzzles"),
-        description: String(localized: "galaxies_description", table: "Puzzles"),
-        instructions: String(localized: "galaxies_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "galaxies_controls", table: "Puzzles"),
+        description: String(localized: "guess_description", table: "Puzzles"),
+        instructions: String(localized: "guess_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "guess_controls", table: "Puzzles"),
         imageName: "guess",
         internalGame: guess,
         allowSingleFingerPanning: false

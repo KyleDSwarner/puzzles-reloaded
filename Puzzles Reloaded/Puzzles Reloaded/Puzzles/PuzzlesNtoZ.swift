@@ -12,6 +12,7 @@ extension Puzzles {
     static var puzzlesNtoZ: [GameConfig] {[
         puzzle_net,
         puzzle_netslide,
+        puzzle_palisade,
         puzzle_pattern,
         puzzle_pearl,
         puzzle_pegs,
@@ -65,9 +66,19 @@ extension Puzzles {
         name: String(localized: "netslide_name", table: "Puzzles"),
         description: String(localized: "netslide_description", table: "Puzzles"),
         instructions: String(localized: "netslide_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "netslide_controls", table: "Puzzles"),
+        controlInfo: String(localized: "sixteen_controls", table: "Puzzles"), // This is intentional! Reuses the same control scheme as Sixteen
         imageName: "netslide",
         internalGame: netslide
+    )
+    
+    // MARK: Palisade
+    static let puzzle_palisade = GameConfig(
+        name: String(localized: "palisade_name", table: "Puzzles"),
+        description: String(localized: "palisade_description", table: "Puzzles"),
+        instructions: String(localized: "palisade_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "palisade_controls", table: "Puzzles"),
+        imageName: "palisade",
+        internalGame: palisade
     )
     
     // MARK: Pattern
@@ -133,6 +144,7 @@ extension Puzzles {
         description: String(localized: "samegame_description", table: "Puzzles"),
         instructions: String(localized: "samegame_instructions", table: "Puzzles"),
         controlInfo: String(localized: "samegame_controls", table: "Puzzles"),
+        customParamInfo: String(localized: "samegame_params", table: "Puzzles"),
         imageName: "samegame",
         internalGame: samegame,
         isExperimental: false)
@@ -183,6 +195,7 @@ extension Puzzles {
         description: String(localized: "solo_description", table: "Puzzles"),
         instructions: String(localized: "solo_instructions", table: "Puzzles"),
         controlInfo: String(localized: "solo_controls", table: "Puzzles"),
+        customParamInfo: String(localized: "solo_params", table: "Puzzles"),
         imageName: "solo",
         internalGame: solo,
         displayClearButtonInToolbar: true,
