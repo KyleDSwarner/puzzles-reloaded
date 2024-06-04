@@ -37,11 +37,23 @@
     "Back" : {
 
     },
+    "Center" : {
+
+    },
+    "Clear" : {
+
+    },
     "Clear Selected Field" : {
+
+    },
+    "Clockwise" : {
 
     },
     "Controls" : {
       "comment" : "Heading for the 'controls' section on help page"
+    },
+    "Counter-Clockwise" : {
+
     },
     "Custom" : {
 
@@ -70,6 +82,9 @@
     "Favorites" : {
 
     },
+    "Fill Blocks" : {
+
+    },
     "filling_description" : {
       "comment" : "Short description for the game 'filling"
     },
@@ -77,6 +92,9 @@
       "comment" : "Heading for the 'game parameters' section on the help page"
     },
     "Game Size & Options" : {
+
+    },
+    "Ghost" : {
 
     },
     "Hello, World!" : {
@@ -91,10 +109,19 @@
     "Hide" : {
 
     },
+    "Hints" : {
+
+    },
     "Key" : {
       "extractionState" : "manual"
     },
     "Light" : {
+
+    },
+    "Lock" : {
+
+    },
+    "Marks" : {
 
     },
     "Net Segment Selector" : {
@@ -136,6 +163,9 @@
     "Settings" : {
 
     },
+    "Shift" : {
+
+    },
     "Sounds" : {
 
     },
@@ -162,6 +192,12 @@
     },
     "User Preferences" : {
       "comment" : "Heading for the 'user parameters' section on the game help page"
+    },
+    "Vampire" : {
+
+    },
+    "Zombie" : {
+
     }
   },
   "version" : "1.0"

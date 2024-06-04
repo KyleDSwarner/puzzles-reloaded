@@ -45,11 +45,11 @@ extension Puzzles {
         imageName: "net",
         internalGame: net,
         touchControls: [ // TODO: We'll need special handling for these controls in Net.
-            ControlConfig(label: "Clockwise", shortPress: PuzzleKeycodes.rightKeypress, longPress: PuzzleKeycodes.middleKeypress, imageName: "arrow.clockwise"), // Left/Right is reversed intentionally to make clockwise the 'default' option
-            ControlConfig(label: "Counter-Clockwise", shortPress: PuzzleKeycodes.leftKeypress, longPress: PuzzleKeycodes.middleKeypress, imageName: "arrow.counterclockwise"),
-            ControlConfig(label: "Lock", shortPress: PuzzleKeycodes.middleKeypress, longPress: .none, imageName: "lock"),
-            ControlConfig(label: "Center", shortPress: PuzzleKeycodes.leftKeypress, longPress: .none),  // Move centre: Ctrl + arrow keys
-            ControlConfig(label: "Shift", shortPress: PuzzleKeycodes.leftKeypress, displayCondition: { gameId in // Shift grid: Shift + arrow keys
+            ControlConfig(label: String(localized: "Clockwise"), shortPress: PuzzleKeycodes.rightKeypress, longPress: PuzzleKeycodes.middleKeypress, imageName: "arrow.clockwise"), // Left/Right is reversed intentionally to make clockwise the 'default' option
+            ControlConfig(label: String(localized: "Counter-Clockwise"), shortPress: PuzzleKeycodes.leftKeypress, longPress: PuzzleKeycodes.middleKeypress, imageName: "arrow.counterclockwise"),
+            ControlConfig(label: String(localized: "Lock"), shortPress: PuzzleKeycodes.middleKeypress, longPress: .none, imageName: "lock"),
+            ControlConfig(label: String(localized: "Center"), shortPress: PuzzleKeycodes.leftKeypress, longPress: .none),  // Move centre: Ctrl + arrow keys
+            ControlConfig(label: String(localized: "Shift"), shortPress: PuzzleKeycodes.leftKeypress, displayCondition: { gameId in // Shift grid: Shift + arrow keys
                 // Variaions of Net have a 'wrapping' mode, indicated by a leading "5x5w:" in the game ID. We're looking for the 'w:'
                 return gameId.contains("w:")
             })
@@ -62,16 +62,20 @@ extension Puzzles {
     
     // MARK: Netslide
     static let puzzle_netslide = GameConfig(
-        name: "Netslide",
-        description: "Net, but more",
+        name: String(localized: "netslide_name", table: "Puzzles"),
+        description: String(localized: "netslide_description", table: "Puzzles"),
+        instructions: String(localized: "netslide_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "netslide_controls", table: "Puzzles"),
         imageName: "netslide",
         internalGame: netslide
     )
     
     // MARK: Pattern
     static let puzzle_pattern = GameConfig(
-        name: "Pattern",
-        description: "A pretty one!",
+        name: String(localized: "pattern_name", table: "Puzzles"),
+        description: String(localized: "pattern_description", table: "Puzzles"),
+        instructions: String(localized: "pattern_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "pattern_controls", table: "Puzzles"),
         imageName: "pattern",
         internalGame: pattern,
         touchControls: [ // TODO: We'll need special handling for these controls in Net.
@@ -83,8 +87,10 @@ extension Puzzles {
     
     // MARK: Pearl
     static let puzzle_pearl = GameConfig(
-        name: "Pearl",
-        description: "Like from a clam",
+        name: String(localized: "pearl_name", table: "Puzzles"),
+        description: String(localized: "pearl_description", table: "Puzzles"),
+        instructions: String(localized: "pearl_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "pearl_controls", table: "Puzzles"),
         imageName: "pearl",
         internalGame: pearl,
         allowSingleFingerPanning: false
@@ -92,8 +98,10 @@ extension Puzzles {
     
     // MARK: Pegs
     static let puzzle_pegs = GameConfig(
-        name: "Pegs",
-        description: "I played this a lot at cracker barrel",
+        name: String(localized: "pegs_name", table: "Puzzles"),
+        description: String(localized: "pegs_description", table: "Puzzles"),
+        instructions: String(localized: "pegs_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "pegs_controls", table: "Puzzles"),
         imageName: "pegs",
         internalGame: pegs,
         allowSingleFingerPanning: false
@@ -101,16 +109,20 @@ extension Puzzles {
     
     // MARK: Range
     static let puzzle_range = GameConfig(
-        name: "Range",
-        description: "down on the this",
+        name: String(localized: "range_name", table: "Puzzles"),
+        description: String(localized: "range_description", table: "Puzzles"),
+        instructions: String(localized: "range_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "range_controls", table: "Puzzles"),
         imageName: "range",
         internalGame: range
     )
     
     // MARK: Rectangles
     static let puzzle_rectangles = GameConfig(
-        name: "Rectangles",
-        description: "These angles are so Rect",
+        name: String(localized: "rectangles_name", table: "Puzzles"),
+        description: String(localized: "rectangles_description", table: "Puzzles"),
+        instructions: String(localized: "rectangles_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "rectangles_controls", table: "Puzzles"),
         imageName: "rect",
         internalGame: rect
     )
@@ -137,32 +149,40 @@ extension Puzzles {
     
     // MARK: Singles
     static let puzzle_singles = GameConfig(
-        name: "Singles",
-        description: "Black out the right set of duplicate numbers",
+        name: String(localized: "singles_name", table: "Puzzles"),
+        description: String(localized: "singles_description", table: "Puzzles"),
+        instructions: String(localized: "singles_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "singles_controls", table: "Puzzles"),
         imageName: "singles",
         internalGame: singles
     )
     
     // MARK: Sixteen
     static let puzzle_sixteen = GameConfig(
-        name: "Sixteen",
-        description: "Slide the grid squares around so that the numbers end up in consecutive order from the top left corner",
+        name: String(localized: "sixteen_name", table: "Puzzles"),
+        description: String(localized: "sixteen_description", table: "Puzzles"),
+        instructions: String(localized: "sixteen_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "sixteen_controls", table: "Puzzles"),
         imageName: "sixteen",
         internalGame: sixteen
     )
     
     // MARK: Slant
     static let puzzle_slant = GameConfig(
-        name: "Slant",
-        description: "--slant--",
+        name: String(localized: "slant_name", table: "Puzzles"),
+        description: String(localized: "slant_description", table: "Puzzles"),
+        instructions: String(localized: "slant_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "slant_controls", table: "Puzzles"),
         imageName: "slant",
         internalGame: slant
     )
     
     // MARK: Solo
     static let puzzle_solo = GameConfig(
-        name: "Solo",
-        description: "--solo--",
+        name: String(localized: "solo_name", table: "Puzzles"),
+        description: String(localized: "solo_description", table: "Puzzles"),
+        instructions: String(localized: "solo_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "solo_controls", table: "Puzzles"),
         imageName: "solo",
         internalGame: solo,
         displayClearButtonInToolbar: true,
@@ -228,7 +248,7 @@ extension Puzzles {
         ],
         
         overflowMenuControls: [
-            ControlConfig(label: "Marks", command: PuzzleKeycodes.MarksButton, imageName: "square.and.pencil")
+            ControlConfig(label: String(localized: "Marks"), command: PuzzleKeycodes.MarksButton, imageName: "square.and.pencil")
         ]
     ).numericButtonsBuilder({ gameId in
         // Sample game ID: 5:2/1/2/3/3/2/2/3/1/2/2/2/5/1/3/3/2/1/3/2
@@ -244,16 +264,20 @@ extension Puzzles {
     
     // MARK: Tracks
     static let puzzle_tracks = GameConfig(
-        name: "Tracks",
-        description: "--tracks--",
+        name: String(localized: "tracks_name", table: "Puzzles"),
+        description: String(localized: "tracks_description", table: "Puzzles"),
+        instructions: String(localized: "tracks_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "tracks_controls", table: "Puzzles"),
         imageName: "tracks",
         internalGame: tracks
     )
     
     // MARK: Twiddle
     static let puzzle_twiddle = GameConfig(
-        name: "Twiddle",
-        description: "--twiddle--",
+        name: String(localized: "twiddle_name", table: "Puzzles"),
+        description: String(localized: "twiddle_description", table: "Puzzles"),
+        instructions: String(localized: "twiddle_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "twiddle_controls", table: "Puzzles"),
         imageName: "twiddle",
         internalGame: twiddle
     )
@@ -269,22 +293,24 @@ extension Puzzles {
         displayClearButtonInToolbar: true,
 
         buttonControls: [
-            ControlConfig(label: "Ghost", command: ButtonPress(for: "G"), imageName: "ghost", isSystemImage: false, displayTextWithIcon: false),
-            ControlConfig(label: "Vampire", command: ButtonPress(for: "V"), imageName: "vampire", isSystemImage: false, displayTextWithIcon: false),
-            ControlConfig(label: "Zombie", command: ButtonPress(for: "Z"), imageName: "zombie", isSystemImage: false, displayTextWithIcon: false),
+            ControlConfig(label: String(localized: "Ghost"), command: ButtonPress(for: "G"), imageName: "ghost", isSystemImage: false, displayTextWithIcon: false),
+            ControlConfig(label: String(localized: "Vampire"), command: ButtonPress(for: "V"), imageName: "vampire", isSystemImage: false, displayTextWithIcon: false),
+            ControlConfig(label: String(localized: "Zombie"), command: ButtonPress(for: "Z"), imageName: "zombie", isSystemImage: false, displayTextWithIcon: false),
         ]
     )
     
     // MARK: Unequal
     static let puzzle_unequal = GameConfig(
-        name: "unequal",
-        description: "equality",
+        name: String(localized: "unequal_name", table: "Puzzles"),
+        description: String(localized: "unequal_description", table: "Puzzles"),
+        instructions: String(localized: "unequal_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "unequal_controls", table: "Puzzles"),
         imageName: "unequal",
         internalGame: unequal,
         
         overflowMenuControls: [
-            ControlConfig(label: "Marks", command: PuzzleKeycodes.MarksButton, imageName: "square.and.pencil"),
-            ControlConfig(label: "Hints", command: ButtonPress(for: "H"), imageName: "plus.square")
+            ControlConfig(label: String(localized: "Marks"), command: PuzzleKeycodes.MarksButton, imageName: "square.and.pencil"),
+            ControlConfig(label: String(localized: "Hints"), command: ButtonPress(for: "H"), imageName: "plus.square")
         ]
     ).numericButtonsBuilder({gameId in
         // Game ID: 4:0,0,0,0D,0,0,0,0,2D,0D,0,0,0,0,0,3U,
@@ -309,8 +335,8 @@ extension Puzzles {
         touchControls: [
             //ControlConfig(label: "Black Blocks First", shortPress: .leftClick, longPress: .rightClick, imageName: "square.fill.black", isSystemImage: false),
             //ControlConfig(label: "White Blocks First", shortPress: .rightClick, longPress: .leftClick, imageName: "square.fill.white", isSystemImage: false),
-            ControlConfig(label: "Fill Blocks", shortPress: PuzzleKeycodes.leftKeypress, longPress: PuzzleKeycodes.rightKeypress, imageName: "square.fill"),
-            ControlConfig(label: "Clear", shortPress: PuzzleKeycodes.middleKeypress, longPress: PuzzleKeycodes.leftKeypress, imageName: "square.slash")
+            ControlConfig(label: String(localized: "Fill Blocks"), shortPress: PuzzleKeycodes.leftKeypress, longPress: PuzzleKeycodes.rightKeypress, imageName: "square.fill"),
+            ControlConfig(label: String(localized: "Clear"), shortPress: PuzzleKeycodes.middleKeypress, longPress: PuzzleKeycodes.leftKeypress, imageName: "square.slash")
         ]
     )
     

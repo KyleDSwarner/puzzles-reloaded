@@ -1,6 +1,321 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "abcd_controls" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ABCD uses the same control scheme as Solo, but with letters instead of numbers.\n\nLeft-click to select a cell, then type a letter on your keyboard to enter it. Press Backspace or Space to clear a cell.\n\nRight-click a cell, then type a letter to add a pencil mark. Pencil marks can be used for any purpose.\n\nYou can also use the arrow keys to move the selected cell around. Press Enter to toggle between entering letters and entering pencil marks.\n\nPress the 'M' key to fill every empty cell with all possible pencil marks."
+          }
+        }
+      }
+    },
+    "abcd_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Place letters according to the numbers. Identical letters cannot touch"
+          }
+        }
+      }
+    },
+    "abcd_instructions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're given an empty grid, and several rows of numbers on the side. You have to write a letter in every empty cell, following these rules:\n\nThe numbers on the edge indicate how many instances of a specific letter appear in that row or column.\nIdentical letters can not be horizontally or vertically adjacent.\nThe inventor of this type is unknown. This puzzle is also known under the names ABCD Puzzle, ABC-Kombi or ABCD-Rätsel.\n\nMore information: https://www.janko.at/Raetsel/Abc-Kombi/index.htm"
+          }
+        }
+      }
+    },
+    "abcd_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ABCD"
+          }
+        }
+      }
+    },
+    "abcd_params" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. Width, Height\nSize of the grid in squares (excluding the size of the numbers on the edge).\n2. Letters\nThe amount of different letters that can appear in the puzzle.\n3. Remove clues\nWhen enabled, the difficulty is increased by hiding certain number clues.\n4. Allow diagonal touching\nWhen disabled, letters cannot be diagonally adjacent (in addition to letters not being orthogonally adjacent)."
+          }
+        }
+      }
+    },
+    "ascent_controls" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are three ways to enter a number:\n\nClick a number to highlight it, then click (or drag to) an adjacent cell to place the next number in the sequence. The arrow keys and Enter can be used to emulate mouse clicks.\n\nClick an empty cell, then type a multi-digit number. To confirm a number, either press Enter, an arrow key, or click any cell.\n\nIn Edges mode, click and drag from an edge number, then release in an empty grid cell in the same row, column or diagonal.\n\nTo remove numbers, right-click or right-drag a number.\n\nIt's also possible to draw a path while the numbers inside the path are still unknown. Left-click and drag across cells to draw a line. Right-click or right-drag to clear the line going through a cell.\n\nIf a path has only a single number, the endpoints will display one or two smaller numbers, which represent the numbers which are valid for this cell."
+          }
+        }
+      }
+    },
+    "ascent_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Place each number once to create a path."
+          }
+        }
+      }
+    },
+    "ascent_instructions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're given a grid, with several numbers inside. Your objective is to place each number exactly once, so a path is formed from the lowest number (i.e. 1) to the highest number. Two numbers that are in sequence must be horizontally, vertically or diagonally adjacent.\n\nThe puzzle can be played on a rectangular or hexagonal grid. It's also possible to play on a rectangular grid while not allowing the path to move diagonally.\n\nIn the alternate game mode 'Edges', the grid is surrounded by numbers placed inside arrows. An arrow points to the row, column or diagonal where this number appears in the path.\n\nThis puzzle is invented by Gyora Benedek, and is known as Hidato (or the non-trademarked name Hidoku). Edges mode is an implementation of 1to25 invented by Jeff Widderich."
+          }
+        }
+      }
+    },
+    "ascent_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ascent"
+          }
+        }
+      }
+    },
+    "blackbox_controls" : {
+
+    },
+    "blackbox_description" : {
+
+    },
+    "blackbox_instructions" : {
+
+    },
+    "blackbox_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blackbox"
+          }
+        }
+      }
+    },
+    "boats_controls" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Left-click to place a boat segment in the grid. Unknown boat segments are represented by a small rectangle, and will automatically change into the correct shape when the surrounding cells are filled in.\n\nRight-click to place water, to indicate that a boat cannot be placed here.\n\nTo play with a keyboard, use the arrow keys to move the cursor. Press Enter to place a boat segment, and press Space to place water."
+          }
+        }
+      }
+    },
+    "boats_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find the fleet in the grid"
+          }
+        }
+      }
+    },
+    "boats_instructions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're given a grid, and a list of boats which must be located inside that grid. Boats can be rotated. Two boats cannot be horizontally, vertically or diagonally adjacent.\n\nThe numbers on the side indicate the amount of cells inside that row or column which are occupied by a boat.\n\nSome boat segments are given (corner pieces, centers, or single-length boats), along with their orientation.\n\nAt the bottom of the puzzle is a list of every boat that must be placed in the grid. When a boat is found, it is automatically crossed off of this list. Make sure a boat is surrounded by water on all sides, to indicate that it cannot possibly grow any further.\n\nThis puzzle is best known as Battleships."
+          }
+        }
+      }
+    },
+    "boats_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boats"
+          }
+        }
+      }
+    },
+    "boats_params" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These parameters are available from the ‘Custom…’ option on the ‘Type’ menu.\n\nWidth, Height\nSize of the grid in squares.\nFleet size\nThe size of the largest possible boat.\nFleet configuration\nCustomize the fleet by entering a list of numbers. Each number indicates how many times a boat of a specific size appears. For example, the configuration 3,2,1 represents 3 boats of size 1, 2 boats of size 2, and 1 boat of size 3.\nDifficulty\nDetermine the difficulty of the generated puzzle. Higher difficulties require more complex reasoning.\nRemove numbers\nWhen enabled, the difficulty is increased by hiding certain number clues."
+          }
+        }
+      }
+    },
+    "bricks_controls" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Left-click to shade a cell. Right-click to unshade a cell. You can also click and drag to place multiple squares.\n\nTo play with a keyboard, use the arrow keys to move the cursor. Press Enter to shade a square, and press Space to unshade a square.\n\nYou can also use the numpad (keys 1, 3, 7, 9) to move the cursor diagonally."
+          }
+        }
+      }
+    },
+    "bricks_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shade several cells in the hexagonal grid while making sure each cell has another shaded cell below it"
+          }
+        }
+      }
+    },
+    "bricks_instructions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Objective of the game: Shade several cells in the hexagonal grid while following these rules:\n\nEach shaded cell must have at least one shaded cell below it (unless it's on the bottom row).\nThere can not be 3 or more shaded cells in a horizontal row.\nA number indicates the amount of shaded cells around it.\nCells with numbers cannot be shaded.\nThis genre was invented by Nikoli under the name Tawamurenga."
+          }
+        }
+      }
+    },
+    "bricks_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bricks"
+          }
+        }
+      }
+    },
+    "bridges_controls" : {
+
+    },
+    "bridges_description" : {
+
+    },
+    "bridges_instructions" : {
+
+    },
+    "bridges_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bridges"
+          }
+        }
+      }
+    },
+    "clusters_controls" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Left-click to place blue squares. Right-click to place red squares. You can also click and drag to place multiple squares.\n\nTo play with a keyboard, use the arrow keys to move the cursor. Press Enter to place a blue square, and press Space to place a red square."
+          }
+        }
+      }
+    },
+    "clusters_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fill in the grid with red and blue clusters, with all dead ends given"
+          }
+        }
+      }
+    },
+    "clusters_instructions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're given a grid, with several dots inside colored squares. Your objective is to fill every empty space with one of two colors while following these rules:\n\nTiles which are adjacent to 1 other tile of the same color are denoted with a dot. All of these tiles are given.\nAll other tiles must be adjacent to 2 or more tiles of the same color.\nThis puzzle type was invented by Inaba Naoki under the name クラスター, or literally Kurasuta, which Google Translate names 'Cluster'. The original puzzles are available here: http://www.inabapuzzle.com/honkaku/kura.html"
+          }
+        }
+      }
+    },
+    "clusters_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clusters"
+          }
+        }
+      }
+    },
+    "cube_controls" : {
+
+    },
+    "cube_description" : {
+
+    },
+    "cube_instructions" : {
+
+    },
+    "cube_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cube"
+          }
+        }
+      }
+    },
+    "dominosa_controls" : {
+
+    },
+    "dominosa_description" : {
+
+    },
+    "dominosa_instructions" : {
+
+    },
+    "dominosa_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dominosa"
+          }
+        }
+      }
+    },
+    "fifteen_controls" : {
+
+    },
+    "fifteen_description" : {
+
+    },
+    "fifteen_instructions" : {
+
+    },
+    "fifteen_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fifteen"
+          }
+        }
+      }
+    },
     "filling_controls" : {
       "localizations" : {
         "en" : {
@@ -35,6 +350,44 @@
         }
       }
     },
+    "flip_controls" : {
+
+    },
+    "flip_description" : {
+
+    },
+    "flip_instructions" : {
+
+    },
+    "flip_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flip"
+          }
+        }
+      }
+    },
+    "flood_controls" : {
+
+    },
+    "flood_description" : {
+
+    },
+    "flood_instructions" : {
+
+    },
+    "flood_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flood"
+          }
+        }
+      }
+    },
     "galaxies_controls" : {
 
     },
@@ -64,6 +417,63 @@
         }
       }
     },
+    "intertia_controls" : {
+
+    },
+    "intertia_description" : {
+
+    },
+    "intertia_instructions" : {
+
+    },
+    "intertia_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inertia"
+          }
+        }
+      }
+    },
+    "keen_controls" : {
+
+    },
+    "keen_description" : {
+
+    },
+    "keen_instructions" : {
+
+    },
+    "keen_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keen"
+          }
+        }
+      }
+    },
+    "lightup_controls" : {
+
+    },
+    "lightup_description" : {
+
+    },
+    "lightup_instructions" : {
+
+    },
+    "lightup_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light Up"
+          }
+        }
+      }
+    },
     "loopy_controls" : {
 
     },
@@ -79,6 +489,113 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Loopy"
+          }
+        }
+      }
+    },
+    "magnets_controls" : {
+
+    },
+    "magnets_description" : {
+
+    },
+    "magnets_instructions" : {
+
+    },
+    "magnets_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Magnets"
+          }
+        }
+      }
+    },
+    "map_controls" : {
+
+    },
+    "map_description" : {
+
+    },
+    "map_instructions" : {
+
+    },
+    "map_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map"
+          }
+        }
+      }
+    },
+    "mathrax_controls" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mathrax uses the same control scheme as Solo.\n\nLeft-click to select a cell, then type a number on your keyboard to enter it. Press Backspace or Space to clear a cell.\n\nRight-click a cell, then type a number to add a pencil mark. Pencil marks can be used for any purpose.\n\nPress the 'Marks' button in the game menu to fill every empty cell with all possible pencil marks."
+          }
+        }
+      }
+    },
+    "mathrax_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Place each number according to the arithmetic clues"
+          }
+        }
+      }
+    },
+    "mathrax_instructions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have a square grid; each square may contain a digit from 1 to the size of the grid, and some squares have clues overlapping them. Your objective is to fill the grid with numbers so that no number appears more than once in a row or column, and all clues are satisfied.\n\nThe following clues can appear:\n\nAn 'E' indicates that the four adjacent digits are even.\nAn 'O' indicates that the four adjacent digits are odd.\nAn '=' indicates that diagonally adjacent digits are equal.\nA number indicates the result of the given operation when applied to each pair of diagonally adjacent digits. (topleft * bottomright) = (topright * bottomleft)\nThe inventor of Mathrax is unknown.\n\nMore information: https://www.janko.at/Raetsel/Mathrax/index.htm"
+          }
+        }
+      }
+    },
+    "mathrax_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matrix"
+          }
+        }
+      }
+    },
+    "mathrax_params" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Size (s*s)\nSize of the grid in squares.\nDifficulty\nDetermine the difficulty of the generated puzzle. Higher difficulties require more complex reasoning.\nAddition clues\nAllows clues with the addition operation to appear.\nSubtraction clues\nAllows clues with the subtraction operation to appear. Note that clues with a difference of zero are covered by Equality clues instead.\nMultiplication clues\nAllows clues with the multiplication operation to appear.\nDivision clues\nAllows clues with the division operation to appear. Note that clues with a ratio of one are covered by Equality clues instead.\nEquality clues\nAllows clues with equality signs to appear.\nEven/odd clues\nAllows Even clues and Odd clues to appear."
+          }
+        }
+      }
+    },
+    "mines_controls" : {
+
+    },
+    "mines_description" : {
+
+    },
+    "mines_instructions" : {
+
+    },
+    "mines_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mines"
           }
         }
       }
@@ -117,6 +634,162 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Net"
+          }
+        }
+      }
+    },
+    "netslide_controls" : {
+
+    },
+    "netslide_description" : {
+
+    },
+    "netslide_instructions" : {
+
+    },
+    "netslide_name" : {
+
+    },
+    "pattern_controls" : {
+
+    },
+    "pattern_description" : {
+
+    },
+    "pattern_instructions" : {
+
+    },
+    "pattern_name" : {
+
+    },
+    "pearl_controls" : {
+
+    },
+    "pearl_description" : {
+
+    },
+    "pearl_instructions" : {
+
+    },
+    "pearl_name" : {
+
+    },
+    "pegs_controls" : {
+
+    },
+    "pegs_description" : {
+
+    },
+    "pegs_instructions" : {
+
+    },
+    "pegs_name" : {
+
+    },
+    "range_controls" : {
+
+    },
+    "range_description" : {
+
+    },
+    "range_instructions" : {
+
+    },
+    "range_name" : {
+
+    },
+    "rectangles_controls" : {
+
+    },
+    "rectangles_description" : {
+
+    },
+    "rectangles_instructions" : {
+
+    },
+    "rectangles_name" : {
+
+    },
+    "rome_controls" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click and hold a square, then drag in one of the four directions to place an arrow.\n\nRight-click and drag to place a pencil mark. Pencil marks can be used for any purpose.\n\nThe keyboard can also be used. Move the cursor with the arrow keys, and press Enter followed with an arrow key to place an arrow. Use Space to add pencil marks. Alternatively, use the arrows on the numpad to enter arrows directly."
+          }
+        }
+      }
+    },
+    "rome_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fill the grid with arrows leading to a goal"
+          }
+        }
+      }
+    },
+    "rome_instructions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You're given a grid that has been divided into areas, containing arrows and one or more goals (represented by circles). Your goal is to fill every empty space with an arrow pointing up, down, left or right while following these rules:\n\nEvery outlined area contains different arrows.\nFollowing the arrows must lead to one of the circled goals.\nThis type was invented by Nikoli, who name it Roma.\n\nMore information: http://www.janko.at/Raetsel/Nikoli/Roma.htm"
+          }
+        }
+      }
+    },
+    "rome_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rome"
+          }
+        }
+      }
+    },
+    "salad_controls" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salad uses a control scheme similar to Solo, but with the ability to mark empty squares.\n\nLeft-click to select a cell, then type a letter or number on your keyboard to enter it. Press Backspace or Space to clear a cell.\n\nPress 'X' to mark a cell as empty, or press 'O' to mark a cell as \"definitely not empty\".\n\nRight-click a cell, then type a letter or number to add a pencil mark. Pencil marks can be used for any purpose. The letter 'X' can also be used to indicate a cell that might be empty.\n\nYou can also use the arrow keys to move the selected cell around. Press Enter to toggle between entering letters/numbers and entering pencil marks.\n\nPress the 'M' key to fill every empty cell with all possible pencil marks."
+          }
+        }
+      }
+    },
+    "salad_description" : {
+
+    },
+    "salad_instructions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have a square grid; each square may contain a character from A (or 1) to a given maximum. Your objective is to put characters in some of the squares, so each character appears exactly once in each row and column.\n\nThe rules vary depending on the game mode:\n\nABC End View mode: Letters on the edge show which letter appears first when 'looking' into the grid.\nNumber Ball mode: Squares with a ball must contain a number. Squares with a cross must remain empty.\nNumber Ball was invented by Inaba Naoki. The original puzzles are available here: http://www.janko.at/Raetsel/Nanbaboru/index.htm\n\nI don't know who first designed ABC End View."
+          }
+        }
+      }
+    },
+    "salad_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salad"
+          }
+        }
+      }
+    },
+    "salad_params" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game mode\nSwitch between ABC End View and Number Ball mode.\nSize (s*s)\nSize of the grid in squares.\nSymbols\nThe amount of different symbols that appear in each row.\nDifficulty\nDetermine the difficulty of the generated puzzle.\n"
           }
         }
       }
@@ -184,6 +857,145 @@
         }
       }
     },
+    "singles_controls" : {
+
+    },
+    "singles_description" : {
+
+    },
+    "singles_instructions" : {
+
+    },
+    "singles_name" : {
+
+    },
+    "sixteen_controls" : {
+
+    },
+    "sixteen_description" : {
+
+    },
+    "sixteen_instructions" : {
+
+    },
+    "sixteen_name" : {
+
+    },
+    "slant_controls" : {
+
+    },
+    "slant_description" : {
+
+    },
+    "slant_instructions" : {
+
+    },
+    "slant_name" : {
+
+    },
+    "solo_controls" : {
+
+    },
+    "solo_description" : {
+
+    },
+    "solo_instructions" : {
+
+    },
+    "solo_name" : {
+
+    },
+    "spokes_controls" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To draw a line, left-click and drag from one hub to another. You can mark a dot as unused by dragging between hubs with the right mouse button.\n\nYou can also use the keyboard. Use the arrow keys to move the cursor on top of a dot, then press Enter to draw a line or Space to mark it."
+          }
+        }
+      }
+    },
+    "spokes_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect all hubs using horizontal, vertical and diagonal lines"
+          }
+        }
+      }
+    },
+    "spokes_instructions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are given a grid filled with hubs with numbers on them. Your objective is to draw lines between them while following these rules:\n\nYou can only draw a line starting from a hub's point. If there is no point visible, you cannot draw a line.\nOnly one line can be drawn between two hubs.\nThe number indicates the amount of lines starting from a hub.\nLines cannot cross each other.\nAll hubs must form a single connected group.\nThe inventor of this puzzle type is unknown."
+          }
+        }
+      }
+    },
+    "spokes_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spokes"
+          }
+        }
+      }
+    },
+    "sticks_controls" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To place a line, drag the mouse horizontally or vertically inside a cell.\n\nTo place a line without dragging the mouse, left-click to place a vertical line and right-click to place a horizontal line.\n\nTo play with a keyboard, use the arrow keys to move the cursor. Press Enter to place a vertical line, and press Space to place a horizontal line."
+          }
+        }
+      }
+    },
+    "sticks_description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fill in the grid with horizontal and vertical line segments"
+          }
+        }
+      }
+    },
+    "sticks_instructions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are given a grid with several black cells. Fill every blank cell with a line, which connects two cell edges and goes horizontally or vertically through the center of the cell. The lines must follow these rules:\n\nA number overlapping a line indicates the length of that line.\nA line can't overlap more than one number.\nNumbers in black cells indicate the amount of lines connected to the cell.\nThis puzzle type was invented by Nikoli, and is known as Tatebo-Yokobo.\n\nMore information: https://www.janko.at/Raetsel/Tateboo-Yokoboo/index.htm"
+          }
+        }
+      }
+    },
+    "sticks_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sticks"
+          }
+        }
+      }
+    },
+    "sticks_params" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These parameters are available from the ‘Custom…’ option on the ‘Type’ menu.\n\nWidth, Height\nSize of the grid in squares.\npercentage of black squares\nRough percentage of black squares in the grid.\nSymmetry\nAllows you to specify the required symmetry of the black squares in the grid."
+          }
+        }
+      }
+    },
     "tents_controls" : {
 
     },
@@ -222,6 +1034,37 @@
         }
       }
     },
+    "tracks_controls" : {
+
+    },
+    "tracks_description" : {
+
+    },
+    "tracks_instructions" : {
+
+    },
+    "tracks_name" : {
+
+    },
+    "twiddle_controls" : {
+
+    },
+    "twiddle_description" : {
+
+    },
+    "twiddle_instructions" : {
+
+    },
+    "twiddle_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Twiddle"
+          }
+        }
+      }
+    },
     "undead_controls" : {
       "comment" : "Control info for the game 'undead'"
     },
@@ -241,6 +1084,18 @@
           }
         }
       }
+    },
+    "unequal_controls" : {
+
+    },
+    "unequal_description" : {
+
+    },
+    "unequal_instructions" : {
+
+    },
+    "unequal_name" : {
+
     },
     "unruly_controls" : {
       "extractionState" : "manual",

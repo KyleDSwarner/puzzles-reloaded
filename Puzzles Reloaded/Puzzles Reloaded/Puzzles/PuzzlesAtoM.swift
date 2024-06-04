@@ -35,39 +35,49 @@ extension Puzzles {
     
     // MARK: Blackbox
     static let puzzle_blackbox = GameConfig(
-        name: "Blackbox",
-        description: "Find the hidden balls in the box by bouncing laser beams off them",
+        name: String(localized: "blackbox_name", table: "Puzzles"),
+        description: String(localized: "blackbox_description", table: "Puzzles"),
+        instructions: String(localized: "blackbox_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "blackbox_controls", table: "Puzzles"),
         imageName: "blackbox",
         internalGame: blackbox
     )
     
     // MARK: Bridges
     static let puzzle_bridges = GameConfig(
-        name: "Bridges",
-        description: "Connect all the islands with a network of bridges.",
+        name: String(localized: "bridges_name", table: "Puzzles"),
+        description: String(localized: "bridges_description", table: "Puzzles"),
+        instructions: String(localized: "bridges_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "bridges_controls", table: "Puzzles"),
         imageName: "bridges",
         internalGame: bridges
     )
     
     // MARK: Cube
     static let puzzle_cube = GameConfig(
-        name: "cube",
-        description: "Pick up all the blue squares by rolling the cube over them",
+        name: String(localized: "cube_name", table: "Puzzles"),
+        description: String(localized: "cube_description", table: "Puzzles"),
+        instructions: String(localized: "cube_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "cube_controls", table: "Puzzles"),
         imageName: "cube",
         internalGame: cube)
     
     // MARK: Dominosa
     static let puzzle_dominosa = GameConfig(
-        name: "Dominosa",
-        description: "Tile the rectangle with a full set of dominoes",
+        name: String(localized: "dominosa_name", table: "Puzzles"),
+        description: String(localized: "dominosa_description", table: "Puzzles"),
+        instructions: String(localized: "dominosa_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "dominosa_controls", table: "Puzzles"),
         imageName: "dominosa",
         internalGame: dominosa
     )
     
     // MARK: Fifteen
     static let puzzle_fifteen = GameConfig(
-        name: "Fifteen",
-        description: "Slide the tiles around to arrange them into order",
+        name: String(localized: "fifteen_name", table: "Puzzles"),
+        description: String(localized: "fifteen_description", table: "Puzzles"),
+        instructions: String(localized: "fifteen_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "fifteen_controls", table: "Puzzles"),
         imageName: "fifteen",
         internalGame: fifteen
     )
@@ -89,16 +99,20 @@ extension Puzzles {
     
     // MARK: Flip
     static let puzzle_flip = GameConfig(
-        name: "flip",
-        description: "Flip groups of squares to light them all up at once",
+        name: String(localized: "flip_name", table: "Puzzles"),
+        description: String(localized: "flip_description", table: "Puzzles"),
+        instructions: String(localized: "flip_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "flip_controls", table: "Puzzles"),
         imageName: "flip",
         internalGame: flip
     )
     
     // MARK: Flood
     static let puzzle_flood = GameConfig(
-        name: "flood",
-        description: "oh no a flood",
+        name: String(localized: "flood_name", table: "Puzzles"),
+        description: String(localized: "flood_description", table: "Puzzles"),
+        instructions: String(localized: "flood_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "flood_controls", table: "Puzzles"),
         imageName: "flood",
         internalGame: flood
     )
@@ -127,8 +141,10 @@ extension Puzzles {
     
     // MARK: Inertia
     static let puzzle_intertia = GameConfig(
-        name: "Intertia",
-        description: "get your mass in gear",
+        name: String(localized: "intertia_name", table: "Puzzles"),
+        description: String(localized: "intertia_description", table: "Puzzles"),
+        instructions: String(localized: "intertia_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "intertia_controls", table: "Puzzles"),
         imageName: "inertia",
         internalGame: inertia,
         allowSingleFingerPanning: false
@@ -136,8 +152,10 @@ extension Puzzles {
     
     // MARK: Keen
     static let puzzle_keen = GameConfig(
-        name: "Keen",
-        description: "Goodbye Galaxy",
+        name: String(localized: "keen_name", table: "Puzzles"),
+        description: String(localized: "keen_description", table: "Puzzles"),
+        instructions: String(localized: "keen_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "keen_controls", table: "Puzzles"),
         imageName: "keen",
         internalGame: keen,
         allowSingleFingerPanning: false,
@@ -155,8 +173,10 @@ extension Puzzles {
     
     // MARK: Light Up
     static let puzzle_lightup = GameConfig(
-        name: "Light Up",
-        description: "like a flashlight",
+        name: String(localized: "lightup_name", table: "Puzzles"),
+        description: String(localized: "lightup_description", table: "Puzzles"),
+        instructions: String(localized: "lightup_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "lightup_controls", table: "Puzzles"),
         imageName: "lightup",
         internalGame: lightup
     )
@@ -174,16 +194,20 @@ extension Puzzles {
     
     // MARK: Magnets
     static let puzzle_magnets = GameConfig(
-        name: "Magnets",
-        description: "my kind of personality",
+        name: String(localized: "magnets_name", table: "Puzzles"),
+        description: String(localized: "magnets_description", table: "Puzzles"),
+        instructions: String(localized: "magnets_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "magnets_controls", table: "Puzzles"),
         imageName: "magnets",
         internalGame: magnets
     )
     
     // MARK: MAP
     static let puzzle_map = GameConfig(
-        name: "Map",
-        description: "East? I thought you said 'Weast'",
+        name: String(localized: "map_name", table: "Puzzles"),
+        description: String(localized: "map_description", table: "Puzzles"),
+        instructions: String(localized: "map_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "map_controls", table: "Puzzles"),
         imageName: "map",
         internalGame: map,
         allowSingleFingerPanning: false,
@@ -194,8 +218,10 @@ extension Puzzles {
     
     // MARK: Mines
     static let puzzle_mines = GameConfig(
-        name: "Mines",
-        description: "kaboom",
+        name: String(localized: "mines_name", table: "Puzzles"),
+        description: String(localized: "mines_description", table: "Puzzles"),
+        instructions: String(localized: "mines_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "mines_controls", table: "Puzzles"),
         imageName: "mines",
         internalGame: mines,
         allowSingleFingerPanning: true

@@ -25,7 +25,6 @@ struct GameView: View {
     @State private var translation: CGSize = .zero
     
     @State private var frontend = Frontend()
-    @State private var controlSelection: ControlOptionsS = ControlOptionsS.leftClick
     
     @State var puzzleImageTransformation: CGAffineTransform = .identity
     

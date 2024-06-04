@@ -146,47 +146,6 @@ class ControlConfig: Hashable {
     }
 }
 
-/**
- An enum that we use to set the control options for each game.
- Each game can configure how it displays each option (different images, etc.).
- */
-struct ControlOptionsS: RawRepresentable, Hashable {
-    init(rawValue: String) {
-        self.rawValue = rawValue
-        self.keypress = nil
-        self.mouseControl = nil
-    }
-    
-    var rawValue: String
-    var keypress: Int?
-    var mouseControl: MouseClick?
-    
-    static let none = ControlOptionsS(rawValue: "none")
-    static let leftClick = ControlOptionsS(rawValue: "leftclick")//.withMouseclick(PuzzleKeycodes.leftKeypress)
-    static let rightClick = ControlOptionsS(rawValue: "rightclick")//.withMouseclick(PuzzleKeycodes.rightKeypress)
-    static let middleClick = ControlOptionsS(rawValue: "middleclick")//.withMouseclick(PuzzleKeycodes.middleKeypress)
-    
-    mutating func withKeypress(_ character: String) -> Self {
-        
-        guard character.count == 1 else {
-            fatalError("Error: Keycodes can only be a single character. Received \(character)")
-        }
-        
-        self.keypress = Int(character.first?.asciiValue ?? 0)
-        return self
-    }
-    
-    mutating func withKeycode(_ keycode: Int) -> Self {
-        self.keypress = keycode
-        return self
-    }
-    
-    mutating func withMouseclick(_ keypress: MouseClick) -> Self {
-        self.mouseControl = keypress
-        return self
-    }
-}
-
 struct ArrowPress {
     let arrowKey: Int
     let modifier: Int // CTRL, etc.

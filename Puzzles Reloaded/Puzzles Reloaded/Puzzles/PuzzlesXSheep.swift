@@ -25,8 +25,11 @@ extension Puzzles {
     
     // MARK: ABCD
     static let puzzle_abcd = GameConfig(
-        name: "abcd",
-        description: "efg",
+        name: String(localized: "abcd_name", table: "Puzzles"),
+        description: String(localized: "abcd_description", table: "Puzzles"),
+        instructions: String(localized: "abcd_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "abcd_controls", table: "Puzzles"),
+        customParamInfo: String(localized: "abcd_params", table: "Puzzles"),
         imageName: "abcd",
         internalGame: abcd
     )
@@ -44,72 +47,94 @@ extension Puzzles {
     
     // MARK: Ascent
     static let puzzle_ascent = GameConfig(
-        name: "Ascent",
-        description: "captain kirk is climbing a mountain, why is he climbing that mountain?",
+        name: String(localized: "ascent_name", table: "Puzzles"),
+        description: String(localized: "ascent_description", table: "Puzzles"),
+        instructions: String(localized: "ascent_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "ascent_controls", table: "Puzzles"),
         imageName: "ascent",
         internalGame: ascent
     )
     
     // MARK: Boats
     static let puzzle_boats = GameConfig(
-        name: "Boats",
-        description: "row row row your this",
+        name: String(localized: "boats_name", table: "Puzzles"),
+        description: String(localized: "boats_description", table: "Puzzles"),
+        instructions: String(localized: "boats_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "boats_controls", table: "Puzzles"),
+        customParamInfo: String(localized: "boats_params", table: "Puzzles"),
         imageName: "boats",
         internalGame: boats
     )
     
     // MARK: Bricks
     static let puzzle_bricks = GameConfig(
-        name: "Bricks",
-        description: "build a building",
+        name: String(localized: "bricks_name", table: "Puzzles"),
+        description: String(localized: "bricks_description", table: "Puzzles"),
+        instructions: String(localized: "bricks_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "bricks_controls", table: "Puzzles"),
         imageName: "bricks",
         internalGame: bricks
     )
     
     // MARK: Clusters
     static let puzzle_clusters = GameConfig(
-        name: "Clusters",
-        description: "clustered!",
+        name: String(localized: "clusters_name", table: "Puzzles"),
+        description: String(localized: "clusters_description", table: "Puzzles"),
+        instructions: String(localized: "clusters_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "clusters_controls", table: "Puzzles"),
         imageName: "clusters",
         internalGame: clusters
     )
     
     // MARK: Mathrax
     static let puzzle_mathrax = GameConfig(
-        name: "Mathrax",
-        description: "Place each number according to the arithmetic clues",
+        name: String(localized: "mathrax_name", table: "Puzzles"),
+        description: String(localized: "mathrax_description", table: "Puzzles"),
+        instructions: String(localized: "mathrax_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "mathrax_controls", table: "Puzzles"),
+        customParamInfo: String(localized: "mathrax_params", table: "Puzzles"),
         imageName: "mathrax",
         internalGame: mathrax
     )
     
     // MARK: Rome
     static let puzzle_rome = GameConfig(
-        name: "Rome",
-        description: "Fill the grid with arrows leadning to a goal",
+        name: String(localized: "rome_name", table: "Puzzles"),
+        description: String(localized: "rome_description", table: "Puzzles"),
+        instructions: String(localized: "rome_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "rome_controls", table: "Puzzles"),
         imageName: "rome",
         internalGame: rome
     )
     
     // MARK: Salad
     static let puzzle_salad = GameConfig(
-        name: "Salad",
-        description: "Place each character once in every row and column. Some squares remain empty",
+        name: String(localized: "salad_name", table: "Puzzles"),
+        description: String(localized: "salad_description", table: "Puzzles"),
+        instructions: String(localized: "salad_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "salad_controls", table: "Puzzles"),
+        customParamInfo: String(localized: "salad_params", table: "Puzzles"),
         imageName: "salad",
         internalGame: salad
     )
     
     // MARK: Spokes
     static let puzzle_spokes = GameConfig(
-        name: "Spokes",
-        description: "Connect all hubs using horizontal, vertical and diagonal lines.",
+        name: String(localized: "spokes_name", table: "Puzzles"),
+        description: String(localized: "spokes_description", table: "Puzzles"),
+        instructions: String(localized: "spokes_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "spokes_controls", table: "Puzzles"),
         imageName: "spokes",
         internalGame: spokes
     )
     
     // MARK: Sticks
     static let puzzle_sticks = GameConfig(
-        name: "Sticks",
-        description: "Fill in the grid with horizontal and vertical line segments",
+        name: String(localized: "sticks_name", table: "Puzzles"),
+        description: String(localized: "sticks_description", table: "Puzzles"),
+        instructions: String(localized: "sticks_instructions", table: "Puzzles"),
+        controlInfo: String(localized: "sticks_controls", table: "Puzzles"),
+        customParamInfo: String(localized: "sticks_params", table: "Puzzles"),
         imageName: "sticks",
         internalGame: sticks
     )
