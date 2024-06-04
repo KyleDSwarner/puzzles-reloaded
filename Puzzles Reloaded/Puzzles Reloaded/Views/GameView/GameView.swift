@@ -178,7 +178,7 @@ struct GameView: View {
             
             // MARK: Game Controls View
             HStack(alignment: .center) {
-                LazyGameControlsView(controlOption: $frontend.controlOption, touchControls: touchControls, buttonControls: game.game.buttonControls, numericButtonsFunction: game.game.numericButtonsBuilder, gameId: frontend.gameId, buttonPressFunction: emitButtonPress)
+                GameControlsView(controlOption: $frontend.controlOption, touchControls: touchControls, buttonControls: game.game.buttonControls, numericButtonsFunction: game.game.numericButtonsBuilder, gameId: frontend.gameId, buttonPressFunction: emitButtonPress)
             }
             .padding(.bottom, 10)
 

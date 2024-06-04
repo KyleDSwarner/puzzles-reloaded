@@ -37,7 +37,7 @@
 		923E64672C00B9890027DF54 /* GameFrontend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64602C00B9890027DF54 /* GameFrontend.swift */; };
 		923E64682C00B9890027DF54 /* GamePresetMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64612C00B9890027DF54 /* GamePresetMenu.swift */; };
 		923E64692C00B9890027DF54 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64622C00B9890027DF54 /* GameView.swift */; };
-		923E646A2C00B9890027DF54 /* LazyGameControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64632C00B9890027DF54 /* LazyGameControlsView.swift */; };
+		923E646A2C00B9890027DF54 /* GameControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64632C00B9890027DF54 /* GameControlsView.swift */; };
 		923E646B2C00B9890027DF54 /* PuzzleImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64642C00B9890027DF54 /* PuzzleImageManager.swift */; };
 		923E64732C00B9E40027DF54 /* GameListUserConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E646E2C00B9E30027DF54 /* GameListUserConfig.swift */; };
 		923E64742C00B9E40027DF54 /* CodableWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E646F2C00B9E30027DF54 /* CodableWrapper.swift */; };
@@ -158,7 +158,7 @@
 		923E64602C00B9890027DF54 /* GameFrontend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameFrontend.swift; sourceTree = "<group>"; };
 		923E64612C00B9890027DF54 /* GamePresetMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePresetMenu.swift; sourceTree = "<group>"; };
 		923E64622C00B9890027DF54 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		923E64632C00B9890027DF54 /* LazyGameControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyGameControlsView.swift; sourceTree = "<group>"; };
+		923E64632C00B9890027DF54 /* GameControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameControlsView.swift; sourceTree = "<group>"; };
 		923E64642C00B9890027DF54 /* PuzzleImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleImageManager.swift; sourceTree = "<group>"; };
 		923E646E2C00B9E30027DF54 /* GameListUserConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameListUserConfig.swift; sourceTree = "<group>"; };
 		923E646F2C00B9E30027DF54 /* CodableWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableWrapper.swift; sourceTree = "<group>"; };
@@ -333,8 +333,8 @@
 		923E642C2C00B9680027DF54 /* Midend */ = {
 			isa = PBXGroup;
 			children = (
-				923E642A2C00B9680027DF54 /* Midend-GameConfig.swift */,
 				923E642B2C00B9680027DF54 /* Midend.swift */,
+				923E642A2C00B9680027DF54 /* Midend-GameConfig.swift */,
 			);
 			path = Midend;
 			sourceTree = "<group>";
@@ -343,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				923E642C2C00B9680027DF54 /* Midend */,
+				923E64602C00B9890027DF54 /* GameFrontend.swift */,
 				923E642D2C00B9680027DF54 /* DrawingAPI.swift */,
 				923E642E2C00B9680027DF54 /* GlobalFunctions.swift */,
 				923E642F2C00B9680027DF54 /* PuzzleSettings.swift */,
@@ -400,9 +401,8 @@
 			isa = PBXGroup;
 			children = (
 				923E64622C00B9890027DF54 /* GameView.swift */,
-				923E64602C00B9890027DF54 /* GameFrontend.swift */,
 				923E64612C00B9890027DF54 /* GamePresetMenu.swift */,
-				923E64632C00B9890027DF54 /* LazyGameControlsView.swift */,
+				923E64632C00B9890027DF54 /* GameControlsView.swift */,
 				923E64642C00B9890027DF54 /* PuzzleImageManager.swift */,
 			);
 			path = GameView;
@@ -671,7 +671,7 @@
 				923E64C62C00BF120027DF54 /* pearl.c in Sources */,
 				923E64E52C00BFBA0027DF54 /* inertia.c in Sources */,
 				923E64692C00B9890027DF54 /* GameView.swift in Sources */,
-				923E646A2C00B9890027DF54 /* LazyGameControlsView.swift in Sources */,
+				923E646A2C00B9890027DF54 /* GameControlsView.swift in Sources */,
 				923E643F2C00B96E0027DF54 /* SettingsView.swift in Sources */,
 				923E64B42C00BEDE0027DF54 /* singles.c in Sources */,
 				923E65202C00C7880027DF54 /* slant.c in Sources */,
