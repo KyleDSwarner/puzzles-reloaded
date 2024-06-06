@@ -163,8 +163,24 @@ class Midend {
         frontend.numColors = numColors
     }
     
-    func initGame() -> (x: Int, y: Int) {
+    func initGame(savegame: String? = nil, preferences: String? = nil) -> (x: Int, y: Int) {
+        
+        // If present, load user preferences
+        if preferences != nil {
+            print("Loading User Preferences")
+            self.loadUserPrefs(preferences: preferences)
+        }
+        
         midend_new_game(midendPointer)
+        
+        // If present, load the same
+        if savegame != nil {
+            print("Loading Save!")
+            let save = SaveContext(savegame: savegame)
+            self.readSave(save)
+        } else {
+            print("No savegame detected")
+        }
         
         //This function will create a new game_drawstate, but does not actually perform a redraw (since you often need to call midend_size() before the redraw can be done). So after calling this function and after calling midend_size(), you should then call midend_redraw(). (It is not necessary to call midend_force_redraw(); that will discard the draw state and create a fresh one, which is unnecessary in this case since there's a fresh one already. It would work, but it's usually excessive.)
         
@@ -196,12 +212,7 @@ class Midend {
         
         print("??? Puzzle determined ideal size as \(Int(puzzleWidth.pointee)) by \(Int(puzzleHeight.pointee)) ???")
         
-        
-        
-        let gameHasStatusbar: Bool = midend_wants_statusbar(midendPointer)
-        print("Game Requests Statusbar: \(gameHasStatusbar)")
-        
-        // Set global X & Y Variables to drive image drawing & interpolation
+        // MARK: Set global X & Y Parameters
         puzzleDimensionsX = Int(puzzleWidth.pointee)
         puzzleDimensionsY = Int(puzzleHeight.pointee)
         

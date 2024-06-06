@@ -31,11 +31,15 @@ class GameListConfig {
     var gameName: String
     var category: GameCategory = GameCategory.none
     var stats: GameStats
+    var saveGame: String?
+    var userPrefs: String?
     
     init(gameName: String) {
         self.gameName = gameName
         self.category = .none
         self.stats = GameStats()
+        self.saveGame = nil
+        self.userPrefs = nil
     }
     
     func updateGameCategory(_ category: GameCategory) {

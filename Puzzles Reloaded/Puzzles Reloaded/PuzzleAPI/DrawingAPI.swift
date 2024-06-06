@@ -287,7 +287,7 @@ func drawThickLine(frontend: UnsafeMutableRawPointer?, thickness: Float, x1: Flo
  Draw a polygon shape using an array of points and the outline color. A fill color can optionally be provided.
  */
 func drawPolygon(frontend: UnsafeMutableRawPointer?, coordinates: UnsafePointer<Int32>?, nPoints: Int32, fillColor: Int32, outlineColor: Int32) {
-    //print("Draw Polygon Called, outlineColor: \(Int(outlineColor)), fill Color: \(Int(fillColor))")
+    // print("Draw Polygon Called, outlineColor: \(Int(outlineColor)), fill Color: \(Int(fillColor))")
     
     let numPoints = Int(nPoints)
     

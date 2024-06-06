@@ -97,35 +97,18 @@ class PuzzleImageManager {
     }
     
     func drawLine(from point1: CGPoint, to point2: CGPoint, color: CGColor, thickness: Float = 1.0) {
-        // print("Drawing Line from \(point1.x)x\(point1.y) to \(point2.x)x\(point2.y) of thickness \(thickness)")
-        
-        //bitmap.beginPath()
-        //bitmap.move(to: point1)
-
-        
-        //bitmap.beginPath()
-        
-        //bitmap.setBlendMode(.normal)
-        //bitmap.setShouldAntialias(false)
-        //bitmap.interpolationQuality = .none
+        //print("Drawing Line from \(point1.x)x\(point1.y) to \(point2.x)x\(point2.y) of thickness \(thickness)")
             
         bitmap.setStrokeColor(color)
         bitmap.setLineWidth(CGFloat(thickness))
-        //yobitmap.setBlendMode(.clear)
         
-        //bitmap.
+        //bitmap.move(to: point1)
+        //bitmap.addLine(to: point2)
         
-        
-        bitmap.move(to: point1)
-        bitmap.addLine(to: point2)
-        
-        bitmap.strokePath()
+        bitmap.strokeLineSegments(between: [point1, point2])
+        //bitmap.strokePath()
         //bitmap.strokeLineSegments(between: [point1, point2])
         bitmap.setBlendMode(.normal)
-        
-        //bitmap.setShouldAntialias(true)
-        //bitmap.interpolationQuality = .high
-        //bitmap.setBlendMode(.normal)
     }
     
     func drawPolygon(coordinates: [CGPoint], outlineColor: CGColor, fillColor: CGColor?) {

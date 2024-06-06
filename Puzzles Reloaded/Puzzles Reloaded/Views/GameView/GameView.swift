@@ -40,23 +40,25 @@ struct GameView: View {
         }
     }
     
-    var translationcgGuy: CGAffineTransform {
-        print("New Guy 2")
-        return CGAffineTransform(translationX: translation.width, y: translation.height)
-            .scaledBy(x: scaleFactor, y: scaleFactor)
-    }
-    
     init(game: Game) {
+        
+
+        
         self.game = game
         frontend.midend.setGame(game.game.internalGame) //lol
         
         if(!game.game.touchControls.isEmpty) {
             frontend.controlOption = game.game.touchControls.first!
         }
-
     }
     
     func cleanupAndBack() {
+        
+        saveUserData()
+        
+        // Remove our observer to terminate events
+        //NotificationCenter.default.removeObserver(appTerminateObserver)
+        
         dismiss()
     }
     
@@ -346,11 +348,49 @@ struct GameView: View {
         .onAppear {
             //testBed()
             //let drawingapi = DrawingAPI()
+            /*
+            appTerminateObserver = NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: .main) { _ in
+                print("Shutting down app, saving user data")
+                self.saveUserData()
+            }
+             */
+            
             frontend.midend.createMidend(frontend: &frontend) // TODO: This feels weird
-            frontend.beginGame()
+            frontend.beginGame(withSaveGame: game.settings.saveGame, withPreferences: game.settings.userPrefs)
         }
+        // MARK: Background & App Terminate notifications
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification), perform: { output in
+                print("Backgrounding app; Saving Data")
+                saveUserData()
+            })
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification), perform: { output in
+            // Note: This very rarely actually fires once the app is backgrounded - but the above backgrounding implemementation should handle most all use cases
+                print("Shutting down app; Saving Data")
+                saveUserData()
+            })
     }
 
+    func saveUserData() {
+        // Save Game
+        let save = frontend.saveGame()
+        
+        if save != nil {
+            print("Saving Game:")
+        } else {
+            print("No game in progress, not saving state")
+        }
+        // Save the game, or null it out if the game should not be saved
+        game.settings.saveGame = save
+        
+        
+        let prefs = frontend.midend.saveUserPrefs()
+        if prefs != nil {
+            print("User Preferences Received")
+        } else {
+            print("No user preferences to store")
+        }
+        game.settings.userPrefs = prefs
+    }
     
     func updateLocation(_ location: CGPoint) {
         print(location)

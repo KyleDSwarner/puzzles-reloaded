@@ -96,6 +96,17 @@ extension Puzzles {
         imageName: "mathrax",
         internalGame: mathrax
     )
+    .numericButtonsBuilder({ gameId in
+        // Game ID: 5:r4f,eM4dA6aS1A6A5a
+        // We need that first number
+        
+        guard !gameId.isEmpty else {
+            return []
+        }
+        
+        let numButtons = Int(gameId.split(separator: ":")[0])
+        return Puzzles.createButtonControls(numButtons ?? 0)
+    })
     
     // MARK: Rome
     static let puzzle_rome = GameConfig(
@@ -116,7 +127,37 @@ extension Puzzles {
         customParamInfo: String(localized: "salad_params", table: "Puzzles"),
         imageName: "salad",
         internalGame: salad
-    )
+    )    
+    .numericButtonsBuilder({ gameId in
+        // Game ID:
+        // 4:4 a-c: 4n3L:aCACcCeCAa,p
+        // 5x5 a-c: 5n3L:aAaAaCbBaBCaCCe,y
+        // 6x6 1-3: 6n3B:Xa1cX3aXb2dOgXXXe1X3
+        // 6x6 a-d: 6n4L:CaDCeACAaBCbAeC,zj
+        // 6x6 1-4: 6n4B:aX1Xb4gXeX1aXaXa42b2c1
+        // {gridSize}n{numCount}{InputType}:...
+        
+        guard !gameId.isEmpty else {
+            return []
+        }
+        
+        let regex = /[^n]+$/ // Matches everything after the 'n' in the substring
+        let numberRegex = /\d/ // In case numbers get larger than 9, let's use a regex to ensure that we pull all values out correctly.
+        let inputTypeRegex = /L|B/
+        
+        let gameIdPrefix = gameId.split(separator: ":")[0] // "4n3L"
+        let gameDetails = gameIdPrefix.firstMatch(of: regex) // "3L"
+        let numButtons = gameDetails?.output.firstMatch(of: numberRegex) // "3"
+        let inputType =  gameDetails?.output.last // "L"
+        
+        
+        // Pass in the correct array based on the gameId: "L" indicates letters, while "B" is numbers.
+        let puzzleInputArray = inputType == "L" ? Puzzles.AlphaButtons : Puzzles.NumericButtons
+        let numButtonsForReal = Int(numButtons?.output ?? "3")
+        
+        //return Puzzles.createButtonControls(numButtons ?? 0)
+        return Puzzles.createButtonControls(numButtonsForReal ?? 3, keycodes: puzzleInputArray)
+    })
     
     // MARK: Spokes
     static let puzzle_spokes = GameConfig(

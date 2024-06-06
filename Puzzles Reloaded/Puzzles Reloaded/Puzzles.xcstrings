@@ -868,7 +868,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mathrax uses the same control scheme as Solo.\n\nLeft-click to select a cell, then type a number on your keyboard to enter it. Press Backspace or Space to clear a cell.\n\nRight-click a cell, then type a number to add a pencil mark. Pencil marks can be used for any purpose.\n\nPress the 'Marks' button in the game menu to fill every empty cell with all possible pencil marks."
+            "value" : "Tap to select a cell, then type a number on your keyboard to enter it. Press Backspace or Space to clear a cell.\n\nRight-click a cell, then type a number to add a pencil mark. Pencil marks can be used for any purpose.\n\nPress the 'Marks' button in the game menu to fill every empty cell with all possible pencil marks."
           }
         }
       }
@@ -898,7 +898,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Matrix"
+            "value" : "Mathrax"
           }
         }
       }

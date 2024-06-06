@@ -49,11 +49,12 @@ class Frontend {
         self.game = thegame
     }
     
-    func beginGame() {
+    func beginGame(withSaveGame saveGame: String? = nil, withPreferences preferences: String? = nil) {
         // This isn't done in the initializer because I need a reference to this object as an inout (&frontend) that is passed in from the view. I can't pass it here due to immutability concerns.
         // If I can refactor this down the road, we can clean this code up a bit!
         
-        let dimensions = midend.initGame() // Initialize the game and find the correct image boundaries
+        
+        let dimensions = midend.initGame(savegame: saveGame, preferences: preferences) // Initialize the game and find the correct image boundaries
         self.imageManager = PuzzleImageManager(width: dimensions.x, height: dimensions.y) // Adding 10 to y dimensions to even out items that line riiiight up to the top of the puzzle
         midend.drawPuzzle() // Actually draw the puzzle, once the image manager knows its size & is ready to go.
         self.puzzleTilesize = midend.getTilesize()
@@ -97,8 +98,19 @@ class Frontend {
         
         //withAnimation(.easeInOut(duration: 2.0)) {
         self.puzzleStatus = midend.getPuzzleStatus()
+        
+        // !!!
+        //midend.saveUserPrefs()
+        //let save = midend.saveInProgressGame()
+        //midend.readSave(save)
         //}
         
+    }
+    
+    func saveGame() -> String? {
+        let save = midend.saveInProgressGame()
+        return save?.saveToString() ?? nil
+        //midend.readSave(save)
     }
     
     //

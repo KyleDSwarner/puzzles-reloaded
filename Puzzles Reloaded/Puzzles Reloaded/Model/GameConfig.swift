@@ -86,6 +86,7 @@ class GameConfig: Identifiable, Hashable {
     
     func numericButtonsBuilder(_ numericButtonsBuilder: @escaping NumButtonsFunction) -> Self {
         self.numericButtonsBuilder = numericButtonsBuilder
+        self.displayClearButtonInToolbar = true
         return self
     }
     

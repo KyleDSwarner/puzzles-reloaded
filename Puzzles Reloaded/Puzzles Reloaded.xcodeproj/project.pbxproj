@@ -121,6 +121,7 @@
 		923E652E2C00D6DF0027DF54 /* PuzzlesXSheep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E652D2C00D6DF0027DF54 /* PuzzlesXSheep.swift */; };
 		923E65312C00D75E0027DF54 /* GameHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E65302C00D75E0027DF54 /* GameHelpView.swift */; };
 		923E653A2C00E7D50027DF54 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E65392C00E7D50027DF54 /* ContentView.swift */; };
+		92B341392C11E90D006A4466 /* Midend-UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B341382C11E90D006A4466 /* Midend-UserData.swift */; };
 		92B55D522C0F410900517280 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D512C0F410900517280 /* Localizable.xcstrings */; };
 		92B55D542C0F46A500517280 /* Puzzles.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D532C0F46A500517280 /* Puzzles.xcstrings */; };
 /* End PBXBuildFile section */
@@ -255,6 +256,7 @@
 		923E65302C00D75E0027DF54 /* GameHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHelpView.swift; sourceTree = "<group>"; };
 		923E65392C00E7D50027DF54 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		923E653B2C00EC290027DF54 /* generated-games.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "generated-games.h"; sourceTree = "<group>"; };
+		92B341382C11E90D006A4466 /* Midend-UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Midend-UserData.swift"; sourceTree = "<group>"; };
 		92B55D512C0F410900517280 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		92B55D532C0F46A500517280 /* Puzzles.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Puzzles.xcstrings; sourceTree = "<group>"; };
 		92C527442C062A7400F421D6 /* Untangle-Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Untangle-Config.h"; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 			children = (
 				923E642B2C00B9680027DF54 /* Midend.swift */,
 				923E642A2C00B9680027DF54 /* Midend-GameConfig.swift */,
+				92B341382C11E90D006A4466 /* Midend-UserData.swift */,
 			);
 			path = Midend;
 			sourceTree = "<group>";
@@ -757,6 +760,7 @@
 				923E650B2C00C4AC0027DF54 /* tree234.c in Sources */,
 				923E64B92C00BEED0027DF54 /* samegame.c in Sources */,
 				923E64CB2C00BF2D0027DF54 /* net.c in Sources */,
+				92B341392C11E90D006A4466 /* Midend-UserData.swift in Sources */,
 				923E63E32C00B9210027DF54 /* PuzzlesApp.swift in Sources */,
 				923E64AD2C00BED00027DF54 /* tents.c in Sources */,
 				923E64AF2C00BED00027DF54 /* sixteen.c in Sources */,
