@@ -31,7 +31,10 @@ extension Puzzles {
         controlInfo: String(localized: "abcd_controls", table: "Puzzles"),
         customParamInfo: String(localized: "abcd_params", table: "Puzzles"),
         imageName: "abcd",
-        internalGame: abcd
+        internalGame: abcd,
+        overflowMenuControls: [
+            ControlConfig(label: String(localized: "Marks"), command: PuzzleKeycodes.MarksButton, imageName: "square.and.pencil")
+        ]
     )
     .numericButtonsBuilder({ gameId in
         // Game ID looks like: 5x5n4:0,2,2,1,1,1,1,2,0,1,3,1,1,1,1,2,2,1,1,1,0,2,2,1,2,1,0,2,1,0,2,2,1,1,2,1,0,2,2,1,

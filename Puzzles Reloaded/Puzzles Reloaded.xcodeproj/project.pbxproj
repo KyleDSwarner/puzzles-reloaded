@@ -16,7 +16,7 @@
 		923E64322C00B9680027DF54 /* Midend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642B2C00B9680027DF54 /* Midend.swift */; };
 		923E64332C00B9680027DF54 /* DrawingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642D2C00B9680027DF54 /* DrawingAPI.swift */; };
 		923E64342C00B9680027DF54 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642E2C00B9680027DF54 /* GlobalFunctions.swift */; };
-		923E64352C00B9680027DF54 /* PuzzleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642F2C00B9680027DF54 /* PuzzleSettings.swift */; };
+		923E64352C00B9680027DF54 /* PuzzleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642F2C00B9680027DF54 /* PuzzleUtils.swift */; };
 		923E643C2C00B96E0027DF54 /* SettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64362C00B96E0027DF54 /* SettingsConstants.swift */; };
 		923E643E2C00B96E0027DF54 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64382C00B96E0027DF54 /* SettingsModel.swift */; };
 		923E643F2C00B96E0027DF54 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64392C00B96E0027DF54 /* SettingsView.swift */; };
@@ -124,6 +124,7 @@
 		92B341392C11E90D006A4466 /* Midend-UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B341382C11E90D006A4466 /* Midend-UserData.swift */; };
 		92B55D522C0F410900517280 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D512C0F410900517280 /* Localizable.xcstrings */; };
 		92B55D542C0F46A500517280 /* Puzzles.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D532C0F46A500517280 /* Puzzles.xcstrings */; };
+		92BBCF0C2C17B09500893703 /* GameCustomSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,7 +139,7 @@
 		923E642B2C00B9680027DF54 /* Midend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Midend.swift; sourceTree = "<group>"; };
 		923E642D2C00B9680027DF54 /* DrawingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingAPI.swift; sourceTree = "<group>"; };
 		923E642E2C00B9680027DF54 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
-		923E642F2C00B9680027DF54 /* PuzzleSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleSettings.swift; sourceTree = "<group>"; };
+		923E642F2C00B9680027DF54 /* PuzzleUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleUtils.swift; sourceTree = "<group>"; };
 		923E64362C00B96E0027DF54 /* SettingsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsConstants.swift; sourceTree = "<group>"; };
 		923E64382C00B96E0027DF54 /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		923E64392C00B96E0027DF54 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -259,6 +260,7 @@
 		92B341382C11E90D006A4466 /* Midend-UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Midend-UserData.swift"; sourceTree = "<group>"; };
 		92B55D512C0F410900517280 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		92B55D532C0F46A500517280 /* Puzzles.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Puzzles.xcstrings; sourceTree = "<group>"; };
+		92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCustomSettingsView.swift; sourceTree = "<group>"; };
 		92C527442C062A7400F421D6 /* Untangle-Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Untangle-Config.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -349,7 +351,7 @@
 				923E64602C00B9890027DF54 /* GameFrontend.swift */,
 				923E642D2C00B9680027DF54 /* DrawingAPI.swift */,
 				923E642E2C00B9680027DF54 /* GlobalFunctions.swift */,
-				923E642F2C00B9680027DF54 /* PuzzleSettings.swift */,
+				923E642F2C00B9680027DF54 /* PuzzleUtils.swift */,
 			);
 			path = PuzzleAPI;
 			sourceTree = "<group>";
@@ -407,6 +409,7 @@
 				923E64612C00B9890027DF54 /* GamePresetMenu.swift */,
 				923E64632C00B9890027DF54 /* GameControlsView.swift */,
 				923E64642C00B9890027DF54 /* PuzzleImageManager.swift */,
+				92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */,
 			);
 			path = GameView;
 			sourceTree = "<group>";
@@ -748,7 +751,7 @@
 				923E64AA2C00BED00027DF54 /* unequal.c in Sources */,
 				923E64FE2C00C00A0027DF54 /* bricks.c in Sources */,
 				923E64742C00B9E40027DF54 /* CodableWrapper.swift in Sources */,
-				923E64352C00B9680027DF54 /* PuzzleSettings.swift in Sources */,
+				923E64352C00B9680027DF54 /* PuzzleUtils.swift in Sources */,
 				923E64212C00B94E0027DF54 /* PuzzlesAtoM.swift in Sources */,
 				923E64512C00B97A0027DF54 /* HapticEffects.swift in Sources */,
 				923E646B2C00B9890027DF54 /* PuzzleImageManager.swift in Sources */,
@@ -770,6 +773,7 @@
 				923E64F92C00C00A0027DF54 /* mathrax.c in Sources */,
 				923E64462C00B9740027DF54 /* GameConfig.swift in Sources */,
 				923E65002C00C00A0027DF54 /* crossing.c in Sources */,
+				92BBCF0C2C17B09500893703 /* GameCustomSettingsView.swift in Sources */,
 				923E64932C00BE940027DF54 /* flood.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

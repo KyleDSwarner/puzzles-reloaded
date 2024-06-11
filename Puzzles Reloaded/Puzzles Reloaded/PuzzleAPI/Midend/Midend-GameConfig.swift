@@ -76,24 +76,30 @@ extension Midend {
         // Afterwards, FREE the memory from the config object???
     }
     
-    public func getCustomGameSettingsMenu() {
-        
-        guard canConfigureGameParams() else {
-            print("Err: Custom settings menu called when game does not support it")
-            return
-        }
-        
-        // Note: Game can send can_configure = false, which would disable this custom menu.
-        
-        // Get the config object. Passing "CFG_SETTINGS" indicates we're asking for game settings - the enum comes from puzzles.h
+    private func getCustomParamsConfig() -> UnsafeMutablePointer<config_item>? {
         let winTitle = UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>.allocate(capacity: 1) // Puzzles will fill this in with a window title. We don't need it, but it's a required field.
+        // Get the config object. Passing "CFG_SETTINGS" indicates we're asking for game settings - the enum comes from puzzles.h
         let config = midend_get_config(midendPointer, Int32(CFG_SETTINGS), winTitle)
         
-        let windowTitle = String(cString: winTitle.pointee!)
-        print("Window Title : \(windowTitle)")
+        winTitle.deallocate()
+        return config
+        
+        
+    }
+    
+    public func getCustomGameSettingsMenu() -> CustomConfigMenu? {
+        
+        // Note: Game can send can_configure = false, which would disable this custom menu.
+        guard canConfigureGameParams() else {
+            print("Err: Custom settings menu called when game does not support it")
+            return nil
+        }
+        
+        let config = getCustomParamsConfig()
         
         if let configMenu = config {
 
+            let customConfigMenu: CustomConfigMenu = CustomConfigMenu(configItem: configMenu.pointee)
             
             var menuIsProcessing = true
             var index = 0
@@ -116,13 +122,31 @@ extension Midend {
                 switch type {
                 case C_STRING:
                     print("This is a string value: \(title)")
-                    let newMenuItem = StringMenuItem(title: title, value: String(cString: configItem.u.string.sval))
+                    let value = String(cString: configItem.u.string.sval)
+                    
+                    // Determine if this is an integer value or not
+                    let intValue = Int(value)
+                    
+                    if let unwrappedInt = intValue {
+                        print("Integer Value found: \(unwrappedInt)")
+                        customConfigMenu.addIntMenuItem(index: index, title: title, currentValue: unwrappedInt)
+                    } else {
+                        print("String found: \(value)")
+                        //let newMenuItem = StringMenuItem(title: title, value: String(cString: configItem.u.string.sval), index: index)
+                        customConfigMenu.addStringMenuItem(index: index, title: title, currentValue: String(cString: configItem.u.string.sval))
+                    }
+                    
                 case C_BOOLEAN:
                     print("This is a Bool value: \(title)")
-                    let newMenuItem = BooleanMenuItem(title: title, value: configItem.u.boolean.bval)
+                    customConfigMenu.addBooleanMenuItem(index: index, title: title, currentValue: configItem.u.boolean.bval)
                 case C_CHOICES:
                     print("This is a choice value: \(title)")
+                    let newMenuItem = processChoiceMenu(configItem, title: title, index: index)
+                    customConfigMenu.addMenuItem(newMenuItem)
+                    
+                    
                     // Choice Names is a non-null delimited string. For example, :Foo:Bar:Baz gives three options.
+                    /*
                     let choices = String(cString: configItem.u.choices.choicenames)
                     let delimiter = choices.first
                     let splitChoices = choices.split(separator: delimiter!)
@@ -132,6 +156,7 @@ extension Midend {
                     let selection = Int(configItem.u.choices.selected)
                     
                     print(splitChoices)
+                     */
                     
                     // selected in an int representing the selction from the 'array' in choicenames.
                 default:
@@ -141,80 +166,145 @@ extension Midend {
                 index += 1
             }
             
-            
-            
-            
-            
+            print("Returning Val")
+            return customConfigMenu
+        
         } else {
             print("No config menu provided")
+            return nil
         }
-        
-        //
     }
     
-    func processChoiceMenu(_ configItem: config_item) -> ChoiceMenuItem {
-        var choices = [ChoiceMenuOption]()
+    func processChoiceMenu(_ configItem: config_item, title: String, index: Int) -> CustomMenuItem2 {
+        var choices = [ChoiceMenuOptionS]()
         
         // Choice Names is a non-null delimited string. For example, :Foo:Bar:Baz gives three options.
         let choicesString = String(cString: configItem.u.choices.choicenames)
         let splitChoices = choicesString.split(separator: choicesString.first!)
         
         for i in 0..<splitChoices.count {
-            let choice: ChoiceMenuOption = (id: i, name: String(splitChoices[i]))
+            //let choice: ChoiceMenuOption = (id: i, name: String(splitChoices[i]))
+            let choice = ChoiceMenuOptionS(id: i, name: String(splitChoices[i]))
             choices.append(choice)
         }
         
-        return ChoiceMenuItem(title: String(cString: configItem.name), choices: choices, selection: Int(configItem.u.choices.selected))
+        //return ChoiceMenuItem(title: String(cString: configItem.name), choices: choices, selection: Int(configItem.u.choices.selected), index: index)
+        return CustomMenuItem2(index: index, type: .CHOICE, title: title, choiceIndex: Int(configItem.u.choices.selected), choices: choices)
     }
     
+    func setNewGameParams(choices: [CustomMenuItem2]) -> String? {
+        
+        let configObject = getCustomParamsConfig()
+        
+        if let config = configObject {
+            
+            //Iterating over the object, we apply the choices the user made into the original C object.
+            // Sicne our choices menu was created from the original config object, we can relatively safely trust the indexes, rather than try to decode the object again.
+            for (index, userSelection) in choices.enumerated() {
+                //var currentItem = config[index]
+                
+                //print(currentItem)
+                
+                switch userSelection.type {
+                case .BOOLEAN:
+                    print("\(userSelection.title) Bool == \(userSelection.boolValue)")
+                    config[index].u.boolean.bval = userSelection.boolValue
+                case .INT:
+                    print("\(userSelection.title) Int == \(userSelection.intValue)")
+                    let pointer = PuzzleUtils.stringToPointer(String(userSelection.intValue))
+                    config[index].u.string.sval = pointer
+                case .STRING:
+                    print("\(userSelection.title) String == \(userSelection.stringValue)")
+                    let pointer = PuzzleUtils.stringToPointer(userSelection.stringValue)
+                    config[index].u.string.sval = pointer
+                case .CHOICE:
+                    print("\(userSelection.title) Choice == \(userSelection.choiceIndex)")
+                    config[index].u.choices.selected = Int32(userSelection.choiceIndex)
+                }
+                
+                //print(currentItem)
+                
+                
+                
+            }
+            
+            //midend_get_config(midendPointer, Int32(CFG_SETTINGS), winTitle)
+            let result = midend_set_config(midendPointer, Int32(CFG_SETTINGS), config)
+            
+            if let unwrappedResult = result {
+                let error = String(cString: unwrappedResult)
+                print(error)
+                return error
+            } else {
+                // Success case! The midend did not return an error
+                return nil
+            }
+            
+        } else {
+            fatalError("Could not retrieve the config object. This should not happen!")
+        }
+    }
+    
+}
+
+enum CustomMenuType {
+    case INT, STRING, BOOLEAN, CHOICE
+}
+
+struct CustomMenuItem2 {
+    var index: Int
+    var type: CustomMenuType
+    var title: String
+    
+    var intValue : Int
+    
+    var stringValue: String
+    
+    var boolValue: Bool
+    
+    var choiceIndex: Int
+    var choices: [ChoiceMenuOptionS]
+    
+    init(index: Int, type: CustomMenuType, title: String, intValue: Int = -1, stringValue: String = "", boolValue: Bool = false, choiceIndex: Int = -1, choices: [ChoiceMenuOptionS] = []) {
+        self.index = index
+        self.type = type
+        self.title = title
+        self.intValue = intValue
+        self.stringValue = stringValue
+        self.boolValue = boolValue
+        self.choiceIndex = choiceIndex
+        self.choices = choices
+    }
 }
 
 class CustomConfigMenu {
-    var configItem: config_item // The original config item that must be submitted back to the midend.
-    var menu: [CustomMenuItem] // A list of cleaned up & processed items for display by swift. Each
+    var configItem: config_item? // The original config item that must be submitted back to the midend.
+    var menu: [CustomMenuItem2] // A list of cleaned up & processed items for display by swift. Each
     
-    init(configItem: config_item, menu: [CustomMenuItem]) {
+    init(configItem: config_item?, menu: [CustomMenuItem2] = []) {
         self.configItem = configItem
         self.menu = menu
     }
-}
-
-protocol CustomMenuItem {
-    var title: String { get set }
-    //var configItem: config_item
-}
-
-class StringMenuItem: CustomMenuItem {
-    var title: String
-    var value: String
     
-    init(title: String, value: String) {
-        self.title = title
-        self.value = value
+    func addMenuItem(_ newItem: CustomMenuItem2) {
+        menu.append(newItem)
+    }
+    
+    func addIntMenuItem(index: Int, title: String, currentValue: Int) {
+        menu.append(CustomMenuItem2(index: index, type: .INT, title: title, intValue: currentValue))
+    }
+    
+    func addStringMenuItem(index: Int, title: String, currentValue: String) {
+        menu.append(CustomMenuItem2(index: index, type: .STRING, title: title, stringValue: currentValue))
+    }
+    
+    func addBooleanMenuItem(index: Int, title: String, currentValue: Bool) {
+        menu.append(CustomMenuItem2(index: index, type: .BOOLEAN, title: title, boolValue: currentValue))
     }
 }
 
-class BooleanMenuItem: CustomMenuItem {
-    var title: String
-    var value: Bool
-    
-    init(title: String, value: Bool) {
-        self.title = title
-        self.value = value
-    }
+struct ChoiceMenuOptionS {
+    let id: Int
+    let name: String
 }
 
-typealias ChoiceMenuOption = (id: Int, name: String)
-
-class ChoiceMenuItem: CustomMenuItem {
-    var title: String
-    var selection: Int
-    var choices: [ChoiceMenuOption]
-    
-    init(title: String, choices: [ChoiceMenuOption], selection: Int) {
-        self.title = title
-        self.choices = choices
-        self.selection = selection
-    }
-    
-}

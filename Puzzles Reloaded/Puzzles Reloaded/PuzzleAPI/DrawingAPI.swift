@@ -148,7 +148,6 @@ func getColorByIndex(frontend: UnsafeMutableRawPointer?, colorIndex: Int32) -> C
  This function flips Y based on the known requested image size to ensure everything renders in the correct direction. (And it goes ahead and casts to an int, for good measure)
  */
 func adjustedY(_ y: Int32, height: Int32 = 0) -> Int {
-    // print("Y was \(Int(y)), adjusting to \(PuzzleSettings.puzzleSize - Int(y))")
     return puzzleDimensionsY - Int(y) - Int(height)
 }
 

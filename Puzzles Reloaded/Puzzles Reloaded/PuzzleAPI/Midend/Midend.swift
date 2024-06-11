@@ -201,10 +201,10 @@ class Midend {
         let userSize = true
 
         let puzzleWidth = UnsafeMutablePointer<Int32>.allocate(capacity: 1) // TODO size of image, as computed?
-        puzzleWidth.initialize(to: Int32(PuzzleSettings.puzzleSize))
+        puzzleWidth.initialize(to: Int32(PuzzleConstants.puzzleSize))
         
         let puzzleHeight = UnsafeMutablePointer<Int32>.allocate(capacity: 1)// TODO size of image, as computed?
-        puzzleHeight.initialize(to: Int32(PuzzleSettings.puzzleSize))
+        puzzleHeight.initialize(to: Int32(PuzzleConstants.puzzleSize))
     
         
         

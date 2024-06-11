@@ -20,6 +20,7 @@ struct GameView: View {
     
     @State private var helpPageDisplayed = false
     @State private var settingsPageDisplayed = false
+    @State private var customGameSettingsDisplayed = false
     
     @State private var scaleFactor: CGFloat = 1.0
     @State private var translation: CGSize = .zero
@@ -206,6 +207,11 @@ struct GameView: View {
         .sheet(isPresented: $settingsPageDisplayed) {
             SettingsView()
         }
+        .sheet(isPresented: $customGameSettingsDisplayed) {
+            GameCustomSettingsView(gameTitle: game.game.name, frontend: frontend)
+                .presentationDetents([.medium, .large])
+        }
+        
         // MARK: Toolbar
         .toolbar {
             // MARK: Top Toolbar
@@ -332,7 +338,7 @@ struct GameView: View {
                         }
                     }
                     Button {
-                        frontend.midend.getCustomGameSettingsMenu()
+                        customGameSettingsDisplayed = true
                     } label: {
                         Label("Custom", systemImage: "chevron.right")
                     }

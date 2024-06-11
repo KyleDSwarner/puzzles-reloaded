@@ -6,7 +6,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ABCD uses the same control scheme as Solo, but with letters instead of numbers.\n\nLeft-click to select a cell, then type a letter on your keyboard to enter it. Press Backspace or Space to clear a cell.\n\nRight-click a cell, then type a letter to add a pencil mark. Pencil marks can be used for any purpose.\n\nYou can also use the arrow keys to move the selected cell around. Press Enter to toggle between entering letters and entering pencil marks.\n\nPress the 'M' key to fill every empty cell with all possible pencil marks."
+            "value" : "Tap on a cell to select a cell, then type a letter on your keyboard to enter it. Press Backspace or Space to clear a cell.\n\nTap on a cell to select it, then press the corresponding letter button to add it to the cell. Press the 'clear' icon on the bottom row to empty the selected cell.\n\nLong pressing on a cell and pressing a letter button will add a note to the cell. These marks are ignored by the game and can be leveraged however you wish.\n\nPress the 'M' key to fill every empty cell with all possible pencil marks."
           }
         }
       }
@@ -16,7 +16,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Place letters according to the numbers. Identical letters cannot touch"
+            "value" : "Place letters in a grid based on a set of rules"
           }
         }
       }
@@ -26,7 +26,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You're given an empty grid, and several rows of numbers on the side. You have to write a letter in every empty cell, following these rules:\n\nThe numbers on the edge indicate how many instances of a specific letter appear in that row or column.\nIdentical letters can not be horizontally or vertically adjacent.\nThe inventor of this type is unknown. This puzzle is also known under the names ABCD Puzzle, ABC-Kombi or ABCD-Rätsel.\n\nMore information: https://www.janko.at/Raetsel/Abc-Kombi/index.htm"
+            "value" : "You're given an empty grid, and several rows of numbers on the side. Your goal is to write a letter in every empty cell, following these rules:\n\n1. The numbers on the edge indicate how many instances of a specific letter appear in that row or column.\n2. Identical letters can not be horizontally or vertically adjacent.\n\nThe inventor of this type is unknown. This puzzle is also known under the names ABCD Puzzle, ABC-Kombi or ABCD-Rätsel.\n\nMore information: https://www.janko.at/Raetsel/Abc-Kombi/index.htm"
           }
         }
       }
@@ -176,7 +176,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "These parameters are available from the ‘Custom…’ option on the ‘Type’ menu.\n\nWidth, Height\nSize of the grid in squares.\nFleet size\nThe size of the largest possible boat.\nFleet configuration\nCustomize the fleet by entering a list of numbers. Each number indicates how many times a boat of a specific size appears. For example, the configuration 3,2,1 represents 3 boats of size 1, 2 boats of size 2, and 1 boat of size 3.\nDifficulty\nDetermine the difficulty of the generated puzzle. Higher difficulties require more complex reasoning.\nRemove numbers\nWhen enabled, the difficulty is increased by hiding certain number clues."
+            "value" : "These parameters are available from the ‘Custom…’ option on the ‘Type’ menu.\n\n- Width, Height: The size of the grid in squares.\n- Fleet size: The size of the largest possible boat.\n- Fleet configuration: Customize the fleet by entering a list of numbers. Each number indicates how many times a boat of a specific size appears. For example, the configuration 3,2,1 represents 3 boats of size 1, 2 boats of size 2, and 1 boat of size 3.\n- Difficulty: Determine the difficulty of the generated puzzle. Higher difficulties require more complex reasoning.\n- Remove numbers: When enabled, the difficulty is increased by hiding certain number clues."
           }
         }
       }

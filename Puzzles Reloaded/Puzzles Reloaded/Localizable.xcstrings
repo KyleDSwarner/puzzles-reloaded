@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
+    "%@ Configuration" : {
+
+    },
     "%lld" : {
 
     },
@@ -37,6 +43,9 @@
     "Back" : {
 
     },
+    "Cancel" : {
+
+    },
     "Center" : {
 
     },
@@ -47,6 +56,9 @@
 
     },
     "Clockwise" : {
+
+    },
+    "Configuration Error" : {
 
     },
     "Controls" : {
@@ -136,6 +148,12 @@
     "New Game by Random Seed" : {
 
     },
+    "No config menu provided" : {
+
+    },
+    "OK" : {
+
+    },
     "Open Game Menu" : {
 
     },
@@ -155,6 +173,12 @@
 
     },
     "Restart Game" : {
+
+    },
+    "Save" : {
+
+    },
+    "Save Changes" : {
 
     },
     "Selector" : {
