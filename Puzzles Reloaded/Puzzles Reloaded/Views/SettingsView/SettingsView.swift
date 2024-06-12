@@ -55,7 +55,7 @@ struct SettingsView: View {
                         } header: {
                             Text("\(game?.name ?? "Game") Settings")
                         } footer: {
-                            Text("Note: Game settings will be applied next time you start a new game")
+                            Text("Note: Some settings may not be applied until the next new game")
                         }
                     }
                     else {

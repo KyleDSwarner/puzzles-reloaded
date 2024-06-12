@@ -23,10 +23,6 @@ struct PuzzleInteractionsView: UIViewRepresentable {
     var puzzleTilesize: Int // TODO: Remove these two values? May not be needed.
     var adjustTapsToTilesize: Bool
 
-
-    // A closure to call when touch data has arrived
-    var onUpdate: (CGPoint) -> Void
-
     // The list of touch types to be notified of
     //var types = TouchType.all
 
@@ -50,7 +46,6 @@ struct PuzzleInteractionsView: UIViewRepresentable {
         context.coordinator.panRecognizer = panRecognizer
         context.coordinator.view = view
         
-        view.onUpdate = onUpdate
         view.frontend = puzzleFrontend
         //view.touchTypes = types
         view.limitToBounds = limitToBounds

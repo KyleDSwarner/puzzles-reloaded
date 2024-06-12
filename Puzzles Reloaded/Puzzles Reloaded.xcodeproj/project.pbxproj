@@ -36,7 +36,6 @@
 		923E645D2C00B9840027DF54 /* GameListILargeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64582C00B9840027DF54 /* GameListILargeItem.swift */; };
 		923E645E2C00B9840027DF54 /* GameListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64592C00B9840027DF54 /* GameListView.swift */; };
 		923E64672C00B9890027DF54 /* GameFrontend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64602C00B9890027DF54 /* GameFrontend.swift */; };
-		923E64682C00B9890027DF54 /* GamePresetMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64612C00B9890027DF54 /* GamePresetMenu.swift */; };
 		923E64692C00B9890027DF54 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64622C00B9890027DF54 /* GameView.swift */; };
 		923E646A2C00B9890027DF54 /* GameControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64632C00B9890027DF54 /* GameControlsView.swift */; };
 		923E646B2C00B9890027DF54 /* PuzzleImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64642C00B9890027DF54 /* PuzzleImageManager.swift */; };
@@ -160,7 +159,6 @@
 		923E64582C00B9840027DF54 /* GameListILargeItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameListILargeItem.swift; sourceTree = "<group>"; };
 		923E64592C00B9840027DF54 /* GameListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameListView.swift; sourceTree = "<group>"; };
 		923E64602C00B9890027DF54 /* GameFrontend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameFrontend.swift; sourceTree = "<group>"; };
-		923E64612C00B9890027DF54 /* GamePresetMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePresetMenu.swift; sourceTree = "<group>"; };
 		923E64622C00B9890027DF54 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		923E64632C00B9890027DF54 /* GameControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameControlsView.swift; sourceTree = "<group>"; };
 		923E64642C00B9890027DF54 /* PuzzleImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleImageManager.swift; sourceTree = "<group>"; };
@@ -408,7 +406,6 @@
 			isa = PBXGroup;
 			children = (
 				923E64622C00B9890027DF54 /* GameView.swift */,
-				923E64612C00B9890027DF54 /* GamePresetMenu.swift */,
 				923E64632C00B9890027DF54 /* GameControlsView.swift */,
 				923E64642C00B9890027DF54 /* PuzzleImageManager.swift */,
 				92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */,
@@ -718,7 +715,6 @@
 				923E649C2C00BEB60027DF54 /* grid.c in Sources */,
 				923E64B62C00BEE20027DF54 /* signpost.c in Sources */,
 				923E64342C00B9680027DF54 /* GlobalFunctions.swift in Sources */,
-				923E64682C00B9890027DF54 /* GamePresetMenu.swift in Sources */,
 				923E65062C00C25D0027DF54 /* filling.c in Sources */,
 				923E650D2C00C6E50027DF54 /* drawing.c in Sources */,
 				923E65012C00C00A0027DF54 /* salad.c in Sources */,

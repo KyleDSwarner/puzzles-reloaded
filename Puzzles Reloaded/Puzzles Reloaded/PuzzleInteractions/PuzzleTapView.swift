@@ -25,8 +25,6 @@ class PuzzleTapView: UIView {
     
     @AppStorage(AppSettings.key) var settings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
     
-    // Internal copies of our settings
-    var onUpdate: ((CGPoint) -> Void)?
     //var touchTypes: PuzzleInteractionsView.TouchType = .all
     var limitToBounds = true
     var frontend: Frontend?
@@ -137,13 +135,13 @@ class PuzzleTapView: UIView {
         longPressTimer.invalidate()
         
         guard isSingleFingerNavEnabled == false else {
-            print("Ignoring movement - single finger nav is enabled")
+            // print("Ignoring movement - single finger nav is enabled")
             return
         }
         
         // Ignore multi-touch - this will always be navigation panning
         guard touches.count == 1 else { 
-            print("Ignoring movement - two touches")
+            // print("Ignoring movement - two touches")
             return
         }
         
@@ -174,15 +172,14 @@ class PuzzleTapView: UIView {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
-        print("Touches Ended")
         
         // Ignore multi-touch - this will always be navigation panning
         guard touches.count == 1 else {
-            print("Ignoring multi-touch gesture")
+            // print("Ignoring multi-touch gesture")
             return
         }
         
-        print("Touch Ended! This was a \(isLongPress ? "Long" : "Short") press \(isDragging ? "with a drag " : "")")
+        // print("Touch Ended! This was a \(isLongPress ? "Long" : "Short") press \(isDragging ? "with a drag " : "")")
         
         // TODO: some games will want to execute long presses immediately when the timer expires- it's going to depend on the game! We can add a gameConfig and hopefully find a clean_ish way to account for the weird differences.
         
@@ -234,7 +231,6 @@ class PuzzleTapView: UIView {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
-        send(location, forEvent: .ended)
         resetTouchInfo()
     }
     
@@ -246,16 +242,5 @@ class PuzzleTapView: UIView {
     
     func adjustDragPosition(x: Int, y: Int) {
         //TODO, for Untangle?
-    }
-
-    // Send a touch location only if the user asked for it
-    func send(_ location: CGPoint, forEvent event: TouchType) {
-        //guard touchTypes.contains(event) else {
-        //    return
-        //}
-
-        if limitToBounds == false || bounds.contains(location) {
-            onUpdate?(CGPoint(x: round(location.x), y: round(location.y)))
-        }
     }
 }

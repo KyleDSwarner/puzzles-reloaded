@@ -40,14 +40,17 @@ class Frontend {
     var currentPreset: Int = -1// Indicates the ID of the preset selected.
     var gamePresets: [PresetMenuItem] = []
     
+    /** Split up the presets menu to prevent the menus from getting too large. If there's more than 10 items, split down the first 8 & overflow the rest.*/
     var gamePresetsPrimaryMenu: [PresetMenuItem] {
         guard gamePresets.count > 10 else {
             return gamePresets
         }
         return Array(gamePresets.prefix(8))
     }
+    
+    /** When needed, represents the overflow menu of game presets */
     var gamePresetsOverflowMenu: [PresetMenuItem] {
-        guard gamePresets.count > 8 else {
+        guard gamePresets.count > 10 else {
             return []
         }
         return Array(gamePresets.suffix(gamePresets.count - 8))

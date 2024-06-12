@@ -83,10 +83,7 @@ struct GameView: View {
                                 .padding(5)
                                 .overlay {
                                     // MARK: Puzzle Interactions & Gestures
-                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $anchor, puzzleFrontend: frontend, limitToBounds: false, allowSingleFingerPanning: game.game.allowSingleFingerPanning, puzzleTilesize: frontend.puzzleTilesize, adjustTapsToTilesize: true) { point in // TODO: Adjust Taps from puzzle config
-                                        print(point)
-                                    }
-                                    //GestureTransformView(transform: $transform)
+                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $anchor, puzzleFrontend: frontend, limitToBounds: false, allowSingleFingerPanning: game.game.allowSingleFingerPanning, puzzleTilesize: frontend.puzzleTilesize, adjustTapsToTilesize: true)
                                 }
                                 .transformEffect(puzzleImageTransformation)
                                 // Instead of using transformEffect, this setup emulates the translations that are initially applied by our CGAFfineTransform
@@ -103,14 +100,11 @@ struct GameView: View {
                                         }
                                     }
                                 }
-                                .frame(width: min(geometry.size.width, geometry.size.height)) //TODO: Maximum size for iPads? Limit these puzzles from getting too large initially
+                                .frame(width: min(geometry.size.width, geometry.size.height, 500)) // 500px set as maximum default size: This limits puzzles from getting too large on ipads
                                 
                         }
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height) // take up all available space to center puzzle on the screen
-                    .onAppear {
-                        print("Size of Picture Stack: w:\(geometry.size.width) h:\(geometry.size.height)")
-                    }
                 }
                 
             }
@@ -401,9 +395,9 @@ struct GameView: View {
         let save = frontend.saveGame()
         
         if save != nil {
-            print("Saving Game:")
+            print("Game Saved")
         } else {
-            print("No game in progress, not saving state")
+            print("Game not saved: nothing to store")
         }
         // Save the game, or null it out if the game should not be saved
         game.settings.saveGame = save

@@ -31,8 +31,8 @@ class GameListConfig {
     var gameName: String
     var category: GameCategory = GameCategory.none
     var stats: GameStats
-    var saveGame: String?
-    var userPrefs: String?
+    var saveGame: String? // Saved game, piped from the internal puzzle app
+    var userPrefs: String? // String from the puzzle code to store internal user preferences
     
     init(gameName: String) {
         self.gameName = gameName
