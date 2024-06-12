@@ -254,6 +254,9 @@ func drawRect(frontend: UnsafeMutableRawPointer?, x: Int32, y: Int32, width: Int
     let fillColor = getColorByIndex(frontend: frontend, colorIndex: color)
     
     getImageManager(frontend: frontend).drawRectangle(x: Int(x), y: adjustedY(y, height: height), width: Int(width), height: Int(height), fillColor: fillColor)
+    
+    // Palisade doesn't send image updates after drawing rectangles, so this is required here
+    forceImageUpdate(frontend: frontend)
 }
 
 /**
@@ -286,7 +289,7 @@ func drawThickLine(frontend: UnsafeMutableRawPointer?, thickness: Float, x1: Flo
  Draw a polygon shape using an array of points and the outline color. A fill color can optionally be provided.
  */
 func drawPolygon(frontend: UnsafeMutableRawPointer?, coordinates: UnsafePointer<Int32>?, nPoints: Int32, fillColor: Int32, outlineColor: Int32) {
-    // print("Draw Polygon Called, outlineColor: \(Int(outlineColor)), fill Color: \(Int(fillColor))")
+    print("Draw Polygon Called, outlineColor: \(Int(outlineColor)), fill Color: \(Int(fillColor))")
     
     let numPoints = Int(nPoints)
     
@@ -319,7 +322,7 @@ func drawCircle(frontend: UnsafeMutableRawPointer?, cx: Int32, cy: Int32, radius
 
 func drawUpdate(frontend: UnsafeMutableRawPointer?, x: Int32, y: Int32, w: Int32, h: Int32) {
     
-    // The intention of this function is to update only a section of the puzzle image based on need. However, iOS is pretty effecient in spitting out new bitmaps,
+    // The intention of this function is to update only a section of the puzzle image based on need. However, iOS is pretty effecient in spitting out new bitmaps and splitting sections out would actually be _more_ intensive.
     // So instead, any update to the image is immediately reflected, and this function is a no-op.
     
     // There are a few potential bugs in implementing the puzzle this way (lines in Tents, for example), so this may need to be revisited in the future.

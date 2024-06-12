@@ -8,6 +8,13 @@
 
 import Foundation
 
+struct PuzzleConfigTypes {
+    static let gameParameters = CFG_SETTINGS
+    static let userPreferences = CFG_PREFS
+    static let gameSeed = CFG_SEED
+    static let gameId = CFG_DESC
+}
+
 extension Midend {
     
     
@@ -67,27 +74,15 @@ extension Midend {
         return game?.can_configure == true
     }
     
-    public func selectPresetOption(option: Int) {
-        // tell the game to persist these options. Then later start a new game?
+    public func getGameUserSettings() -> CustomConfigMenu? {
+        return getPuzzleConfig(for: PuzzleConfigTypes.userPreferences)
     }
     
-    public func submitCustomOption() {
-        
-        // Afterwards, FREE the memory from the config object???
+    public func setGameUserSettings(choices: [CustomMenuItem2]) -> String? {
+        return setPuzzleConfig(choices: choices, for: PuzzleConfigTypes.userPreferences)
     }
     
-    private func getCustomParamsConfig() -> UnsafeMutablePointer<config_item>? {
-        let winTitle = UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>.allocate(capacity: 1) // Puzzles will fill this in with a window title. We don't need it, but it's a required field.
-        // Get the config object. Passing "CFG_SETTINGS" indicates we're asking for game settings - the enum comes from puzzles.h
-        let config = midend_get_config(midendPointer, Int32(CFG_SETTINGS), winTitle)
-        
-        winTitle.deallocate()
-        return config
-        
-        
-    }
-    
-    public func getCustomGameSettingsMenu() -> CustomConfigMenu? {
+    public func getGameCustomParameters() -> CustomConfigMenu? {
         
         // Note: Game can send can_configure = false, which would disable this custom menu.
         guard canConfigureGameParams() else {
@@ -95,7 +90,27 @@ extension Midend {
             return nil
         }
         
-        let config = getCustomParamsConfig()
+        return getPuzzleConfig(for: PuzzleConfigTypes.gameParameters)
+    }
+    
+    public func setGameCustomParameters(choices: [CustomMenuItem2]) -> String? {
+        return setPuzzleConfig(choices: choices, for: PuzzleConfigTypes.gameParameters)
+    }
+    
+    
+    
+    public func getGameSeedSettings() -> CustomConfigMenu? {
+        return getPuzzleConfig(for: PuzzleConfigTypes.gameSeed)
+    }
+    
+    public func getGameIdSettings() -> CustomConfigMenu? {
+        return getPuzzleConfig(for: PuzzleConfigTypes.gameId)
+    }
+    
+    
+    public func getPuzzleConfig(for configType: Int) -> CustomConfigMenu? {
+                
+        let config = getCustomParamsConfig(for: configType)
         
         if let configMenu = config {
 
@@ -111,7 +126,7 @@ extension Midend {
                 let type = Int(configItem.type)
                 
                 if type == C_END {
-                    print("END found")
+                    //print("END found")
                     menuIsProcessing = false // short circuit the while loop
                     break
                 }
@@ -121,26 +136,26 @@ extension Midend {
                 // Type will be one of the following values that tell us how to process the data: C_STRING, C_CHOICES, C_BOOLEAN, C_END
                 switch type {
                 case C_STRING:
-                    print("This is a string value: \(title)")
+                    //print("This is a string value: \(title)")
                     let value = String(cString: configItem.u.string.sval)
                     
                     // Determine if this is an integer value or not
                     let intValue = Int(value)
                     
                     if let unwrappedInt = intValue {
-                        print("Integer Value found: \(unwrappedInt)")
+                        //print("Integer Value found: \(unwrappedInt)")
                         customConfigMenu.addIntMenuItem(index: index, title: title, currentValue: unwrappedInt)
                     } else {
-                        print("String found: \(value)")
+                        //print("String found: \(value)")
                         //let newMenuItem = StringMenuItem(title: title, value: String(cString: configItem.u.string.sval), index: index)
                         customConfigMenu.addStringMenuItem(index: index, title: title, currentValue: String(cString: configItem.u.string.sval))
                     }
                     
                 case C_BOOLEAN:
-                    print("This is a Bool value: \(title)")
+                    //print("This is a Bool value: \(title)")
                     customConfigMenu.addBooleanMenuItem(index: index, title: title, currentValue: configItem.u.boolean.bval)
                 case C_CHOICES:
-                    print("This is a choice value: \(title)")
+                    //print("This is a choice value: \(title)")
                     let newMenuItem = processChoiceMenu(configItem, title: title, index: index)
                     customConfigMenu.addMenuItem(newMenuItem)
                     
@@ -166,7 +181,6 @@ extension Midend {
                 index += 1
             }
             
-            print("Returning Val")
             return customConfigMenu
         
         } else {
@@ -175,7 +189,21 @@ extension Midend {
         }
     }
     
-    func processChoiceMenu(_ configItem: config_item, title: String, index: Int) -> CustomMenuItem2 {
+    /**
+     
+     */
+    private func getCustomParamsConfig(for configType: Int) -> UnsafeMutablePointer<config_item>? {
+        let winTitle = UnsafeMutablePointer<UnsafeMutablePointer<CChar>?>.allocate(capacity: 1) // Puzzles will fill this in with a window title. We don't need it, but it's a required field.
+        // Get the config object. Passing "CFG_SETTINGS" indicates we're asking for game settings - the enum comes from puzzles.h
+        let config = midend_get_config(midendPointer, Int32(configType), winTitle)
+        
+        winTitle.deallocate()
+        return config
+        
+        
+    }
+    
+    private func processChoiceMenu(_ configItem: config_item, title: String, index: Int) -> CustomMenuItem2 {
         var choices = [ChoiceMenuOptionS]()
         
         // Choice Names is a non-null delimited string. For example, :Foo:Bar:Baz gives three options.
@@ -192,56 +220,56 @@ extension Midend {
         return CustomMenuItem2(index: index, type: .CHOICE, title: title, choiceIndex: Int(configItem.u.choices.selected), choices: choices)
     }
     
-    func setNewGameParams(choices: [CustomMenuItem2]) -> String? {
+    private func setPuzzleConfig(choices: [CustomMenuItem2], for configType: Int) -> String? {
         
-        let configObject = getCustomParamsConfig()
+        let configObject = getCustomParamsConfig(for: configType)
         
-        if let config = configObject {
+        guard let config = configObject else {
+            print("Count not retrieve config object; cannot set parameters")
+            return "Internal error occurred when setting puzzle configuration"
+        }
             
-            //Iterating over the object, we apply the choices the user made into the original C object.
-            // Sicne our choices menu was created from the original config object, we can relatively safely trust the indexes, rather than try to decode the object again.
-            for (index, userSelection) in choices.enumerated() {
-                //var currentItem = config[index]
-                
-                //print(currentItem)
-                
-                switch userSelection.type {
-                case .BOOLEAN:
-                    print("\(userSelection.title) Bool == \(userSelection.boolValue)")
-                    config[index].u.boolean.bval = userSelection.boolValue
-                case .INT:
-                    print("\(userSelection.title) Int == \(userSelection.intValue)")
-                    let pointer = PuzzleUtils.stringToPointer(String(userSelection.intValue))
-                    config[index].u.string.sval = pointer
-                case .STRING:
-                    print("\(userSelection.title) String == \(userSelection.stringValue)")
-                    let pointer = PuzzleUtils.stringToPointer(userSelection.stringValue)
-                    config[index].u.string.sval = pointer
-                case .CHOICE:
-                    print("\(userSelection.title) Choice == \(userSelection.choiceIndex)")
-                    config[index].u.choices.selected = Int32(userSelection.choiceIndex)
-                }
-                
-                //print(currentItem)
-                
-                
-                
+        //Iterating over the object, we apply the choices the user made into the original C object.
+        // Sicne our choices menu was created from the original config object, we can relatively safely trust the indexes, rather than try to decode the object again.
+        // The index from the user selection choice (previously stored) is used vs the enumerated index, as items may occasionally be filtered out (keyboard-based settings, etc).
+        for (_, userSelection) in choices.enumerated() {
+            //var currentItem = config[index]
+            
+            //print(currentItem)
+            
+            switch userSelection.type {
+            case .BOOLEAN:
+                //print("\(userSelection.title) Bool == \(userSelection.boolValue)")
+                config[userSelection.index].u.boolean.bval = userSelection.boolValue
+            case .INT:
+                //print("\(userSelection.title) Int == \(userSelection.intValue)")
+                let pointer = PuzzleUtils.stringToPointer(String(userSelection.intValue))
+                config[userSelection.index].u.string.sval = pointer
+            case .STRING:
+                //print("\(userSelection.title) String == \(userSelection.stringValue)")
+                let pointer = PuzzleUtils.stringToPointer(userSelection.stringValue)
+                config[userSelection.index].u.string.sval = pointer
+            case .CHOICE:
+                //print("\(userSelection.title) Choice == \(userSelection.choiceIndex)")
+                config[userSelection.index].u.choices.selected = Int32(userSelection.choiceIndex)
             }
             
-            //midend_get_config(midendPointer, Int32(CFG_SETTINGS), winTitle)
-            let result = midend_set_config(midendPointer, Int32(CFG_SETTINGS), config)
+            //print(currentItem)
             
-            if let unwrappedResult = result {
-                let error = String(cString: unwrappedResult)
-                print(error)
-                return error
-            } else {
-                // Success case! The midend did not return an error
-                return nil
-            }
             
+            
+        }
+        
+        //midend_get_config(midendPointer, Int32(CFG_SETTINGS), winTitle)
+        let result = midend_set_config(midendPointer, Int32(configType), config)
+        
+        if let unwrappedResult = result {
+            let error = String(cString: unwrappedResult)
+            print(error)
+            return error
         } else {
-            fatalError("Could not retrieve the config object. This should not happen!")
+            // Success case! The midend did not return an error
+            return nil
         }
     }
     

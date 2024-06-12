@@ -42,9 +42,6 @@ struct GameView: View {
     }
     
     init(game: Game) {
-        
-
-        
         self.game = game
         frontend.midend.setGame(game.game.internalGame) //lol
         
@@ -65,6 +62,11 @@ struct GameView: View {
     
     func emitButtonPress(_ button: ButtonPress?) {
         frontend.fireButton(button)
+    }
+    
+    func newGame() {
+        frontend.beginGame() // TODO: Make this async to handle long-generating games?
+        self.puzzleImageTransformation = .identity
     }
     
     var body: some View {
@@ -205,10 +207,10 @@ struct GameView: View {
         }
         // MARK: Settings Page Sheet
         .sheet(isPresented: $settingsPageDisplayed) {
-            SettingsView()
+            SettingsView(game: game.game, frontend: frontend)
         }
         .sheet(isPresented: $customGameSettingsDisplayed) {
-            GameCustomSettingsView(gameTitle: game.game.name, frontend: frontend)
+            GameCustomSettingsView(gameTitle: game.game.name, frontend: frontend, newGameCallback: newGame)
                 .presentationDetents([.medium, .large])
         }
         
@@ -238,8 +240,7 @@ struct GameView: View {
             ToolbarItemGroup(placement: .bottomBar) {
                 Menu("Open Game Menu", systemImage: "menucard") {
                     Button("New Game") {
-                        frontend.beginGame() // New Game Rename?
-                        self.puzzleImageTransformation = .identity
+                        newGame()
                     }
                     Button() {
                         frontend.midend.restartGame()
@@ -249,12 +250,15 @@ struct GameView: View {
                         Label("Restart Game", systemImage: "arrow.circlepath")
                     }
                     
+                    // TODO: Implement these features!
+                    /*
                     Button("Enter Game ID") { // Display Advanced Game Options?
                         
                     }
                     Button("New Game by Random Seed") {
                         
                     }
+                     */
                     
                     // Display this section if we can auto-solve OR if the game has some overflow controls
                     if frontend.canSolve || !overflowMenuControls.isEmpty {
@@ -325,7 +329,7 @@ struct GameView: View {
                 
                 // MARK: Game Presets Menu
                 Menu() {
-                    ForEach(frontend.gamePresets) { preset in
+                    ForEach(frontend.gamePresetsPrimaryMenu) { preset in
                         Button() {
                             frontend.setNewGamePreset(preset.params)
                         } label: {
@@ -335,6 +339,22 @@ struct GameView: View {
                                 Text(preset.title)
                             }
                             
+                        }
+                    }
+                    if !frontend.gamePresetsOverflowMenu.isEmpty {
+                        Menu("More Options") {
+                            ForEach(frontend.gamePresetsOverflowMenu) { preset in
+                                Button() {
+                                    frontend.setNewGamePreset(preset.params)
+                                } label: {
+                                    if preset.id == frontend.currentPreset {
+                                        Label(preset.title, systemImage: "checkmark.circle")
+                                    } else {
+                                        Text(preset.title)
+                                    }
+                                    
+                                }
+                            }
                         }
                     }
                     Button {

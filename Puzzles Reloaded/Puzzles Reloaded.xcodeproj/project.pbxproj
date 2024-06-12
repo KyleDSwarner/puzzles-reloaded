@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		92123DDF2C19E5570020DB69 /* CustomGameConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */; };
 		923E63E32C00B9210027DF54 /* PuzzlesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63E22C00B9210027DF54 /* PuzzlesApp.swift */; };
 		923E63E72C00B9220027DF54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 923E63E62C00B9220027DF54 /* Assets.xcassets */; };
 		923E63EB2C00B9220027DF54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 923E63EA2C00B9220027DF54 /* Preview Assets.xcassets */; };
 		923E64202C00B94E0027DF54 /* PuzzleConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64032C00B94E0027DF54 /* PuzzleConfig.swift */; };
 		923E64212C00B94E0027DF54 /* PuzzlesAtoM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64042C00B94E0027DF54 /* PuzzlesAtoM.swift */; };
-		923E64312C00B9680027DF54 /* Midend-GameConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642A2C00B9680027DF54 /* Midend-GameConfig.swift */; };
+		923E64312C00B9680027DF54 /* Midend-GameParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642A2C00B9680027DF54 /* Midend-GameParams.swift */; };
 		923E64322C00B9680027DF54 /* Midend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642B2C00B9680027DF54 /* Midend.swift */; };
 		923E64332C00B9680027DF54 /* DrawingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642D2C00B9680027DF54 /* DrawingAPI.swift */; };
 		923E64342C00B9680027DF54 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642E2C00B9680027DF54 /* GlobalFunctions.swift */; };
@@ -128,6 +129,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameConfigView.swift; sourceTree = "<group>"; };
 		923E63DF2C00B9210027DF54 /* Puzzles Reloaded.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Puzzles Reloaded.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		923E63E22C00B9210027DF54 /* PuzzlesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlesApp.swift; sourceTree = "<group>"; };
 		923E63E62C00B9220027DF54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -135,7 +137,7 @@
 		923E63EA2C00B9220027DF54 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		923E64032C00B94E0027DF54 /* PuzzleConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleConfig.swift; sourceTree = "<group>"; };
 		923E64042C00B94E0027DF54 /* PuzzlesAtoM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzlesAtoM.swift; sourceTree = "<group>"; };
-		923E642A2C00B9680027DF54 /* Midend-GameConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Midend-GameConfig.swift"; sourceTree = "<group>"; };
+		923E642A2C00B9680027DF54 /* Midend-GameParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Midend-GameParams.swift"; sourceTree = "<group>"; };
 		923E642B2C00B9680027DF54 /* Midend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Midend.swift; sourceTree = "<group>"; };
 		923E642D2C00B9680027DF54 /* DrawingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingAPI.swift; sourceTree = "<group>"; };
 		923E642E2C00B9680027DF54 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
@@ -338,7 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				923E642B2C00B9680027DF54 /* Midend.swift */,
-				923E642A2C00B9680027DF54 /* Midend-GameConfig.swift */,
+				923E642A2C00B9680027DF54 /* Midend-GameParams.swift */,
 				92B341382C11E90D006A4466 /* Midend-UserData.swift */,
 			);
 			path = Midend;
@@ -571,6 +573,7 @@
 			isa = PBXGroup;
 			children = (
 				923E64392C00B96E0027DF54 /* SettingsView.swift */,
+				92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */,
 			);
 			path = SettingsView;
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				923E64E32C00BFBA0027DF54 /* keen.c in Sources */,
 				923E645E2C00B9840027DF54 /* GameListView.swift in Sources */,
 				923E64942C00BE940027DF54 /* bridges.c in Sources */,
+				92123DDF2C19E5570020DB69 /* CustomGameConfigView.swift in Sources */,
 				923E64912C00BE940027DF54 /* cube.c in Sources */,
 				923E64B12C00BED00027DF54 /* towers.c in Sources */,
 				923E64862C00BE620027DF54 /* penrose.c in Sources */,
@@ -737,7 +741,7 @@
 				923E64FA2C00C00A0027DF54 /* boats.c in Sources */,
 				923E64992C00BEA30027DF54 /* combi.c in Sources */,
 				923E64672C00B9890027DF54 /* GameFrontend.swift in Sources */,
-				923E64312C00B9680027DF54 /* Midend-GameConfig.swift in Sources */,
+				923E64312C00B9680027DF54 /* Midend-GameParams.swift in Sources */,
 				923E65292C00C86A0027DF54 /* sort.c in Sources */,
 				923E64402C00B96E0027DF54 /* UserPreferences.swift in Sources */,
 				923E65272C00C84F0027DF54 /* printing.c in Sources */,

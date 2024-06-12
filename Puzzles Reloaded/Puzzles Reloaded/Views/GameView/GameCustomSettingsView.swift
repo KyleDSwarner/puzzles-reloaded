@@ -19,92 +19,30 @@ struct GameCustomSettingsView: View {
     //@State var gameMenu: [CustomMenuItem] = []
     
     var frontend: Frontend
+    var newGameCallback: () -> Void
     
     private var gameConfig: CustomConfigMenu?
     @State private var gameMenu: [CustomMenuItem2] = []
     
-    init(gameTitle: String, frontend: Frontend) {
+    init(gameTitle: String, frontend: Frontend, newGameCallback: @escaping () -> Void) {
         self.gameTitle = gameTitle
         
         self.frontend = frontend
+        self.newGameCallback = newGameCallback
         
-        gameConfig = frontend.midend.getCustomGameSettingsMenu()
+        gameConfig = frontend.midend.getGameCustomParameters()
     }
     
     var body: some View {
         NavigationStack {
                 Form {
-                    List($gameMenu, id:\.index) { menuItem in
-                        switch menuItem.wrappedValue.type {
-                        case .BOOLEAN:
-                            Toggle(isOn: menuItem.boolValue) {
-                                Text(menuItem.wrappedValue.title)
-                            }
-                        case .STRING:
-                            HStack {
-                                Text(menuItem.wrappedValue.title)
-                                Spacer()
-                                TextField("", text: menuItem.stringValue)
-                            }
-                            TextField(menuItem.wrappedValue.title, text: menuItem.stringValue, prompt: Text(menuItem.wrappedValue.title))
-                        case .INT:
-                            HStack {
-                                Text(menuItem.wrappedValue.title)
-                                TextField("", value: menuItem.intValue, formatter: NumberFormatter())
-                                    //.frame(width: 30)
-                                    .bold()
-                                    //.multilineTextAlignment(.trailing)
-                                    //.padding(.horizontal, 5)
-                                    //.background(.gray)
-                                    //.clipShape(RoundedRectangle(cornerRadius: 5))
-                                    .keyboardType(.numberPad)
-                                    //.submitLabel(.done)
-                                    .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
-                                        // Select all text automatically when you tap on the text field for easier data entry
-                                        if let textField = obj.object as? UITextField {
-                                            textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
-                                        }
-                                    }
-                                Stepper("", value: menuItem.intValue, in: 0...100)
-                                    .accessibilityHidden(true)
-                            }
-                        case .CHOICE:
-                            Picker(menuItem.wrappedValue.title, selection: menuItem.choiceIndex) {
-                                ForEach(menuItem.choices, id:\.id) { choice in
-                                    Text(choice.wrappedValue.name)
-                                }
-                            }
-                        }
-                    }
+                    CustomGameConfigView(gameMenu: $gameMenu)
                     
                     Section {
                         Button("Save Changes") {
                             saveChanges()
                         }
                     }
-                    /*
-                    ForEach($gameMenu, id:\.index) { $menuItem in
-                        if $menuItem.wrappedValue is BooleanMenuItem {
-                            
-                            
-                            
-                            //let booleanMenu = $menuItem as! Binding<BooleanMenuItem>
-                            Toggle(isOn: ($menuItem.wrappedValue as BooleanMenuItem).value) {
-                                Text(menuItem.title)
-                            }
-                            
-                            //Text("\(booleanMenu.value)")
-                        }
-                        else if menuItem is StringMenuItem {
-                            let stringMenuItem = menuItem as! StringMenuItem
-                            
-                        }
-                        else if menuItem is ChoiceMenuItem {
-                            
-                        }
-                        Text(menuItem.title)
-                    }
-                     */
                 }
                 .navigationTitle("\(gameTitle) Configuration")
                 .navigationBarTitleDisplayMode(.inline)
@@ -141,7 +79,7 @@ struct GameCustomSettingsView: View {
     }
     
     func saveChanges() {
-        let error = frontend.midend.setNewGameParams(choices: self.gameMenu)
+        let error = frontend.midend.setGameCustomParameters(choices: self.gameMenu)
         
         if let errorText = error {
             // Present the error to the user
@@ -149,7 +87,7 @@ struct GameCustomSettingsView: View {
             presentingAlertMessage = true
         } else {
             dismiss()
-            frontend.beginGame()
+            newGameCallback()
             // Success! Close the modal and generate a new game.
             // Do we need to consider long-running game generation?
             // TODO: Move this to a callback function?

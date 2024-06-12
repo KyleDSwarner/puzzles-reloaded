@@ -7,14 +7,19 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct SettingsView: View {
-
     @Environment(\.dismiss) var dismiss
     
     // The settings page doesn't use the UserPreferences shared class to avoid an odd bug where the settings buttons didn't work correctly on first press
     @AppStorage(AppSettings.key) var appSettings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
+    @State private var gameSettingsMenu: [CustomMenuItem2] = []
+    
+    private let settingExclusions: [String] = ["Keyboard shortcuts without Ctrl"]
+    
+    // Game, to be provided when the settings menu is selected from within a game
+    var game: GameConfig? = nil
+    var frontend: Frontend? = nil
     
     var body: some View {
         NavigationStack {
@@ -26,6 +31,48 @@ struct SettingsView: View {
                     Toggle("Sounds", isOn: $appSettings.value.enableSounds)
                     
                 }
+                
+                Section {
+                    HStack {
+                        Text("Long Press Duration")
+                        Spacer()
+                        Text("\(appSettings.value.longPressTime.formatted(.number.precision(.fractionLength(0))))ms")
+                        //Text(Duration.milliseconds(appSettings.value.longPressTime.cle
+                    }
+                    Slider(value: $appSettings.value.longPressTime, in: 125...1000, step: 125) {
+                        Text("Long Press Duration")
+                    } minimumValueLabel: {
+                        Text("125ms")
+                    } maximumValueLabel: {
+                        Text("1s")
+                    }
+                }
+                
+                if game != nil {
+                    if !gameSettingsMenu.isEmpty {
+                        Section {
+                            CustomGameConfigView(gameMenu: $gameSettingsMenu)
+                        } header: {
+                            Text("\(game?.name ?? "Game") Settings")
+                        } footer: {
+                            Text("Note: Game settings will be applied next time you start a new game")
+                        }
+                    }
+                    else {
+                        Section {
+                            Text("No settings available")
+                        } header: {
+                            Text("\(game?.name ?? "Game") Settings")
+                        }
+                    }
+                }
+                
+                
+                
+                /*
+                 
+                These sections are designed, but at the moment don't do anything
+                 
                 Section {
                     
                     Picker("Theme", selection: $appSettings.value.appTheme) {
@@ -40,18 +87,34 @@ struct SettingsView: View {
                 } footer: {
                     Text("Enable games that may be incomplete or broken")
                 }
+                 */
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
+                        if frontend != nil {
+                            print("Saving Game Settings")
+                            _ = frontend?.midend.setGameUserSettings(choices: gameSettingsMenu)
+                        }
                         dismiss()
                     } label: {
                         Text("Done")
                     }
                 }
                 
+            }
+            .onAppear {
+                if game != nil && frontend != nil {
+                    let gameParams = frontend?.midend.getGameUserSettings()
+                    
+                    self.gameSettingsMenu = gameParams?.menu ?? []
+                    
+                    self.gameSettingsMenu = gameSettingsMenu.filter { setting in
+                        !settingExclusions.contains(setting.title)
+                    }
+                }
             }
         }
     }

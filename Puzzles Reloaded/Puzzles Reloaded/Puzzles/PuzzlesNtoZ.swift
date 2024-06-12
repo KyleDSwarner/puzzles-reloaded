@@ -292,7 +292,8 @@ extension Puzzles {
         instructions: String(localized: "twiddle_instructions", table: "Puzzles"),
         controlInfo: String(localized: "twiddle_controls", table: "Puzzles"),
         imageName: "twiddle",
-        internalGame: twiddle
+        internalGame: twiddle,
+        touchControls: [ControlConfig(label: String(localized: "Clockwise"), shortPress: PuzzleKeycodes.rightKeypress, longPress: PuzzleKeycodes.leftKeypress, imageName: "arrow.clockwise")] // Single touch controls makes the default tap command move objects clockwise
     )
     
     // MARK: Undead

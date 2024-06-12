@@ -7,7 +7,16 @@
     "%@ Configuration" : {
 
     },
+    "%@ Settings" : {
+
+    },
+    "%@ms" : {
+
+    },
     "%lld" : {
+
+    },
+    "1s" : {
 
     },
     "5 Numeric Buttons" : {
@@ -31,10 +40,10 @@
     "31 Hex Buttons" : {
 
     },
-    "All Games" : {
+    "125ms" : {
 
     },
-    "Auto (Follow Device)" : {
+    "All Games" : {
 
     },
     "Auto-Solve" : {
@@ -70,22 +79,10 @@
     "Custom" : {
 
     },
-    "Dark" : {
-
-    },
     "Done" : {
 
     },
-    "Enable games that may be incomplete or broken" : {
-
-    },
     "Enable Haptic Feedback" : {
-
-    },
-    "Enter Game ID" : {
-
-    },
-    "Experimental Games" : {
 
     },
     "Favorite" : {
@@ -127,13 +124,16 @@
     "Key" : {
       "extractionState" : "manual"
     },
-    "Light" : {
-
-    },
     "Lock" : {
 
     },
+    "Long Press Duration" : {
+
+    },
     "Marks" : {
+
+    },
+    "More Options" : {
 
     },
     "Net Segment Selector" : {
@@ -145,10 +145,13 @@
     "New Game" : {
 
     },
-    "New Game by Random Seed" : {
+    "No config menu provided" : {
 
     },
-    "No config menu provided" : {
+    "No settings available" : {
+
+    },
+    "Note: Game settings will be applied next time you start a new game" : {
 
     },
     "OK" : {
@@ -194,9 +197,6 @@
 
     },
     "Test Item!" : {
-
-    },
-    "Theme" : {
 
     },
     "Undead Controls" : {

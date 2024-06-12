@@ -40,6 +40,19 @@ class Frontend {
     var currentPreset: Int = -1// Indicates the ID of the preset selected.
     var gamePresets: [PresetMenuItem] = []
     
+    var gamePresetsPrimaryMenu: [PresetMenuItem] {
+        guard gamePresets.count > 10 else {
+            return gamePresets
+        }
+        return Array(gamePresets.prefix(8))
+    }
+    var gamePresetsOverflowMenu: [PresetMenuItem] {
+        guard gamePresets.count > 8 else {
+            return []
+        }
+        return Array(gamePresets.suffix(gamePresets.count - 8))
+    }
+    
     init() {
         self.imageManager = nil // Can we get rid of this? Can't create the image processor until we know the height, otherwise the bitmap starts getting weird.
         self.midend = Midend()

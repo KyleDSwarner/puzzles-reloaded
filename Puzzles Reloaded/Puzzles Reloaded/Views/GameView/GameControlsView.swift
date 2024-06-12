@@ -130,7 +130,8 @@ struct GameControlsView: View, Equatable {
         
         HStack {
             Spacer()
-            if(touchControls.count > 0) {
+            // Some games have 1 touch command to configure the default - we shouldn't display the controls unless there's at least 2!
+            if(touchControls.count > 1) {
                 Picker("Selector", selection: $controlOption) {
                     ForEach(0..<filteredTouchControls.count, id:\.self) { index in
                         ButtonLabel(control: filteredTouchControls[index])

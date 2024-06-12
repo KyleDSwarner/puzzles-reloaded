@@ -59,7 +59,7 @@ func midend_writeSave(context: UnsafeMutableRawPointer, buffer: UnsafeRawPointer
 
 func midend_readFile(context: UnsafeMutableRawPointer?, buffer: UnsafeMutableRawPointer?, length: Int32) -> Bool {
     
-    guard let unwrappedBuffer = buffer else {
+    guard buffer != nil else {
         return false
     }
     
@@ -92,7 +92,7 @@ extension Midend {
      Saves user-configured game settings to a string
      */
     func saveUserPrefs() -> String? {
-        var newSave = SaveContext() // Test...
+        let newSave = SaveContext() // Test...
         //midend_save_prefs(midendPointer, midend_writeFile, newSave)
         
         withUnsafePointer(to: newSave) { savePointer in
@@ -144,73 +144,15 @@ extension Midend {
     
     func readSave(_ savegame: SaveContext?) {
         
-        guard var save = savegame else {
+        guard let save = savegame else {
             return
         }
         
         withUnsafePointer(to: save) { savePointer in
-            let result = midend_deserialise(midendPointer, midend_readFile, UnsafeMutableRawPointer(mutating: savePointer))
+            _ = midend_deserialise(midendPointer, midend_readFile, UnsafeMutableRawPointer(mutating: savePointer))
+            //TODO: Process errors, if any? This returns an error message, but will we display it?
         }
     }
-    
-
-    
-    /*
-
-     static void saveGameWrite(void *ctx, void *buf, int len)
-     {
-         NSMutableString *save = (__bridge NSMutableString *)(ctx);
-         [save appendString:[[NSString alloc] initWithBytes:buf length:len encoding:NSUTF8StringEncoding]];
-     }
-
-     - (NSString *)saveGameState_inprogress:(BOOL *)inprogress
-     {
-         if (me == NULL) {
-             return nil;
-         }
-         *inprogress = midend_can_undo(me) && midend_status(me) == 0;
-         NSMutableString *save = [[NSMutableString alloc] init];
-         // midend_serialise(me, saveGameWrite, (__bridge void *)(save));
-         return save;
-     }
-
-     struct StringReadContext {
-         void *save;
-         int pos;
-     };
-
-     static int saveGameRead(void *ctx, void *buf, int len)
-     {
-         struct StringReadContext *srctx = (struct StringReadContext *)ctx;
-         NSString *save = (__bridge NSString *)(srctx->save);
-         NSUInteger used = 0;
-         BOOL r = [save getBytes:buf maxLength:len usedLength:&used encoding:NSUTF8StringEncoding options:0 range:NSMakeRange(srctx->pos, save.length-srctx->pos) remainingRange:NULL];
-         srctx->pos += used;
-         return r;
-     }
-
-     - (void)loadPrefs
-     {
-         NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-         NSString *prefs = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/%s.prefs", path, ourgame->name] encoding:NSUTF8StringEncoding error:NULL];
-         if (prefs != nil) {
-             struct StringReadContext srctx;
-             srctx.save = (__bridge void *)(prefs);
-             srctx.pos = 0;
-             //midend_load_prefs(me, saveGameRead, &srctx);
-         }
-     }
-
-     // Saves preferences to a local file, based on the name. Then we read it back out later.
-     - (void)savePrefs
-     {
-         NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-         NSMutableString *prefs = [[NSMutableString alloc] init];
-         //midend_save_prefs(me, saveGameWrite, (__bridge void *)(prefs));
-         [prefs writeToFile:[NSString stringWithFormat:@"%@/%s.prefs", path, ourgame->name] atomically:YES encoding:NSUTF8StringEncoding error:NULL];
-         midend_force_redraw(me);
-     }
-     */
 }
 
 

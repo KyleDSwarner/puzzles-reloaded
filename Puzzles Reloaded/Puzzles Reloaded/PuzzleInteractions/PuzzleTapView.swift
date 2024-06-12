@@ -22,6 +22,9 @@ struct TouchType: OptionSet {
 // This view is attaches to the main puzzle image as an overlay, via PuzzleInteractionsView
 // (The pan & zoom interactions are also attached there)
 class PuzzleTapView: UIView {
+    
+    @AppStorage(AppSettings.key) var settings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
+    
     // Internal copies of our settings
     var onUpdate: ((CGPoint) -> Void)?
     //var touchTypes: PuzzleInteractionsView.TouchType = .all
@@ -92,15 +95,16 @@ class PuzzleTapView: UIView {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         
-        let adjustedLocation = adjustedTapLocation(point: location)
+        // let adjustedLocation = adjustedTapLocation(point: location)
         
         // send(location, forEvent: .started)
         
         // MARK: Long Press Trigger
         // If there's no long press configured, don't start the timer!
         if frontend?.controlOption.longPress != nil {
-            //TODO: Adjustable timer interval?
-            longPressTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) {_ in
+            
+            // Long press timer is based on user settings & defaults to 500ms. `withTimeInterval` is in seconds, so this value is divided by 1000.
+            longPressTimer = Timer.scheduledTimer(withTimeInterval: settings.value.longPressTime / 1000, repeats: false) {_ in
                 self.isLongPress = true
                 
                 self.hapticsEngine.playLongPressHaptic()

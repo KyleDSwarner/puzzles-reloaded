@@ -26,6 +26,8 @@ struct AppSettings: Codable {
     var gameListView: GameListViewSetting = GameListViewSetting.listView
     var appTheme: AppTheme = AppTheme.auto
     
+    var longPressTime = 500.0 // in ms
+    
     mutating func toggleGameListView() {
         self.gameListView = self.gameListView == .listView ? .gridView : .listView
     }
