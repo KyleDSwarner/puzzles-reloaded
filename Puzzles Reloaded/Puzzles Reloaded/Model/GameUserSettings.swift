@@ -28,9 +28,9 @@ struct GameStats: Codable {
 
 @Model
 class GameUserSettings {
-    var gameName: String
+    var gameName: String = ""
     var category: GameCategory = GameCategory.none
-    var stats: GameStats
+    var stats: GameStats = GameStats()
     var saveGame: String? // Saved game, piped from the internal puzzle app
     var userPrefs: String? // String from the puzzle code to store internal user preferences
     
