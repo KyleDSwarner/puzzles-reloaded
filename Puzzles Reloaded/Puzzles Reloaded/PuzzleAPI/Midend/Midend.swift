@@ -163,7 +163,7 @@ class Midend {
         frontend.numColors = numColors
     }
     
-    func initGame(savegame: String? = nil, preferences: String? = nil) -> (x: Int, y: Int) {
+    func initGame(savegame: String? = nil, preferences: String? = nil, completionHandler: () -> Void) -> (x: Int, y: Int) {
         
         // If present, load user preferences
         if preferences != nil {
@@ -172,6 +172,7 @@ class Midend {
         }
         
         midend_new_game(midendPointer)
+        
         
         // If present, load the same
         if savegame != nil {
@@ -206,8 +207,6 @@ class Midend {
         let puzzleHeight = UnsafeMutablePointer<Int32>.allocate(capacity: 1)// TODO size of image, as computed?
         puzzleHeight.initialize(to: Int32(PuzzleConstants.puzzleSize))
     
-        
-        
         midend_size(midendPointer, puzzleWidth, puzzleHeight, userSize, devicePixelRatio)
         
         print("??? Puzzle determined ideal size as \(Int(puzzleWidth.pointee)) by \(Int(puzzleHeight.pointee)) ???")
@@ -220,6 +219,8 @@ class Midend {
         
         let gameIdString = String(cString: gameId!)
         print("Game ID: \(gameIdString)")
+        
+        completionHandler()
         
         return (x: Int(puzzleWidth.pointee), y: Int(puzzleHeight.pointee))
         

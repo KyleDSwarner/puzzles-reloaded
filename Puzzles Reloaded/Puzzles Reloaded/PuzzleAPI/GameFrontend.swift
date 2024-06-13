@@ -70,7 +70,9 @@ class Frontend {
         // If I can refactor this down the road, we can clean this code up a bit!
         
         
-        let dimensions = midend.initGame(savegame: saveGame, preferences: preferences) // Initialize the game and find the correct image boundaries
+        let dimensions = midend.initGame(savegame: saveGame, preferences: preferences) {
+            //TODO: Completion Handler - Stop timers for long-generating games.
+        } // Initialize the game and find the correct image boundaries
         self.imageManager = PuzzleImageManager(width: dimensions.x, height: dimensions.y) // Adding 10 to y dimensions to even out items that line riiiight up to the top of the puzzle
         midend.drawPuzzle() // Actually draw the puzzle, once the image manager knows its size & is ready to go.
         self.puzzleTilesize = midend.getTilesize()

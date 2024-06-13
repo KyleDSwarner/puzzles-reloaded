@@ -16,7 +16,7 @@ struct GameView: View {
     @State private var displayNewGameButton = false
     @State private var displayRestartButton = false
     @State private var enableCompletionAnimation = false
-    @State private var anchor: CGPoint = .zero
+    @State private var tapAnchor: CGPoint = .zero
     
     @State private var helpPageDisplayed = false
     @State private var settingsPageDisplayed = false
@@ -83,7 +83,7 @@ struct GameView: View {
                                 .padding(5)
                                 .overlay {
                                     // MARK: Puzzle Interactions & Gestures
-                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $anchor, puzzleFrontend: frontend, allowSingleFingerPanning: game.game.allowSingleFingerPanning)
+                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $tapAnchor, puzzleFrontend: frontend, allowSingleFingerPanning: game.game.allowSingleFingerPanning)
                                 }
                                 .transformEffect(puzzleImageTransformation)
                                 // Instead of using transformEffect, this setup emulates the translations that are initially applied by our CGAFfineTransform

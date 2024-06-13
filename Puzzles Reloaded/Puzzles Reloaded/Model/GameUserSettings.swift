@@ -59,7 +59,6 @@ class GameUserSettings {
     }
     
     var hasSavedGame: Bool {
-        print("Save Game is \(saveGame != nil && saveGame?.isEmpty == false)")
         return saveGame != nil && saveGame?.isEmpty == false
     }
     
