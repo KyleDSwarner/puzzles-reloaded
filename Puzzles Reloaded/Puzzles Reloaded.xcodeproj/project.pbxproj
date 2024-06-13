@@ -39,7 +39,7 @@
 		923E64692C00B9890027DF54 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64622C00B9890027DF54 /* GameView.swift */; };
 		923E646A2C00B9890027DF54 /* GameControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64632C00B9890027DF54 /* GameControlsView.swift */; };
 		923E646B2C00B9890027DF54 /* PuzzleImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64642C00B9890027DF54 /* PuzzleImageManager.swift */; };
-		923E64732C00B9E40027DF54 /* GameListUserConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E646E2C00B9E30027DF54 /* GameListUserConfig.swift */; };
+		923E64732C00B9E40027DF54 /* GameUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E646E2C00B9E30027DF54 /* GameUserSettings.swift */; };
 		923E64742C00B9E40027DF54 /* CodableWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E646F2C00B9E30027DF54 /* CodableWrapper.swift */; };
 		923E64752C00B9E40027DF54 /* GameConfig-UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64702C00B9E40027DF54 /* GameConfig-UserSettings.swift */; };
 		923E64852C00BE620027DF54 /* penrose-legacy.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E647F2C00BE620027DF54 /* penrose-legacy.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -120,7 +120,6 @@
 		923E652C2C00D62A0027DF54 /* PuzzlesNtoZ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E652B2C00D62A0027DF54 /* PuzzlesNtoZ.swift */; };
 		923E652E2C00D6DF0027DF54 /* PuzzlesXSheep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E652D2C00D6DF0027DF54 /* PuzzlesXSheep.swift */; };
 		923E65312C00D75E0027DF54 /* GameHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E65302C00D75E0027DF54 /* GameHelpView.swift */; };
-		923E653A2C00E7D50027DF54 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E65392C00E7D50027DF54 /* ContentView.swift */; };
 		92B341392C11E90D006A4466 /* Midend-UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B341382C11E90D006A4466 /* Midend-UserData.swift */; };
 		92B55D522C0F410900517280 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D512C0F410900517280 /* Localizable.xcstrings */; };
 		92B55D542C0F46A500517280 /* Puzzles.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D532C0F46A500517280 /* Puzzles.xcstrings */; };
@@ -162,7 +161,7 @@
 		923E64622C00B9890027DF54 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		923E64632C00B9890027DF54 /* GameControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameControlsView.swift; sourceTree = "<group>"; };
 		923E64642C00B9890027DF54 /* PuzzleImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleImageManager.swift; sourceTree = "<group>"; };
-		923E646E2C00B9E30027DF54 /* GameListUserConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameListUserConfig.swift; sourceTree = "<group>"; };
+		923E646E2C00B9E30027DF54 /* GameUserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameUserSettings.swift; sourceTree = "<group>"; };
 		923E646F2C00B9E30027DF54 /* CodableWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableWrapper.swift; sourceTree = "<group>"; };
 		923E64702C00B9E40027DF54 /* GameConfig-UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GameConfig-UserSettings.swift"; sourceTree = "<group>"; };
 		923E647E2C00BE620027DF54 /* Puzzles Reloaded-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Puzzles Reloaded-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -255,7 +254,6 @@
 		923E652B2C00D62A0027DF54 /* PuzzlesNtoZ.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlesNtoZ.swift; sourceTree = "<group>"; };
 		923E652D2C00D6DF0027DF54 /* PuzzlesXSheep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlesXSheep.swift; sourceTree = "<group>"; };
 		923E65302C00D75E0027DF54 /* GameHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHelpView.swift; sourceTree = "<group>"; };
-		923E65392C00E7D50027DF54 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		923E653B2C00EC290027DF54 /* generated-games.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "generated-games.h"; sourceTree = "<group>"; };
 		92B341382C11E90D006A4466 /* Midend-UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Midend-UserData.swift"; sourceTree = "<group>"; };
 		92B55D512C0F410900517280 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -372,7 +370,7 @@
 				923E64412C00B9740027DF54 /* Game.swift */,
 				923E64422C00B9740027DF54 /* GameConfig.swift */,
 				923E64702C00B9E40027DF54 /* GameConfig-UserSettings.swift */,
-				923E646E2C00B9E30027DF54 /* GameListUserConfig.swift */,
+				923E646E2C00B9E30027DF54 /* GameUserSettings.swift */,
 				923E64432C00B9740027DF54 /* GameManager.swift */,
 			);
 			path = Model;
@@ -416,7 +414,6 @@
 		923E646C2C00B9A30027DF54 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				923E65392C00E7D50027DF54 /* ContentView.swift */,
 				923E645A2C00B9840027DF54 /* GameList */,
 				923E64652C00B9890027DF54 /* GameView */,
 				923E652F2C00D7490027DF54 /* HelpView */,
@@ -668,7 +665,7 @@
 				923E64C42C00BF120027DF54 /* pattern.c in Sources */,
 				923E64A92C00BED00027DF54 /* twiddle.c in Sources */,
 				923E64FB2C00C00A0027DF54 /* spokes.c in Sources */,
-				923E64732C00B9E40027DF54 /* GameListUserConfig.swift in Sources */,
+				923E64732C00B9E40027DF54 /* GameUserSettings.swift in Sources */,
 				923E64852C00BE620027DF54 /* penrose-legacy.c in Sources */,
 				923E64F82C00C00A0027DF54 /* sticks.c in Sources */,
 				923E65212C00C7880027DF54 /* dominosa.c in Sources */,
@@ -732,7 +729,6 @@
 				923E64CC2C00BF2D0027DF54 /* netslide.c in Sources */,
 				923E64F62C00C00A0027DF54 /* seismic.c in Sources */,
 				923E64D72C00BF490027DF54 /* malloc.c in Sources */,
-				923E653A2C00E7D50027DF54 /* ContentView.swift in Sources */,
 				923E64472C00B9740027DF54 /* GameManager.swift in Sources */,
 				923E64FA2C00C00A0027DF54 /* boats.c in Sources */,
 				923E64992C00BEA30027DF54 /* combi.c in Sources */,
@@ -837,6 +833,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -891,6 +888,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
@@ -915,6 +913,7 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Puzzles Dev";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -933,7 +932,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Puzzles Reloaded/Puzzles Reloaded-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -958,6 +957,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = COMBINED;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Puzzles;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.puzzle-games";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -976,7 +976,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Puzzles Reloaded/Puzzles Reloaded-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
