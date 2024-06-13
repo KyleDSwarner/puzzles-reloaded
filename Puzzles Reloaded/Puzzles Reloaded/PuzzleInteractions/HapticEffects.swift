@@ -29,26 +29,6 @@ class HapticEffects {
             } catch let error {
                 fatalError("Engine Creation Error: \(error)")
             }
-            
-            // The reset handler provides an opportunity to restart the engine.
-            /*
-            engine.resetHandler = {
-                
-                print("Reset Handler: Restarting the engine.")
-                
-                do {
-                    // Try restarting the engine.
-                    try self.engine.start()
-                    
-                    // Register any custom resources you had registered, using registerAudioResource.
-                    // Recreate all haptic pattern players you had created, using createPlayer.
-                    
-                    
-                } catch {
-                    fatalError("Failed to restart the engine: \(error)")
-                }
-            }
-             */
         }
     }
     
@@ -87,7 +67,7 @@ class HapticEffects {
             try engine.start()
             try player.start(atTime: 0)
         } catch {
-            print("Oh no, an error in the haptic effects! Oh well, fail silently.")
+            print("Error in haptic engine, failing silently")
         }
     }
     

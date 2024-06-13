@@ -413,5 +413,5 @@ struct GameView: View {
 
 #Preview {
     GameView(game: Game.exampleGameModel)
-        .modelContainer(for: GameListConfig.self, inMemory: true)
+        .modelContainer(for: GameUserSettings.self, inMemory: true)
 }

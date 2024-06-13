@@ -30,24 +30,6 @@ import SwiftData
         dataIsLoaded = true
     }
     
-    // MARK - Settings Retrieval Functions
-    
-    /*
-    func retrieveAppSettings(context: ModelContext) -> AppSettings {
-        let appSettings = FetchDescriptor<AppSettings>()
-        let results = try! context.fetch(appSettings)
-        
-        if let appSettings = results.first {
-            return appSettings
-        }
-    
-        let newSettings = AppSettings()
-        context.insert(newSettings)
-        
-        return newSettings
-    }
-     */
-    
     func createGamesList(with context: ModelContext) {
         guard dataIsLoaded == false else {
             return
@@ -63,27 +45,27 @@ import SwiftData
         dataIsLoaded = true
     }
     
-    func collectGamePreferences(from context: ModelContext) -> [GameListConfig] {
+    func collectGamePreferences(from context: ModelContext) -> [GameUserSettings] {
         
-        let gameSettings = FetchDescriptor<GameListConfig>()
+        let gameSettings = FetchDescriptor<GameUserSettings>()
         let results = try! context.fetch(gameSettings)
         
         return results
     }
     
     
-    func findPreferencesForGame(_ game: GameConfig, from preferences: [GameListConfig], context: ModelContext) -> GameListConfig {
+    func findPreferencesForGame(_ game: GameConfig, from preferences: [GameUserSettings], context: ModelContext) -> GameUserSettings {
         if let preferences = findExistingPreferences(game, from: preferences) {
             return preferences
         }
         
-        let newPreferences = GameListConfig(gameName: game.name)
+        let newPreferences = GameUserSettings(gameName: game.name)
         context.insert(newPreferences)
 
         return newPreferences
     }
     
-    func findExistingPreferences(_ game: GameConfig, from preferences: [GameListConfig]) -> GameListConfig? {
+    func findExistingPreferences(_ game: GameConfig, from preferences: [GameUserSettings]) -> GameUserSettings? {
         return preferences.first(where: { $0.gameName == game.name})
     }
     

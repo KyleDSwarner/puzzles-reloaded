@@ -16,7 +16,7 @@ struct PuzzlesApp: App {
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            GameListConfig.self
+            GameUserSettings.self
             //AppSettings.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
@@ -40,6 +40,6 @@ struct PuzzlesApp: App {
 
 #Preview {
     GameListView()
-        .modelContainer(for: GameListConfig.self, inMemory: true)
+        .modelContainer(for: GameUserSettings.self, inMemory: true)
         .environment(GameManager())
 }

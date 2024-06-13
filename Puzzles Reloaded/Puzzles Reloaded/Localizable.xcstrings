@@ -13,31 +13,7 @@
     "%@ms" : {
 
     },
-    "%lld" : {
-
-    },
     "1s" : {
-
-    },
-    "5 Numeric Buttons" : {
-
-    },
-    "8 Numeric Buttons" : {
-
-    },
-    "9 Numeric Buttons" : {
-
-    },
-    "10 Numeric Buttons" : {
-
-    },
-    "16 Hex Buttons" : {
-
-    },
-    "25 Hex Buttons" : {
-
-    },
-    "31 Hex Buttons" : {
 
     },
     "125ms" : {
@@ -94,9 +70,6 @@
     "Fill Blocks" : {
 
     },
-    "filling_description" : {
-      "comment" : "Short description for the game 'filling"
-    },
     "Game Parameters" : {
       "comment" : "Heading for the 'game parameters' section on the help page"
     },
@@ -104,9 +77,6 @@
 
     },
     "Ghost" : {
-
-    },
-    "Hello, World!" : {
 
     },
     "Help" : {
@@ -136,16 +106,7 @@
     "More Options" : {
 
     },
-    "Net Segment Selector" : {
-
-    },
-    "Net Segment Selector with Shift" : {
-
-    },
     "New Game" : {
-
-    },
-    "No config menu provided" : {
 
     },
     "No settings available" : {
@@ -158,9 +119,6 @@
 
     },
     "Open Game Menu" : {
-
-    },
-    "Pattern Controls" : {
 
     },
     "Puzzle View" : {
@@ -199,9 +157,6 @@
     "Test Item!" : {
 
     },
-    "Undead Controls" : {
-
-    },
     "Undo previous move" : {
 
     },
@@ -209,9 +164,6 @@
 
     },
     "Unhide" : {
-
-    },
-    "Unruly Controls" : {
 
     },
     "User Preferences" : {

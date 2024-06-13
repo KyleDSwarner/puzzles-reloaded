@@ -18,7 +18,7 @@ import SwiftData
     
     internal let id = UUID()
     let game: GameConfig
-    let settings: GameListConfig
+    let settings: GameUserSettings
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
@@ -26,7 +26,7 @@ import SwiftData
         hasher.combine(settings)
     }
     
-    init(game: GameConfig, settings: GameListConfig) {
+    init(game: GameConfig, settings: GameUserSettings) {
         self.game = game
         self.settings = settings
     }
@@ -43,6 +43,6 @@ import SwiftData
         self.game.isExperimental
     }
     
-    static var exampleGameModel = Game(game: GameConfig.exampleGame, settings: GameListConfig(gameName: "abcd"))
+    static var exampleGameModel = Game(game: GameConfig.exampleGame, settings: GameUserSettings(gameName: "abcd"))
     
 }

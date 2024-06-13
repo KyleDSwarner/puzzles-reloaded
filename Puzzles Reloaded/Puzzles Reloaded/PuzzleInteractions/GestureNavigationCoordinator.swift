@@ -15,7 +15,7 @@ struct GestureBoundaries {
     static let maximumOverscrollFactorY = 0.5
 }
 
-extension UIView{
+extension UIView {
     var globalPoint :CGPoint? {
         return self.superview?.convert(self.frame.origin, to: nil)
     }
@@ -24,46 +24,6 @@ extension UIView{
         return self.superview?.convert(self.frame, to: nil)
     }
 }
-
-/*
-struct GestureTransformView : UIViewRepresentable {
-
-    @Binding var transform: CGAffineTransform
-    
-    func makeUIView(context: Context) -> UIView {
-        let view = UIView()
-        
-        let zoomRecognizer = UIPinchGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.zoom(_:)))
-        
-        let panRecognizer = UIPanGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.pan(_:)))
-        
-        panRecognizer.minimumNumberOfTouches = 2 // Require a two finger touch to prevent conlifct with single taps in the puzzles
-        
-        zoomRecognizer.delegate = context.coordinator
-        panRecognizer.delegate = context.coordinator
-        view.addGestureRecognizer(zoomRecognizer)
-        view.addGestureRecognizer(panRecognizer)
-        context.coordinator.zoomRecognizer = zoomRecognizer
-        context.coordinator.panRecognizer = panRecognizer
-        context.coordinator.view = view
-        
-        return view
-    }
-    
-    func updateUIView(_ uiView: UIView, context: Context) {
-        // Nada
-    }
-    
-
-    
-    func makeCoordinator() -> Coordinator {
-        let coordinator = Coordinator(self)
-        coordinator.setupOrientationNotifications()
-        return coordinator
-            
-    }
-}
- */
 
 extension PuzzleInteractionsView {
     class Coordinator: NSObject, UIGestureRecognizerDelegate {

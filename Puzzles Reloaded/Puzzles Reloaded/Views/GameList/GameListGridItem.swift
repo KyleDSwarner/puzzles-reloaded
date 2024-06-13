@@ -34,6 +34,20 @@ struct GameListGridItem: View {
                     }
                 
                 // Future additions : Indicators for games on progress?
+                if game.settings.hasSavedGame {
+                    VStack(alignment:.trailing) {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Circle()
+                                .stroke(.black, lineWidth: 2)
+                                .fill(.yellow)
+                                .frame(width: 10, height: 10)
+                                .padding(4)
+                        }
+                    }
+                }
+                
             }
         }
         .buttonStyle(PlainButtonStyle())

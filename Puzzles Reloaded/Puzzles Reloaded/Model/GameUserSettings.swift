@@ -27,7 +27,7 @@ struct GameStats: Codable {
 
 
 @Model
-class GameListConfig {
+class GameUserSettings {
     var gameName: String
     var category: GameCategory = GameCategory.none
     var stats: GameStats
@@ -56,6 +56,11 @@ class GameListConfig {
     
     var isHidden: Bool {
         self.category == .hidden
+    }
+    
+    var hasSavedGame: Bool {
+        print("Save Game is \(saveGame != nil && saveGame?.isEmpty == false)")
+        return saveGame != nil && saveGame?.isEmpty == false
     }
     
 

@@ -34,9 +34,8 @@ class SoundEffects {
                 fatalError("Engine Creation Error: \(error)")
             }
          */
-            
-
     }
+    
     func playSoundEffect() -> Void {
         
         guard settings.value.enableSounds == true else {

@@ -16,7 +16,7 @@ struct GameListLargeItem: View {
         game.game
     }
     
-    var gameSettings: GameListConfig {
+    var gameSettings: GameUserSettings {
         game.settings
     }
     
@@ -33,10 +33,28 @@ struct GameListLargeItem: View {
                 }
                  */
                 VStack {
-                    Image(gameConfig.imageName)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 75, height: 75)
+                    ZStack {
+                        
+                        Image(gameConfig.imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 75, height: 75)
+                        
+                        if game.settings.hasSavedGame {
+                            VStack(alignment:.trailing) {
+                                Spacer()
+                                HStack {
+                                    Spacer()
+                                    Circle()
+                                        .stroke(.black, lineWidth: 2)
+                                        .fill(.yellow)
+                                        .frame(width: 10, height: 10)
+                                        .padding(4)
+                                }
+                            }
+                        }
+                    }
+                    .frame(width: 75, height: 75)
                 }
                 .padding(.vertical, 5)
                

@@ -188,5 +188,5 @@ struct GameListView: View {
 #Preview {
     GameListView()
         .environment(GameManager())
-        .modelContainer(for: GameListConfig.self, inMemory: true)
+        .modelContainer(for: GameUserSettings.self, inMemory: true)
 }

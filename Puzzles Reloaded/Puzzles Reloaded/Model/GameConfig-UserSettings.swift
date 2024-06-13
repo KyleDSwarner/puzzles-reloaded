@@ -10,7 +10,7 @@ import Foundation
 
 extension GameConfig {
     
-    func isFavorite(from gameSettings: GameListConfig?) -> Bool {
+    func isFavorite(from gameSettings: GameUserSettings?) -> Bool {
         if let settings = gameSettings {
             return settings.category == .favorite
         }
@@ -19,7 +19,7 @@ extension GameConfig {
         }
     }
     
-    func isHidden(from gameSettings: GameListConfig?) -> Bool {
+    func isHidden(from gameSettings: GameUserSettings?) -> Bool {
         if let settings = gameSettings {
             return settings.category == .hidden
         }
