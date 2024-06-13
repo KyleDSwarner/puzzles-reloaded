@@ -54,13 +54,16 @@ struct PuzzleKeycodes {
     static let UNDO = UI_UNDO
     static let REDO = UI_REDO
     
-    static let DRAG_LEFT = MOD_SHFT | CURSOR_LEFT
+    static let CursorUp = CURSOR_UP
+    static let CursorDown = CURSOR_DOWN
+    static let CursorLeft = CURSOR_LEFT
+    static let CursorRight = CURSOR_RIGHT
     
-    //TODO: Unsure if it makes sense to continue using these methods. Seems like we need to turn interactions into an Int. Holding on to it for now!
-    // This was used becase LEFT/RIGHT/MIDDLE was stored as an integer, so they just used it to index these items
-    static let buttonDown: [Int] = [LEFT_BUTTON, RIGHT_BUTTON, MIDDLE_BUTTON]
-    static let buttonDrag: [Int] = [LEFT_DRAG, RIGHT_DRAG, MIDDLE_DRAG]
-    static let buttonUp: [Int] = [LEFT_RELEASE, RIGHT_RELEASE, MIDDLE_RELEASE]
+    static let DRAG_LEFT = MOD_SHFT | CURSOR_LEFT
+    static let NET_CENTER = MOD_CTRL | CURSOR_UP
+    
+    static let ShiftKey = MOD_SHFT
+    static let CtrlKey = MOD_CTRL
     
     static let leftKeypress: MouseClick = MouseClick(down: LEFT_BUTTON, up: LEFT_RELEASE, drag: LEFT_DRAG)
     static let rightKeypress: MouseClick = MouseClick(down: RIGHT_BUTTON, up: RIGHT_RELEASE, drag: RIGHT_DRAG)
@@ -91,6 +94,8 @@ class ControlConfig: Hashable {
     static func == (lhs: ControlConfig, rhs: ControlConfig) -> Bool {
         lhs.id == rhs.id
     }
+    
+
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
@@ -146,6 +151,11 @@ class ControlConfig: Hashable {
     }
 }
 
+extension ControlConfig {
+    // Some Defaults
+    static var MarksControl = ControlConfig(label: String(localized: "Marks"), command: PuzzleKeycodes.MarksButton, imageName: "square.and.pencil")
+}
+
 struct ArrowPress {
     let arrowKey: Int
     let modifier: Int // CTRL, etc.
@@ -156,18 +166,33 @@ struct ArrowPress {
     }
 }
 
-protocol PuzzleInteraction {
-    
-}
-
-struct MouseClick: PuzzleInteraction {
+struct MouseClick {
     let down: Int
     let drag: Int
     let up: Int
+    
+    let useArrowKeys: Bool
+    let arrowKeyModifier: Int // CTRL, etc.
+    let reverseArrowDirections: Bool
     
     init(down: Int, up: Int, drag: Int) {
         self.down = down
         self.up = up
         self.drag = drag
+        
+        self.arrowKeyModifier = -1
+        self.useArrowKeys = false
+        self.reverseArrowDirections = false
+    }
+    
+    // Instead of Mouse clicks, we'll adjust commands to arrow keys with an attacked modifier
+    init(usesArrowKeys: Bool, withModifier: Int, reverseArrowDirections: Bool = false) {
+        self.useArrowKeys = usesArrowKeys
+        self.arrowKeyModifier = withModifier
+        self.reverseArrowDirections = reverseArrowDirections
+        
+        self.down = -1
+        self.drag = -1
+        self.up = -1
     }
 }

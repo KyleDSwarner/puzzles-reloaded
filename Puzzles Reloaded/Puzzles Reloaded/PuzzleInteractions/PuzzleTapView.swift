@@ -8,16 +8,6 @@
 
 import SwiftUI
 
-// The types of touches users want to be notified about
-struct TouchType: OptionSet {
-    let rawValue: Int
-
-    static let started = TouchType(rawValue: 1 << 0)
-    static let moved = TouchType(rawValue: 1 << 1)
-    static let ended = TouchType(rawValue: 1 << 2)
-    static let all: TouchType = [.started, .moved, .ended]
-}
-
 // UIView responsible for catching taps, long presses, atznd drags on the main puzzle.
 // This view is attaches to the main puzzle image as an overlay, via PuzzleInteractionsView
 // (The pan & zoom interactions are also attached there)
@@ -25,8 +15,6 @@ class PuzzleTapView: UIView {
     
     @AppStorage(AppSettings.key) var settings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
     
-    //var touchTypes: PuzzleInteractionsView.TouchType = .all
-    var limitToBounds = true
     var frontend: Frontend?
     var isSingleFingerNavEnabled = false
     
@@ -37,6 +25,7 @@ class PuzzleTapView: UIView {
     
     private var isLongPress = false
     private var isDragging = false
+    private var arrowKeyTapLocation: CGPoint = .zero
     
     // Our main initializer, making sure interaction is enabled.
     override init(frame: CGRect) {
@@ -69,7 +58,7 @@ class PuzzleTapView: UIView {
         let adjustedPoint = CGPoint(x: point.x / scaleFactorX(), y: point.y / scaleFactorY())
         
         //
-        let tilesize = frontend?.puzzleTilesize ?? 0
+        // let tilesize = frontend?.puzzleTilesize ?? 0
         
         //print("Scale: \(Float(scaleFactor)) old X: \(point.x) new X: \(adjustedPoint.x)")
         return adjustedPoint
@@ -81,8 +70,8 @@ class PuzzleTapView: UIView {
     
     // MARK: Keypresses
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        // TODO - manage keyboard commands. WASD, Ctrl+S, etc
-        let keycode = PuzzleKeycodes.SOLVE
+        // TODO: - manage keyboard commands. WASD, Ctrl+S, etc
+        // let keycode = PuzzleKeycodes.SOLVE
         
         
     }
@@ -93,9 +82,17 @@ class PuzzleTapView: UIView {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         
-        // let adjustedLocation = adjustedTapLocation(point: location)
+         let adjustedLocation = adjustedTapLocation(point: location)
         
         // send(location, forEvent: .started)
+        
+        if let mouseCommand = frontend?.controlOption.shortPress {
+            if mouseCommand.useArrowKeys == true {
+                arrowKeyTapLocation = adjustedLocation
+                    // Register the current location for reference when dragging
+                    // We'll fire a command for every _tilesize_ pixels we move in any direction
+            }
+        }
         
         // MARK: Long Press Trigger
         // If there's no long press configured, don't start the timer!
@@ -115,15 +112,6 @@ class PuzzleTapView: UIView {
             
             
         }
-        
-        // Store the location for future use
-        
-        // If 'net center mode', then process a specific key (0x03)
-        /*
-         if (self.net_centre_mode) {
-             midend_process_key(me, touchXpixels, touchYpixels, 0x03);
-         }
-         */
     }
 
     // MARK: Touch Dragging
@@ -140,31 +128,81 @@ class PuzzleTapView: UIView {
         }
         
         // Ignore multi-touch - this will always be navigation panning
-        guard touches.count == 1 else { 
+        guard touches.count == 1 else {
             // print("Ignoring movement - two touches")
             return
         }
         
         let location = touch.location(in: self)
         
-        // TODO: Ignore if out of bounds
-        
         let adjustedLocation = adjustedTapLocation(point: location)
         
         let command = isLongPress ? self.frontend?.controlOption.longPress : self.frontend?.controlOption.shortPress
         
-        if !isDragging && !isLongPress && command != nil {
-            // We need to send the short press' keyDown command - but only the first time.
-            self.frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: command!.down)
+        
+        // For arrow key-based commands, compare the current position to the initial postion (stored in `touchesStart`), and move the cursor when the distance is greater than the tile size.
+        if command?.useArrowKeys == true, let tilesizeInt = frontend?.puzzleTilesize {
+            // MARK: Arrow Key Dragging Logic
+            let tilesize = CGFloat(tilesizeInt)
+            
+            // Some commands need to be reversed to feel 'right' when using touchscreens vs. arrow keys.
+            let reverseArrowDirections = command?.reverseArrowDirections == true
+            
+            let xPosition = adjustedLocation.x
+            let yPosition = adjustedLocation.y
+            
+            var xDiff = xPosition - arrowKeyTapLocation.x
+            var yDiff = yPosition - arrowKeyTapLocation.y
+            
+            // These loops see if the difference from the previous postion is greater than (or equal to) the tilesize. Then so, it fires a command to move in the correct cursor direction & resets values to adjust the tap position to current.
+            
+            while(xDiff >= tilesize) {
+                let cursorDirection = reverseArrowDirections ? PuzzleKeycodes.CursorLeft : PuzzleKeycodes.CursorRight
+                sendArrowKeyCommand(command: cursorDirection, modifier: command?.arrowKeyModifier)
+                xDiff -= tilesize
+                arrowKeyTapLocation.x += tilesize
+            }
+            
+            while(xDiff <= -tilesize) {
+                let cursorDirection = reverseArrowDirections ? PuzzleKeycodes.CursorRight : PuzzleKeycodes.CursorLeft
+                sendArrowKeyCommand(command: cursorDirection, modifier: command?.arrowKeyModifier)
+                xDiff += tilesize
+                arrowKeyTapLocation.x -= tilesize
+            }
+            
+            while(yDiff <= -tilesize) {
+                let cursorDirection = reverseArrowDirections ? PuzzleKeycodes.CursorDown : PuzzleKeycodes.CursorUp
+                sendArrowKeyCommand(command: cursorDirection, modifier: command?.arrowKeyModifier)
+                yDiff += tilesize
+                arrowKeyTapLocation.y -= tilesize
+            }
+            
+            while(yDiff >= tilesize) {
+                let cursorDirection = reverseArrowDirections ? PuzzleKeycodes.CursorUp : PuzzleKeycodes.CursorDown
+                sendArrowKeyCommand(command: cursorDirection, modifier: command?.arrowKeyModifier)
+                yDiff -= tilesize
+                arrowKeyTapLocation.y += tilesize
+            }            
+            
+        } else {
+            // MARK: Usual Tap & Drag Commands Based on mouseclicks & drags
+            if !isDragging && !isLongPress && command != nil {
+                // We need to send the short press' keyDown command - but only the first time.
+                self.frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: command!.down)
+            }
+            
+            isDragging = true
+            
+            // Then we need to send a DRAG command to the correct
+            self.frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: command!.drag)
         }
         
-        isDragging = true
-        
-        // Then we need to send a DRAG command to the correct
-        self.frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: command!.drag)
-        
-        
         //send(location, forEvent: .moved)
+    }
+    
+    private func sendArrowKeyCommand(command: Int, modifier: Int?) {
+        let mod: Int = modifier ?? 0
+        frontend?.midend.sendKeypress(x: -1, y: -1, keypress: command | mod)
     }
 
     // MARK: Touch Finished
@@ -175,32 +213,26 @@ class PuzzleTapView: UIView {
         
         // Ignore multi-touch - this will always be navigation panning
         guard touches.count == 1 else {
-            // print("Ignoring multi-touch gesture")
             return
         }
-        
-        // print("Touch Ended! This was a \(isLongPress ? "Long" : "Short") press \(isDragging ? "with a drag " : "")")
-        
-        // TODO: some games will want to execute long presses immediately when the timer expires- it's going to depend on the game! We can add a gameConfig and hopefully find a clean_ish way to account for the weird differences.
-        
-        // In its simplest form, let's just send LEFT or RIGHT depending on if this was a short or long press
-        //let keysToFire = isLongPress ? frontend?.controlOption.longPress: frontend?.controlOption.shortPress
         
         // If this is a long press or if we're dragging, we've already sent the 'down' command - we just need to fire up.
         let command = getCorrectCommand()
         
-        // If we haven't started a long press or started dragging, we need to send the keydown command
-        if !isLongPress && !isDragging {
-            sendKeypress(command: command?.down, location: location)
+        // Double check this isn't an arrow key command - releasing tap should do nothing for arrow commands!
+        if command?.useArrowKeys == false {
+            // If we haven't started a long press or started dragging, we need to send the keydown command
+            if !isLongPress && !isDragging {
+                sendKeypress(command: command?.down, location: location)
+            }
+            
+            // And we always need to sent the keyup command
+            sendKeypress(command: command?.up, location: location)
+            
         }
-        
-        // And we always need to sent the keyup command
-        sendKeypress(command: command?.up, location: location)
         
         // Reset Values
         resetTouchInfo()
-        
-        //send(location, forEvent: .ended)
     }
     
     /**
@@ -229,8 +261,7 @@ class PuzzleTapView: UIView {
 
     // Triggered when the user's touch is interrupted, e.g. by a low battery alert.
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
-        let location = touch.location(in: self)
+        guard touches.first != nil else { return }
         resetTouchInfo()
     }
     
@@ -238,9 +269,6 @@ class PuzzleTapView: UIView {
         isLongPress = false
         isDragging = false
         longPressTimer.invalidate()
-    }
-    
-    func adjustDragPosition(x: Int, y: Int) {
-        //TODO, for Untangle?
+        arrowKeyTapLocation = .zero
     }
 }

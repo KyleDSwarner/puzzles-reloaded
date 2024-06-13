@@ -49,14 +49,14 @@ extension Puzzles {
             ControlConfig(label: String(localized: "Clockwise"), shortPress: PuzzleKeycodes.rightKeypress, longPress: PuzzleKeycodes.middleKeypress, imageName: "arrow.clockwise"), // Left/Right is reversed intentionally to make clockwise the 'default' option
             ControlConfig(label: String(localized: "Counter-Clockwise"), shortPress: PuzzleKeycodes.leftKeypress, longPress: PuzzleKeycodes.middleKeypress, imageName: "arrow.counterclockwise"),
             ControlConfig(label: String(localized: "Lock"), shortPress: PuzzleKeycodes.middleKeypress, longPress: .none, imageName: "lock"),
-            ControlConfig(label: String(localized: "Center"), shortPress: PuzzleKeycodes.leftKeypress, longPress: .none),  // Move centre: Ctrl + arrow keys
-            ControlConfig(label: String(localized: "Shift"), shortPress: PuzzleKeycodes.leftKeypress, displayCondition: { gameId in // Shift grid: Shift + arrow keys
+            ControlConfig(label: String(localized: "Center"), shortPress: MouseClick(usesArrowKeys: true, withModifier: PuzzleKeycodes.CtrlKey), longPress: .none),  // Move centre: Ctrl + arrow keys
+            ControlConfig(label: String(localized: "Shift"), shortPress: MouseClick(usesArrowKeys: true, withModifier: PuzzleKeycodes.ShiftKey, reverseArrowDirections: true), displayCondition: { gameId in // Shift grid: Shift + arrow keys
                 // Variaions of Net have a 'wrapping' mode, indicated by a leading "5x5w:" in the game ID. We're looking for the 'w:'
                 return gameId.contains("w:")
             })
         ],
-        buttonControls: [
-            ControlConfig(label: "Jumble", command: ButtonPress(for: "j")),
+        overflowMenuControls: [
+            ControlConfig(label: "Shuffle Blocks", command: ButtonPress(for: "j")),
         ]
 
     )
@@ -90,8 +90,8 @@ extension Puzzles {
         imageName: "pattern",
         internalGame: pattern,
         touchControls: [ // TODO: We'll need special handling for these controls in Net.
-            ControlConfig(label: "Black Boxes", shortPress: PuzzleKeycodes.leftKeypress, longPress: PuzzleKeycodes.rightKeypress, imageName: "square.fill", imageColor: .black),
-            ControlConfig(label: "White Boxes", shortPress: PuzzleKeycodes.rightKeypress, longPress: PuzzleKeycodes.leftKeypress, imageName: "square.fill", imageColor: .white),
+            ControlConfig(label: "Black", shortPress: PuzzleKeycodes.leftKeypress, longPress: PuzzleKeycodes.rightKeypress),
+            ControlConfig(label: "White", shortPress: PuzzleKeycodes.rightKeypress, longPress: PuzzleKeycodes.leftKeypress),
             ControlConfig(label: "Clear", shortPress: PuzzleKeycodes.middleKeypress, longPress: .none, imageName: "square.slash"),
         ]
     )
@@ -199,8 +199,8 @@ extension Puzzles {
         imageName: "solo",
         internalGame: solo,
         displayClearButtonInToolbar: true,
-        buttonControls: [
-            // ControlConfig(label: "Clear", command: PuzzleKeycodes.ClearButton, imageName: "square.slash"),
+        overflowMenuControls: [
+            ControlConfig.MarksControl
         ]
     ).numericButtonsBuilder({ gameId in
         //print("Solo: \(gameId)")
@@ -240,7 +240,7 @@ extension Puzzles {
         internalGame: tents,
 
         touchControls: [
-            ControlConfig(label: "Add and Remove Tents", shortPress: PuzzleKeycodes.leftKeypress, longPress: PuzzleKeycodes.rightKeypress, imageName: "square.fill.black", isSystemImage: false, imageColor: .black),
+            ControlConfig(label: "Add and Remove Tents", shortPress: PuzzleKeycodes.leftKeypress, longPress: PuzzleKeycodes.rightKeypress, imageName: "square", imageColor: .black),
             ControlConfig(label: "Clear", shortPress: PuzzleKeycodes.middleKeypress, longPress: .none, imageName: "square.slash")
         ]
     )
@@ -261,7 +261,7 @@ extension Puzzles {
         ],
         
         overflowMenuControls: [
-            ControlConfig(label: String(localized: "Marks"), command: PuzzleKeycodes.MarksButton, imageName: "square.and.pencil")
+            ControlConfig.MarksControl
         ]
     ).numericButtonsBuilder({ gameId in
         // Sample game ID: 5:2/1/2/3/3/2/2/3/1/2/2/2/5/1/3/3/2/1/3/2
@@ -323,7 +323,7 @@ extension Puzzles {
         internalGame: unequal,
         
         overflowMenuControls: [
-            ControlConfig(label: String(localized: "Marks"), command: PuzzleKeycodes.MarksButton, imageName: "square.and.pencil"),
+            ControlConfig.MarksControl,
             ControlConfig(label: String(localized: "Hints"), command: ButtonPress(for: "H"), imageName: "plus.square")
         ]
     ).numericButtonsBuilder({gameId in
@@ -362,6 +362,7 @@ extension Puzzles {
         controlInfo: String(localized: "untangle_controls", table: "Puzzles", comment: "Description of controls for the game 'untangle'"),
         imageName: "untangle",
         internalGame: untangle,
-        allowSingleFingerPanning: false
+        allowSingleFingerPanning: false,
+        touchControls: [ControlConfig(label: "", shortPress: PuzzleKeycodes.leftKeypress, longPress: .none)]
     )
 }

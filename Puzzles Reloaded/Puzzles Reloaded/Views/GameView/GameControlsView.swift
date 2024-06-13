@@ -15,18 +15,6 @@ struct ButtonLabel: View {
     let control: ControlConfig
     var largeButtons: Bool = false
     
-    var labelStyle: any LabelStyle {
-        if control.imageName.isEmpty {
-            return TitleOnlyLabelStyle.titleOnly
-        }
-        else if control.displayTextWithIcon {
-            return TitleAndIconLabelStyle.titleAndIcon
-        }
-        return IconOnlyLabelStyle.iconOnly
-                    
-    
-    }
-    
     var body: some View {
         if control.imageName.isEmpty {
             Text(control.label)

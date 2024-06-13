@@ -19,15 +19,13 @@ import Foundation
 
 @_cdecl("frontend_default_colour")
 func frontend_default_colour(frontend: OpaquePointer, output: UnsafeMutablePointer<Float>) {
-    print("Default Color")
     let defaultColor = Float(0.8)
     
     //Provide the RGB values of the default color background.
-    // TODO: How can we support dark mode here? All of the colors will need to change.... :/
+    // TODO: In the future, I'd like these colors to be changed based on light/dark mode. This will require a full replacement of the colors array for all puzzles, so this is pending as a future enhancement. :/
     output[0] = defaultColor
     output[1] = defaultColor
     output[2] = defaultColor
-    // output[0] = output[1] = output[2] = 0.8f; ???
 }
 
 @_cdecl("get_random_seed")
@@ -43,24 +41,6 @@ func get_random_seed(randseed: UnsafeMutablePointer<UnsafeMutableRawPointer?>, r
     
     randseed.pointee = UnsafeMutableRawPointer(pointer)
     randSeedSize.pointee = Int32(sizeOfSeed)
-    
-    /*
-    var anotherPointer = UnsafeMutablePointer<UnsafeMutableRawPointer?>.allocate(capacity: 1)
-    anotherPointer.pointee = UnsafeMutableRawPointer(pointer)
-    
-    
-    var sizePointer = UnsafeMutablePointer<Int32>.allocate(capacity: 1)
-    sizePointer.pointee = Int32(sizeOfSeed)
-    print(pointer)
-    print(sizeOfSeed)
-    */
-    
-    /*
-    time_t *tp = snew(time_t);
-    time(tp);
-    *randseed = (void *)tp;
-    *randseedsize = sizeof(time_t);
-     */
 }
 
 @_cdecl("activate_timer")
@@ -77,6 +57,7 @@ func deactivate_timer(frontend: OpaquePointer) {
 
 @_cdecl("fatal")
 func fatal(message: UnsafePointer<CChar>) {
-    print("Un Oh Something Fatal Happened :(")
-    //TODO get the message & print to console.
+    let message = String(cString: message)
+    print("--- Fatal Error ---")
+    fatalError(message)
 }

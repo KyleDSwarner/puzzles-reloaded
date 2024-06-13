@@ -83,7 +83,7 @@ struct GameView: View {
                                 .padding(5)
                                 .overlay {
                                     // MARK: Puzzle Interactions & Gestures
-                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $anchor, puzzleFrontend: frontend, limitToBounds: false, allowSingleFingerPanning: game.game.allowSingleFingerPanning, puzzleTilesize: frontend.puzzleTilesize, adjustTapsToTilesize: true)
+                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $anchor, puzzleFrontend: frontend, allowSingleFingerPanning: game.game.allowSingleFingerPanning)
                                 }
                                 .transformEffect(puzzleImageTransformation)
                                 // Instead of using transformEffect, this setup emulates the translations that are initially applied by our CGAFfineTransform
@@ -108,20 +108,6 @@ struct GameView: View {
                 }
                 
             }
-            //.padding(20) Padding boundaries
-            /*
-            HStack {
-                if let newdebug = frontend.imageManager?.debugImage {
-                    Image(newdebug, scale: 1.0, label: Text("Puzzle View"))
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100, height: 100)
-                        
-                }
-
-            }
-             */
-            
             
             Spacer()
             
@@ -233,8 +219,10 @@ struct GameView: View {
             // MARK: Bottom Toolbar
             ToolbarItemGroup(placement: .bottomBar) {
                 Menu("Open Game Menu", systemImage: "menucard") {
-                    Button("New Game") {
+                    Button {
                         newGame()
+                    } label: {
+                        Label("New Game", systemImage: "plus.circle")
                     }
                     Button() {
                         frontend.midend.restartGame()
@@ -262,7 +250,12 @@ struct GameView: View {
                                 Button {
                                     frontend.fireButton(control.buttonCommand)
                                 } label: {
-                                    Label(control.label, systemImage: control.imageName)
+                                    if !control.imageName.isEmpty {
+                                        Label(control.label, systemImage: control.imageName)
+                                    } else {
+                                        Text(control.label)
+                                    }
+                                    
                                 }
                             }
                             

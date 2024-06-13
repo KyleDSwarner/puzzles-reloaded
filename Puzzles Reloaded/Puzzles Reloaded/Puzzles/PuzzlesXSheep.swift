@@ -33,7 +33,7 @@ extension Puzzles {
         imageName: "abcd",
         internalGame: abcd,
         overflowMenuControls: [
-            ControlConfig(label: String(localized: "Marks"), command: PuzzleKeycodes.MarksButton, imageName: "square.and.pencil")
+            ControlConfig.MarksControl
         ]
     )
     .numericButtonsBuilder({ gameId in
