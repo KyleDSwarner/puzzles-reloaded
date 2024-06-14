@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "PuzzlesReloaded-Icon.png",
+      "filename" : "AppIcon-nontransparent.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
