@@ -8,12 +8,6 @@
 
 import Foundation
 
-struct PuzzleConstants {
-    
-    static let puzzleSize = 1024 // Given to the puzzle midend & our CGContext to build the image. This needs to be consistent across several areas in the app!
-    
-}
-
 struct PuzzleUtils {
     
     static func stringToPointer(_ theString: String) -> UnsafeMutablePointer<CChar> {

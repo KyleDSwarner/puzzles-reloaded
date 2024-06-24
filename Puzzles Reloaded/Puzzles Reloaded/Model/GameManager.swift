@@ -71,7 +71,7 @@ import SwiftData
     
     func filterGameList(category: GameCategory, showExperimentalGames: Bool) -> [Game] {
         gameModel.filter { game in
-            game.settings.category == category && (showExperimentalGames || !game.game.isExperimental)
+            game.settings.category == category && (showExperimentalGames || !game.gameConfig.isExperimental)
         }
     }
     

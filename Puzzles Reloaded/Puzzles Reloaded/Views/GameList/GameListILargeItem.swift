@@ -13,7 +13,7 @@ struct GameListLargeItem: View {
     var game: Game
     
     var gameConfig: GameConfig {
-        game.game
+        game.gameConfig
     }
     
     var gameSettings: GameUserSettings {

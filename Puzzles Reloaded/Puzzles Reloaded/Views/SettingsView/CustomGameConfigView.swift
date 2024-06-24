@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CustomGameConfigView: View {
     
-    @Binding var gameMenu: [CustomMenuItem2]
+    @Binding var gameMenu: [CustomMenuItem]
     
     var body: some View {
         List($gameMenu, id:\.index) { menuItem in

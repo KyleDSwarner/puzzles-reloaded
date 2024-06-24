@@ -13,9 +13,7 @@ struct SettingsView: View {
     
     // The settings page doesn't use the UserPreferences shared class to avoid an odd bug where the settings buttons didn't work correctly on first press
     @AppStorage(AppSettings.key) var appSettings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
-    @State private var gameSettingsMenu: [CustomMenuItem2] = []
-    
-    private let settingExclusions: [String] = ["Keyboard shortcuts without Ctrl"]
+    @State private var gameSettingsMenu: [CustomMenuItem] = []
     
     // Game, to be provided when the settings menu is selected from within a game
     var game: GameConfig? = nil
@@ -111,8 +109,9 @@ struct SettingsView: View {
                     
                     self.gameSettingsMenu = gameParams?.menu ?? []
                     
+                    // Filter out puzzle settings that don't make sense for mobile devices
                     self.gameSettingsMenu = gameSettingsMenu.filter { setting in
-                        !settingExclusions.contains(setting.title)
+                        !PuzzleConstants.settingExclusions.contains(setting.title)
                     }
                 }
             }

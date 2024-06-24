@@ -328,12 +328,17 @@ extension Puzzles {
         ]
     ).numericButtonsBuilder({gameId in
         // Game ID: 4:0,0,0,0D,0,0,0,0,2D,0D,0,0,0,0,0,3U,
+        // Adjancent Game ID: 6a:0,0RD,0DL,0D,0D,0D,1,0UR,0UL,0U,0U,...
         
         guard !gameId.isEmpty else {
             return []
         }
         
-        let numButtons = Int(gameId.split(separator: ":")[0])
+        let numButtonsRegex = /^\d/
+        let digitMatch = gameId.firstMatch(of: numButtonsRegex)
+        
+        let numButtons = Int(digitMatch?.output ?? "0")
+        
         return Puzzles.createButtonControls(numButtons ?? 0)
     })
     

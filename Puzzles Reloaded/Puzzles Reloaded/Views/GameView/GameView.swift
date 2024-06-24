@@ -32,21 +32,21 @@ struct GameView: View {
     var game: Game
     
     var touchControls: [ControlConfig] {
-        game.game.touchControls
+        game.gameConfig.touchControls
     }
     
     var overflowMenuControls: [ControlConfig] {
-        game.game.overflowMenuControls.filter { control in
+        game.gameConfig.overflowMenuControls.filter { control in
             control.displayCondition(frontend.gameId)
         }
     }
     
     init(game: Game) {
         self.game = game
-        frontend.midend.setGame(game.game.internalGame) //lol
+        frontend.midend.setGame(game.gameConfig.internalGame) //lol
         
-        if(!game.game.touchControls.isEmpty) {
-            frontend.controlOption = game.game.touchControls.first!
+        if(!game.gameConfig.touchControls.isEmpty) {
+            frontend.controlOption = game.gameConfig.touchControls.first!
         }
     }
     
@@ -83,7 +83,7 @@ struct GameView: View {
                                 .padding(5)
                                 .overlay {
                                     // MARK: Puzzle Interactions & Gestures
-                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $tapAnchor, puzzleFrontend: frontend, allowSingleFingerPanning: game.game.allowSingleFingerPanning)
+                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $tapAnchor, puzzleFrontend: frontend, allowSingleFingerPanning: game.gameConfig.allowSingleFingerPanning)
                                 }
                                 .transformEffect(puzzleImageTransformation)
                                 // Instead of using transformEffect, this setup emulates the translations that are initially applied by our CGAFfineTransform
@@ -162,7 +162,7 @@ struct GameView: View {
             
             // MARK: Game Controls View
             HStack(alignment: .center) {
-                GameControlsView(controlOption: $frontend.controlOption, touchControls: touchControls, buttonControls: game.game.buttonControls, numericButtonsFunction: game.game.numericButtonsBuilder, gameId: frontend.gameId, buttonPressFunction: emitButtonPress)
+                GameControlsView(controlOption: $frontend.controlOption, touchControls: touchControls, buttonControls: game.gameConfig.buttonControls, numericButtonsFunction: game.gameConfig.numericButtonsBuilder, gameId: frontend.gameId, buttonPressFunction: emitButtonPress)
             }
             .padding(.bottom, 10)
 
@@ -172,7 +172,7 @@ struct GameView: View {
             //.padding(.leading, 5)
 
         }
-        .navigationTitle(game.game.name)
+        .navigationTitle(game.gameConfig.name)
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         //.toolbarBackground(Color(UIColor.red), for: .navigationBar)
@@ -183,14 +183,14 @@ struct GameView: View {
         //.toolbarBackground(.visible, for: .bottomBar)
         // MARK: Help Page Sheet
         .sheet(isPresented: $helpPageDisplayed) {
-            GameHelpView(game: game.game)
+            GameHelpView(game: game.gameConfig)
         }
         // MARK: Settings Page Sheet
         .sheet(isPresented: $settingsPageDisplayed) {
-            SettingsView(game: game.game, frontend: frontend)
+            SettingsView(game: game.gameConfig, frontend: frontend)
         }
         .sheet(isPresented: $customGameSettingsDisplayed) {
-            GameCustomSettingsView(gameTitle: game.game.name, frontend: frontend, newGameCallback: newGame)
+            GameCustomSettingsView(gameTitle: game.gameConfig.name, frontend: frontend, newGameCallback: newGame)
                 .presentationDetents([.medium, .large])
         }
         
@@ -287,7 +287,7 @@ struct GameView: View {
                 
                 Spacer()
                 
-                if game.game.displayClearButtonInToolbar {
+                if game.gameConfig.displayClearButtonInToolbar {
                     Button() {
                         frontend.fireButton(PuzzleKeycodes.ClearButton)
                     } label: {

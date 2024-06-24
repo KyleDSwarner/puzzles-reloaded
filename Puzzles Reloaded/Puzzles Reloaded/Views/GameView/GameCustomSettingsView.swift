@@ -14,15 +14,13 @@ struct GameCustomSettingsView: View {
     @State private var presentingAlertMessage = false
     @State private var errorText = ""
     
-    var gameTitle: String = "Test"
-    
-    //@State var gameMenu: [CustomMenuItem] = []
+    var gameTitle: String = ""
     
     var frontend: Frontend
     var newGameCallback: () -> Void
     
     private var gameConfig: CustomConfigMenu?
-    @State private var gameMenu: [CustomMenuItem2] = []
+    @State private var gameMenu: [CustomMenuItem] = []
     
     init(gameTitle: String, frontend: Frontend, newGameCallback: @escaping () -> Void) {
         self.gameTitle = gameTitle

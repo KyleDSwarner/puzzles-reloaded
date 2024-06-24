@@ -8,23 +8,6 @@
 
 import Foundation
 
-class SaveContext {
-    var position: Int = 0 // Since file reads occur in chunks, this keeps track of what has already been read.
-    var prefData: NSMutableString = ""
-    
-    func saveToString() -> String? {
-        return prefData as String
-    }
-    
-    init() {
-        self.prefData = ""
-    }
-    
-    init(savegame: String?) {
-        self.prefData = NSMutableString(string: savegame ?? "")
-    }
-}
-
 func midend_getPrefContext(_ context: UnsafeMutableRawPointer?) -> SaveContext {
     let pointer = context?.bindMemory(to: SaveContext.self, capacity: 1)
     return pointer!.pointee // Note: Force unwrapping the value here. Frontend _shouldn't_ ever be null, but there's really not much we can do if it isn't! TODO: Add some messaging to trace if/when this situation occurs.
@@ -86,14 +69,16 @@ func midend_readFile(context: UnsafeMutableRawPointer?, buffer: UnsafeMutableRaw
      */
 }
 
+/**
+ Extension methods for saving & loading user preferences
+ */
 extension Midend {
     
     /**
      Saves user-configured game settings to a string
      */
     func saveUserPrefs() -> String? {
-        let newSave = SaveContext() // Test...
-        //midend_save_prefs(midendPointer, midend_writeFile, newSave)
+        let newSave = SaveContext()
         
         withUnsafePointer(to: newSave) { savePointer in
             midend_save_prefs(midendPointer, midend_writeFile, UnsafeMutableRawPointer(mutating: savePointer))
@@ -121,7 +106,12 @@ extension Midend {
             
         }
     }
-    
+}
+
+/**
+ Extension methods for saving & loading saved games
+ */
+extension Midend {
     func saveInProgressGame() -> SaveContext? {
         print("Attempting to Save Game")
         // Verify we should save a game - if we're at the beginning or end of a game, we shouldn't!
@@ -132,8 +122,7 @@ extension Midend {
             return nil
         }
         
-        // We shouldn't actually use this object, I'm guessing. doot doot doot
-        var newSave = SaveContext() // Test...
+        var newSave = SaveContext()
         
         withUnsafePointer(to: &newSave) { savePointer in
             midend_serialise(midendPointer, midend_writeFile, UnsafeMutableRawPointer(mutating: savePointer))

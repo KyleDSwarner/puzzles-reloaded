@@ -9,30 +9,6 @@
 import Foundation
 import CoreGraphics
 
-class PresetMenuItem: Identifiable {
-    let id: Int
-    let title: String
-    
-    //These items are mutuall exclusive: There will always be one or the other.
-    var params: OpaquePointer? // End of the chain - this indicates parameters for the game.
-    var submenu: [PresetMenuItem]? // Nested Menus!
-    
-    init(id: Int, title: String) {
-        self.id = id
-        self.title = title
-        self.params = nil
-        self.submenu = nil
-    }
-    
-    func addNestedMenu(_ submenu: [PresetMenuItem]) {
-        self.submenu = submenu
-    }
-    
-    func addParams(_ params: OpaquePointer) {
-        self.params = params
-    }
-}
-
 /**
  Class represents the functions on the 'midend', the object that connects the puzzle backend to our code here.
  The actual midend object is provided as an `OpaquePointer` and the midend methods are provided globally by the puzzle code.

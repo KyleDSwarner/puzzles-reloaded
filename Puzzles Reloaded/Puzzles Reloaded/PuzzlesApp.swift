@@ -17,7 +17,6 @@ struct PuzzlesApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             GameUserSettings.self
-            //AppSettings.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

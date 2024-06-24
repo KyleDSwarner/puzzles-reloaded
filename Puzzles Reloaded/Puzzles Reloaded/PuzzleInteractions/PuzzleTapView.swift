@@ -220,7 +220,7 @@ class PuzzleTapView: UIView {
         let command = getCorrectCommand()
         
         // Double check this isn't an arrow key command - releasing tap should do nothing for arrow commands!
-        if command?.useArrowKeys == false {
+        if command != nil && command?.useArrowKeys == false {
             // If we haven't started a long press or started dragging, we need to send the keydown command
             if !isLongPress && !isDragging {
                 sendKeypress(command: command?.down, location: location)
@@ -228,6 +228,8 @@ class PuzzleTapView: UIView {
             
             // And we always need to sent the keyup command
             sendKeypress(command: command?.up, location: location)
+            
+            frontend?.movesTakenInGame = true // This boolean lets us better know when we should/should not save the user's game
             
         }
         

@@ -17,7 +17,6 @@ struct PuzzleConfigTypes {
 
 extension Midend {
     
-    
     public func getCurrentPreset() -> Int {
         return Int(midend_which_preset(midendPointer))
     }
@@ -78,7 +77,7 @@ extension Midend {
         return getPuzzleConfig(for: PuzzleConfigTypes.userPreferences)
     }
     
-    public func setGameUserSettings(choices: [CustomMenuItem2]) -> String? {
+    public func setGameUserSettings(choices: [CustomMenuItem]) -> String? {
         return setPuzzleConfig(choices: choices, for: PuzzleConfigTypes.userPreferences)
     }
     
@@ -93,7 +92,7 @@ extension Midend {
         return getPuzzleConfig(for: PuzzleConfigTypes.gameParameters)
     }
     
-    public func setGameCustomParameters(choices: [CustomMenuItem2]) -> String? {
+    public func setGameCustomParameters(choices: [CustomMenuItem]) -> String? {
         return setPuzzleConfig(choices: choices, for: PuzzleConfigTypes.gameParameters)
     }
     
@@ -108,6 +107,9 @@ extension Midend {
     }
     
     
+    /**
+     Retuns the options that can be provided to the user for custom game configuration
+     */
     public func getPuzzleConfig(for configType: Int) -> CustomConfigMenu? {
                 
         let config = getCustomParamsConfig(for: configType)
@@ -203,8 +205,8 @@ extension Midend {
         
     }
     
-    private func processChoiceMenu(_ configItem: config_item, title: String, index: Int) -> CustomMenuItem2 {
-        var choices = [ChoiceMenuOptionS]()
+    private func processChoiceMenu(_ configItem: config_item, title: String, index: Int) -> CustomMenuItem {
+        var choices = [ChoiceMenuOption]()
         
         // Choice Names is a non-null delimited string. For example, :Foo:Bar:Baz gives three options.
         let choicesString = String(cString: configItem.u.choices.choicenames)
@@ -212,15 +214,15 @@ extension Midend {
         
         for i in 0..<splitChoices.count {
             //let choice: ChoiceMenuOption = (id: i, name: String(splitChoices[i]))
-            let choice = ChoiceMenuOptionS(id: i, name: String(splitChoices[i]))
+            let choice = ChoiceMenuOption(id: i, name: String(splitChoices[i]))
             choices.append(choice)
         }
         
         //return ChoiceMenuItem(title: String(cString: configItem.name), choices: choices, selection: Int(configItem.u.choices.selected), index: index)
-        return CustomMenuItem2(index: index, type: .CHOICE, title: title, choiceIndex: Int(configItem.u.choices.selected), choices: choices)
+        return CustomMenuItem(index: index, type: .CHOICE, title: title, choiceIndex: Int(configItem.u.choices.selected), choices: choices)
     }
     
-    private func setPuzzleConfig(choices: [CustomMenuItem2], for configType: Int) -> String? {
+    private func setPuzzleConfig(choices: [CustomMenuItem], for configType: Int) -> String? {
         
         let configObject = getCustomParamsConfig(for: configType)
         
@@ -273,66 +275,5 @@ extension Midend {
         }
     }
     
-}
-
-enum CustomMenuType {
-    case INT, STRING, BOOLEAN, CHOICE
-}
-
-struct CustomMenuItem2 {
-    var index: Int
-    var type: CustomMenuType
-    var title: String
-    
-    var intValue : Int
-    
-    var stringValue: String
-    
-    var boolValue: Bool
-    
-    var choiceIndex: Int
-    var choices: [ChoiceMenuOptionS]
-    
-    init(index: Int, type: CustomMenuType, title: String, intValue: Int = -1, stringValue: String = "", boolValue: Bool = false, choiceIndex: Int = -1, choices: [ChoiceMenuOptionS] = []) {
-        self.index = index
-        self.type = type
-        self.title = title
-        self.intValue = intValue
-        self.stringValue = stringValue
-        self.boolValue = boolValue
-        self.choiceIndex = choiceIndex
-        self.choices = choices
-    }
-}
-
-class CustomConfigMenu {
-    var configItem: config_item? // The original config item that must be submitted back to the midend.
-    var menu: [CustomMenuItem2] // A list of cleaned up & processed items for display by swift. Each
-    
-    init(configItem: config_item?, menu: [CustomMenuItem2] = []) {
-        self.configItem = configItem
-        self.menu = menu
-    }
-    
-    func addMenuItem(_ newItem: CustomMenuItem2) {
-        menu.append(newItem)
-    }
-    
-    func addIntMenuItem(index: Int, title: String, currentValue: Int) {
-        menu.append(CustomMenuItem2(index: index, type: .INT, title: title, intValue: currentValue))
-    }
-    
-    func addStringMenuItem(index: Int, title: String, currentValue: String) {
-        menu.append(CustomMenuItem2(index: index, type: .STRING, title: title, stringValue: currentValue))
-    }
-    
-    func addBooleanMenuItem(index: Int, title: String, currentValue: Bool) {
-        menu.append(CustomMenuItem2(index: index, type: .BOOLEAN, title: title, boolValue: currentValue))
-    }
-}
-
-struct ChoiceMenuOptionS {
-    let id: Int
-    let name: String
 }
 

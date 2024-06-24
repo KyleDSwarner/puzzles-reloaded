@@ -19,7 +19,7 @@ struct GameListGridItem: View {
             ZStack {
                 //RoundedRectangle(cornerRadius: 5, style: .continuous)
                 //    .fill(Color.primary)
-                Image("\(game.game.imageName)")
+                Image("\(game.gameConfig.imageName)")
                     .resizable()
                     
                 //.padding(2)

@@ -50,7 +50,10 @@ extension Puzzles {
         instructions: String(localized: "bridges_instructions", table: "Puzzles"),
         controlInfo: String(localized: "bridges_controls", table: "Puzzles"),
         imageName: "bridges",
-        internalGame: bridges
+        internalGame: bridges,
+        overflowMenuControls: [
+            ControlConfig(label: "Mark Neighbors", command: ButtonPress(for: "G"))
+        ]
     )
     
     // MARK: Cube

@@ -18,6 +18,7 @@ class Frontend {
     var midend: Midend // Reference to the midend
     var colors: [CGColor] = [] //typedef float rgb[3]; ?
     var gameHasStatusbar = false
+    var movesTakenInGame = false
     var numColors: Int = 0
     var timer = Timer()
     
@@ -37,7 +38,7 @@ class Frontend {
     
     var controlOption: ControlConfig = .defaultConfig
     
-    var currentPreset: Int = -1// Indicates the ID of the preset selected.
+    var currentPreset: Int = -1 // Indicates the ID of the preset selected.
     var gamePresets: [PresetMenuItem] = []
     
     /** Split up the presets menu to prevent the menus from getting too large. If there's more than 10 items, split down the first 8 & overflow the rest.*/
@@ -57,7 +58,6 @@ class Frontend {
     }
     
     init() {
-        self.imageManager = nil // Can we get rid of this? Can't create the image processor until we know the height, otherwise the bitmap starts getting weird.
         self.midend = Midend()
     }
     
@@ -72,14 +72,16 @@ class Frontend {
         
         let dimensions = midend.initGame(savegame: saveGame, preferences: preferences) {
             //TODO: Completion Handler - Stop timers for long-generating games.
-        } // Initialize the game and find the correct image boundaries
-        self.imageManager = PuzzleImageManager(width: dimensions.x, height: dimensions.y) // Adding 10 to y dimensions to even out items that line riiiight up to the top of the puzzle
+        }
+        
+        // Initialize the game and find the correct image boundaries
+        self.imageManager = PuzzleImageManager(width: dimensions.x, height: dimensions.y)
+        
         midend.drawPuzzle() // Actually draw the puzzle, once the image manager knows its size & is ready to go.
         self.puzzleTilesize = midend.getTilesize()
         
-        //print("777 FORCE FULL REFRESH 777")
-        //self.imageManager?.forceRefresh()
         gamePresets = midend.getGamePresets()
+        self.movesTakenInGame = saveGame != nil // Assume moves have already been taken previously IF there's a savegame, otherewise set to false.
         updateFrontendFlags()
         
     }
@@ -113,22 +115,17 @@ class Frontend {
         self.gameId = midend.getGameId()
         self.currentPreset = midend.getCurrentPreset()
         self.canSolve = midend.isPuzzleAutoSolvable()
-        
-        //withAnimation(.easeInOut(duration: 2.0)) {
-        self.puzzleStatus = midend.getPuzzleStatus()
-        
-        // !!!
-        //midend.saveUserPrefs()
-        //let save = midend.saveInProgressGame()
-        //midend.readSave(save)
-        //}
-        
     }
     
     func saveGame() -> String? {
+        
+        guard movesTakenInGame == true else {
+            print("no moves taken in current game - not saving game")
+            return nil
+        }
+        
         let save = midend.saveInProgressGame()
         return save?.saveToString() ?? nil
-        //midend.readSave(save)
     }
     
     //
@@ -141,6 +138,7 @@ class Frontend {
         
         if let unwrappedButton = button {
             self.midend.sendKeypress(x: -1, y: -1, keypress: unwrappedButton.keycode)
+            self.movesTakenInGame = true
         }
         else {
             print("Err: No button command provided on a button configured to emit a command.")
