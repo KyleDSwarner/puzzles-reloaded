@@ -20,7 +20,12 @@ class Frontend {
     var gameHasStatusbar = false
     var movesTakenInGame = false
     var numColors: Int = 0
-    var timer = Timer()
+    var animationTimer = Timer()
+    
+    var gameGenerationTimer = Timer()
+    var displayLoadingScreen = false
+    var currentGameInvalidated = false
+    var gameGenerationTask: Task<(), Never>?
     
     var game: game? // Reference to the actual game in the puzzle collection
     
@@ -61,29 +66,50 @@ class Frontend {
         self.midend = Midend()
     }
     
+    deinit {
+        gameGenerationTask?.cancel()
+    }
+    
     func setGame(_ thegame: game) {
         self.game = thegame
     }
     
-    func beginGame(withSaveGame saveGame: String? = nil, withPreferences preferences: String? = nil) {
-        // This isn't done in the initializer because I need a reference to this object as an inout (&frontend) that is passed in from the view. I can't pass it here due to immutability concerns.
-        // If I can refactor this down the road, we can clean this code up a bit!
-        
-        
-        let dimensions = midend.initGame(savegame: saveGame, preferences: preferences) {
-            //TODO: Completion Handler - Stop timers for long-generating games.
+    @MainActor func beginGame(withSaveGame saveGame: String? = nil, withPreferences preferences: String? = nil) async {
+       
+        self.gameGenerationTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+            withAnimation {
+                self.displayLoadingScreen = true
+                self.currentGameInvalidated = true
+            }
         }
         
-        // Initialize the game and find the correct image boundaries
-        self.imageManager = PuzzleImageManager(width: dimensions.x, height: dimensions.y)
+        gameGenerationTask = Task {
+            let dimensions = await midend.initGame(savegame: saveGame, preferences: preferences)
+            
+            // Stop timer here.
+            self.gameGenerationTimer.invalidate()
+            self.displayLoadingScreen = false
+            self.currentGameInvalidated = false
+            
+            // Initialize the game and find the correct image boundaries
+            self.imageManager = PuzzleImageManager(width: dimensions.x, height: dimensions.y)
+            
+            midend.drawPuzzle() // Actually draw the puzzle, once the image manager knows its size & is ready to go.
+            self.puzzleTilesize = midend.getTilesize()
+            
+            gamePresets = midend.getGamePresets()
+            self.movesTakenInGame = saveGame != nil // Assume moves have already been taken previously IF there's a savegame, otherewise set to false.
+            updateFrontendFlags()
+        }
+    }
+    
+    func cancelNewGame() {
+        self.displayLoadingScreen = false
         
-        midend.drawPuzzle() // Actually draw the puzzle, once the image manager knows its size & is ready to go.
-        self.puzzleTilesize = midend.getTilesize()
+        // Cancel the current game task to free up cycles
+        gameGenerationTask?.cancel()
         
-        gamePresets = midend.getGamePresets()
-        self.movesTakenInGame = saveGame != nil // Assume moves have already been taken previously IF there's a savegame, otherewise set to false.
-        updateFrontendFlags()
-        
+        self.gameGenerationTimer.invalidate()
     }
     
     func refreshImage() {
@@ -93,11 +119,21 @@ class Frontend {
     }
     
     func undoMove() {
+        // Ensure the image hasn't been disabled (during loading states)
+        guard self.currentGameInvalidated == false else {
+            return
+        }
+        
         midend.undo()
         updateFrontendFlags()
     }
     
     func redoMove() {
+        // Ensure the image hasn't been disabled (during loading states)
+        guard self.currentGameInvalidated == false else {
+            return
+        }
+        
         midend.redo()
         updateFrontendFlags()
     }
@@ -129,12 +165,17 @@ class Frontend {
     }
     
     //
-    func setNewGamePreset(_ parameters: OpaquePointer?) {
+    func setNewGamePreset(_ parameters: OpaquePointer?) async {
         midend.setGameParams(params: parameters)
-        self.beginGame() // Immediately start a new game based on the preset parameters provided.
+        await self.beginGame() // Immediately start a new game based on the preset parameters provided.
     }
     
     func fireButton(_ button: ButtonPress?) {
+        
+        // Ensure the image hasn't been disabled (during loading states)
+        guard self.currentGameInvalidated == false else {
+            return
+        }
         
         if let unwrappedButton = button {
             self.midend.sendKeypress(x: -1, y: -1, keypress: unwrappedButton.keycode)
@@ -162,11 +203,11 @@ enum PuzzleStatus: Int {
 */
 extension Frontend {
     func startTimer() {
-        if(timer.isValid) {
-            timer.invalidate()
+        if(animationTimer.isValid) {
+            animationTimer.invalidate()
         }
         
-        self.timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
+        self.animationTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
             //print("Timer First WOO")
             self.midend.triggerTimer()
         }
@@ -175,7 +216,7 @@ extension Frontend {
     
     func stopTimer() {
         //print("Stopping Timer beooooooo")
-        timer.invalidate()
+        animationTimer.invalidate()
     }
 }
 

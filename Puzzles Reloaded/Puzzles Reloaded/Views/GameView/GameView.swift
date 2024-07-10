@@ -26,6 +26,7 @@ struct GameView: View {
     @State private var translation: CGSize = .zero
     
     @State private var frontend = Frontend()
+    @State private var effectsManager = EffectsManager()
     
     @State var puzzleImageTransformation: CGAffineTransform = .identity
     
@@ -61,12 +62,15 @@ struct GameView: View {
     }
     
     func emitButtonPress(_ button: ButtonPress?) {
+        effectsManager.triggerShortPressEffects()
         frontend.fireButton(button)
     }
     
     func newGame() {
-        frontend.beginGame() // TODO: Make this async to handle long-generating games?
-        self.puzzleImageTransformation = .identity
+        Task {
+            await frontend.beginGame() // TODO: Make this async to handle long-generating games?
+            self.puzzleImageTransformation = .identity
+        }
     }
     
     var body: some View {
@@ -100,11 +104,38 @@ struct GameView: View {
                                         }
                                     }
                                 }
+                                .blur(radius: frontend.currentGameInvalidated ? 5 : 0)
                                 .frame(width: min(geometry.size.width, geometry.size.height, 500)) // 500px set as maximum default size: This limits puzzles from getting too large on ipads
                                 
                         }
+                        
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height) // take up all available space to center puzzle on the screen
+                    
+                    if frontend.displayLoadingScreen {
+                        VStack {
+                            VStack {
+                                
+                                Text("Generating Puzzle").font(.headline)
+                                Text("This may take a long time for complex puzzles").font(.subheadline)
+                                ProgressView()
+                                Button("Cancel") {
+                                    
+                                    cancelGameGenerationAndRegernateMidend()
+                                    
+                                    // On the assumption that long-running generation should only ever occur when the user chose difficult custom settings,
+                                    // Open the custom game settings menu.
+                                    customGameSettingsDisplayed = true
+                                }
+                                .buttonStyle(.bordered)
+                                .padding(10)
+                            }
+                            .padding(10)
+                            .background(.thinMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                        }
+                        .frame(width: geometry.size.width, height: geometry.size.height) // take up all available space to center puzzle on the screen
+                    }
                 }
                 
             }
@@ -123,7 +154,10 @@ struct GameView: View {
                     
                     if displayNewGameButton {
                         Button("New Game") {
-                            frontend.beginGame() // New Game Rename?
+                            Task {
+                                await frontend.beginGame() // New Game Rename?
+                            }
+                            
                         }
                         .padding(5)
                         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
@@ -231,6 +265,8 @@ struct GameView: View {
                     } label: {
                         Label("Restart Game", systemImage: "arrow.circlepath")
                     }
+                    .disabled(frontend.currentGameInvalidated)
+                    
                     
                     // TODO: Implement these features!
                     /*
@@ -255,14 +291,15 @@ struct GameView: View {
                                     } else {
                                         Text(control.label)
                                     }
-                                    
                                 }
+                                .disabled(frontend.currentGameInvalidated)
                             }
                             
                             if frontend.canSolve {
                                 Button("Auto-Solve") {
                                     frontend.midend.solvePuzzle()
                                 }
+                                .disabled(frontend.currentGameInvalidated)
                             }
                         }
                     }
@@ -289,6 +326,7 @@ struct GameView: View {
                 
                 if game.gameConfig.displayClearButtonInToolbar {
                     Button() {
+                        effectsManager.triggerShortPressEffects()
                         frontend.fireButton(PuzzleKeycodes.ClearButton)
                     } label: {
                         Image(systemName: "square.slash")
@@ -296,6 +334,7 @@ struct GameView: View {
                     }
                 }
                 Button() {
+                    effectsManager.triggerShortPressEffects()
                     frontend.undoMove()
                 } label: {
                     Image(systemName: "arrow.uturn.backward")
@@ -304,6 +343,7 @@ struct GameView: View {
                 .disabled(!frontend.canUndo)
                 
                 Button() {
+                    effectsManager.triggerShortPressEffects()
                     frontend.redoMove()
                 } label: {
                     Image(systemName: "arrow.uturn.forward")
@@ -318,7 +358,9 @@ struct GameView: View {
                 Menu() {
                     ForEach(frontend.gamePresetsPrimaryMenu) { preset in
                         Button() {
-                            frontend.setNewGamePreset(preset.params)
+                            Task {
+                                await frontend.setNewGamePreset(preset.params)
+                            }
                         } label: {
                             if preset.id == frontend.currentPreset {
                                 Label(preset.title, systemImage: "checkmark.circle")
@@ -332,7 +374,9 @@ struct GameView: View {
                         Menu("More Options") {
                             ForEach(frontend.gamePresetsOverflowMenu) { preset in
                                 Button() {
-                                    frontend.setNewGamePreset(preset.params)
+                                    Task {
+                                        await frontend.setNewGamePreset(preset.params)
+                                    }
                                 } label: {
                                     if preset.id == frontend.currentPreset {
                                         Label(preset.title, systemImage: "checkmark.circle")
@@ -369,7 +413,9 @@ struct GameView: View {
              */
             
             frontend.midend.createMidend(frontend: &frontend) // TODO: This feels weird
-            frontend.beginGame(withSaveGame: game.settings.saveGame, withPreferences: game.settings.userPrefs)
+            Task {
+                await frontend.beginGame(withSaveGame: game.settings.saveGame, withPreferences: game.settings.userPrefs)
+            }
         }
         // MARK: Background & App Terminate notifications
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification), perform: { output in
@@ -381,6 +427,16 @@ struct GameView: View {
                 print("Shutting down app; Saving Data")
                 saveUserData()
             })
+    }
+    
+    func cancelGameGenerationAndRegernateMidend() {
+        frontend.cancelNewGame()
+        
+        /*
+         Cancelling a game in places tends to desync the internal state of the puzzle midend, causing assertion failues when the user creates another game.
+         This recreates the midend from scratch to avoid these issues (and has the added benefit of resetting the custom game settings, which feels cleaner)
+         */
+        frontend.midend.createMidend(frontend: &frontend)
     }
 
     func saveUserData() {

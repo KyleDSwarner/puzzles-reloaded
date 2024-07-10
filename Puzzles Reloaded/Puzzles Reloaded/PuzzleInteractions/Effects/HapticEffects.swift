@@ -38,31 +38,49 @@ class HapticEffects {
         return hapticCapability.supportsHaptics
     }
     
-    func playLongPressHaptic() -> Void {
+    /**
+     Ensure haptics is supported (not on iPads!) and that the haptic option is enabled in user's settings.
+     */
+    private func hapticsEnabled() -> Bool {
+        return supportsHaptics && settings.value.enableHaptics == true
+    }
+    
+    func playShortPressHaptic() -> Void {
         
-        //AudioServicesPlaySystemSound(0x450);
-        
-        // Ensure haptics is supported (not on iPads!) and that the haptic option is enabled in user's settings.
-        guard supportsHaptics == true && settings.value.enableHaptics == true else {
+        guard hapticsEnabled() else {
             return
         }
         
-        var events = [CHHapticEvent]()
+        let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.5)
+        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.5)
+        let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
+        
+        triggerHapticEffect([event])
+    }
+    
+    func playLongPressHaptic() -> Void {
+        
+        // Ensure haptics is supported (not on iPads!) and that the haptic option is enabled in user's settings.
+        guard hapticsEnabled() else {
+            return
+        }
         
         let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1)
         let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 1)
         let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
         
-        events.append(event)
-            
+        triggerHapticEffect([event])
+    }
+    
+    private func triggerHapticEffect(_ events: [CHHapticEvent]) {
         do {
             let pattern = try CHHapticPattern(events: events, parameters: [])
             let player = try engine.makePlayer(with: pattern)
             
             // Stop the engine after it completes the playback.
-            engine.notifyWhenPlayersFinished { error in
-                return .stopEngine
-            }
+            //engine.notifyWhenPlayersFinished { error in
+            //    return .stopEngine
+            //}
             
             try engine.start()
             try player.start(atTime: 0)

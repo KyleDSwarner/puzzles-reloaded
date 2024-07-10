@@ -90,8 +90,6 @@ class Midend {
             fatalError("ERROR: Game not defined!")
         }
         
-        //let game = net // TODO make this game configurable!
-        
         let drawingApi = DrawingAPI.asPointer()
         
         
@@ -139,7 +137,7 @@ class Midend {
         frontend.numColors = numColors
     }
     
-    func initGame(savegame: String? = nil, preferences: String? = nil, completionHandler: () -> Void) -> (x: Int, y: Int) {
+    func initGame(savegame: String? = nil, preferences: String? = nil) async -> (x: Int, y: Int) {
         
         // If present, load user preferences
         if preferences != nil {
@@ -147,16 +145,17 @@ class Midend {
             self.loadUserPrefs(preferences: preferences)
         }
         
-        midend_new_game(midendPointer)
-        
-        
         // If present, load the same
         if savegame != nil {
             print("Loading Save!")
             let save = SaveContext(savegame: savegame)
             self.readSave(save)
         } else {
-            print("No savegame detected")
+            print("Generating new game")
+            
+            // On particularly complex games, finding & generating a valid game can be quite complex. These methods are async to assist in detecting these delays and giving the user a way to cancel.
+            midend_new_game(midendPointer)
+            
         }
         
         //This function will create a new game_drawstate, but does not actually perform a redraw (since you often need to call midend_size() before the redraw can be done). So after calling this function and after calling midend_size(), you should then call midend_redraw(). (It is not necessary to call midend_force_redraw(); that will discard the draw state and create a fresh one, which is unnecessary in this case since there's a fresh one already. It would work, but it's usually excessive.)
@@ -195,8 +194,6 @@ class Midend {
         
         let gameIdString = String(cString: gameId!)
         print("Game ID: \(gameIdString)")
-        
-        completionHandler()
         
         return (x: Int(puzzleWidth.pointee), y: Int(puzzleHeight.pointee))
         

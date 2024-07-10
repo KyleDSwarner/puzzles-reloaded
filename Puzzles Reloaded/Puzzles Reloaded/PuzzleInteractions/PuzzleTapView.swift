@@ -18,8 +18,7 @@ class PuzzleTapView: UIView {
     var frontend: Frontend?
     var isSingleFingerNavEnabled = false
     
-    private var hapticsEngine = HapticEffects()
-    private var soundEffectsEngine = SoundEffects()
+    private var effectsManager = EffectsManager()
 
     private var longPressTimer = Timer()
     
@@ -80,6 +79,12 @@ class PuzzleTapView: UIView {
     // Triggered when a touch starts.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
+        
+        // Ensure the image hasn't been disabled (during loading states)
+        guard frontend?.currentGameInvalidated == false else {
+            return
+        }
+        
         let location = touch.location(in: self)
         
          let adjustedLocation = adjustedTapLocation(point: location)
@@ -101,12 +106,7 @@ class PuzzleTapView: UIView {
             // Long press timer is based on user settings & defaults to 500ms. `withTimeInterval` is in seconds, so this value is divided by 1000.
             longPressTimer = Timer.scheduledTimer(withTimeInterval: settings.value.longPressTime / 1000, repeats: false) {_ in
                 self.isLongPress = true
-                
-                self.hapticsEngine.playLongPressHaptic()
-                self.soundEffectsEngine.playSoundEffect()
-                // Long Press Trigger? (Swap left & right click in Frontend?)
-                // Haptic Feedback?
-                // Sound Effect?
+                self.triggerLongPressEffects()
                 self.sendKeyDown(at: location)
             }
             
@@ -118,6 +118,11 @@ class PuzzleTapView: UIView {
     // Triggered when an existing touch moves.
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
+        
+        // Ensure the image hasn't been disabled (during loading states)
+        guard frontend?.currentGameInvalidated == false else {
+            return
+        }
         
         // End the long press timer if it isn't already
         longPressTimer.invalidate()
@@ -189,6 +194,7 @@ class PuzzleTapView: UIView {
             if !isDragging && !isLongPress && command != nil {
                 // We need to send the short press' keyDown command - but only the first time.
                 self.frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: command!.down)
+                self.triggerShortPressEffects()
             }
             
             isDragging = true
@@ -202,6 +208,9 @@ class PuzzleTapView: UIView {
     
     private func sendArrowKeyCommand(command: Int, modifier: Int?) {
         let mod: Int = modifier ?? 0
+        
+        triggerShortPressEffects()
+        
         frontend?.midend.sendKeypress(x: -1, y: -1, keypress: command | mod)
     }
 
@@ -209,6 +218,12 @@ class PuzzleTapView: UIView {
     // Triggered when the user lifts a finger.
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
+        
+        // Ensure the image hasn't been disabled (during loading states)
+        guard frontend?.currentGameInvalidated == false else {
+            return
+        }
+        
         let location = touch.location(in: self)
         
         // Ignore multi-touch - this will always be navigation panning
@@ -221,13 +236,17 @@ class PuzzleTapView: UIView {
         
         // Double check this isn't an arrow key command - releasing tap should do nothing for arrow commands!
         if command != nil && command?.useArrowKeys == false {
+            
             // If we haven't started a long press or started dragging, we need to send the keydown command
             if !isLongPress && !isDragging {
+                triggerShortPressEffects() // For short presses, play the haptic & sound effects (if enabled)
                 sendKeypress(command: command?.down, location: location)
             }
             
             // And we always need to sent the keyup command
             sendKeypress(command: command?.up, location: location)
+            
+
             
             frontend?.movesTakenInGame = true // This boolean lets us better know when we should/should not save the user's game
             
@@ -272,5 +291,13 @@ class PuzzleTapView: UIView {
         isDragging = false
         longPressTimer.invalidate()
         arrowKeyTapLocation = .zero
+    }
+    
+    func triggerShortPressEffects() {
+        effectsManager.triggerShortPressEffects()
+    }
+    
+    func triggerLongPressEffects() {
+        effectsManager.triggerLongPressEffects()
     }
 }

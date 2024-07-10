@@ -76,6 +76,9 @@
     "Game Size & Options" : {
 
     },
+    "Generating Puzzle" : {
+
+    },
     "Ghost" : {
 
     },
@@ -155,6 +158,9 @@
 
     },
     "Test Item!" : {
+
+    },
+    "This may take a long time for complex puzzles" : {
 
     },
     "Undo previous move" : {

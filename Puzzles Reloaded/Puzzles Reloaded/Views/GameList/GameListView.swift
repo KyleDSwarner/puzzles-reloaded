@@ -149,8 +149,6 @@ struct GameListView: View {
                 GameView(game: gameModel)
             }
             .navigationTitle("Puzzles")
-            //.toolbarBackground(Color.gray, for: .automatic)
-            //.toolbarBackground(Color.blue, for: .bottomBar)
             .toolbar {
                 if(settings.value.gameListView == .gridView && !gameManager.hiddenGames.isEmpty) {
                     Button() {
