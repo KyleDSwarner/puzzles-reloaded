@@ -68,7 +68,7 @@ struct GameView: View {
     
     func newGame() {
         Task {
-            await frontend.beginGame() // TODO: Make this async to handle long-generating games?
+            await frontend.beginGame()
             self.puzzleImageTransformation = .identity
         }
     }
@@ -359,7 +359,8 @@ struct GameView: View {
                     ForEach(frontend.gamePresetsPrimaryMenu) { preset in
                         Button() {
                             Task {
-                                await frontend.setNewGamePreset(preset.params)
+                                frontend.setNewGamePreset(preset.params)
+                                newGame()
                             }
                         } label: {
                             if preset.id == frontend.currentPreset {
@@ -375,7 +376,8 @@ struct GameView: View {
                             ForEach(frontend.gamePresetsOverflowMenu) { preset in
                                 Button() {
                                     Task {
-                                        await frontend.setNewGamePreset(preset.params)
+                                        frontend.setNewGamePreset(preset.params)
+                                        newGame()
                                     }
                                 } label: {
                                     if preset.id == frontend.currentPreset {

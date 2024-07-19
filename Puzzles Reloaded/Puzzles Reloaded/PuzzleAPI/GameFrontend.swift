@@ -165,9 +165,8 @@ class Frontend {
     }
     
     //
-    func setNewGamePreset(_ parameters: OpaquePointer?) async {
+    func setNewGamePreset(_ parameters: OpaquePointer?) {
         midend.setGameParams(params: parameters)
-        await self.beginGame() // Immediately start a new game based on the preset parameters provided.
     }
     
     func fireButton(_ button: ButtonPress?) {
