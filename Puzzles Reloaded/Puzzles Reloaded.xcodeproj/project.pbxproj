@@ -939,7 +939,7 @@
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = "Puzzles Reloaded/Puzzles_Reloaded.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_ASSET_PATHS = "\"Puzzles Reloaded/Preview Content\"";
 				DEVELOPMENT_TEAM = 9SA9A2VPKQ;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -992,7 +992,7 @@
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = "Puzzles Reloaded/Puzzles_Reloaded.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_ASSET_PATHS = "\"Puzzles Reloaded/Preview Content\"";
 				DEVELOPMENT_TEAM = 9SA9A2VPKQ;
 				ENABLE_HARDENED_RUNTIME = YES;
