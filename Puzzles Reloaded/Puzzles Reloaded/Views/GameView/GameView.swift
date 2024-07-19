@@ -105,7 +105,7 @@ struct GameView: View {
                                     }
                                 }
                                 .blur(radius: frontend.currentGameInvalidated ? 5 : 0)
-                                .frame(width: min(geometry.size.width, geometry.size.height, 500)) // 500px set as maximum default size: This limits puzzles from getting too large on ipads
+                                .frame(width: min(geometry.size.width, geometry.size.height, 600)) // 600px set as maximum default size: This limits puzzles from getting too large on ipads
                                 
                         }
                         
