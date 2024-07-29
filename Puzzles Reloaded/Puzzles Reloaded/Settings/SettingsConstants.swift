@@ -23,6 +23,7 @@ struct AppSettings: Codable {
     var enableHaptics: Bool = true
     var enableSounds: Bool = true
     var showExperimentalGames: Bool = false
+    var disableGameStatusbar: Bool = false
     var gameListView: GameListViewSetting = GameListViewSetting.listView
     var appTheme: AppTheme = AppTheme.auto
     

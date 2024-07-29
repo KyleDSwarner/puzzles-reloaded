@@ -35,11 +35,11 @@ class Midend {
     }
     
     func undo() {
-        sendKeypress(x: -1, y: -1, keypress: PuzzleKeycodes.UNDO)
+        _ = sendKeypress(x: -1, y: -1, keypress: PuzzleKeycodes.UNDO)
     }
     
     func redo() {
-        sendKeypress(x: -1, y: -1, keypress: PuzzleKeycodes.REDO)
+        _ = sendKeypress(x: -1, y: -1, keypress: PuzzleKeycodes.REDO)
     }
     
     func restartGame() {
@@ -62,8 +62,9 @@ class Midend {
         midend_solve(midendPointer)
     }
     
-    func sendKeypress(x: Int, y: Int, keypress: Int) {
-        midend_process_key(self.midendPointer, Int32(x), Int32(y), Int32(keypress)) // We need to process how we send what keys & when
+    func sendKeypress(x: Int, y: Int, keypress: Int) -> Int {
+        let returnValue = midend_process_key(self.midendPointer, Int32(x), Int32(y), Int32(keypress)) // We need to process how we send what keys & when
+        return Int(returnValue)
     }
     
     func getPuzzleStatus() -> PuzzleStatus {

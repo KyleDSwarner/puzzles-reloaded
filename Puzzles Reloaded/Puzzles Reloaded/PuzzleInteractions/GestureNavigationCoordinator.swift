@@ -59,9 +59,10 @@ extension PuzzleInteractionsView {
         }
         
         func setupOrientationNotifications() {
-            NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
+            // NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         }
         
+        /*
         @objc func rotated() {
             if UIDevice.current.orientation.isLandscape {
                 print("Landscape")
@@ -83,6 +84,7 @@ extension PuzzleInteractionsView {
             //parent.transform.scaledAndPanned(by: (1 - parent.transform.a), with: .init(x: 0.5, y: 0.5), translatedX: -parent.transform.tx, translatedY: -parent.transform.ty)
             //parent.transform = parent.transform.translatedBy(x: -parent.transform.tx * parent.transform.a, y: .zero)
         }
+         */
         
         func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
             return true

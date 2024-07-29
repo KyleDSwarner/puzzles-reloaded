@@ -46,6 +46,10 @@ struct SettingsView: View {
                     }
                 }
                 
+                Section {
+                    Toggle("Disable Game Statusbars", isOn: $appSettings.value.disableGameStatusbar)
+                }
+                
                 if game != nil {
                     if !gameSettingsMenu.isEmpty {
                         Section {

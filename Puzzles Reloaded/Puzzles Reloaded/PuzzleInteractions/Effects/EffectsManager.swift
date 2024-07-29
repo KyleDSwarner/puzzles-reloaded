@@ -9,6 +9,10 @@
 import Foundation
 import SwiftUI
 
+enum FeedbackType {
+    case SHORT, LONG, DRAG, NONE
+}
+
 class EffectsManager {
     
     @AppStorage(AppSettings.key) var settings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
@@ -19,6 +23,17 @@ class EffectsManager {
     init() {
         self.hapticEffects = HapticEffects()
         self.soundEffects = SoundEffects()
+    }
+    
+    func triggerEffect(feedbackType: FeedbackType) {
+        switch feedbackType {
+        case .SHORT:
+            triggerShortPressEffects()
+        case .LONG:
+            triggerLongPressEffects()
+        default:
+            return
+        }
     }
     
     func triggerShortPressEffects() {
@@ -32,3 +47,5 @@ class EffectsManager {
     }
     
 }
+
+
