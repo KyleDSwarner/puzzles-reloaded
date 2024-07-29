@@ -94,7 +94,7 @@ struct GameListView: View {
                             }
                         }
                     }
-                    //.listStyle(SidebarListStyle())
+                    .listStyle(SidebarListStyle()) // Sidebar list style allows the collapsible hidden games section
                     //.listStyle(.plain)
                     
                     

@@ -15,7 +15,9 @@ struct GameContextMenu: View {
     var body: some View {
         if(!game.isHidden) { // Don't let the user promote something to favorite straight from hidden
             Button {
-                game.settings.updateGameCategory(.favorite)
+                withAnimation {
+                    game.settings.updateGameCategory(.favorite)
+                }
             } label: {
                 if(!game.isFavorite) {
                     Label("Favorite", systemImage: "star")
@@ -29,7 +31,9 @@ struct GameContextMenu: View {
         
         if(!game.isFavorite) { // Don't let the user accidentially hide a favorite game
             Button {
-                game.settings.updateGameCategory(.hidden)
+                withAnimation {
+                    game.settings.updateGameCategory(.hidden)
+                }
             } label: {
                 if(!game.isHidden) {
                     Label("Hide", systemImage: "eye.slash")
