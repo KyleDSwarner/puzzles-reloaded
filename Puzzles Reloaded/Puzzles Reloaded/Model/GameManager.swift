@@ -9,7 +9,8 @@
 import SwiftUI
 import SwiftData
 
-@Observable class GameManager {
+@Observable 
+class GameManager {
     private(set) var games: [GameConfig] // Configured games, from internal Tatham system
     private(set) var gameModel: [Game]
     private var dataIsLoaded: Bool

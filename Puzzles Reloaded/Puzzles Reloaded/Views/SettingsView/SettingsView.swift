@@ -69,6 +69,12 @@ struct SettingsView: View {
                     }
                 }
                 
+                /*
+                NavigationLink("About Puzzles Reloaded") {
+                    AboutView()
+                }
+                 */
+                
                 
                 
                 /*

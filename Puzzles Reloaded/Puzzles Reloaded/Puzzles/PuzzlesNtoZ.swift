@@ -368,6 +368,6 @@ extension Puzzles {
         imageName: "untangle",
         internalGame: untangle,
         allowSingleFingerPanning: false,
-        touchControls: [ControlConfig(label: "", shortPress: PuzzleKeycodes.leftKeypress, longPress: .none)]
+        touchControls: [ControlConfig(label: "", shortPress: PuzzleKeycodes.leftKeypress, longPress: .none)] // Left click only, disables long presses
     )
 }

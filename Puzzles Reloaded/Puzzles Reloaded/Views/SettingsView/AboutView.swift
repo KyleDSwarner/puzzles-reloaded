@@ -10,10 +10,27 @@ import SwiftUI
 
 struct AboutView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        VStack(alignment: .leading) {
+            Text("Issues or Questions?")
+            Text("Submit issues to our issue board on GitHub")
+            Link("Learn SwiftUI", destination: URL(string: "https://www.hackingwithswift.com/quick-start/swiftui")!)
+            
+            Text("Special Thanks")
+            Text("Tatham, x-sheep, etc.")
+            
+            Text("License")
+            Text("MIT Blah")
+            
+
+        }
+        .navigationTitle("About")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    AboutView()
+    NavigationStack {
+        AboutView()
+    }
 }

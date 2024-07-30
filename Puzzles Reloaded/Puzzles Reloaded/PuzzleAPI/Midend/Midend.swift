@@ -177,10 +177,10 @@ class Midend {
         let devicePixelRatio = 2.0 //Could it be improved on higher density displays? TBD.
         let userSize = true
 
-        let puzzleWidth = UnsafeMutablePointer<Int32>.allocate(capacity: 1) // TODO size of image, as computed?
+        let puzzleWidth = UnsafeMutablePointer<Int32>.allocate(capacity: 1)
         puzzleWidth.initialize(to: Int32(PuzzleConstants.puzzleSize))
         
-        let puzzleHeight = UnsafeMutablePointer<Int32>.allocate(capacity: 1)// TODO size of image, as computed?
+        let puzzleHeight = UnsafeMutablePointer<Int32>.allocate(capacity: 1)
         puzzleHeight.initialize(to: Int32(PuzzleConstants.puzzleSize))
     
         midend_size(midendPointer, puzzleWidth, puzzleHeight, userSize, devicePixelRatio)

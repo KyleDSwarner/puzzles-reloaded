@@ -19,6 +19,12 @@
     "125ms" : {
 
     },
+    "About" : {
+
+    },
+    "About Puzzles Reloaded" : {
+
+    },
     "All Games" : {
 
     },
@@ -53,6 +59,9 @@
 
     },
     "Custom" : {
+
+    },
+    "Disable Game Statusbars" : {
 
     },
     "Done" : {
@@ -94,8 +103,17 @@
     "Hints" : {
 
     },
+    "Issues or Questions?" : {
+
+    },
     "Key" : {
       "extractionState" : "manual"
+    },
+    "Learn SwiftUI" : {
+
+    },
+    "License" : {
+
     },
     "Lock" : {
 
@@ -104,6 +122,9 @@
 
     },
     "Marks" : {
+
+    },
+    "MIT Blah" : {
 
     },
     "More Options" : {
@@ -155,6 +176,15 @@
 
     },
     "Sounds" : {
+
+    },
+    "Special Thanks" : {
+
+    },
+    "Submit issues to our issue board on GitHub" : {
+
+    },
+    "Tatham, x-sheep, etc." : {
 
     },
     "Test Item!" : {

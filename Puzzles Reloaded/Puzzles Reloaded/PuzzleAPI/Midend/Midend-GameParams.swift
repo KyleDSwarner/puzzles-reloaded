@@ -116,7 +116,7 @@ extension Midend {
         
         if let configMenu = config {
 
-            let customConfigMenu: CustomConfigMenu = CustomConfigMenu(configItem: configMenu.pointee)
+            let customConfigMenu: CustomConfigMenu = CustomConfigMenu()
             
             var menuIsProcessing = true
             var index = 0

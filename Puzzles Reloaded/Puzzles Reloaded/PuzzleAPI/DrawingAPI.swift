@@ -100,18 +100,6 @@ class DrawingAPI {
     
 }
 
-// MARK: Global X/Y Dimensions
-// These dimension variables are mutable & set globally to make it easy for the C & Swift code to interact better with each other.
-
-/**
- X Dimension of the puzzle image, globally set for easy usage across the swift & C code.
- */
-var puzzleDimensionsX: Int = 512
-
-/**
- Y Dimension of the puzzle image, globally set for easy usage across the swift & C code.
- */
-var puzzleDimensionsY: Int = 512
 
 //MARK: Helpers for the drawing functions
 // Functions that help clean up boilerplate in the drawing functions - mostly extracting things from pointers

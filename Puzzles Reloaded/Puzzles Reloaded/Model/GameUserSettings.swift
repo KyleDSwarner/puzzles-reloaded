@@ -6,25 +6,8 @@
 //  Copyright © 2024 Kyle Swarner. All rights reserved.
 //
 
+import Foundation
 import SwiftData
-
-enum GameCategory: Codable {
-    case none, favorite, hidden
-}
-
-struct GameStats: Codable {
-    var gamesPlayed = 0
-    var gamesWon = 0
-    
-    var winPercentage: Double {
-        guard gamesPlayed > 0 else {
-            return 0
-        }
-        
-        return Double(gamesWon / gamesPlayed)
-    }
-}
-
 
 @Model
 class GameUserSettings {
@@ -33,6 +16,8 @@ class GameUserSettings {
     var stats: GameStats = GameStats()
     var saveGame: String? // Saved game, piped from the internal puzzle app
     var userPrefs: String? // String from the puzzle code to store internal user preferences
+    var selectedDefaultPreset: Int?
+    var customPuzzlePresets: [CustomGamePreset] = []
     
     init(gameName: String) {
         self.gameName = gameName
@@ -40,6 +25,7 @@ class GameUserSettings {
         self.stats = GameStats()
         self.saveGame = nil
         self.userPrefs = nil
+        self.selectedDefaultPreset = nil
     }
     
     func updateGameCategory(_ category: GameCategory) {
@@ -61,6 +47,47 @@ class GameUserSettings {
     var hasSavedGame: Bool {
         return saveGame != nil && saveGame?.isEmpty == false
     }
-    
+}
 
+enum GameCategory: Codable {
+    case none, favorite, hidden
+}
+
+struct GameStats: Codable {
+    var gamesPlayed = 0
+    var gamesWon = 0
+    
+    var winPercentage: Double {
+        guard gamesPlayed > 0 else {
+            return 0
+        }
+        
+        return Double(gamesWon / gamesPlayed)
+    }
+}
+
+struct CustomGamePreset: Codable, Identifiable {
+    var id = UUID()
+    var sortOrder: Int = 0
+    var name: String = ""
+    var puzzleConfig: CustomConfigMenu
+    
+    init(sortOrder: Int, name: String, puzzleConfig: CustomConfigMenu) {
+        
+        self.sortOrder = sortOrder
+        self.name = name
+        self.puzzleConfig = puzzleConfig
+    }
+    
+    mutating func updateName(newName: String) {
+        self.name = newName
+    }
+    
+    mutating func updateSortOrder(sortOrder: Int) {
+        self.sortOrder = sortOrder
+    }
+    
+    mutating func updatePuzzleConfig(puzzleConfig: CustomConfigMenu) {
+        self.puzzleConfig = puzzleConfig
+    }
 }

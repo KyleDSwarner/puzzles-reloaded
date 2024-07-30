@@ -169,6 +169,10 @@ class Frontend {
         midend.setGameParams(params: parameters)
     }
     
+    /**
+     Fire a button press to the puzzle midend.
+     The result of `sendKeypress` is ignored as buttons as configured to handle their own visual effects. It would be odd if buttons didn't consistently provide the feedback.
+     */
     func fireButton(_ button: ButtonPress?) {
         
         // Ensure the image hasn't been disabled (during loading states)
@@ -177,7 +181,7 @@ class Frontend {
         }
         
         if let unwrappedButton = button {
-            let keypressResult = self.midend.sendKeypress(x: -1, y: -1, keypress: unwrappedButton.keycode)
+            _ = self.midend.sendKeypress(x: -1, y: -1, keypress: unwrappedButton.keycode)
             self.movesTakenInGame = true
         }
         else {

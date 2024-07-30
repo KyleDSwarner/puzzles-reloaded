@@ -76,6 +76,16 @@ struct PuzzleKeycodes {
     static let RedoButton = ButtonPress(keycode: UI_REDO)
 }
 
+/**
+ A struct of ints marking the different response codes from `midend_process_key` and allows us to understand if/when taps affect the screen
+ */
+struct PuzzleInteractionResponse {
+    static let noEffect = PKR_NO_EFFECT
+    static let someEffect = PKR_SOME_EFFECT
+    static let quit = PKR_QUIT
+    static let unused = PKR_UNUSED
+}
+
 struct ButtonPress {
     let keycode: Int
     

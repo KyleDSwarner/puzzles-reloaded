@@ -23,7 +23,7 @@
 		923E64332C00B9680027DF54 /* DrawingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642D2C00B9680027DF54 /* DrawingAPI.swift */; };
 		923E64342C00B9680027DF54 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642E2C00B9680027DF54 /* GlobalFunctions.swift */; };
 		923E64352C00B9680027DF54 /* PuzzleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642F2C00B9680027DF54 /* PuzzleUtils.swift */; };
-		923E643C2C00B96E0027DF54 /* SettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64362C00B96E0027DF54 /* SettingsConstants.swift */; };
+		923E643C2C00B96E0027DF54 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64362C00B96E0027DF54 /* AppSettings.swift */; };
 		923E643E2C00B96E0027DF54 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64382C00B96E0027DF54 /* SettingsModel.swift */; };
 		923E643F2C00B96E0027DF54 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64392C00B96E0027DF54 /* SettingsView.swift */; };
 		923E64402C00B96E0027DF54 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E643A2C00B96E0027DF54 /* UserPreferences.swift */; };
@@ -127,6 +127,8 @@
 		92B55D522C0F410900517280 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D512C0F410900517280 /* Localizable.xcstrings */; };
 		92B55D542C0F46A500517280 /* Puzzles.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D532C0F46A500517280 /* Puzzles.xcstrings */; };
 		92BBCF0C2C17B09500893703 /* GameCustomSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */; };
+		92D8D8692C57C4CD00E1E9E3 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */; };
+		92D8D86B2C57CA7800E1E9E3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 92D8D86A2C57CA7800E1E9E3 /* README.md */; };
 		92E7FE2E2C3F15C70020C1F5 /* EffectsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -149,7 +151,7 @@
 		923E642D2C00B9680027DF54 /* DrawingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingAPI.swift; sourceTree = "<group>"; };
 		923E642E2C00B9680027DF54 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		923E642F2C00B9680027DF54 /* PuzzleUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleUtils.swift; sourceTree = "<group>"; };
-		923E64362C00B96E0027DF54 /* SettingsConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsConstants.swift; sourceTree = "<group>"; };
+		923E64362C00B96E0027DF54 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		923E64382C00B96E0027DF54 /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		923E64392C00B96E0027DF54 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		923E643A2C00B96E0027DF54 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
@@ -269,6 +271,8 @@
 		92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCustomSettingsView.swift; sourceTree = "<group>"; };
 		92C527442C062A7400F421D6 /* Untangle-Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Untangle-Config.h"; sourceTree = "<group>"; };
 		92D724732C1C71A90021AD89 /* Puzzles-Reloaded-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Puzzles-Reloaded-Info.plist"; sourceTree = SOURCE_ROOT; };
+		92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		92D8D86A2C57CA7800E1E9E3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -330,6 +334,7 @@
 				923E64792C00BDCE0027DF54 /* Submodules */,
 				923E63E62C00B9220027DF54 /* Assets.xcassets */,
 				923E63E82C00B9220027DF54 /* Puzzles_Reloaded.entitlements */,
+				92D8D86A2C57CA7800E1E9E3 /* README.md */,
 				923E63E92C00B9220027DF54 /* Preview Content */,
 			);
 			path = "Puzzles Reloaded";
@@ -380,7 +385,7 @@
 		923E643B2C00B96E0027DF54 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				923E64362C00B96E0027DF54 /* SettingsConstants.swift */,
+				923E64362C00B96E0027DF54 /* AppSettings.swift */,
 				923E64382C00B96E0027DF54 /* SettingsModel.swift */,
 				923E643A2C00B96E0027DF54 /* UserPreferences.swift */,
 			);
@@ -394,7 +399,6 @@
 				923E64422C00B9740027DF54 /* GameConfig.swift */,
 				923E646E2C00B9E30027DF54 /* GameUserSettings.swift */,
 				923E64432C00B9740027DF54 /* GameManager.swift */,
-				9208EFFD2C29FB7000FD14BD /* PuzzleConstants.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -589,6 +593,7 @@
 			isa = PBXGroup;
 			children = (
 				923E64392C00B96E0027DF54 /* SettingsView.swift */,
+				92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */,
 				92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */,
 			);
 			path = SettingsView;
@@ -597,6 +602,7 @@
 		92B55D582C0F95B200517280 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9208EFFD2C29FB7000FD14BD /* PuzzleConstants.swift */,
 				923E646F2C00B9E30027DF54 /* CodableWrapper.swift */,
 			);
 			path = Utils;
@@ -678,6 +684,7 @@
 			files = (
 				92B55D542C0F46A500517280 /* Puzzles.xcstrings in Resources */,
 				923E63EB2C00B9220027DF54 /* Preview Assets.xcassets in Resources */,
+				92D8D86B2C57CA7800E1E9E3 /* README.md in Resources */,
 				92B55D522C0F410900517280 /* Localizable.xcstrings in Resources */,
 				923E63E72C00B9220027DF54 /* Assets.xcassets in Resources */,
 			);
@@ -702,7 +709,7 @@
 				9208F0002C29FDB900FD14BD /* PresetMenuItem.swift in Sources */,
 				923E64F82C00C00A0027DF54 /* sticks.c in Sources */,
 				923E65212C00C7880027DF54 /* dominosa.c in Sources */,
-				923E643C2C00B96E0027DF54 /* SettingsConstants.swift in Sources */,
+				923E643C2C00B96E0027DF54 /* AppSettings.swift in Sources */,
 				923E64E62C00BFBA0027DF54 /* lightup.c in Sources */,
 				923E64BE2C00BEFD0027DF54 /* random.c in Sources */,
 				923E64332C00B9680027DF54 /* DrawingAPI.swift in Sources */,
@@ -780,6 +787,7 @@
 				923E64322C00B9680027DF54 /* Midend.swift in Sources */,
 				923E64AA2C00BED00027DF54 /* unequal.c in Sources */,
 				923E64FE2C00C00A0027DF54 /* bricks.c in Sources */,
+				92D8D8692C57C4CD00E1E9E3 /* AboutView.swift in Sources */,
 				923E64742C00B9E40027DF54 /* CodableWrapper.swift in Sources */,
 				923E64352C00B9680027DF54 /* PuzzleUtils.swift in Sources */,
 				923E64212C00B94E0027DF54 /* PuzzlesAtoM.swift in Sources */,
@@ -971,7 +979,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1020,7 +1028,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

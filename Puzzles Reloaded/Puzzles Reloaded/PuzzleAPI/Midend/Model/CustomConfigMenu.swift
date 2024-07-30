@@ -8,11 +8,11 @@
 
 import Foundation
 
-enum CustomMenuType {
+enum CustomMenuType: Codable {
     case INT, STRING, BOOLEAN, CHOICE
 }
 
-struct CustomMenuItem {
+struct CustomMenuItem: Codable {
     var index: Int
     var type: CustomMenuType
     var title: String
@@ -36,14 +36,15 @@ struct CustomMenuItem {
         self.choiceIndex = choiceIndex
         self.choices = choices
     }
+    
 }
 
-class CustomConfigMenu {
-    var configItem: config_item? // The original config item that must be submitted back to the midend.
+class CustomConfigMenu: Codable {
+    // var configItem: config_item? // The original config item that must be submitted back to the midend.
     var menu: [CustomMenuItem] // A list of cleaned up & processed items for display by swift. Each
     
-    init(configItem: config_item?, menu: [CustomMenuItem] = []) {
-        self.configItem = configItem
+    init(menu: [CustomMenuItem] = []) {
+       // self.configItem = configItem
         self.menu = menu
     }
     
@@ -64,7 +65,7 @@ class CustomConfigMenu {
     }
 }
 
-struct ChoiceMenuOption {
+struct ChoiceMenuOption: Codable {
     let id: Int
     let name: String
 }

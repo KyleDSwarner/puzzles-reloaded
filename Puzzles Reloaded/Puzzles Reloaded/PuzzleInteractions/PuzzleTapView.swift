@@ -193,14 +193,16 @@ class PuzzleTapView: UIView {
             // MARK: Usual Tap & Drag Commands Based on mouseclicks & drags
             if !isDragging && !isLongPress && command != nil {
                 // We need to send the short press' keyDown command - but only the first time.
-                self.frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: command!.down)
-                self.triggerShortPressEffects()
+                sendKeypress(command: command!.down, location: location, physicalFeedbackType: .SHORT)
+                //self.frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: command!.down)
+                //self.triggerShortPressEffects()
             }
             
             isDragging = true
             
             // Then we need to send a DRAG command to the correct
-            self.frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: command!.drag)
+            sendKeypress(command: command!.drag, location: location, physicalFeedbackType: .NONE)
+            //self.frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: command!.drag)
         }
         
         //send(location, forEvent: .moved)
@@ -209,9 +211,12 @@ class PuzzleTapView: UIView {
     private func sendArrowKeyCommand(command: Int, modifier: Int?) {
         let mod: Int = modifier ?? 0
         
-        triggerShortPressEffects()
+        //triggerShortPressEffects()
         
-        frontend?.midend.sendKeypress(x: -1, y: -1, keypress: command | mod)
+        //frontend?.midend.sendKeypress(x: -1, y: -1, keypress: command | mod)
+        
+        sendKeypress(command: command | mod, physicalFeedbackType: .SHORT)
+        
     }
 
     // MARK: Touch Finished
@@ -239,8 +244,8 @@ class PuzzleTapView: UIView {
             
             // If we haven't started a long press or started dragging, we need to send the keydown command
             if !isLongPress && !isDragging {
-                triggerShortPressEffects() // For short presses, play the haptic & sound effects (if enabled)
-                sendKeypress(command: command?.down, location: location)
+                // triggerShortPressEffects() // For short presses, play the haptic & sound effects (if enabled)
+                sendKeypress(command: command?.down, location: location, physicalFeedbackType: .SHORT)
             }
             
             // And we always need to sent the keyup command
@@ -269,15 +274,29 @@ class PuzzleTapView: UIView {
         return command
     }
     
-    func sendKeypress(command: Int?, location: CGPoint) {
-        
+    func sendKeypress(command: Int?, location: CGPoint = CGPoint(x: -1, y: -1), physicalFeedbackType: FeedbackType = .NONE) {
         guard let unwrappedCommand = command else {
             return
         }
         
-        let adjustedLocation = adjustedTapLocation(point: location)
+        var targetLocation = location
         
-        frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: unwrappedCommand)
+        // If a location is provided, adjust it to account for image scale.
+        if targetLocation.x != -1 && targetLocation.y != -1 {
+            targetLocation = adjustedTapLocation(point: targetLocation)
+        }
+        
+        let keypressResponse = frontend?.midend.sendKeypress(x: Int(targetLocation.x), y: Int(targetLocation.y), keypress: unwrappedCommand)
+        
+        if keypressResponse == PuzzleInteractionResponse.someEffect {
+            effectsManager.triggerEffect(feedbackType: physicalFeedbackType)
+        }
+    }
+    
+    func sentKeypressNoLocation(command: Int?) {
+        guard let unwrappedCommand = command else {
+            return
+        }
     }
 
     // Triggered when the user's touch is interrupted, e.g. by a low battery alert.
