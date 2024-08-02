@@ -85,6 +85,7 @@ struct GameCustomSettingsView: View {
             presentingAlertMessage = true
         } else {
             dismiss()
+            frontend.setPuzzlePreset(customPreset: self.gameMenu)
             newGameCallback()
             // Success! Close the modal and generate a new game.
             // Do we need to consider long-running game generation?

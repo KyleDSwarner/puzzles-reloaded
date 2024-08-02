@@ -26,8 +26,6 @@ extension Midend {
      */
     public func getGamePresets() -> [PresetMenuItem] {
         
-        currentGamePreset = Int(midend_which_preset(midendPointer))
-        
         let presetMenuPointer: UnsafeMutablePointer<preset_menu> = midend_get_presets(midendPointer, nil)
         
         return convertPresetMenu(presetMenuPointer.pointee)

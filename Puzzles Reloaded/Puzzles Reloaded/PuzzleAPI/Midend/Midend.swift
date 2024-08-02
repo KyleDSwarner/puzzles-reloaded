@@ -17,9 +17,9 @@ import CoreGraphics
 class Midend {
     var midendPointer: OpaquePointer? = nil
     var game: game?
-    var currentGamePreset: Int = -1
     
-    init() {
+    init(game: game) {
+        self.game = game
     }
     
     func setMidendPointer(midendPointer: OpaquePointer?) {

@@ -16,7 +16,8 @@ import CoreGraphics
 @Observable
 class Frontend {
     var midend: Midend // Reference to the midend
-    var colors: [CGColor] = [] //typedef float rgb[3]; ?
+    var colors: [CGColor] = [] // Array of colors used to build the puzzle. Set from the midend when building the puzzle.
+    
     var gameHasStatusbar = false
     var movesTakenInGame = false
     var numColors: Int = 0
@@ -27,7 +28,7 @@ class Frontend {
     var currentGameInvalidated = false
     var gameGenerationTask: Task<(), Never>?
     
-    var game: game? // Reference to the actual game in the puzzle collection
+    var game: Game
     
     var imageManager: PuzzleImageManager?
     var statusbarText: String = ""
@@ -62,19 +63,16 @@ class Frontend {
         return Array(gamePresets.suffix(gamePresets.count - 8))
     }
     
-    init() {
-        self.midend = Midend()
+    init(game: Game) {
+        self.game = game
+        self.midend = Midend(game: game.gameConfig.internalGame) // Init midend and give it the internal game
     }
     
     deinit {
         gameGenerationTask?.cancel()
     }
     
-    func setGame(_ thegame: game) {
-        self.game = thegame
-    }
-    
-    @MainActor func beginGame(withSaveGame saveGame: String? = nil, withPreferences preferences: String? = nil) async {
+    @MainActor func beginGame(isFirstLoad: Bool = false, withSaveGame saveGame: String? = nil, withPreferences preferences: String? = nil) async {
        
         self.gameGenerationTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
             withAnimation {
@@ -83,7 +81,31 @@ class Frontend {
             }
         }
         
+        // Go ahead and generate the game presets if they aren't already
+        if gamePresets.isEmpty {
+            gamePresets = midend.getGamePresets()
+        }
+        
+        // If this is the first app load, load user preferences, saved games, and defaults.
+        if isFirstLoad {
+            
+            // If there's a saved preset, use it!
+            if !game.settings.customDefaultPreset.isEmpty {
+                // Ignoring potential return value of this call, assuming that it can never be set without first having the error value checked in the UI.
+                print("Detected Custom Preset - Loading Data into Puzzle")
+                _ = midend.setGameCustomParameters(choices: game.settings.customDefaultPreset)
+            }
+            else if let userPreset = game.settings.selectedDefaultPreset {
+                print("Detected Preset \(userPreset)")
+                if let preset = gamePresets.first(where: { $0.id == userPreset}) {
+                    print("Found Preset \(userPreset) == \(preset.title)")
+                    self.setNewGamePreset(preset.params)
+                }
+            }
+        }
+        
         gameGenerationTask = Task {
+            
             let dimensions = await midend.initGame(savegame: saveGame, preferences: preferences)
             
             // Stop timer here.
@@ -97,7 +119,7 @@ class Frontend {
             midend.drawPuzzle() // Actually draw the puzzle, once the image manager knows its size & is ready to go.
             self.puzzleTilesize = midend.getTilesize()
             
-            gamePresets = midend.getGamePresets()
+            
             self.movesTakenInGame = saveGame != nil // Assume moves have already been taken previously IF there's a savegame, otherewise set to false.
             updateFrontendFlags()
         }
@@ -193,11 +215,7 @@ class Frontend {
 
 }
 
-enum PuzzleStatus: Int {
-    case SOLVED = 1
-    case UNSOLVABLE = -1
-    case INPROGRESS = 0
-}
+
 
 /** 
  Timer start/stop methods provided on the frontend
@@ -220,6 +238,25 @@ extension Frontend {
     func stopTimer() {
         //print("Stopping Timer beooooooo")
         animationTimer.invalidate()
+    }
+}
+
+/**
+ These methods set puzzle defaults to load when there's no save, either puzzle-provided defaults, or user-designed customs.
+ */
+extension Frontend {
+    
+    func setPuzzlePreset(defaultPreset: PresetMenuItem) {
+        print("Saving Preset as Default: \(defaultPreset.title)")
+        game.settings.selectedDefaultPreset = defaultPreset.id
+        game.settings.customDefaultPreset = []
+    }
+    
+    func setPuzzlePreset(customPreset: [CustomMenuItem]) {
+        print("Saving Custom Presets!")
+        game.settings.customDefaultPreset = customPreset
+        game.settings.selectedDefaultPreset = nil
+        
     }
 }
 

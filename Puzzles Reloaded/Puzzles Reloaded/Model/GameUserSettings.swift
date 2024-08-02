@@ -17,6 +17,7 @@ class GameUserSettings {
     var saveGame: String? // Saved game, piped from the internal puzzle app
     var userPrefs: String? // String from the puzzle code to store internal user preferences
     var selectedDefaultPreset: Int?
+    var customDefaultPreset: [CustomMenuItem] = [] // This is populated from the game's custom menu settings view
     var customPuzzlePresets: [CustomGamePreset] = []
     
     init(gameName: String) {

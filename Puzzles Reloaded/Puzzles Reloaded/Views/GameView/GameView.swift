@@ -28,7 +28,7 @@ struct GameView: View {
     @State private var translation: CGSize = .zero
     @State private var currentGeometry: CGSize = .zero
     
-    @State private var frontend = Frontend()
+    @State private var frontend: Frontend
     @State private var effectsManager = EffectsManager()
     
     @State var puzzleImageTransformation: CGAffineTransform = .identity
@@ -47,7 +47,8 @@ struct GameView: View {
     
     init(game: Game) {
         self.game = game
-        frontend.midend.setGame(game.gameConfig.internalGame) //lol
+        frontend = Frontend(game: game)
+        frontend.midend.setGame(game.gameConfig.internalGame)
         
         if(!game.gameConfig.touchControls.isEmpty) {
             frontend.controlOption = game.gameConfig.touchControls.first!
@@ -74,6 +75,14 @@ struct GameView: View {
             await frontend.beginGame()
             self.puzzleImageTransformation = .identity
         }
+    }
+    
+    func setNewGamePreset(_ preset: PresetMenuItem) {
+        frontend.setNewGamePreset(preset.params)
+        
+        frontend.setPuzzlePreset(defaultPreset: preset)
+        
+        newGame()
     }
     
     var body: some View {
@@ -162,7 +171,7 @@ struct GameView: View {
                         if displayNewGameButton {
                             Button("New Game") {
                                 Task {
-                                    await frontend.beginGame() // New Game Rename?
+                                    await frontend.beginGame()
                                 }
                                 
                             }
@@ -315,6 +324,7 @@ struct GameView: View {
                         }
                     }
                     
+                    // Exit Button
                     Section {
                         Button() {
                             cleanupAndBack()
@@ -324,14 +334,6 @@ struct GameView: View {
                     }
                     
                 }
-                /*
-                Button() {
-                    displayingGameMenu = true
-                } label: {
-                    Image(systemName: "menucard")
-                        .accessibilityLabel("Open Game Menu")
-                }
-                 */
                 
                 Spacer()
                 
@@ -344,6 +346,7 @@ struct GameView: View {
                             .accessibilityLabel("Clear Selected Field")
                     }
                 }
+                
                 Button() {
                     effectsManager.triggerShortPressEffects()
                     frontend.undoMove()
@@ -369,10 +372,7 @@ struct GameView: View {
                 Menu() {
                     ForEach(frontend.gamePresetsPrimaryMenu) { preset in
                         Button() {
-                            Task {
-                                frontend.setNewGamePreset(preset.params)
-                                newGame()
-                            }
+                            setNewGamePreset(preset)
                         } label: {
                             if preset.id == frontend.currentPreset {
                                 Label(preset.title, systemImage: "checkmark.circle")
@@ -386,10 +386,7 @@ struct GameView: View {
                         Menu("More Options") {
                             ForEach(frontend.gamePresetsOverflowMenu) { preset in
                                 Button() {
-                                    Task {
-                                        frontend.setNewGamePreset(preset.params)
-                                        newGame()
-                                    }
+                                    setNewGamePreset(preset)
                                 } label: {
                                     if preset.id == frontend.currentPreset {
                                         Label(preset.title, systemImage: "checkmark.circle")
@@ -418,7 +415,7 @@ struct GameView: View {
         .onAppear {
             frontend.midend.createMidend(frontend: &frontend)
             Task {
-                await frontend.beginGame(withSaveGame: game.settings.saveGame, withPreferences: game.settings.userPrefs)
+                await frontend.beginGame(isFirstLoad: true, withSaveGame: game.settings.saveGame, withPreferences: game.settings.userPrefs)
             }
         }
         // MARK: Background & App Terminate notifications
