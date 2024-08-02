@@ -2,8 +2,7 @@
 
 An implementation of the [Simon Tatham Portable Puzzle Collection](https://www.chiark.greenend.org.uk/~sgtatham/puzzles/) for iOS & macOS.
 
-A total of 50 gabi
-In addition to the games from the main collections, it also provides a set of new games by [x-sheep](https://github.com/x-sheep/puzzles-unreleased)
+In addition to the games from the main collections, it also provides a set of new games by [x-sheep](https://github.com/x-sheep/puzzles-unreleased). 50 games in total are currently supported!
 
 Get it here: [Puzzles Reloaded iOS](https://apps.apple.com/us/app/puzzles-reloaded/id6504365885)
 
