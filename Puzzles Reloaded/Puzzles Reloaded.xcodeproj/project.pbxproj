@@ -131,6 +131,7 @@
 		92D8D8692C57C4CD00E1E9E3 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */; };
 		92D8D86B2C57CA7800E1E9E3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 92D8D86A2C57CA7800E1E9E3 /* README.md */; };
 		92E7FE2E2C3F15C70020C1F5 /* EffectsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */; };
+		92F6946A2C6BE2480023D830 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F694692C6BE2480023D830 /* LicenseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -276,6 +277,7 @@
 		92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		92D8D86A2C57CA7800E1E9E3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsManager.swift; sourceTree = "<group>"; };
+		92F694692C6BE2480023D830 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -611,8 +613,8 @@
 		92B55D572C0F6F0800517280 /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
+				92F6946B2C6BEAEF0023D830 /* About */,
 				923E64392C00B96E0027DF54 /* SettingsView.swift */,
-				92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */,
 				92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */,
 			);
 			path = SettingsView;
@@ -635,6 +637,15 @@
 				923E644E2C00B97A0027DF54 /* SoundEffects.swift */,
 			);
 			path = Effects;
+			sourceTree = "<group>";
+		};
+		92F6946B2C6BEAEF0023D830 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */,
+				92F694692C6BE2480023D830 /* LicenseView.swift */,
+			);
+			path = About;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -719,6 +730,7 @@
 				923E651F2C00C7880027DF54 /* guess.c in Sources */,
 				923E64FF2C00C00A0027DF54 /* ascent.c in Sources */,
 				923E64BA2C00BEED0027DF54 /* rect.c in Sources */,
+				92F6946A2C6BE2480023D830 /* LicenseView.swift in Sources */,
 				923E64D82C00BF490027DF54 /* midend.c in Sources */,
 				923E64C42C00BF120027DF54 /* pattern.c in Sources */,
 				923E64A92C00BED00027DF54 /* twiddle.c in Sources */,
@@ -999,7 +1011,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1048,7 +1060,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

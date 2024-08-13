@@ -241,7 +241,7 @@ extension Puzzles {
 
         touchControls: [
             ControlConfig(label: "Add and Remove Tents", shortPress: PuzzleKeycodes.leftKeypress, longPress: PuzzleKeycodes.rightKeypress, imageName: "square", imageColor: .black),
-            ControlConfig(label: "Clear", shortPress: PuzzleKeycodes.middleKeypress, longPress: .none, imageName: "square.slash")
+            // ControlConfig(label: "Clear", shortPress: PuzzleKeycodes.middleKeypress, longPress: .none, imageName: "square.slash") (Tents does not support a dedicated clear button)
         ]
     )
     

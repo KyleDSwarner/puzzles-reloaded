@@ -106,6 +106,11 @@ struct GameView: View {
                                 //.modifier(ModdedPuzzleImage(translation: puzzleImageTransformation, anchor: anchor))
                                 //.animation(.easeInOut(duration:1.0), value: puzzleImageTransformation)
                                 //.modifier(TranslatedImage(translation: puzzleImageTransformation, anchor: anchor, enablePuzzleCompleteAnimation: enableCompletionAnimation))
+                                /* Available on iOS 17.5. Don't enable quite yet.
+                                .onPencilDoubleTap { gesture in
+                                        print("Double Tap on Pencil!!")
+                                }
+                                 */
                                 .onChange(of: frontend.puzzleStatus) { old, new in
                                     if(new == .SOLVED) {
                                         //TODO: The affine transform is not animable, and I haven't found a way to animate completions while also keeping the navigation fluid.

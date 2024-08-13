@@ -22,6 +22,9 @@
     "About" : {
 
     },
+    "About Puzzles Reloaded" : {
+
+    },
     "All Games" : {
 
     },
@@ -49,13 +52,28 @@
     "Configuration Error" : {
 
     },
+    "Contribute Code" : {
+
+    },
+    "Contributor of 10 new puzzles to this collection" : {
+
+    },
     "Controls" : {
       "comment" : "Heading for the 'controls' section on help page"
+    },
+    "Copyright 2024 Kyle Swarner\n\nThe notice below applies to source code as distributed at\nhttps://github.com/KyleDSwarner/puzzles-reloaded and does not apply to\ncustom graphics. Legal permission for app icon and other custom assets are retained by their owners.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE." : {
+      "comment" : "App License (MIT, with exclusions for assets)"
     },
     "Counter-Clockwise" : {
 
     },
     "Custom" : {
+
+    },
+    "Developer of first Simon Tatham collection for iOS, without which this app would not exist" : {
+
+    },
+    "Disable game information that appears at the bottom of the screen" : {
 
     },
     "Disable Game Statusbars" : {
@@ -85,7 +103,13 @@
     "Generating Puzzle" : {
 
     },
+    "Get Involved" : {
+      "comment" : "Heading on about page"
+    },
     "Ghost" : {
+
+    },
+    "Greg Hewgill" : {
 
     },
     "Help" : {
@@ -100,13 +124,10 @@
     "Hints" : {
 
     },
-    "Issues or Questions?" : {
-
-    },
     "Key" : {
       "extractionState" : "manual"
     },
-    "Learn SwiftUI" : {
+    "Leonard Sprong" : {
 
     },
     "License" : {
@@ -118,10 +139,10 @@
     "Long Press Duration" : {
 
     },
-    "Marks" : {
+    "Made with love by Kyle Swarner" : {
 
     },
-    "MIT Blah" : {
+    "Marks" : {
 
     },
     "More Options" : {
@@ -140,6 +161,12 @@
 
     },
     "Open Game Menu" : {
+
+    },
+    "Original developer of the puzzle collection" : {
+
+    },
+    "Privacy Policy" : {
 
     },
     "Puzzle View" : {
@@ -172,16 +199,19 @@
     "Shift" : {
 
     },
+    "Simon Tatham" : {
+
+    },
+    "Simon Tatham Puzzles Reloaded" : {
+      "comment" : "App title on about page"
+    },
     "Sounds" : {
 
     },
     "Special Thanks" : {
-
+      "comment" : "Heading on about page"
     },
-    "Submit issues to our issue board on GitHub" : {
-
-    },
-    "Tatham, x-sheep, etc." : {
+    "Submit An Issue" : {
 
     },
     "Test Item!" : {
@@ -204,6 +234,17 @@
     },
     "Vampire" : {
 
+    },
+    "Version %@, Build %@" : {
+      "comment" : "Version and build information on about page",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Version %1$@, Build %2$@"
+          }
+        }
+      }
     },
     "Zombie" : {
 

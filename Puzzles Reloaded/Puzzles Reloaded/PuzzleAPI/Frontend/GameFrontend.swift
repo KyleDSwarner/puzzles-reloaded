@@ -203,7 +203,7 @@ class Frontend {
         }
         
         if let unwrappedButton = button {
-            _ = self.midend.sendKeypress(x: -1, y: -1, keypress: unwrappedButton.keycode)
+            self.midend.sendKeypress(x: -1, y: -1, keypress: unwrappedButton.keycode)
             self.movesTakenInGame = true
         }
         else {
@@ -214,7 +214,6 @@ class Frontend {
     }
 
 }
-
 
 
 /** 

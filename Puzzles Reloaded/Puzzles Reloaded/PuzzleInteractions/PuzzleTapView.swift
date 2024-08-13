@@ -24,6 +24,8 @@ class PuzzleTapView: UIView {
     
     private var isLongPress = false
     private var isDragging = false
+    private var dragDeadzoneExceeded = false
+    private var initialTouchLocation: CGPoint = .zero
     private var arrowKeyTapLocation: CGPoint = .zero
     
     // Our main initializer, making sure interaction is enabled.
@@ -79,6 +81,7 @@ class PuzzleTapView: UIView {
     // Triggered when a touch starts.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
+               
         
         // Ensure the image hasn't been disabled (during loading states)
         guard frontend?.currentGameInvalidated == false else {
@@ -87,7 +90,10 @@ class PuzzleTapView: UIView {
         
         let location = touch.location(in: self)
         
-         let adjustedLocation = adjustedTapLocation(point: location)
+        let adjustedLocation = adjustedTapLocation(point: location)
+        
+        // Store the initial location for later use
+        initialTouchLocation = adjustedLocation
         
         // send(location, forEvent: .started)
         
@@ -124,8 +130,7 @@ class PuzzleTapView: UIView {
             return
         }
         
-        // End the long press timer if it isn't already
-        longPressTimer.invalidate()
+        
         
         guard isSingleFingerNavEnabled == false else {
             // print("Ignoring movement - single finger nav is enabled")
@@ -140,7 +145,29 @@ class PuzzleTapView: UIView {
         
         let location = touch.location(in: self)
         
+        
         let adjustedLocation = adjustedTapLocation(point: location)
+        
+        /*
+         MARK: Apple Pencil Logic
+         Pencils detect very small movement and trigger this movement function, making is very difficult to hold steady to trigger long press functions.
+         When long press logic is present, compare the current location to the pencil drag deadzone, and only continue once the pencil exceeds that distance.
+         */
+        if touch.type == .pencil && !dragDeadzoneExceeded && frontend?.controlOption.longPress != nil  {
+            let xOffsetFromOrigin = abs(adjustedLocation.x - initialTouchLocation.x)
+            let yOffsetFromOrigin = abs(adjustedLocation.y - initialTouchLocation.y)
+            
+            if xOffsetFromOrigin > PuzzleConstants.PencilDragDeadzone || yOffsetFromOrigin > PuzzleConstants.PencilDragDeadzone {
+                dragDeadzoneExceeded = true
+                // Continue on and short-circuit this logic from occurring again
+            } else {
+                // Ignore this input
+                return
+            }
+        }
+        
+        // End the long press timer if it isn't already
+        longPressTimer.invalidate()
         
         let command = isLongPress ? self.frontend?.controlOption.longPress : self.frontend?.controlOption.shortPress
         
@@ -222,6 +249,7 @@ class PuzzleTapView: UIView {
     // MARK: Touch Finished
     // Triggered when the user lifts a finger.
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         guard let touch = touches.first else { return }
         
         // Ensure the image hasn't been disabled (during loading states)
@@ -308,7 +336,9 @@ class PuzzleTapView: UIView {
     func resetTouchInfo() {
         isLongPress = false
         isDragging = false
+        dragDeadzoneExceeded = false
         longPressTimer.invalidate()
+        initialTouchLocation = .zero
         arrowKeyTapLocation = .zero
     }
     

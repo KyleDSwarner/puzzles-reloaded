@@ -48,6 +48,8 @@ struct SettingsView: View {
                 
                 Section {
                     Toggle("Disable Game Statusbars", isOn: $appSettings.value.disableGameStatusbar)
+                } footer: {
+                    Text("Disable game information that appears at the bottom of the screen")
                 }
                 
                 if game != nil {
@@ -69,14 +71,14 @@ struct SettingsView: View {
                     }
                 }
                 
-                /*
-                NavigationLink("About Puzzles Reloaded") {
-                    AboutView()
+                Section {
+                    NavigationLink("About Puzzles Reloaded") {
+                        AboutView()
+                    }
                 }
-                 */
                 
                 
-                
+
                 /*
                  
                 These sections are designed, but at the moment don't do anything
