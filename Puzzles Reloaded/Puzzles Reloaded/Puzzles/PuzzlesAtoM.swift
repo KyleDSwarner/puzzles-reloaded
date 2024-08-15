@@ -117,7 +117,8 @@ extension Puzzles {
         instructions: String(localized: "flood_instructions", table: "Puzzles"),
         controlInfo: String(localized: "flood_controls", table: "Puzzles"),
         imageName: "flood",
-        internalGame: flood
+        internalGame: flood,
+        touchControls: [ControlConfig(label: "", shortPress: PuzzleKeycodes.leftKeypress, longPress: .none)] // Left click only, disables long presses
     )
     
     // MARK: Galaxies

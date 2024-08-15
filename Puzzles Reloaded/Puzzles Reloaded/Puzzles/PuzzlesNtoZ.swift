@@ -45,12 +45,13 @@ extension Puzzles {
         controlInfo: String(localized: "net_controls", table: "Puzzles"),
         imageName: "net",
         internalGame: net,
-        touchControls: [ // TODO: We'll need special handling for these controls in Net.
+        touchControls: [
             ControlConfig(label: String(localized: "Clockwise"), shortPress: PuzzleKeycodes.rightKeypress, longPress: PuzzleKeycodes.middleKeypress, imageName: "arrow.clockwise"), // Left/Right is reversed intentionally to make clockwise the 'default' option
             ControlConfig(label: String(localized: "Counter-Clockwise"), shortPress: PuzzleKeycodes.leftKeypress, longPress: PuzzleKeycodes.middleKeypress, imageName: "arrow.counterclockwise"),
             ControlConfig(label: String(localized: "Lock"), shortPress: PuzzleKeycodes.middleKeypress, longPress: .none, imageName: "lock"),
             ControlConfig(label: String(localized: "Center"), shortPress: MouseClick(usesArrowKeys: true, withModifier: PuzzleKeycodes.CtrlKey), longPress: .none),  // Move centre: Ctrl + arrow keys
-            ControlConfig(label: String(localized: "Shift"), shortPress: MouseClick(usesArrowKeys: true, withModifier: PuzzleKeycodes.ShiftKey, reverseArrowDirections: true), displayCondition: { gameId in // Shift grid: Shift + arrow keys
+            ControlConfig(label: String(localized: "Shift"), shortPress: MouseClick(usesArrowKeys: true, withModifier: PuzzleKeycodes.ShiftKey, reverseArrowDirections: true), displayCondition: { gameId in
+                // Shift grid: Shift + arrow keys
                 // Variaions of Net have a 'wrapping' mode, indicated by a leading "5x5w:" in the game ID. We're looking for the 'w:'
                 return gameId.contains("w:")
             })
