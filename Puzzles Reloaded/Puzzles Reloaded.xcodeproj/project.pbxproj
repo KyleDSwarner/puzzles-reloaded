@@ -331,7 +331,7 @@
 		923E63E02C00B9210027DF54 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				923E63DF2C00B9210027DF54 /* Puzzles Reloaded.app */,
+				923E63DF2C00B9210027DF54 /* Simon Tatham Puzzles Reloaded.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
