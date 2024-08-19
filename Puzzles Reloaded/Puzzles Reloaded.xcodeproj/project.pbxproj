@@ -14,6 +14,7 @@
 		9208F0072C2A02F400FD14BD /* untangle.c in Sources */ = {isa = PBXBuildFile; fileRef = 9208F0062C2A02F400FD14BD /* untangle.c */; settings = {COMPILER_FLAGS = "-w -include Untangle-Config.h"; }; };
 		92123DDF2C19E5570020DB69 /* CustomGameConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */; };
 		922D3DDD2C5D0F2F00DD7300 /* PuzzleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922D3DDC2C5D0F2F00DD7300 /* PuzzleStatus.swift */; };
+		92339D5C2C737718002D84FF /* KeyboardInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92339D5B2C737718002D84FF /* KeyboardInputHandler.swift */; };
 		923E63E32C00B9210027DF54 /* PuzzlesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63E22C00B9210027DF54 /* PuzzlesApp.swift */; };
 		923E63E72C00B9220027DF54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 923E63E62C00B9220027DF54 /* Assets.xcassets */; };
 		923E63EB2C00B9220027DF54 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 923E63EA2C00B9220027DF54 /* Preview Assets.xcassets */; };
@@ -142,7 +143,8 @@
 		9208F0062C2A02F400FD14BD /* untangle.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = untangle.c; sourceTree = "<group>"; };
 		92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameConfigView.swift; sourceTree = "<group>"; };
 		922D3DDC2C5D0F2F00DD7300 /* PuzzleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleStatus.swift; sourceTree = "<group>"; };
-		923E63DF2C00B9210027DF54 /* Puzzles Reloaded.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Puzzles Reloaded.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		92339D5B2C737718002D84FF /* KeyboardInputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardInputHandler.swift; sourceTree = "<group>"; };
+		923E63DF2C00B9210027DF54 /* Simon Tatham Puzzles Reloaded.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simon Tatham Puzzles Reloaded.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		923E63E22C00B9210027DF54 /* PuzzlesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlesApp.swift; sourceTree = "<group>"; };
 		923E63E62C00B9220027DF54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		923E63E82C00B9220027DF54 /* Puzzles_Reloaded.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Puzzles_Reloaded.entitlements; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 				923E64492C00B97A0027DF54 /* GestureNavigationCoordinator.swift */,
 				923E644D2C00B97A0027DF54 /* PuzzleTapView.swift */,
 				923E644B2C00B97A0027DF54 /* PuzzleInteractionCodes.swift */,
+				92339D5B2C737718002D84FF /* KeyboardInputHandler.swift */,
 			);
 			path = PuzzleInteractions;
 			sourceTree = "<group>";
@@ -667,7 +670,7 @@
 			packageProductDependencies = (
 			);
 			productName = "Puzzles Reloaded";
-			productReference = 923E63DF2C00B9210027DF54 /* Puzzles Reloaded.app */;
+			productReference = 923E63DF2C00B9210027DF54 /* Simon Tatham Puzzles Reloaded.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -752,6 +755,7 @@
 				923E64C62C00BF120027DF54 /* pearl.c in Sources */,
 				923E64E52C00BFBA0027DF54 /* inertia.c in Sources */,
 				923E64692C00B9890027DF54 /* GameView.swift in Sources */,
+				92339D5C2C737718002D84FF /* KeyboardInputHandler.swift in Sources */,
 				923E646A2C00B9890027DF54 /* GameControlsView.swift in Sources */,
 				923E643F2C00B96E0027DF54 /* SettingsView.swift in Sources */,
 				923E64B42C00BEDE0027DF54 /* singles.c in Sources */,
@@ -1011,11 +1015,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Simon Tatham Puzzles Reloaded";
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Puzzles Reloaded/Puzzles Reloaded-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1060,11 +1064,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Puzzles Reloaded/Puzzles Reloaded-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

@@ -68,14 +68,6 @@ class PuzzleTapView: UIView {
     func fireKeypress(keycode: MouseClick) {
         
     }
-    
-    // MARK: Keypresses
-    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
-        // TODO: - manage keyboard commands. WASD, Ctrl+S, etc
-        // let keycode = PuzzleKeycodes.SOLVE
-        
-        
-    }
 
     // MARK: Touch Started
     // Triggered when a touch starts.
@@ -96,6 +88,7 @@ class PuzzleTapView: UIView {
         initialTouchLocation = adjustedLocation
         
         // send(location, forEvent: .started)
+    
         
         if let mouseCommand = frontend?.controlOption.shortPress {
             if mouseCommand.useArrowKeys == true {

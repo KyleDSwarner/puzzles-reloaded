@@ -28,12 +28,14 @@ struct GameView: View {
     @State private var translation: CGSize = .zero
     @State private var currentGeometry: CGSize = .zero
     
+    @FocusState private var imageIsFocused: Bool
     @State private var frontend: Frontend
     @State private var effectsManager = EffectsManager()
     
     @State var puzzleImageTransformation: CGAffineTransform = .identity
     
     var game: Game
+    private var keyboardHandler: KeyboardInputHandler?
     
     var touchControls: [ControlConfig] {
         game.gameConfig.touchControls
@@ -48,6 +50,8 @@ struct GameView: View {
     init(game: Game) {
         self.game = game
         frontend = Frontend(game: game)
+        self.keyboardHandler = KeyboardInputHandler(frontend: frontend)
+        //var keyboardHandler = KeyboardInputHandler(frontend: frontend)
         frontend.midend.setGame(game.gameConfig.internalGame)
         
         if(!game.gameConfig.touchControls.isEmpty) {
@@ -96,11 +100,22 @@ struct GameView: View {
                                 .antialiased(true)
                                 .interpolation(.high)
                                 .scaledToFit()
+                                .focusable()
+                                .focused($imageIsFocused)
                                 .overlay {
                                     // MARK: Puzzle Interactions & Gestures
                                     PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $tapAnchor, puzzleFrontend: frontend, allowSingleFingerPanning: game.gameConfig.allowSingleFingerPanning)
                                 }
                                 .transformEffect(puzzleImageTransformation)
+                                // MARK: Keyboard Handling
+                                .onKeyPress { key in                                    
+                                    if key.key == .escape {
+                                        self.cleanupAndBack()
+                                        return .handled
+                                    }
+                                    
+                                    return self.keyboardHandler?.handleKeypress(keypress: key) ?? KeyPress.Result.ignored
+                                }
                                 // Instead of using transformEffect, this setup emulates the translations that are initially applied by our CGAFfineTransform
                                 // This way, we're able to apply animations!
                                 //.modifier(ModdedPuzzleImage(translation: puzzleImageTransformation, anchor: anchor))
@@ -111,6 +126,7 @@ struct GameView: View {
                                         print("Double Tap on Pencil!!")
                                 }
                                  */
+                                
                                 .onChange(of: frontend.puzzleStatus) { old, new in
                                     if(new == .SOLVED) {
                                         //TODO: The affine transform is not animable, and I haven't found a way to animate completions while also keeping the navigation fluid.
@@ -120,8 +136,11 @@ struct GameView: View {
                                         }
                                     }
                                 }
+
                                 .blur(radius: frontend.currentGameInvalidated ? 5 : 0)
-                                .frame(width: min(geometry.size.width, 600), height: min(geometry.size.height, 600)) // 600px set as maximum default size: This limits puzzles from getting too large on ipads
+                                .frame(width: min(geometry.size.width, 800), height: min(geometry.size.height, 800))
+                                //.frame(width: min(geometry.size.width, 600), height: min(geometry.size.height, 600)) // 600px set as maximum default size: This limits puzzles from getting too large on ipads
+                            
                                 
                         }
                         
@@ -130,6 +149,7 @@ struct GameView: View {
                     .onChange(of: geometry.size) {
                         // print("width: \(geometry.size.width), height: \(geometry.size.height)")
                         currentGeometry = geometry.size
+                        imageIsFocused = true
                     }
                     
                     if frontend.displayLoadingScreen {
@@ -419,6 +439,7 @@ struct GameView: View {
         // MARK: On Appear: Configure Frontend & Start Game
         .onAppear {
             frontend.midend.createMidend(frontend: &frontend)
+            imageIsFocused = true
             Task {
                 await frontend.beginGame(isFirstLoad: true, withSaveGame: game.settings.saveGame, withPreferences: game.settings.userPrefs)
             }

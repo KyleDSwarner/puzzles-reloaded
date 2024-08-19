@@ -88,12 +88,15 @@ struct PuzzleInteractionResponse {
 
 struct ButtonPress {
     let keycode: Int
+    let character: Character?
     
     init(keycode: Int) {
         self.keycode = keycode
+        self.character = nil
     }
     
     init(for character: Character?) {
+        self.character = character
         self.keycode = Int(character?.asciiValue ?? 0)
     }
 }

@@ -240,7 +240,6 @@ extension PuzzleImageManager {
     }
     
     func placeImageFragment(image: CGImage?, x: Int, y: Int, width: Int, height: Int) {
-        print("Drawing Image Fragment")
         
         guard let unwrappedImage = image else {
             print("No image provided when redrawing blitter")
@@ -251,16 +250,6 @@ extension PuzzleImageManager {
         
         bitmap.draw(unwrappedImage, in: rect, byTiling: false)
     }
-    
-    /*
-    func createBlitter() -> blitter {
-        return blitter(
-    }
-    
-    func createImageFromBitmap() {
-        self.toImage()
-    }
-     */
     
 }
 
