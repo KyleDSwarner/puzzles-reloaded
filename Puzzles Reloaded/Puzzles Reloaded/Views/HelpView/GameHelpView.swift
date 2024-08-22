@@ -76,6 +76,7 @@ struct GameHelpView: View {
                 }
                 .padding(15)
                 .navigationTitle("Help")
+                    #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading) {
@@ -87,6 +88,7 @@ struct GameHelpView: View {
                     }
                     
                 }
+                    #endif
             }
         }
     }

@@ -73,7 +73,9 @@ struct AboutView: View {
             }
         }
         .navigationTitle("About")
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 }
 

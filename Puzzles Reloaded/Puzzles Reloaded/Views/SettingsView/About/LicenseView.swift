@@ -26,7 +26,9 @@ struct LicenseView: View {
                 """, comment: "App License (MIT, with exclusions for assets)")
         }
         .navigationTitle("Privacy Policy")
+#if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
         .padding(20)
     }
 }

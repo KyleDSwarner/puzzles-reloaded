@@ -33,14 +33,17 @@ struct CustomGameConfigView: View {
                     //.padding(.horizontal, 5)
                     //.background(.gray)
                     //.clipShape(RoundedRectangle(cornerRadius: 5))
+                    #if os(iOS)
                         .keyboardType(.numberPad)
                     //.submitLabel(.done)
+                    
                         .onReceive(NotificationCenter.default.publisher(for: UITextField.textDidBeginEditingNotification)) { obj in
                             // Select all text automatically when you tap on the text field for easier data entry
                             if let textField = obj.object as? UITextField {
                                 textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
                             }
                         }
+                    #endif
                     Stepper("", value: menuItem.intValue, in: 0...100)
                         .accessibilityHidden(true)
                 }

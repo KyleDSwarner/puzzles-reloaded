@@ -100,6 +100,7 @@ struct SettingsView: View {
                  */
             }
             .navigationTitle("Settings")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -115,6 +116,7 @@ struct SettingsView: View {
                 }
                 
             }
+            #endif
             .onAppear {
                 if game != nil && frontend != nil {
                     let gameParams = frontend?.midend.getGameUserSettings()

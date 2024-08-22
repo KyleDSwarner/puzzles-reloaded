@@ -8,6 +8,7 @@
 import SwiftUI
 
 /// Our UIKit to SwiftUI wrapper view
+#if os(iOS)
 struct PuzzleInteractionsView: UIViewRepresentable {
     
     // Pan & Zoom transform bound to the puzzle image
@@ -53,3 +54,4 @@ struct PuzzleInteractionsView: UIViewRepresentable {
     }
 
 }
+#endif

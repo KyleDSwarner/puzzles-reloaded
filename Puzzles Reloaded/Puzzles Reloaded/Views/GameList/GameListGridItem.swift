@@ -28,7 +28,9 @@ struct GameListGridItem: View {
                     .border(.primary, width: 2)
                 
                     .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                #if os(iOS)
                     .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 5))
+                #endif
                     .contextMenu() {
                         GameContextMenu(game: game)
                     }

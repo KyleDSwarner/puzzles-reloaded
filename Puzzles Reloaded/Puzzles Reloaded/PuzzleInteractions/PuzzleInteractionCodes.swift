@@ -86,6 +86,10 @@ struct PuzzleInteractionResponse {
     static let unused = PKR_UNUSED
 }
 
+enum MouseClickType {
+    case LEFT, RIGHT, MIDDLE
+}
+
 struct ButtonPress {
     let keycode: Int
     let character: Character?

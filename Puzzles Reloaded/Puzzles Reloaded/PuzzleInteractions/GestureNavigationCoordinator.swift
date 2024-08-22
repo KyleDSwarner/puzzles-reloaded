@@ -15,6 +15,7 @@ struct GestureBoundaries {
     static let maximumOverscrollFactorY = 0.5
 }
 
+#if os(iOS)
 extension UIView {
     var globalPoint :CGPoint? {
         return self.superview?.convert(self.frame.origin, to: nil)
@@ -395,3 +396,4 @@ extension PuzzleInteractionsView {
         }
     }
 }
+#endif

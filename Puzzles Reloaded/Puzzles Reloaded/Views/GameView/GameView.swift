@@ -102,10 +102,12 @@ struct GameView: View {
                                 .scaledToFit()
                                 .focusable()
                                 .focused($imageIsFocused)
+                            #if os(iOS)
                                 .overlay {
                                     // MARK: Puzzle Interactions & Gestures
                                     PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $tapAnchor, puzzleFrontend: frontend, allowSingleFingerPanning: game.gameConfig.allowSingleFingerPanning)
                                 }
+                            #endif
                                 .transformEffect(puzzleImageTransformation)
                                 // MARK: Keyboard Handling
                                 .onKeyPress { key in                                    
@@ -250,7 +252,9 @@ struct GameView: View {
         }
         
         .navigationTitle(game.gameConfig.name)
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
         .navigationBarBackButtonHidden(true)
         .background(Color("Puzzle Background"))
 
@@ -274,6 +278,7 @@ struct GameView: View {
         }
         
         // MARK: Toolbar
+#if os(iOS)
         .toolbar {
             // MARK: Top Toolbar
             ToolbarItem(placement: .topBarLeading) {
@@ -435,6 +440,7 @@ struct GameView: View {
                 .menuOrder(.fixed)
             }
         }
+        #endif
         
         // MARK: On Appear: Configure Frontend & Start Game
         .onAppear {
@@ -445,6 +451,7 @@ struct GameView: View {
             }
         }
         // MARK: Background & App Terminate notifications
+        #if os(iOS)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification), perform: { output in
                 print("Backgrounding app; Saving Data")
                 saveUserData()
@@ -454,6 +461,7 @@ struct GameView: View {
                 print("Shutting down app; Saving Data")
                 saveUserData()
             })
+        #endif
     }
     
     func cancelGameGenerationAndRegernateMidend() {

@@ -43,6 +43,7 @@ struct GameCustomSettingsView: View {
                     }
                 }
                 .navigationTitle("\(gameTitle) Configuration")
+            /*
                 .navigationBarTitleDisplayMode(.inline)
 
                 .toolbar {
@@ -56,12 +57,15 @@ struct GameCustomSettingsView: View {
                             saveChanges()
                         }
                     }
+                    #if os(iOS)
                     ToolbarItem(placement: .keyboard) {
                         Button("Done") {
                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         }
                     }
+                    #endif
                 }
+             */
             }
         // MARK: Create Game Menu Object
         .onAppear {

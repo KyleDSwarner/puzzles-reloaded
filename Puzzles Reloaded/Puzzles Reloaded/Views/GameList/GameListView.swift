@@ -41,7 +41,7 @@ struct GameListView: View {
     
     // MARK: Toolbar Design Configuration
     func configureToolbarDisplay() {
-        
+        #if os(iOS)
         let navbarAppearance = UINavigationBarAppearance()
         navbarAppearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
         navbarAppearance.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.7)
@@ -61,6 +61,7 @@ struct GameListView: View {
         UINavigationBar.appearance().standardAppearance = navbarAppearance
         UINavigationBar.appearance().compactAppearance = navbarAppearance
         UINavigationBar.appearance().scrollEdgeAppearance = navbarAppearance
+        #endif
         
         //UINavigationBar.appearance().tintColor = .white
     }

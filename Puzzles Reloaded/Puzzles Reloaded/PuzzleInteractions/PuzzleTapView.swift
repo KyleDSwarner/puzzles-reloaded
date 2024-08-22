@@ -11,6 +11,7 @@ import SwiftUI
 // UIView responsible for catching taps, long presses, atznd drags on the main puzzle.
 // This view is attaches to the main puzzle image as an overlay, via PuzzleInteractionsView
 // (The pan & zoom interactions are also attached there)
+#if os(iOS)
 class PuzzleTapView: UIView {
     
     @AppStorage(AppSettings.key) var settings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
@@ -27,6 +28,8 @@ class PuzzleTapView: UIView {
     private var dragDeadzoneExceeded = false
     private var initialTouchLocation: CGPoint = .zero
     private var arrowKeyTapLocation: CGPoint = .zero
+    private var mouseLeftClick = false
+    private var mouseEventHandled = false
     
     // Our main initializer, making sure interaction is enabled.
     override init(frame: CGRect) {
@@ -73,7 +76,11 @@ class PuzzleTapView: UIView {
     // Triggered when a touch starts.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
-               
+        
+        
+        
+
+        
         
         // Ensure the image hasn't been disabled (during loading states)
         guard frontend?.currentGameInvalidated == false else {
@@ -83,6 +90,21 @@ class PuzzleTapView: UIView {
         let location = touch.location(in: self)
         
         let adjustedLocation = adjustedTapLocation(point: location)
+        
+        // Mouse handling logic is disabled: Rely on short/long presses for now.
+        // This code is not properly handling right clicks and cannot be relied upon
+        
+        /*
+        let type = touch.type
+        
+        if type == .indirectPointer { // Mouse Click!
+            mouseLeftClick = true
+            print("Touch Begain: INDIRECT POINTER LEFT CLICK")
+            handleMouseClick(.LEFT, location: location, event: event)
+            return
+        }
+         */
+        
         
         // Store the initial location for later use
         initialTouchLocation = adjustedLocation
@@ -123,8 +145,6 @@ class PuzzleTapView: UIView {
             return
         }
         
-        
-        
         guard isSingleFingerNavEnabled == false else {
             // print("Ignoring movement - single finger nav is enabled")
             return
@@ -138,8 +158,8 @@ class PuzzleTapView: UIView {
         
         let location = touch.location(in: self)
         
-        
         let adjustedLocation = adjustedTapLocation(point: location)
+        
         
         /*
          MARK: Apple Pencil Logic
@@ -162,7 +182,14 @@ class PuzzleTapView: UIView {
         // End the long press timer if it isn't already
         longPressTimer.invalidate()
         
-        let command = isLongPress ? self.frontend?.controlOption.longPress : self.frontend?.controlOption.shortPress
+        var command = isLongPress ? self.frontend?.controlOption.longPress : self.frontend?.controlOption.shortPress
+        
+        // If this is a mouse, override the command layer to always stick to the left/right mouse button
+        /*
+        if touch.type == .indirectPointer {
+            command = PuzzleKeycodes.leftKeypress
+        }
+         */
         
         
         // For arrow key-based commands, compare the current position to the initial postion (stored in `touchesStart`), and move the cursor when the distance is greater than the tile size.
@@ -211,7 +238,7 @@ class PuzzleTapView: UIView {
             
         } else {
             // MARK: Usual Tap & Drag Commands Based on mouseclicks & drags
-            if !isDragging && !isLongPress && command != nil {
+            if !isDragging && !isLongPress && !mouseLeftClick && command != nil {
                 // We need to send the short press' keyDown command - but only the first time.
                 sendKeypress(command: command!.down, location: location, physicalFeedbackType: .SHORT)
                 //self.frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: command!.down)
@@ -230,13 +257,7 @@ class PuzzleTapView: UIView {
     
     private func sendArrowKeyCommand(command: Int, modifier: Int?) {
         let mod: Int = modifier ?? 0
-        
-        //triggerShortPressEffects()
-        
-        //frontend?.midend.sendKeypress(x: -1, y: -1, keypress: command | mod)
-        
         sendKeypress(command: command | mod, physicalFeedbackType: .SHORT)
-        
     }
 
     // MARK: Touch Finished
@@ -256,6 +277,18 @@ class PuzzleTapView: UIView {
         guard touches.count == 1 else {
             return
         }
+        
+        /*
+         let type = touch.type
+         
+        if type == .indirectPointer {
+            print("Left click in progress? \(mouseLeftClick)")
+            let mouseType: MouseClickType = mouseLeftClick ? .LEFT : .RIGHT
+            handleMouseClick(mouseType,  location: location, buttonReleased: true, event: event)
+            resetTouchInfo()
+            return // Short Circuit, don't fire the rest of it!
+        }
+         */
         
         // If this is a long press or if we're dragging, we've already sent the 'down' command - we just need to fire up.
         let command = getCorrectCommand()
@@ -280,6 +313,46 @@ class PuzzleTapView: UIView {
         
         // Reset Values
         resetTouchInfo()
+    }
+    
+    // MARK: Mouse Click Handling
+    private func handleMouseClick(_ type: MouseClickType, location: CGPoint, buttonReleased: Bool = false, event uiEvent: UIEvent?) {
+        //guard mouseEventHandled == false, let event = uiEvent else {
+        //    print("Mouse Event already handled, bypassing")
+        //    return
+        //}
+        
+        guard let event = uiEvent else {
+            return
+        }
+        
+        let raiseLeftControl = event.modifierFlags.contains(.control) || event.modifierFlags.contains(.command)
+        
+        print("type: \(type) raising left control: \(raiseLeftControl)")
+        
+        // To prevent left & right click handling logic from both firing & conflicting, this boolean short-circuits the mouse handling logic.
+        mouseEventHandled = true
+        
+        if type == .RIGHT || raiseLeftControl == true {
+            print("RIGHT CLICK")
+            let rightClick = PuzzleKeycodes.rightKeypress
+            
+            // Right clicks happen all at once via `touchEnded`, so we need to send both down & up commands.
+            sendKeypress(command: rightClick.down, location: location)
+            sendKeypress(command: rightClick.up, location: location, physicalFeedbackType: .SHORT)
+            //return MouseClickEvent(command: RIGHT_BUTTON, feedbackType: .SHORT)
+        } else {
+            print("LEFT CLICK")
+            let leftClick = PuzzleKeycodes.leftKeypress
+            let command = buttonReleased ? leftClick.up : leftClick.down
+            let feedback: FeedbackType = buttonReleased ? .SHORT : .NONE
+            
+            sendKeypress(command: command, location: location, physicalFeedbackType: feedback)
+            //sendKeypress(command: LEFT_BUTTON, physicalFeedbackType: .SHORT)
+        }
+        
+        
+        //sendKeypress(command: mouseClick.up, physicalFeedbackType: .SHORT)
     }
     
     /**
@@ -313,12 +386,6 @@ class PuzzleTapView: UIView {
             effectsManager.triggerEffect(feedbackType: physicalFeedbackType)
         }
     }
-    
-    func sentKeypressNoLocation(command: Int?) {
-        guard let unwrappedCommand = command else {
-            return
-        }
-    }
 
     // Triggered when the user's touch is interrupted, e.g. by a low battery alert.
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -333,6 +400,8 @@ class PuzzleTapView: UIView {
         longPressTimer.invalidate()
         initialTouchLocation = .zero
         arrowKeyTapLocation = .zero
+        mouseLeftClick = false
+        mouseEventHandled = false
     }
     
     func triggerShortPressEffects() {
@@ -343,3 +412,4 @@ class PuzzleTapView: UIView {
         effectsManager.triggerLongPressEffects()
     }
 }
+#endif
