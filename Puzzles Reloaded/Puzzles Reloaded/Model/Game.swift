@@ -10,6 +10,9 @@ import Foundation
 import SwiftUI
 import SwiftData
 
+/**
+ This object is used to merge together the internal game config alongside the user's settings (which are stored in SwiftData). The game menus are given an array of these objects to form the complete game list.
+ */
 @Observable class Game: Identifiable, Hashable {
     
     static func == (lhs: Game, rhs: Game) -> Bool {
@@ -43,6 +46,6 @@ import SwiftData
         self.gameConfig.isExperimental
     }
     
-    static var exampleGameModel = Game(game: GameConfig.exampleGame, settings: GameUserSettings(gameName: "abcd"))
+    static var exampleGameModel = Game(game: GameConfig.exampleGame, settings: GameUserSettings(identifier: "abcd"))
     
 }

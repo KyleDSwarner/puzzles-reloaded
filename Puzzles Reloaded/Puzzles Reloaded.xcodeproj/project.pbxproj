@@ -26,7 +26,6 @@
 		923E64342C00B9680027DF54 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642E2C00B9680027DF54 /* GlobalFunctions.swift */; };
 		923E64352C00B9680027DF54 /* PuzzleUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E642F2C00B9680027DF54 /* PuzzleUtils.swift */; };
 		923E643C2C00B96E0027DF54 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64362C00B96E0027DF54 /* AppSettings.swift */; };
-		923E643E2C00B96E0027DF54 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64382C00B96E0027DF54 /* SettingsModel.swift */; };
 		923E643F2C00B96E0027DF54 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64392C00B96E0027DF54 /* SettingsView.swift */; };
 		923E64402C00B96E0027DF54 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E643A2C00B96E0027DF54 /* UserPreferences.swift */; };
 		923E64452C00B9740027DF54 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64412C00B9740027DF54 /* Game.swift */; };
@@ -159,7 +158,6 @@
 		923E642E2C00B9680027DF54 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		923E642F2C00B9680027DF54 /* PuzzleUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleUtils.swift; sourceTree = "<group>"; };
 		923E64362C00B96E0027DF54 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
-		923E64382C00B96E0027DF54 /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		923E64392C00B96E0027DF54 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		923E643A2C00B96E0027DF54 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		923E64412C00B9740027DF54 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -379,6 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				923E64032C00B94E0027DF54 /* PuzzleConfig.swift */,
+				923E64422C00B9740027DF54 /* GameConfig.swift */,
 				923E64042C00B94E0027DF54 /* PuzzlesAtoM.swift */,
 				923E652B2C00D62A0027DF54 /* PuzzlesNtoZ.swift */,
 				923E652D2C00D6DF0027DF54 /* PuzzlesXSheep.swift */,
@@ -413,8 +412,8 @@
 			isa = PBXGroup;
 			children = (
 				923E64362C00B96E0027DF54 /* AppSettings.swift */,
-				923E64382C00B96E0027DF54 /* SettingsModel.swift */,
 				923E643A2C00B96E0027DF54 /* UserPreferences.swift */,
+				923E646E2C00B9E30027DF54 /* GameUserSettings.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -423,8 +422,6 @@
 			isa = PBXGroup;
 			children = (
 				923E64412C00B9740027DF54 /* Game.swift */,
-				923E64422C00B9740027DF54 /* GameConfig.swift */,
-				923E646E2C00B9E30027DF54 /* GameUserSettings.swift */,
 				923E64432C00B9740027DF54 /* GameManager.swift */,
 			);
 			path = Model;
@@ -809,7 +806,6 @@
 				923E64D52C00BF490027DF54 /* matching.c in Sources */,
 				923E645C2C00B9840027DF54 /* GameListGridItem.swift in Sources */,
 				923E64C32C00BF120027DF54 /* pegs.c in Sources */,
-				923E643E2C00B96E0027DF54 /* SettingsModel.swift in Sources */,
 				923E64CC2C00BF2D0027DF54 /* netslide.c in Sources */,
 				923E64F62C00C00A0027DF54 /* seismic.c in Sources */,
 				923E64D72C00BF490027DF54 /* malloc.c in Sources */,

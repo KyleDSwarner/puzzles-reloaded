@@ -31,6 +31,7 @@ struct GameView: View {
     @FocusState private var imageIsFocused: Bool
     @State private var frontend: Frontend
     @State private var effectsManager = EffectsManager()
+    @State private var gameWon = false // Gate that allows us to know if the game has been won (now or in the past)
     
     @State var puzzleImageTransformation: CGAffineTransform = .identity
     
@@ -77,6 +78,8 @@ struct GameView: View {
     func newGame() {
         Task {
             await frontend.beginGame()
+            self.game.settings.stats.updateStats_NewGame(gameId: frontend.gameId, gameDescription: frontend.currentGamePresetDescription)
+            self.gameWon = false
             self.puzzleImageTransformation = .identity
         }
     }
@@ -133,6 +136,12 @@ struct GameView: View {
                                     if(new == .SOLVED) {
                                         //TODO: The affine transform is not animable, and I haven't found a way to animate completions while also keeping the navigation fluid.
                                         enableCompletionAnimation = true
+                                        
+                                        // Increment the game winning stats. `gameWon` gates this so it can only fire once per game.
+                                        if gameWon == false {
+                                            gameWon = true
+                                            game.settings.stats.gameWon(gameId: frontend.gameId)
+                                        }
                                         withAnimation(.easeInOut(duration: 0.5)) {
                                             puzzleImageTransformation = .identity
                                         }
@@ -270,7 +279,7 @@ struct GameView: View {
         }
         // MARK: Settings Page Sheet
         .sheet(isPresented: $settingsPageDisplayed) {
-            SettingsView(game: game.gameConfig, frontend: frontend)
+            SettingsView(game: game, frontend: frontend)
         }
         .sheet(isPresented: $customGameSettingsDisplayed) {
             GameCustomSettingsView(gameTitle: game.gameConfig.name, frontend: frontend, newGameCallback: newGame)
@@ -447,7 +456,13 @@ struct GameView: View {
             frontend.midend.createMidend(frontend: &frontend)
             imageIsFocused = true
             Task {
+                let isLoadingFromSavedGame: Bool = game.settings.saveGame != nil
                 await frontend.beginGame(isFirstLoad: true, withSaveGame: game.settings.saveGame, withPreferences: game.settings.userPrefs)
+                
+                // If there's no saved game, increment the 'games played' stat
+                if isLoadingFromSavedGame == false {
+                    self.game.settings.stats.updateStats_NewGame(gameId: frontend.gameId, gameDescription: frontend.currentGamePresetDescription)
+                }
             }
         }
         // MARK: Background & App Terminate notifications

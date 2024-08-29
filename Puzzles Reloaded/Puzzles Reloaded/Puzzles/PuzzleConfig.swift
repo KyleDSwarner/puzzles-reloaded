@@ -8,11 +8,7 @@
 
 import Foundation
 
-struct Puzzles: RawRepresentable {
-    var rawValue: GameConfig
-}
-
-extension Puzzles {
+struct Puzzles {
     
     static var allPuzzles: [GameConfig] {
         puzzlesAtoM + puzzlesNtoZ + puzzlesXsheep

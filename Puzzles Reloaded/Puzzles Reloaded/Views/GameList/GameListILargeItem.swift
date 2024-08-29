@@ -62,7 +62,7 @@ struct GameListLargeItem: View {
                 VStack(alignment: .leading) {
                     Text(gameConfig.name)
                         .font(.title)
-                    Text(gameConfig.description)
+                    Text(gameConfig.shortDescription)
                         .font(.subheadline)
                 }
                 

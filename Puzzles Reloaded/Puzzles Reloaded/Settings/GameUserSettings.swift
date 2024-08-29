@@ -20,8 +20,8 @@ class GameUserSettings {
     var customDefaultPreset: [CustomMenuItem] = [] // This is populated from the game's custom menu settings view
     var customPuzzlePresets: [CustomGamePreset] = []
     
-    init(gameName: String) {
-        self.gameName = gameName
+    init(identifier: String) {
+        self.gameName = identifier
         self.category = .none
         self.stats = GameStats()
         self.saveGame = nil
@@ -57,6 +57,8 @@ enum GameCategory: Codable {
 struct GameStats: Codable {
     var gamesPlayed = 0
     var gamesWon = 0
+    var lastPlayed: Date?
+    //var history: [GameHistory] = [GameHistory]()
     
     var winPercentage: Double {
         guard gamesPlayed > 0 else {
@@ -64,6 +66,37 @@ struct GameStats: Codable {
         }
         
         return Double(gamesWon / gamesPlayed)
+    }
+    
+    mutating func updateStats_NewGame(gameId: String, gameDescription: String) {
+        print("New Game Started! id: \(gameId) description: \(gameDescription)") // Note: These values aren't quite ready when the app is starting up, we'll need to refactor this.
+        gamesPlayed += 1
+        lastPlayed = Date.now
+        
+        //let newHistory = GameHistory(gameId: "test123", description: "Describing")
+        //self.history.append(newHistory)
+        
+        // Limit the size of the history to the last 20 items
+        //self.history = self.history.suffix(20)
+    }
+    
+    mutating func gameWon(gameId: String) {
+        gamesWon += 1
+    }
+}
+
+struct GameHistory: Codable, Identifiable {
+    var id = UUID()
+    var gameId: String = ""
+    var description: String = ""
+    var datePlayed: Date = Date.now
+    var gameWon: Bool = false
+    
+    init(gameId: String, description: String) {
+        self.gameId = gameId
+        self.description = description
+        self.datePlayed = Date.now
+        self.gameWon = false
     }
 }
 

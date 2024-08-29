@@ -23,11 +23,8 @@ class KeyboardInputHandler {
     }
     
     func handleKeypress(keypress: KeyPress) -> KeyPress.Result {
-        print("Keypress Pressed: \(keypress.characters)")
+        // print("Keypress Pressed: \(keypress.characters)")
         
-        var ctrlModifier = false
-        
-        let something: String = "a"
         //let keypress: Character = something.first
         guard let keypressChar = keypress.characters.first else {
             return .ignored

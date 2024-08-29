@@ -67,20 +67,11 @@ class PuzzleTapView: UIView {
         //print("Scale: \(Float(scaleFactor)) old X: \(point.x) new X: \(adjustedPoint.x)")
         return adjustedPoint
     }
-    
-    func fireKeypress(keycode: MouseClick) {
-        
-    }
 
     // MARK: Touch Started
     // Triggered when a touch starts.
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
-        
-        
-        
-
-        
         
         // Ensure the image hasn't been disabled (during loading states)
         guard frontend?.currentGameInvalidated == false else {
@@ -182,7 +173,7 @@ class PuzzleTapView: UIView {
         // End the long press timer if it isn't already
         longPressTimer.invalidate()
         
-        var command = isLongPress ? self.frontend?.controlOption.longPress : self.frontend?.controlOption.shortPress
+        let command = isLongPress ? self.frontend?.controlOption.longPress : self.frontend?.controlOption.shortPress
         
         // If this is a mouse, override the command layer to always stick to the left/right mouse button
         /*

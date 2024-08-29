@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 typealias NumButtonsFunction = (_ gameId: String) -> [ControlConfig]
 typealias FireButtonFunction = (_ button: ButtonPress?) -> Void
@@ -21,19 +22,19 @@ class GameConfig: Identifiable, Hashable {
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
-        hasher.combine(description)
+        hasher.combine(shortDescription)
     }
     
     static let defaultNumericFunction: (String) -> Int = { _ in 0 }
     
     var id = UUID()
-    var name: String
+    // var name: String
+    var identifier: String
     var imageName: String
-    var description: String
     var isExperimental: Bool
     
-    var instructions: String?
-    var controlInfo: String?
+    // var instructions: String?
+    // var controlInfo: String?
     var customParamInfo: String?
     var userParamInfo: String?
     
@@ -49,13 +50,10 @@ class GameConfig: Identifiable, Hashable {
     var internalGame: game // The reference to the game representation from the c code.
     
     init(
-        name: String,
-        description: String,
-        instructions: String? = nil,
-        controlInfo: String? = nil,
+        identifier: String,
         customParamInfo: String? = nil,
         userParamInfo: String? = nil,
-        imageName: String,
+        imageName: String? = nil,
         internalGame: game,
         isExperimental: Bool = false,
         allowSingleFingerPanning: Bool = false,
@@ -64,14 +62,9 @@ class GameConfig: Identifiable, Hashable {
         buttonControls: [ControlConfig] = [],
         overflowMenuControls: [ControlConfig] = []) {
             
-            self.name = name
-            self.description = description
-            self.instructions = instructions
-            self.controlInfo = controlInfo
-            self.customParamInfo = customParamInfo
-            self.userParamInfo = userParamInfo
+            self.identifier = identifier
         
-            self.imageName = imageName
+            self.imageName = imageName ?? identifier // In case we need to pass in a cusom image name, otherwise reuse the main identifier.
             self.isExperimental = isExperimental
             self.internalGame = internalGame
             
@@ -82,6 +75,28 @@ class GameConfig: Identifiable, Hashable {
             self.overflowMenuControls = overflowMenuControls
             
             self.numericButtonsBuilder = { _ in []}
+    }
+    
+    // MARK: Localized Strings
+    
+    var name: String {
+        let nameKey = "\(self.identifier)_name"
+        return String(localized: String.LocalizationValue(nameKey), table: "Puzzles")
+    }
+    
+    var shortDescription: String {
+        let descriptionKey = "\(self.identifier)_description"
+        return String(localized: String.LocalizationValue(descriptionKey), table: "Puzzles")
+    }
+    
+    var instructions: String {
+        let instructionsKey = "\(self.identifier)_instructions"
+        return String(localized: String.LocalizationValue(instructionsKey), table: "Puzzles")
+    }
+    
+    var controlInfo: String {
+        let controlsKey = "\(self.identifier)_controls"
+        return String(localized: String.LocalizationValue(controlsKey), table: "Puzzles")
     }
     
     func numericButtonsBuilder(_ numericButtonsBuilder: @escaping NumButtonsFunction) -> Self {
@@ -95,14 +110,7 @@ class GameConfig: Identifiable, Hashable {
     }
     
     static let exampleGame = GameConfig(
-        name: "Example Game",
-        description: "Example Text",
-        instructions: """
-        Here are some long form game instructions. These will tend to get pretty wordy!
-
-        Multiple lines go here. Anyway, how are you today? I hope everything is great.
-        """,
-        controlInfo: "Controls go here. Left click, right click, all that jazz.",
+        identifier: "signpost",
         customParamInfo: "Information about custom parameters go here",
         userParamInfo: "Information about user parameters go here",
         imageName: "signpost",

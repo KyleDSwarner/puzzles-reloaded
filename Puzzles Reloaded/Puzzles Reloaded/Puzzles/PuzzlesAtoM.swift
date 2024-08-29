@@ -35,21 +35,13 @@ extension Puzzles {
     
     // MARK: Blackbox
     static let puzzle_blackbox = GameConfig(
-        name: String(localized: "blackbox_name", table: "Puzzles"),
-        description: String(localized: "blackbox_description", table: "Puzzles"),
-        instructions: String(localized: "blackbox_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "blackbox_controls", table: "Puzzles"),
-        imageName: "blackbox",
+        identifier: "blackbox",
         internalGame: blackbox
     )
     
     // MARK: Bridges
     static let puzzle_bridges = GameConfig(
-        name: String(localized: "bridges_name", table: "Puzzles"),
-        description: String(localized: "bridges_description", table: "Puzzles"),
-        instructions: String(localized: "bridges_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "bridges_controls", table: "Puzzles"),
-        imageName: "bridges",
+        identifier: "bridges",
         internalGame: bridges,
         overflowMenuControls: [
             ControlConfig(label: "Mark Neighbors", command: ButtonPress(for: "G"))
@@ -58,40 +50,24 @@ extension Puzzles {
     
     // MARK: Cube
     static let puzzle_cube = GameConfig(
-        name: String(localized: "cube_name", table: "Puzzles"),
-        description: String(localized: "cube_description", table: "Puzzles"),
-        instructions: String(localized: "cube_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "cube_controls", table: "Puzzles"),
-        imageName: "cube",
+        identifier: "cube",
         internalGame: cube)
     
     // MARK: Dominosa
     static let puzzle_dominosa = GameConfig(
-        name: String(localized: "dominosa_name", table: "Puzzles"),
-        description: String(localized: "dominosa_description", table: "Puzzles"),
-        instructions: String(localized: "dominosa_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "dominosa_controls", table: "Puzzles"),
-        imageName: "dominosa",
+        identifier: "dominosa",
         internalGame: dominosa
     )
     
     // MARK: Fifteen
     static let puzzle_fifteen = GameConfig(
-        name: String(localized: "fifteen_name", table: "Puzzles"),
-        description: String(localized: "fifteen_description", table: "Puzzles"),
-        instructions: String(localized: "fifteen_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "fifteen_controls", table: "Puzzles"),
-        imageName: "fifteen",
+        identifier: "fifteen",
         internalGame: fifteen
     )
     
     // MARK: Filling
     static let puzzle_filling = GameConfig(
-        name: String(localized: "filling_name", table: "Puzzles", comment: "Display name for the game 'filling'"),
-        description: String(localized: "filling_description", table: "Puzzles", comment: "Short description for the game 'filling'"),
-        instructions: String(localized: "filling_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "filling_controls", table: "Puzzles"),
-        imageName: "filling",
+        identifier: "filling",
         internalGame: filling,
         displayClearButtonInToolbar: true
     ).numericButtonsBuilder({ gameId in
@@ -102,65 +78,41 @@ extension Puzzles {
     
     // MARK: Flip
     static let puzzle_flip = GameConfig(
-        name: String(localized: "flip_name", table: "Puzzles"),
-        description: String(localized: "flip_description", table: "Puzzles"),
-        instructions: String(localized: "flip_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "flip_controls", table: "Puzzles"),
-        imageName: "flip",
+        identifier: "flip",
         internalGame: flip
     )
     
     // MARK: Flood
     static let puzzle_flood = GameConfig(
-        name: String(localized: "flood_name", table: "Puzzles"),
-        description: String(localized: "flood_description", table: "Puzzles"),
-        instructions: String(localized: "flood_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "flood_controls", table: "Puzzles"),
-        imageName: "flood",
+        identifier: "flood",
         internalGame: flood,
         touchControls: [ControlConfig(label: "", shortPress: PuzzleKeycodes.leftKeypress, longPress: .none)] // Left click only, disables long presses
     )
     
     // MARK: Galaxies
     static let puzzle_galaxies = GameConfig(
-        name: String(localized: "galaxies_name", table: "Puzzles"),
-        description: String(localized: "galaxies_description", table: "Puzzles"),
-        instructions: String(localized: "galaxies_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "galaxies_controls", table: "Puzzles"),
-        imageName: "galaxies",
+        identifier: "galaxies",
         internalGame: galaxies,
         allowSingleFingerPanning: false
     )
     
     // MARK: Guess
     static let puzzle_guess = GameConfig(
-        name: String(localized: "guess_name", table: "Puzzles"),
-        description: String(localized: "guess_description", table: "Puzzles"),
-        instructions: String(localized: "guess_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "guess_controls", table: "Puzzles"),
-        imageName: "guess",
+        identifier: "guess",
         internalGame: guess,
         allowSingleFingerPanning: false
     )
     
     // MARK: Inertia
     static let puzzle_intertia = GameConfig(
-        name: String(localized: "intertia_name", table: "Puzzles"),
-        description: String(localized: "intertia_description", table: "Puzzles"),
-        instructions: String(localized: "intertia_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "intertia_controls", table: "Puzzles"),
-        imageName: "inertia",
+        identifier: "inertia",
         internalGame: inertia,
         allowSingleFingerPanning: false
     )
     
     // MARK: Keen
     static let puzzle_keen = GameConfig(
-        name: String(localized: "keen_name", table: "Puzzles"),
-        description: String(localized: "keen_description", table: "Puzzles"),
-        instructions: String(localized: "keen_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "keen_controls", table: "Puzzles"),
-        imageName: "keen",
+        identifier: "keen",
         internalGame: keen,
         allowSingleFingerPanning: false,
         displayClearButtonInToolbar: true
@@ -177,42 +129,26 @@ extension Puzzles {
     
     // MARK: Light Up
     static let puzzle_lightup = GameConfig(
-        name: String(localized: "lightup_name", table: "Puzzles"),
-        description: String(localized: "lightup_description", table: "Puzzles"),
-        instructions: String(localized: "lightup_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "lightup_controls", table: "Puzzles"),
-        imageName: "lightup",
+        identifier: "lightup",
         internalGame: lightup
     )
     
     // MARK: Loopy
     static let puzzle_loopy = GameConfig(
-        name: String(localized: "loopy_name", table: "Puzzles"),
-        description: String(localized: "loopy_description", table: "Puzzles"),
-        instructions: String(localized: "loopy_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "loopy_controls", table: "Puzzles"),
-        imageName: "loopy",
+        identifier: "loopy",
         internalGame: loopy,
         allowSingleFingerPanning: true
     )
     
     // MARK: Magnets
     static let puzzle_magnets = GameConfig(
-        name: String(localized: "magnets_name", table: "Puzzles"),
-        description: String(localized: "magnets_description", table: "Puzzles"),
-        instructions: String(localized: "magnets_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "magnets_controls", table: "Puzzles"),
-        imageName: "magnets",
+        identifier: "magnets",
         internalGame: magnets
     )
     
     // MARK: MAP
     static let puzzle_map = GameConfig(
-        name: String(localized: "map_name", table: "Puzzles"),
-        description: String(localized: "map_description", table: "Puzzles"),
-        instructions: String(localized: "map_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "map_controls", table: "Puzzles"),
-        imageName: "map",
+        identifier: "map",
         internalGame: map,
         allowSingleFingerPanning: false,
         overflowMenuControls: [
@@ -222,22 +158,14 @@ extension Puzzles {
     
     // MARK: Mines
     static let puzzle_mines = GameConfig(
-        name: String(localized: "mines_name", table: "Puzzles"),
-        description: String(localized: "mines_description", table: "Puzzles"),
-        instructions: String(localized: "mines_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "mines_controls", table: "Puzzles"),
-        imageName: "mines",
+        identifier: "mines",
         internalGame: mines,
         allowSingleFingerPanning: true
     )
     
     // MARK: Mosaic
     static let puzzle_mosaic = GameConfig(
-        name: String(localized: "mosaic_name", table: "Puzzles"),
-        description: String(localized: "mosaic_description", table: "Puzzles"),
-        instructions: String(localized: "mosaic_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "mosaic_controls", table: "Puzzles"),
-        imageName: "mosaic",
+        identifier: "mosaic",
         internalGame: mosaic
     )
     

@@ -16,7 +16,7 @@ struct SettingsView: View {
     @State private var gameSettingsMenu: [CustomMenuItem] = []
     
     // Game, to be provided when the settings menu is selected from within a game
-    var game: GameConfig? = nil
+    var game: Game? = nil
     var frontend: Frontend? = nil
     
     var body: some View {
@@ -52,12 +52,12 @@ struct SettingsView: View {
                     Text("Disable game information that appears at the bottom of the screen")
                 }
                 
-                if game != nil {
+                if let game = game {
                     if !gameSettingsMenu.isEmpty {
                         Section {
                             CustomGameConfigView(gameMenu: $gameSettingsMenu)
                         } header: {
-                            Text("\(game?.name ?? "Game") Settings")
+                            Text("\(game.gameConfig.name) Settings")
                         } footer: {
                             Text("Note: Some settings may not be applied until the next new game")
                         }
@@ -66,23 +66,30 @@ struct SettingsView: View {
                         Section {
                             Text("No settings available")
                         } header: {
-                            Text("\(game?.name ?? "Game") Settings")
+                            Text("\(game.gameConfig.name) Settings")
+                        }
+                    }
+                    /*
+                    NavigationLink("Game Statistics") {
+                        Text("Games Played: \(game.settings.stats.gamesPlayed)")
+                        Text("Games Won: \(game.settings.stats.gamesWon)")
+                        Text("Win Percentage: \(game.settings.stats.winPercentage)")
+                        Text("Last Played: \(game.settings.stats.lastPlayed ?? Date.now)")
+                    }
+                    */
+                }
+                else { // About Game / Rate / Welcome message should only show up on the root settings page
+                    Section {
+                        Toggle("Display First Run Message", isOn: $appSettings.value.showFirstRunMessage)
+                        NavigationLink("About Puzzles Reloaded") {
+                            AboutView()
+                        }
+                        Button("Rate the App") {
+                            requestReview()
                         }
                     }
                 }
                 
-                Section {
-                    Toggle("Display First Run Message", isOn: $appSettings.value.showFirstRunMessage)
-                    NavigationLink("About Puzzles Reloaded") {
-                        AboutView()
-                    }
-                    Button("Rate the App") {
-                        requestReview()
-                    }
-                }
-                
-                
-
                 /*
                  
                 These sections are designed, but at the moment don't do anything

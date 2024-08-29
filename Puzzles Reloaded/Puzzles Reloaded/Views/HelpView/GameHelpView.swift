@@ -37,21 +37,16 @@ struct GameHelpView: View {
                     }
                     .padding(.bottom, 15)
                     
-                        if let instructions = game.instructions {
-                            Text(instructions)
-                                .multilineTextAlignment(.leading)
-                        }
+                    Text(game.instructions)
+                        .multilineTextAlignment(.leading)
                     
+                    Spacer(minLength: 20)
+                    Divider()
                     
-                    if let controlInfo = game.controlInfo {
-                        Spacer(minLength: 20)
-                        Divider()
-                        
-                        Text("Controls", comment: "Heading for the 'controls' section on help page").font(.title2)
-                            .padding(.bottom, 5)
-                        Text(controlInfo)
-                            .multilineTextAlignment(.leading)
-                    }
+                    Text("Controls", comment: "Heading for the 'controls' section on help page").font(.title2)
+                        .padding(.bottom, 5)
+                    Text(game.controlInfo)
+                        .multilineTextAlignment(.leading)
                     
                     
                     if let customParamText = game.customParamInfo {

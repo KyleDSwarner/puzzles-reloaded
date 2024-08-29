@@ -60,14 +60,14 @@ class GameManager {
             return preferences
         }
         
-        let newPreferences = GameUserSettings(gameName: game.name)
+        let newPreferences = GameUserSettings(identifier: game.identifier)
         context.insert(newPreferences)
 
         return newPreferences
     }
     
     func findExistingPreferences(_ game: GameConfig, from preferences: [GameUserSettings]) -> GameUserSettings? {
-        return preferences.first(where: { $0.gameName == game.name})
+        return preferences.first(where: { $0.identifier == game.identifier})
     }
     
     func filterGameList(category: GameCategory, showExperimentalGames: Bool) -> [Game] {

@@ -39,11 +39,7 @@ extension Puzzles {
     
     // MARK: Net
     static let puzzle_net = GameConfig(
-        name: String(localized: "net_name", table: "Puzzles"),
-        description: String(localized: "net_description", table: "Puzzles"),
-        instructions: String(localized: "net_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "net_controls", table: "Puzzles"),
-        imageName: "net",
+        identifier: "net",
         internalGame: net,
         touchControls: [
             ControlConfig(label: String(localized: "Clockwise"), shortPress: PuzzleKeycodes.rightKeypress, longPress: PuzzleKeycodes.middleKeypress, imageName: "arrow.clockwise"), // Left/Right is reversed intentionally to make clockwise the 'default' option
@@ -64,31 +60,19 @@ extension Puzzles {
     
     // MARK: Netslide
     static let puzzle_netslide = GameConfig(
-        name: String(localized: "netslide_name", table: "Puzzles"),
-        description: String(localized: "netslide_description", table: "Puzzles"),
-        instructions: String(localized: "netslide_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "sixteen_controls", table: "Puzzles"), // This is intentional! Reuses the same control scheme as Sixteen
-        imageName: "netslide",
+        identifier: "netslide",
         internalGame: netslide
     )
     
     // MARK: Palisade
     static let puzzle_palisade = GameConfig(
-        name: String(localized: "palisade_name", table: "Puzzles"),
-        description: String(localized: "palisade_description", table: "Puzzles"),
-        instructions: String(localized: "palisade_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "palisade_controls", table: "Puzzles"),
-        imageName: "palisade",
+        identifier: "palisade",
         internalGame: palisade
     )
     
     // MARK: Pattern
     static let puzzle_pattern = GameConfig(
-        name: String(localized: "pattern_name", table: "Puzzles"),
-        description: String(localized: "pattern_description", table: "Puzzles"),
-        instructions: String(localized: "pattern_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "pattern_controls", table: "Puzzles"),
-        imageName: "pattern",
+        identifier: "pattern",
         internalGame: pattern,
         touchControls: [ // TODO: We'll need special handling for these controls in Net.
             ControlConfig(label: "Black", shortPress: PuzzleKeycodes.leftKeypress, longPress: PuzzleKeycodes.rightKeypress),
@@ -99,105 +83,65 @@ extension Puzzles {
     
     // MARK: Pearl
     static let puzzle_pearl = GameConfig(
-        name: String(localized: "pearl_name", table: "Puzzles"),
-        description: String(localized: "pearl_description", table: "Puzzles"),
-        instructions: String(localized: "pearl_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "pearl_controls", table: "Puzzles"),
-        imageName: "pearl",
+        identifier: "pearl",
         internalGame: pearl,
         allowSingleFingerPanning: false
     )
     
     // MARK: Pegs
     static let puzzle_pegs = GameConfig(
-        name: String(localized: "pegs_name", table: "Puzzles"),
-        description: String(localized: "pegs_description", table: "Puzzles"),
-        instructions: String(localized: "pegs_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "pegs_controls", table: "Puzzles"),
-        imageName: "pegs",
+        identifier: "pegs",
         internalGame: pegs,
         allowSingleFingerPanning: false
     )
     
     // MARK: Range
     static let puzzle_range = GameConfig(
-        name: String(localized: "range_name", table: "Puzzles"),
-        description: String(localized: "range_description", table: "Puzzles"),
-        instructions: String(localized: "range_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "range_controls", table: "Puzzles"),
-        imageName: "range",
+        identifier: "range",
         internalGame: range
     )
     
     // MARK: Rectangles
     static let puzzle_rectangles = GameConfig(
-        name: String(localized: "rectangles_name", table: "Puzzles"),
-        description: String(localized: "rectangles_description", table: "Puzzles"),
-        instructions: String(localized: "rectangles_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "rectangles_controls", table: "Puzzles"),
-        imageName: "rect",
+        identifier: "rectangles",
         internalGame: rect
     )
     
     // MARK: Samegame
     static let puzzle_samegame = GameConfig(
-        name: String(localized: "samegame_name", table: "Puzzles"),
-        description: String(localized: "samegame_description", table: "Puzzles"),
-        instructions: String(localized: "samegame_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "samegame_controls", table: "Puzzles"),
+        identifier: "samegame",
         customParamInfo: String(localized: "samegame_params", table: "Puzzles"),
-        imageName: "samegame",
         internalGame: samegame,
         isExperimental: false)
     
     // MARK: Signpost
     static let puzzle_signpost = GameConfig(
-        name: String(localized: "signpost_name", table: "Puzzles", comment: "Display name for the puzzle 'signpost'"),
-        description: String(localized: "signpost_desc", table: "Puzzles", comment: "Short Description for the puzzle 'signpost'"),
-        instructions: String(localized: "signpost_instructions", table: "Puzzles", comment: "Instructions for the puzzle 'signpost'"),
-        controlInfo: String(localized: "signpost_controls", table: "Puzzles", comment: "Control Info for the puzzle 'signpost'"),
-        imageName: "signpost",
+        identifier: "signpost",
         internalGame: signpost
     )
     
     // MARK: Singles
     static let puzzle_singles = GameConfig(
-        name: String(localized: "singles_name", table: "Puzzles"),
-        description: String(localized: "singles_description", table: "Puzzles"),
-        instructions: String(localized: "singles_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "singles_controls", table: "Puzzles"),
-        imageName: "singles",
+        identifier: "singles",
         internalGame: singles
     )
     
     // MARK: Sixteen
     static let puzzle_sixteen = GameConfig(
-        name: String(localized: "sixteen_name", table: "Puzzles"),
-        description: String(localized: "sixteen_description", table: "Puzzles"),
-        instructions: String(localized: "sixteen_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "sixteen_controls", table: "Puzzles"),
-        imageName: "sixteen",
+        identifier: "sixteen",
         internalGame: sixteen
     )
     
     // MARK: Slant
     static let puzzle_slant = GameConfig(
-        name: String(localized: "slant_name", table: "Puzzles"),
-        description: String(localized: "slant_description", table: "Puzzles"),
-        instructions: String(localized: "slant_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "slant_controls", table: "Puzzles"),
-        imageName: "slant",
+        identifier: "slant",
         internalGame: slant
     )
     
     // MARK: Solo
     static let puzzle_solo = GameConfig(
-        name: String(localized: "solo_name", table: "Puzzles"),
-        description: String(localized: "solo_description", table: "Puzzles"),
-        instructions: String(localized: "solo_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "solo_controls", table: "Puzzles"),
+        identifier: "solo",
         customParamInfo: String(localized: "solo_params", table: "Puzzles"),
-        imageName: "solo",
         internalGame: solo,
         displayClearButtonInToolbar: true,
         overflowMenuControls: [
@@ -233,11 +177,7 @@ extension Puzzles {
     
     // MARK: Tents
     static let puzzle_tents = GameConfig(
-        name: String(localized: "tents_name", table: "Puzzles"),
-        description: String(localized: "tents_description", table: "Puzzles"),
-        instructions: String(localized: "tents_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "tents_controls", table: "Puzzles"),
-        imageName: "tents",
+        identifier: "tents",
         internalGame: tents,
 
         touchControls: [
@@ -248,11 +188,7 @@ extension Puzzles {
     
     // MARK: Towers
     static let puzzle_towers = GameConfig(
-        name: String(localized: "towers_name", table: "Puzzles"),
-        description: String(localized: "towers_description", table: "Puzzles"),
-        instructions: String(localized: "towers_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "towers_controls", table: "Puzzles"),
-        imageName: "towers",
+        identifier: "towers",
         internalGame: towers,
         isExperimental: false,
         displayClearButtonInToolbar: true,
@@ -278,32 +214,20 @@ extension Puzzles {
     
     // MARK: Tracks
     static let puzzle_tracks = GameConfig(
-        name: String(localized: "tracks_name", table: "Puzzles"),
-        description: String(localized: "tracks_description", table: "Puzzles"),
-        instructions: String(localized: "tracks_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "tracks_controls", table: "Puzzles"),
-        imageName: "tracks",
+        identifier: "tracks",
         internalGame: tracks
     )
     
     // MARK: Twiddle
     static let puzzle_twiddle = GameConfig(
-        name: String(localized: "twiddle_name", table: "Puzzles"),
-        description: String(localized: "twiddle_description", table: "Puzzles"),
-        instructions: String(localized: "twiddle_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "twiddle_controls", table: "Puzzles"),
-        imageName: "twiddle",
+        identifier: "twiddle",
         internalGame: twiddle,
         touchControls: [ControlConfig(label: String(localized: "Clockwise"), shortPress: PuzzleKeycodes.rightKeypress, longPress: PuzzleKeycodes.leftKeypress, imageName: "arrow.clockwise")] // Single touch controls makes the default tap command move objects clockwise
     )
     
     // MARK: Undead
     static let puzzle_undead = GameConfig(
-        name: String(localized: "undead_name", table: "Puzzles", comment: "Display name for the game 'undead'"),
-        description: String(localized: "undead_description", table: "Puzzles", comment: "Short description for the game 'undead'"),
-        instructions: String(localized: "undead_instructions", table: "Puzzles", comment: "Instructions for the game 'undead'"),
-        controlInfo: String(localized: "undead_controls", table: "Puzzles", comment: "Control info for the game 'undead'"),
-        imageName: "undead",
+        identifier: "undead",
         internalGame: undead,
         displayClearButtonInToolbar: true,
 
@@ -316,11 +240,7 @@ extension Puzzles {
     
     // MARK: Unequal
     static let puzzle_unequal = GameConfig(
-        name: String(localized: "unequal_name", table: "Puzzles"),
-        description: String(localized: "unequal_description", table: "Puzzles"),
-        instructions: String(localized: "unequal_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "unequal_controls", table: "Puzzles"),
-        imageName: "unequal",
+        identifier: "unequal",
         internalGame: unequal,
         
         overflowMenuControls: [
@@ -345,11 +265,7 @@ extension Puzzles {
     
     // MARK: Unruly
     static let puzzle_unruly = GameConfig(
-        name: String(localized: "unruly_name", table: "Puzzles"),
-        description: String(localized: "unruly_description", table: "Puzzles"),
-        instructions: String(localized: "unruly_instructions", table: "Puzzles"),
-        controlInfo: String(localized: "unruly_controls", table: "Puzzles"),
-        imageName: "unruly",
+        identifier: "unruly",
         internalGame: unruly,
         isExperimental: false,
         touchControls: [
@@ -362,11 +278,7 @@ extension Puzzles {
     
     // MARK: Untangle
     static let puzzle_untangle = GameConfig(
-        name: String(localized: "untangle_name", table: "Puzzles", comment: "Display name for the game 'untangle'"),
-        description: String(localized: "untangle_description", table: "Puzzles", comment: "Short Description for the game 'untangle'"),
-        instructions: String(localized: "untangle_instructions", table: "Puzzles", comment: "Game instructions for 'untangle'"),
-        controlInfo: String(localized: "untangle_controls", table: "Puzzles", comment: "Description of controls for the game 'untangle'"),
-        imageName: "untangle",
+        identifier: "untangle",
         internalGame: untangle,
         allowSingleFingerPanning: false,
         touchControls: [ControlConfig(label: "", shortPress: PuzzleKeycodes.leftKeypress, longPress: .none)] // Left click only, disables long presses
