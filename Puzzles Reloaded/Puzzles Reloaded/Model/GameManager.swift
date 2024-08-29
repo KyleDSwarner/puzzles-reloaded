@@ -67,7 +67,7 @@ class GameManager {
     }
     
     func findExistingPreferences(_ game: GameConfig, from preferences: [GameUserSettings]) -> GameUserSettings? {
-        return preferences.first(where: { $0.identifier == game.identifier})
+        return preferences.first(where: { $0.gameName == game.identifier})
     }
     
     func filterGameList(category: GameCategory, showExperimentalGames: Bool) -> [Game] {
