@@ -129,6 +129,8 @@
 		92B55D522C0F410900517280 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D512C0F410900517280 /* Localizable.xcstrings */; };
 		92B55D542C0F46A500517280 /* Puzzles.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D532C0F46A500517280 /* Puzzles.xcstrings */; };
 		92BBCF0C2C17B09500893703 /* GameCustomSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */; };
+		92C9E6442C809F1F004F9944 /* TargetDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C9E6432C809F1F004F9944 /* TargetDevice.swift */; };
+		92C9E6462C80B496004F9944 /* WelcomeMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C9E6452C80B496004F9944 /* WelcomeMessageView.swift */; };
 		92D8D8692C57C4CD00E1E9E3 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */; };
 		92D8D86B2C57CA7800E1E9E3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 92D8D86A2C57CA7800E1E9E3 /* README.md */; };
 		92E7FE2E2C3F15C70020C1F5 /* EffectsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */; };
@@ -275,6 +277,8 @@
 		92B55D532C0F46A500517280 /* Puzzles.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Puzzles.xcstrings; sourceTree = "<group>"; };
 		92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCustomSettingsView.swift; sourceTree = "<group>"; };
 		92C527442C062A7400F421D6 /* Untangle-Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Untangle-Config.h"; sourceTree = "<group>"; };
+		92C9E6432C809F1F004F9944 /* TargetDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetDevice.swift; sourceTree = "<group>"; };
+		92C9E6452C80B496004F9944 /* WelcomeMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeMessageView.swift; sourceTree = "<group>"; };
 		92D724732C1C71A90021AD89 /* Puzzles-Reloaded-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Puzzles-Reloaded-Info.plist"; sourceTree = SOURCE_ROOT; };
 		92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		92D8D86A2C57CA7800E1E9E3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
@@ -446,6 +450,7 @@
 				923E64562C00B9840027DF54 /* GameContextMenu.swift */,
 				923E64572C00B9840027DF54 /* GameListGridItem.swift */,
 				923E64582C00B9840027DF54 /* GameListILargeItem.swift */,
+				92C9E6452C80B496004F9944 /* WelcomeMessageView.swift */,
 			);
 			path = GameList;
 			sourceTree = "<group>";
@@ -628,6 +633,7 @@
 			children = (
 				9208EFFD2C29FB7000FD14BD /* PuzzleConstants.swift */,
 				923E646F2C00B9E30027DF54 /* CodableWrapper.swift */,
+				92C9E6432C809F1F004F9944 /* TargetDevice.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -736,6 +742,7 @@
 				92F6946A2C6BE2480023D830 /* LicenseView.swift in Sources */,
 				923E64D82C00BF490027DF54 /* midend.c in Sources */,
 				923E64C42C00BF120027DF54 /* pattern.c in Sources */,
+				92C9E6442C809F1F004F9944 /* TargetDevice.swift in Sources */,
 				923E64A92C00BED00027DF54 /* twiddle.c in Sources */,
 				923E64FB2C00C00A0027DF54 /* spokes.c in Sources */,
 				923E64732C00B9E40027DF54 /* GameUserSettings.swift in Sources */,
@@ -760,6 +767,7 @@
 				923E643F2C00B96E0027DF54 /* SettingsView.swift in Sources */,
 				923E64B42C00BEDE0027DF54 /* singles.c in Sources */,
 				923E65202C00C7880027DF54 /* slant.c in Sources */,
+				92C9E6462C80B496004F9944 /* WelcomeMessageView.swift in Sources */,
 				923E64BC2C00BEF40027DF54 /* range.c in Sources */,
 				923E652C2C00D62A0027DF54 /* PuzzlesNtoZ.swift in Sources */,
 				923E64E32C00BFBA0027DF54 /* keen.c in Sources */,

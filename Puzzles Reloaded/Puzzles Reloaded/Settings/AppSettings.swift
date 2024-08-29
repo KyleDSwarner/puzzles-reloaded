@@ -24,6 +24,7 @@ struct AppSettings: Codable {
     var enableSounds: Bool = true
     var showExperimentalGames: Bool = false
     var disableGameStatusbar: Bool = false
+    var showFirstRunMessage: Bool = true
     var gameListView: GameListViewSetting = GameListViewSetting.listView
     var appTheme: AppTheme = AppTheme.auto
     

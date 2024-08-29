@@ -72,8 +72,12 @@ struct SettingsView: View {
                 }
                 
                 Section {
+                    Toggle("Display First Run Message", isOn: $appSettings.value.showFirstRunMessage)
                     NavigationLink("About Puzzles Reloaded") {
                         AboutView()
+                    }
+                    Button("Rate the App") {
+                        requestReview()
                     }
                 }
                 
@@ -131,6 +135,13 @@ struct SettingsView: View {
             }
         }
     }
+    
+    func requestReview() {
+          let url = "https://apps.apple.com/app/id6504365885?action=write-review"
+          guard let writeReviewURL = URL(string: url)
+              else { fatalError("Expected a valid URL") }
+          UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+        }
 }
 
 #Preview {

@@ -40,6 +40,9 @@
     "Center" : {
 
     },
+    "Choose a game from the list below and start playing! If you're unsure how to play, the help button on the top right will lead you in the right direction." : {
+      "comment" : "Welcome Message, Chunk 2"
+    },
     "Clear" : {
 
     },
@@ -73,10 +76,19 @@
     "Developer of first Simon Tatham collection for iOS, without which this app would not exist" : {
 
     },
+    "Different difficulty settings for each game can be found on the bottom right of each puzzle and allows for infinite adjustment of each game to your preferences." : {
+      "comment" : "Welcome Message, Chunk 3"
+    },
     "Disable game information that appears at the bottom of the screen" : {
 
     },
     "Disable Game Statusbars" : {
+
+    },
+    "Dismiss Message" : {
+
+    },
+    "Display First Run Message" : {
 
     },
     "Done" : {
@@ -175,6 +187,9 @@
     "Puzzles" : {
 
     },
+    "Rate the App" : {
+
+    },
     "Redo previous move" : {
 
     },
@@ -214,6 +229,12 @@
     "Test Item!" : {
 
     },
+    "This game will always be totally free and will never have ads. Enjoy!" : {
+
+    },
+    "This is a collection of %lld puzzles with infinite generation. You'll never fail to find a new challenge!" : {
+
+    },
     "This may take a long time for complex puzzles" : {
 
     },
@@ -242,6 +263,9 @@
           }
         }
       }
+    },
+    "Welcome!" : {
+
     },
     "Zombie" : {
 

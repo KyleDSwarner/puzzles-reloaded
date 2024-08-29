@@ -14,7 +14,7 @@ import SwiftUI
 #if os(iOS)
 class PuzzleTapView: UIView {
     
-    @AppStorage(AppSettings.key) var settings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
+    @AppStorage(AppSettings.key) var appSettings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
     
     var frontend: Frontend?
     var isSingleFingerNavEnabled = false
@@ -125,7 +125,7 @@ class PuzzleTapView: UIView {
         if frontend?.controlOption.longPress != nil {
             
             // Long press timer is based on user settings & defaults to 500ms. `withTimeInterval` is in seconds, so this value is divided by 1000.
-            longPressTimer = Timer.scheduledTimer(withTimeInterval: settings.value.longPressTime / 1000, repeats: false) {_ in
+            longPressTimer = Timer.scheduledTimer(withTimeInterval: appSettings.value.longPressTime / 1000, repeats: false) {_ in
                 self.isLongPress = true
                 self.triggerLongPressEffects()
                 self.sendKeyDown(at: location)

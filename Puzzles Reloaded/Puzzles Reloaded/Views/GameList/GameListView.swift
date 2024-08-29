@@ -13,10 +13,11 @@ struct GameListView: View {
     
     @Environment(\.modelContext) private var modelContext
     @Environment(GameManager.self) var gameManager: GameManager
-    @AppStorage(AppSettings.key) var settings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
+    @AppStorage(AppSettings.key) var appSettings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
     
     @State private var isHiddenSectionExpanded = false
     @State private var settingsPageDisplayed = false
+    @State private var welcomeMessageDisplayed = false
     
     
     let columns = [
@@ -24,15 +25,15 @@ struct GameListView: View {
     ]
     
     var favoriteGames: [Game] {
-        gameManager.filterGameList(category: .favorite, showExperimentalGames: settings.value.showExperimentalGames)
+        gameManager.filterGameList(category: .favorite, showExperimentalGames: appSettings.value.showExperimentalGames)
     }
     
     var allGames: [Game] {
-        gameManager.filterGameList(category: .none, showExperimentalGames: settings.value.showExperimentalGames)
+        gameManager.filterGameList(category: .none, showExperimentalGames: appSettings.value.showExperimentalGames)
     }
     
     var hiddenGames: [Game] {
-        gameManager.filterGameList(category: .hidden, showExperimentalGames: settings.value.showExperimentalGames)
+        gameManager.filterGameList(category: .hidden, showExperimentalGames: appSettings.value.showExperimentalGames)
     }
     
     init() {
@@ -69,7 +70,42 @@ struct GameListView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                if(settings.value.gameListView == .listView) {
+                
+                // MARK: First Run Message
+                // Note: `welcomeMessageDisplayed` is a separate boolean in order for animations to work properly. Toggling animations based on the appSettings wrapper didn't work properly.
+                if(appSettings.value.showFirstRunMessage && welcomeMessageDisplayed) {
+                    VStack(alignment: .leading) {
+                        WelcomeMessageView()
+                       
+                        Button("Dismiss Message") {
+                            withAnimation {
+                                welcomeMessageDisplayed = false
+                            } completion: {
+                                appSettings.value.showFirstRunMessage = false
+                            }
+                        }.buttonStyle(.bordered)
+                        
+                    }
+                    .frame(
+                      minWidth: 0,
+                      maxWidth: .infinity,
+                      minHeight: 0,
+                      maxHeight: .infinity,
+                      alignment: .topLeading
+                    )
+                    .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    .padding(20)
+                    
+                    //.border(.green, 3)
+                    .border(.blue, width: 3)
+                    
+                    .clipShape(RoundedRectangle(cornerRadius: 3))
+                    .padding(10)
+                    
+                }
+                 
+                
+                if(appSettings.value.gameListView == .listView) {
                     List {
                         if(!favoriteGames.isEmpty) {
                             Section("Favorites") {
@@ -142,6 +178,16 @@ struct GameListView: View {
                 // Thoughts: Should this be moved to the root PuzzlesApp file?
                 
                 gameManager.createGamesList(with: modelContext)
+                
+                if appSettings.value.showFirstRunMessage == true {
+                    welcomeMessageDisplayed = true
+                }
+            }
+            // Detects changes to the welcome message settings & updates the flags accordingly
+            .onChange(of: appSettings.value.showFirstRunMessage) { _, newValue in
+                withAnimation {
+                    welcomeMessageDisplayed = newValue
+                }
             }
             .sheet(isPresented: $settingsPageDisplayed) {
                 SettingsView()
@@ -151,7 +197,7 @@ struct GameListView: View {
             }
             .navigationTitle("Puzzles")
             .toolbar {
-                if(settings.value.gameListView == .gridView && !gameManager.hiddenGames.isEmpty) {
+                if(appSettings.value.gameListView == .gridView && !gameManager.hiddenGames.isEmpty) {
                     Button() {
                         isHiddenSectionExpanded.toggle()
                     } label: {
@@ -163,9 +209,9 @@ struct GameListView: View {
                     }
                 }
                 Button {
-                    settings.value.toggleGameListView()
+                    appSettings.value.toggleGameListView()
                 } label: {
-                    if(settings.value.gameListView == .listView) {
+                    if(appSettings.value.gameListView == .listView) {
                         Image(systemName: "rectangle.grid.1x2")
                     } else { // "grid"
                         Image(systemName: "square.grid.3x3")
