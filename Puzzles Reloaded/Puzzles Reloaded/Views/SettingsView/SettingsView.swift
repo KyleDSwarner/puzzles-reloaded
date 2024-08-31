@@ -80,10 +80,10 @@ struct SettingsView: View {
                 }
                 else { // About Game / Rate / Welcome message should only show up on the root settings page
                     Section {
-                        Toggle("Display First Run Message", isOn: $appSettings.value.showFirstRunMessage)
                         NavigationLink("About Puzzles Reloaded") {
                             AboutView()
                         }
+                        Toggle("Display First Run Message", isOn: $appSettings.value.showFirstRunMessage)
                         Button("Rate the App") {
                             requestReview()
                         }

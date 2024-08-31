@@ -1608,7 +1608,7 @@
         }
       }
     },
-    "signpost_desc" : {
+    "signpost_description" : {
       "comment" : "Short Description for the puzzle 'signpost'",
       "extractionState" : "manual",
       "localizations" : {
