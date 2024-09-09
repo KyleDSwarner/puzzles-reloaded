@@ -42,8 +42,8 @@ extension Puzzles {
         identifier: "net",
         internalGame: net,
         touchControls: [
-            ControlConfig(label: String(localized: "Clockwise"), shortPress: PuzzleKeycodes.rightKeypress, longPress: PuzzleKeycodes.middleKeypress, imageName: "arrow.clockwise"), // Left/Right is reversed intentionally to make clockwise the 'default' option
             ControlConfig(label: String(localized: "Counter-Clockwise"), shortPress: PuzzleKeycodes.leftKeypress, longPress: PuzzleKeycodes.middleKeypress, imageName: "arrow.counterclockwise"),
+            ControlConfig(label: String(localized: "Clockwise"), shortPress: PuzzleKeycodes.rightKeypress, longPress: PuzzleKeycodes.middleKeypress, imageName: "arrow.clockwise"),
             ControlConfig(label: String(localized: "Lock"), shortPress: PuzzleKeycodes.middleKeypress, longPress: .none, imageName: "lock"),
             ControlConfig(label: String(localized: "Center"), shortPress: MouseClick(usesArrowKeys: true, withModifier: PuzzleKeycodes.CtrlKey), longPress: .none),  // Move centre: Ctrl + arrow keys
             ControlConfig(label: String(localized: "Shift"), shortPress: MouseClick(usesArrowKeys: true, withModifier: PuzzleKeycodes.ShiftKey, reverseArrowDirections: true), displayCondition: { gameId in
