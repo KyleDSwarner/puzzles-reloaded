@@ -35,6 +35,8 @@ struct GameView: View {
     
     @State var puzzleImageTransformation: CGAffineTransform = .identity
     
+    @State private var singleFingerScrolling: Bool = false
+    
     var game: Game
     private var keyboardHandler: KeyboardInputHandler?
     
@@ -108,7 +110,7 @@ struct GameView: View {
                             #if os(iOS)
                                 .overlay {
                                     // MARK: Puzzle Interactions & Gestures
-                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $tapAnchor, puzzleFrontend: frontend, allowSingleFingerPanning: game.gameConfig.allowSingleFingerPanning)
+                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $tapAnchor, puzzleFrontend: frontend, allowSingleFingerPanning: singleFingerScrolling)
                                 }
                             #endif
                                 .transformEffect(puzzleImageTransformation)
@@ -279,7 +281,7 @@ struct GameView: View {
         }
         // MARK: Settings Page Sheet
         .sheet(isPresented: $settingsPageDisplayed) {
-            SettingsView(game: game, frontend: frontend)
+            SettingsView(game: game, frontend: frontend, refreshSettingsCallback: refreshSettings)
         }
         .sheet(isPresented: $customGameSettingsDisplayed) {
             GameCustomSettingsView(gameTitle: game.gameConfig.name, frontend: frontend, newGameCallback: newGame)
@@ -455,6 +457,10 @@ struct GameView: View {
         .onAppear {
             frontend.midend.createMidend(frontend: &frontend)
             imageIsFocused = true
+            
+            // Update the single finger scrolling value
+            singleFingerScrolling = game.settings.singleFingerPanningEnabled
+            
             Task {
                 let isLoadingFromSavedGame: Bool = game.settings.saveGame != nil
                 await frontend.beginGame(isFirstLoad: true, withSaveGame: game.settings.saveGame, withPreferences: game.settings.userPrefs)
@@ -464,6 +470,11 @@ struct GameView: View {
                     self.game.settings.stats.updateStats_NewGame()
                 }
             }
+        }
+        // MARK: Single Finger Navigation Sync
+        .onChange(of: singleFingerScrolling) {
+            // Syncronize the finger panning settings to the model
+            game.settings.singleFingerPanningEnabled = singleFingerScrolling
         }
         // MARK: Background & App Terminate notifications
         #if os(iOS)
@@ -477,6 +488,15 @@ struct GameView: View {
                 saveUserData()
             })
         #endif
+    }
+    
+    /**
+        Refresh settings that are represented as Bindings to other objects & trigger proper view resets.
+            Fired as a callback from Settings View
+     */
+    func refreshSettings() {
+        print("Refreshing Settings From Menu")
+        singleFingerScrolling = game.settings.singleFingerPanningEnabled
     }
     
     func cancelGameGenerationAndRegernateMidend() {

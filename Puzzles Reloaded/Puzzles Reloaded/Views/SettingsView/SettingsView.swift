@@ -18,6 +18,14 @@ struct SettingsView: View {
     // Game, to be provided when the settings menu is selected from within a game
     var game: Game? = nil
     var frontend: Frontend? = nil
+    var refreshSettingsCallback: (() -> Void)?
+    
+    /**
+     Determines if there are any game-specific settings to display
+     */
+    var displayGameSettingsMenu: Bool {
+        !gameSettingsMenu.isEmpty || game?.gameConfig.allowSingleFingerPanning == true
+    }
     
     var body: some View {
         NavigationStack {
@@ -53,9 +61,23 @@ struct SettingsView: View {
                 }
                 
                 if let game = game {
-                    if !gameSettingsMenu.isEmpty {
+                    
+                    if displayGameSettingsMenu {
                         Section {
-                            CustomGameConfigView(gameMenu: $gameSettingsMenu)
+                            if game.gameConfig.allowSingleFingerPanning {
+                                let singleFingerNavBinding = Binding<Bool>(get: { game.settings.singleFingerPanningEnabled}, set: {
+                                    game.settings.singleFingerPanningEnabled = $0
+                                    if let refreshSettingsCallback = refreshSettingsCallback {
+                                        refreshSettingsCallback() // Function callback triggers a refresh of settings back on the main game page
+                                    }
+                                })
+                                Toggle("Single finger scrolling", isOn: singleFingerNavBinding)
+                            }
+                            
+                            if !gameSettingsMenu.isEmpty {
+                                CustomGameConfigView(gameMenu: $gameSettingsMenu)
+                            }
+                            
                         } header: {
                             Text("\(game.gameConfig.name) Settings")
                         } footer: {
@@ -69,6 +91,7 @@ struct SettingsView: View {
                             Text("\(game.gameConfig.name) Settings")
                         }
                     }
+                    
                     /*
                     NavigationLink("Game Statistics") {
                         Text("Games Played: \(game.settings.stats.gamesPlayed)")
@@ -152,5 +175,8 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    var value: Bool = false
+    let singleFingerPanning = Binding<Bool>(get: { value }, set: { value = $0 })
+    
+    return SettingsView()
 }
