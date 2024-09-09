@@ -63,13 +63,6 @@ class Frontend {
         return Array(gamePresets.suffix(gamePresets.count - 8))
     }
     
-    var currentGamePresetDescription: String {
-        guard currentPreset >= 0 else {
-            return "Ne Description"
-        }
-        return gamePresets[currentPreset].title
-    }
-    
     init(game: Game) {
         self.game = game
         self.midend = Midend(game: game.gameConfig.internalGame) // Init midend and give it the internal game

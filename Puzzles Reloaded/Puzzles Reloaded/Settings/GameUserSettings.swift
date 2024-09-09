@@ -68,8 +68,8 @@ struct GameStats: Codable {
         return Double(gamesWon / gamesPlayed)
     }
     
-    mutating func updateStats_NewGame(gameId: String, gameDescription: String) {
-        print("New Game Started! id: \(gameId) description: \(gameDescription)") // Note: These values aren't quite ready when the app is starting up, we'll need to refactor this.
+    mutating func updateStats_NewGame(gameId: String = "", gameDescription: String = "") {
+        // print("New Game Started! id: \(gameId) description: \(gameDescription)") // Note: These values aren't quite ready when the app is starting up, we'll need to refactor this.
         gamesPlayed += 1
         lastPlayed = Date.now
         

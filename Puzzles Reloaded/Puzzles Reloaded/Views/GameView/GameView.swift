@@ -78,7 +78,7 @@ struct GameView: View {
     func newGame() {
         Task {
             await frontend.beginGame()
-            self.game.settings.stats.updateStats_NewGame(gameId: frontend.gameId, gameDescription: frontend.currentGamePresetDescription)
+            self.game.settings.stats.updateStats_NewGame()
             self.gameWon = false
             self.puzzleImageTransformation = .identity
         }
@@ -461,7 +461,7 @@ struct GameView: View {
                 
                 // If there's no saved game, increment the 'games played' stat
                 if isLoadingFromSavedGame == false {
-                    self.game.settings.stats.updateStats_NewGame(gameId: frontend.gameId, gameDescription: frontend.currentGamePresetDescription)
+                    self.game.settings.stats.updateStats_NewGame()
                 }
             }
         }
