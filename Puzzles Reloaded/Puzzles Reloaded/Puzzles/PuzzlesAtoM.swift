@@ -146,7 +146,7 @@ extension Puzzles {
         internalGame: magnets
     )
     
-    // MARK: MAP
+    // MARK: Map
     static let puzzle_map = GameConfig(
         identifier: "map",
         internalGame: map,

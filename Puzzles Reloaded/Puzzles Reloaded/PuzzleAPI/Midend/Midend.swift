@@ -108,8 +108,6 @@ class Midend {
         
         let midend: OpaquePointer? = midend_new(OpaquePointer(frontendPointer), gamePointer, drawingApi, frontendPointer /* frontend again? */) // OpaquePointer to Midend object
         
-        
-        //frontend.midend.setMidendPointer(midendPointer: midend)
         self.midendPointer = midend
         frontend.gameHasStatusbar = midend_wants_statusbar(midend)
         buildGameColors(midend: midend, frontend: frontend)

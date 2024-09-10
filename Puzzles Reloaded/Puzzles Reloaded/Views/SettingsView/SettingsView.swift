@@ -60,6 +60,12 @@ struct SettingsView: View {
                     Text("Disable game information that appears at the bottom of the screen")
                 }
                 
+                Section {
+                    Toggle("Swipe to Exit Game", isOn: $appSettings.value.enableSwipeBack)
+                } footer: {
+                    Text("Enable swiping back to exit puzzles. May interfere with long presses in some games!")
+                }
+                
                 if let game = game {
                     
                     if displayGameSettingsMenu {

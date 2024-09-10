@@ -43,25 +43,25 @@ struct GameListView: View {
     // MARK: Toolbar Design Configuration
     func configureToolbarDisplay() {
         #if os(iOS)
-        let navbarAppearance = UINavigationBarAppearance()
-        navbarAppearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-        navbarAppearance.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.7)
-        //navbarAppearance.backgroundColor = UIColor.r
-        
-        let toolbarAppearance = UIToolbarAppearance()
-        toolbarAppearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-        toolbarAppearance.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.7)
-        
-        //UIToolbar.appearance().standardAppearance = coloredAppearance
-        
-        UIToolbar.appearance().standardAppearance = toolbarAppearance
-        UIToolbar.appearance().compactAppearance = toolbarAppearance
-        UIToolbar.appearance().scrollEdgeAppearance = toolbarAppearance
-        
-        
-        UINavigationBar.appearance().standardAppearance = navbarAppearance
-        UINavigationBar.appearance().compactAppearance = navbarAppearance
-        UINavigationBar.appearance().scrollEdgeAppearance = navbarAppearance
+            let navbarAppearance = UINavigationBarAppearance()
+            navbarAppearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+            navbarAppearance.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.7)
+            //navbarAppearance.backgroundColor = UIColor.r
+            
+            let toolbarAppearance = UIToolbarAppearance()
+            toolbarAppearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+            toolbarAppearance.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.7)
+            
+            //UIToolbar.appearance().standardAppearance = coloredAppearance
+            
+            UIToolbar.appearance().standardAppearance = toolbarAppearance
+            UIToolbar.appearance().compactAppearance = toolbarAppearance
+            UIToolbar.appearance().scrollEdgeAppearance = toolbarAppearance
+            
+            
+            UINavigationBar.appearance().standardAppearance = navbarAppearance
+            UINavigationBar.appearance().compactAppearance = navbarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navbarAppearance
         #endif
         
         //UINavigationBar.appearance().tintColor = .white
@@ -101,9 +101,7 @@ struct GameListView: View {
                     
                     .clipShape(RoundedRectangle(cornerRadius: 3))
                     .padding(10)
-                    
                 }
-                 
                 
                 if(appSettings.value.gameListView == .listView) {
                     List {

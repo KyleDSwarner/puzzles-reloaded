@@ -63,12 +63,6 @@ struct GameView: View {
     }
     
     func cleanupAndBack() {
-        
-        saveUserData()
-        
-        // Remove our observer to terminate events
-        //NotificationCenter.default.removeObserver(appTerminateObserver)
-        
         dismiss()
     }
     
@@ -266,7 +260,7 @@ struct GameView: View {
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(!appSettings.value.enableSwipeBack)
         .background(Color("Puzzle Background"))
 
         //.toolbarBackground(Color(UIColor.red), for: .navigationBar)
@@ -292,9 +286,12 @@ struct GameView: View {
 #if os(iOS)
         .toolbar {
             // MARK: Top Toolbar
-            ToolbarItem(placement: .topBarLeading) {
-                Button("Back") {
-                    cleanupAndBack()
+            if !appSettings.value.enableSwipeBack {
+                // Add a separate back button when swipeBack is disabled.
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Back") {
+                        cleanupAndBack()
+                    }
                 }
             }
             ToolbarItemGroup(placement: .topBarTrailing) {
@@ -471,6 +468,11 @@ struct GameView: View {
                 }
             }
         }
+        // MARK: On Disappear: Save data when leaving
+        .onDisappear {
+            print("On Disappear!")
+            saveUserData()
+        }
         // MARK: Single Finger Navigation Sync
         .onChange(of: singleFingerScrolling) {
             // Syncronize the finger panning settings to the model
@@ -495,7 +497,6 @@ struct GameView: View {
             Fired as a callback from Settings View
      */
     func refreshSettings() {
-        print("Refreshing Settings From Menu")
         singleFingerScrolling = game.settings.singleFingerPanningEnabled
     }
     

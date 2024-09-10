@@ -97,6 +97,9 @@
     "Enable Haptic Feedback" : {
 
     },
+    "Enable swiping back to exit puzzles. May interfere with long presses in some games!" : {
+
+    },
     "Favorite" : {
 
     },
@@ -227,6 +230,9 @@
       "comment" : "Heading on about page"
     },
     "Submit An Issue" : {
+
+    },
+    "Swipe to Exit Game" : {
 
     },
     "Test Item!" : {

@@ -20,7 +20,6 @@ struct PuzzleInteractionsView: UIViewRepresentable {
     var allowSingleFingerPanning: Bool
 
     func makeUIView(context: Context) -> PuzzleTapView {
-        print("Building Interaction View")
         // Create the underlying UIView, passing in our configuration
         let view = PuzzleTapView()
         
@@ -53,9 +52,6 @@ struct PuzzleInteractionsView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: PuzzleTapView, context: Context) {
-        print("Updating UI View on Puzzle Tap Thing")
-        print("Single Finger Panning is \(allowSingleFingerPanning)")
-        // print("Refresh toggle is \(settingsRefreshToggle)")
         uiView.isSingleFingerNavEnabled = allowSingleFingerPanning
         
         setPanRecognizerNumTouches(context.coordinator.panRecognizer)

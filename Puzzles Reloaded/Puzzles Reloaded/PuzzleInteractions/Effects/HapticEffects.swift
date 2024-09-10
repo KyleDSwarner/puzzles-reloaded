@@ -11,14 +11,12 @@ import CoreHaptics
 import SwiftUI
 import AudioToolbox
 
-
-
 class HapticEffects {
     
     @AppStorage(AppSettings.key) var settings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
     
     var supportsHaptics: Bool = false
-    var engine: CHHapticEngine!
+    var engine: CHHapticEngine?
 
     init() {
         supportsHaptics = HapticEffects.deviceSupportsHaptics()
@@ -27,7 +25,7 @@ class HapticEffects {
             do {
                 engine = try CHHapticEngine()
             } catch let error {
-                fatalError("Engine Creation Error: \(error)")
+                print("Haptic engine creation error, haptics will not function")
             }
         }
     }
@@ -65,14 +63,20 @@ class HapticEffects {
             return
         }
         
-        let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 1)
-        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 1)
+        let intensity = CHHapticEventParameter(parameterID: .hapticIntensity, value: 0.75)
+        let sharpness = CHHapticEventParameter(parameterID: .hapticSharpness, value: 0.5)
         let event = CHHapticEvent(eventType: .hapticTransient, parameters: [intensity, sharpness], relativeTime: 0)
         
         triggerHapticEffect([event])
     }
     
     private func triggerHapticEffect(_ events: [CHHapticEvent]) {
+        
+        guard let engine = engine else {
+            print("Cannot trigger haptic effects, engine is nil")
+            return
+        }
+        
         do {
             let pattern = try CHHapticPattern(events: events, parameters: [])
             let player = try engine.makePlayer(with: pattern)
