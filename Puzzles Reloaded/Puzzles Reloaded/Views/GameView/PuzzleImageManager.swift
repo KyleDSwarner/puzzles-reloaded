@@ -52,8 +52,15 @@ class PuzzleImageManager {
         return self.bitmap.makeImage()
     }
     
+    func debug(_ message: String) {
+        #if targetEnvironment(simulator)
+            print("\(Date.now) \(message)")
+        #endif
+    }
+    
     func drawText(text: String, x: Int, y: Int, fontsize: Int, horizontalAlignment: TextHorizontalAlignment, verticalAlignment: TextVerticalAlignment, color: CGColor) {
-        //print("Draw Text: Printing '\(text)' at \(x)x\(y), color \(color.components)")
+        debug("Draw Text: Printing '\(text)' at \(x)x\(y)")
+        
         
         var xPosition = CGFloat(x)
         var yPosition = CGFloat(y)
@@ -97,7 +104,7 @@ class PuzzleImageManager {
     }
     
     func drawLine(from point1: CGPoint, to point2: CGPoint, color: CGColor, thickness: Float = 1.0) {
-        //print("Drawing Line from \(point1.x)x\(point1.y) to \(point2.x)x\(point2.y) of thickness \(thickness)")
+        debug("Drawing Line from \(point1.x)x\(point1.y) to \(point2.x)x\(point2.y) of thickness \(thickness)")
             
         bitmap.setStrokeColor(color)
         bitmap.setLineWidth(CGFloat(thickness))
@@ -112,7 +119,8 @@ class PuzzleImageManager {
     }
     
     func drawPolygon(coordinates: [CGPoint], outlineColor: CGColor, fillColor: CGColor?) {
-        // print("Drawing Polygon")
+        debug("Drawing Polygon")
+        
         bitmap.beginPath()
         bitmap.move(to: coordinates[0])
         
@@ -136,15 +144,17 @@ class PuzzleImageManager {
     }
     
     func drawRectangle(x: Int, y: Int, width: Int, height: Int, fillColor: CGColor) {
-        //print("Drawing Rectangle of size \(width)x\(height) as \(x)x\(y) Rect Color \(fillColor.components)")
+        
+        debug("Drawing Rectangle at \(x)x\(y) of size \(width)x\(height)")
+        
         bitmap.setFillColor(fillColor)
+        
         //bitmap?.addRect(CGRect(x: x, y: y, width: width, height: height))
         bitmap.fill([CGRect(x: x, y: y, width: width, height: height)])
-        
     }
     
     func drawCircle(x: Int, y: Int, radius: Int, outlineColor: CGColor, fillColor: CGColor?) {
-        // print("Drawing Circle at \(x)x\(y) of radius \(radius)")
+        debug("Drawing Circle at \(x)x\(y) of radius \(radius)")
         
         let rect = CGRect(
             x: CGFloat(x - radius), // Old app added 1 here
@@ -175,7 +185,6 @@ class PuzzleImageManager {
     }
     
     func clipArea(x: Int, y: Int, width: Int, height: Int) {
-        
         if(!clipping) {
             bitmap.saveGState()
         }
@@ -199,7 +208,6 @@ class PuzzleImageManager {
     }
     
     func updateRect(x: Int, y: Int, width: Int, height: Int) {
-        
         // this is all commented out for now. Will have to investigate later.
         
         let rect = CGRect(x: x, y: y, width: width, height: height)

@@ -304,6 +304,8 @@ func drawCircle(frontend: UnsafeMutableRawPointer?, cx: Int32, cy: Int32, radius
     getImageManager(frontend: frontend).drawCircle(x: Int(cx), y: adjustedY(cy), radius: Int(radius),
         outlineColor: getColorByIndex(frontend: frontend, colorIndex: outlineColor),
         fillColor: fillColor != -1 ? getColorByIndex(frontend: frontend, colorIndex: fillColor) : nil)
+    
+    forceImageUpdate(frontend: frontend)
 }
 
 // MARK: Drawing Update Methods
