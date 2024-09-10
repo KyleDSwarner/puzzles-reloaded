@@ -181,8 +181,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    var value: Bool = false
-    let singleFingerPanning = Binding<Bool>(get: { value }, set: { value = $0 })
-    
     return SettingsView()
 }

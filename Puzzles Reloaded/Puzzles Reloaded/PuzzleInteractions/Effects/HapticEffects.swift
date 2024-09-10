@@ -25,7 +25,7 @@ class HapticEffects {
             do {
                 engine = try CHHapticEngine()
             } catch let error {
-                print("Haptic engine creation error, haptics will not function")
+                print("Haptic engine creation error, haptics will not function: \(error)")
             }
         }
     }
