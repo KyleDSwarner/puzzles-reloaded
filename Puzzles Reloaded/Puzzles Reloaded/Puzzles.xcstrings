@@ -1074,7 +1074,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fill in the grid given clues about number of nearby black squares."
+            "value" : "Fill in the grid given clues about number of nearby black squares"
           }
         }
       }
@@ -1793,7 +1793,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fill in the grid so that each row, column and square block contains one of every digit."
+            "value" : "Fill in the grid so that each row, column and square block contains one of every digit"
           }
         }
       }
