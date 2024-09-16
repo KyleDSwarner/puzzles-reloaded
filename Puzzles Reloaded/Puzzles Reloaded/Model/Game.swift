@@ -46,6 +46,8 @@ import SwiftData
         self.gameConfig.isExperimental
     }
     
-    static var exampleGameModel = Game(game: GameConfig.exampleGame, settings: GameUserSettings(identifier: "abcd"))
+#if DEBUG
+    nonisolated(unsafe) static let exampleGameModel = Game(game: GameConfig.exampleGame, settings: GameUserSettings(identifier: "abcd"))
+#endif
     
 }

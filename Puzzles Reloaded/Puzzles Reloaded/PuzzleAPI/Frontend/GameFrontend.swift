@@ -14,7 +14,7 @@ import CoreGraphics
  It contains a reference to the midend - user interactions are piped from here into the midend, which will then relay back to us drawing instructions.
  */
 @Observable
-class Frontend {
+class Frontend: @unchecked Sendable {
     var midend: Midend // Reference to the midend
     var colors: [CGColor] = [] // Array of colors used to build the puzzle. Set from the midend when building the puzzle.
     

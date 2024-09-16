@@ -117,9 +117,11 @@ class PuzzleTapView: UIView {
             
             // Long press timer is based on user settings & defaults to 500ms. `withTimeInterval` is in seconds, so this value is divided by 1000.
             longPressTimer = Timer.scheduledTimer(withTimeInterval: appSettings.value.longPressTime / 1000, repeats: false) {_ in
-                self.isLongPress = true
-                self.triggerLongPressEffects()
-                self.sendKeyDown(at: location)
+                Task { @MainActor in
+                    self.isLongPress = true
+                    self.triggerLongPressEffects()
+                    self.sendKeyDown(at: location)
+                }
             }
             
             

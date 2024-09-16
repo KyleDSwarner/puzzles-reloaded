@@ -107,7 +107,7 @@ struct ButtonPress {
 
 
 
-class ControlConfig: Hashable {
+class ControlConfig: Hashable, @unchecked Sendable {
     static func == (lhs: ControlConfig, rhs: ControlConfig) -> Bool {
         lhs.id == rhs.id
     }
@@ -170,7 +170,7 @@ class ControlConfig: Hashable {
 
 extension ControlConfig {
     // Some Defaults
-    static var MarksControl = ControlConfig(label: String(localized: "Marks"), command: PuzzleKeycodes.MarksButton, imageName: "square.and.pencil")
+    static let MarksControl = ControlConfig(label: String(localized: "Marks"), command: PuzzleKeycodes.MarksButton, imageName: "square.and.pencil")
 }
 
 struct ArrowPress {

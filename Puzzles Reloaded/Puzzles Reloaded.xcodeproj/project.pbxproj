@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -45,7 +45,6 @@
 		923E64692C00B9890027DF54 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64622C00B9890027DF54 /* GameView.swift */; };
 		923E646A2C00B9890027DF54 /* GameControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64632C00B9890027DF54 /* GameControlsView.swift */; };
 		923E646B2C00B9890027DF54 /* PuzzleImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E64642C00B9890027DF54 /* PuzzleImageManager.swift */; };
-		923E64732C00B9E40027DF54 /* GameUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E646E2C00B9E30027DF54 /* GameUserSettings.swift */; };
 		923E64742C00B9E40027DF54 /* CodableWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E646F2C00B9E30027DF54 /* CodableWrapper.swift */; };
 		923E64852C00BE620027DF54 /* penrose-legacy.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E647F2C00BE620027DF54 /* penrose-legacy.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		923E64862C00BE620027DF54 /* penrose.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64812C00BE620027DF54 /* penrose.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -177,7 +176,6 @@
 		923E64622C00B9890027DF54 /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		923E64632C00B9890027DF54 /* GameControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameControlsView.swift; sourceTree = "<group>"; };
 		923E64642C00B9890027DF54 /* PuzzleImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuzzleImageManager.swift; sourceTree = "<group>"; };
-		923E646E2C00B9E30027DF54 /* GameUserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameUserSettings.swift; sourceTree = "<group>"; };
 		923E646F2C00B9E30027DF54 /* CodableWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableWrapper.swift; sourceTree = "<group>"; };
 		923E647E2C00BE620027DF54 /* Puzzles Reloaded-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Puzzles Reloaded-Bridging-Header.h"; sourceTree = "<group>"; };
 		923E647F2C00BE620027DF54 /* penrose-legacy.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "penrose-legacy.c"; path = "../../submodules/simon-tatham-puzzles/penrose-legacy.c"; sourceTree = "<group>"; };
@@ -283,6 +281,10 @@
 		92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsManager.swift; sourceTree = "<group>"; };
 		92F694692C6BE2480023D830 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		924DD1092C98B0C500A8FCA2 /* UserPreferences */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UserPreferences; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		923E63DC2C00B9210027DF54 /* Frameworks */ = {
@@ -413,7 +415,6 @@
 			children = (
 				923E64362C00B96E0027DF54 /* AppSettings.swift */,
 				923E643A2C00B96E0027DF54 /* UserPreferences.swift */,
-				923E646E2C00B9E30027DF54 /* GameUserSettings.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -421,6 +422,7 @@
 		923E64442C00B9740027DF54 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				924DD1092C98B0C500A8FCA2 /* UserPreferences */,
 				923E64412C00B9740027DF54 /* Game.swift */,
 				923E64432C00B9740027DF54 /* GameManager.swift */,
 			);
@@ -669,6 +671,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				924DD1092C98B0C500A8FCA2 /* UserPreferences */,
+			);
 			name = "Puzzles Reloaded";
 			packageProductDependencies = (
 			);
@@ -742,7 +747,6 @@
 				92C9E6442C809F1F004F9944 /* TargetDevice.swift in Sources */,
 				923E64A92C00BED00027DF54 /* twiddle.c in Sources */,
 				923E64FB2C00C00A0027DF54 /* spokes.c in Sources */,
-				923E64732C00B9E40027DF54 /* GameUserSettings.swift in Sources */,
 				923E64852C00BE620027DF54 /* penrose-legacy.c in Sources */,
 				9208F0002C29FDB900FD14BD /* PresetMenuItem.swift in Sources */,
 				923E64F82C00C00A0027DF54 /* sticks.c in Sources */,
@@ -1019,7 +1023,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "Simon Tatham Puzzles Reloaded";
 				SDKROOT = iphoneos;
@@ -1027,7 +1031,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Puzzles Reloaded/Puzzles Reloaded-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1068,14 +1072,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Puzzles Reloaded/Puzzles Reloaded-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

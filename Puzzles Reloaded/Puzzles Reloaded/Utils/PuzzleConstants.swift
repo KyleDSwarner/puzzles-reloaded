@@ -23,10 +23,10 @@ struct PuzzleConstants {
 /**
  X Dimension of the puzzle image, globally set for easy usage across the swift & C code.
  */
-var puzzleDimensionsX: Int = 512
+nonisolated(unsafe) var puzzleDimensionsX: Int = 512
 
 /**
  Y Dimension of the puzzle image, globally set for easy usage across the swift & C code.
  */
-var puzzleDimensionsY: Int = 512
+nonisolated(unsafe) var puzzleDimensionsY: Int = 512
 

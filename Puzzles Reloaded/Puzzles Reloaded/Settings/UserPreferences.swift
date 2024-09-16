@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-class UserPreferences {
+class UserPreferences: @unchecked Sendable {
     
     @AppStorage(AppSettings.key) var appSettings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
     

@@ -13,8 +13,8 @@ typealias NumButtonsFunction = (_ gameId: String) -> [ControlConfig]
 typealias FireButtonFunction = (_ button: ButtonPress?) -> Void
 
 // Intent: Representation of the game data fed from the on-device tatham games.
-@Observable 
-class GameConfig: Identifiable, Hashable {
+@Observable
+class GameConfig: Identifiable, Hashable, @unchecked Sendable {
     
     static func == (lhs: GameConfig, rhs: GameConfig) -> Bool {
         return lhs.name == rhs.name
@@ -24,8 +24,6 @@ class GameConfig: Identifiable, Hashable {
         hasher.combine(name)
         hasher.combine(shortDescription)
     }
-    
-    static let defaultNumericFunction: (String) -> Int = { _ in 0 }
     
     var id = UUID()
     // var name: String

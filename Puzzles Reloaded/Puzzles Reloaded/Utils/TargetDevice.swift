@@ -15,7 +15,7 @@ enum TargetDevice {
     case iPhone
     case iWatch
     
-    public static var currentDevice: Self {
+    @MainActor public static var currentDevice: Self {
         var currentDeviceModel = UIDevice.current.model
         #if targetEnvironment(macCatalyst)
         currentDeviceModel = "nativeMac"

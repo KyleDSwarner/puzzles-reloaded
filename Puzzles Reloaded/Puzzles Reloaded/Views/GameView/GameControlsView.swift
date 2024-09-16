@@ -110,7 +110,7 @@ struct GameControlsView: View, Equatable {
      This prevents the controls from being redrawn every time the user interacts with the puzzle.
      (Note that `init` is still run`
      */
-    static func == (lhs: GameControlsView, rhs: GameControlsView) -> Bool {
+    nonisolated static func == (lhs: GameControlsView, rhs: GameControlsView) -> Bool {
         lhs.gameId == rhs.gameId
     }
     
