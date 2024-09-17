@@ -57,8 +57,7 @@ struct GameListGridItem: View {
 }
 
 #Preview {
-    return GameListGridItem(game: Game.exampleGameModel)
-    
+    GameListGridItem(game: Game.exampleGameModel)
 }
 
 
