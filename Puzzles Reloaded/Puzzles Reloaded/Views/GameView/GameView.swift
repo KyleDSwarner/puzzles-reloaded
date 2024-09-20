@@ -17,12 +17,15 @@ struct GameView: View {
     @State private var displayingGameTypeMenu = false
     @State private var displayNewGameButton = false
     @State private var displayRestartButton = false
+
     @State private var enableCompletionAnimation = false
     @State private var tapAnchor: CGPoint = .zero
     
     @State private var helpPageDisplayed = false
     @State private var settingsPageDisplayed = false
     @State private var customGameSettingsDisplayed = false
+    @State private var displayingGameIdView = false
+    @State private var displayingCustomSeedView = false
     
     @State private var scaleFactor: CGFloat = 1.0
     @State private var translation: CGSize = .zero
@@ -273,6 +276,14 @@ struct GameView: View {
         .sheet(isPresented: $helpPageDisplayed) {
             GameHelpView(game: game.gameConfig)
         }
+        // MARK: Game ID Sheet
+        .sheet(isPresented: $displayingGameIdView) {
+            GameIDView(frontend: frontend)
+        }
+        // MARK: Custom Seed Sheet
+        .sheet(isPresented: $displayingCustomSeedView) {
+            Text("Custom Seed View")
+        }
         // MARK: Settings Page Sheet
         .sheet(isPresented: $settingsPageDisplayed) {
             SettingsView(game: game, frontend: frontend, refreshSettingsCallback: refreshSettings)
@@ -315,7 +326,11 @@ struct GameView: View {
                         newGame()
                     } label: {
                         Label("New Game", systemImage: "plus.circle")
+                            .onLongPressGesture {
+                                displayingGameIdView = true
+                            }
                     }
+                    
                     Button() {
                         frontend.midend.restartGame()
                         self.puzzleImageTransformation = .identity
@@ -325,16 +340,14 @@ struct GameView: View {
                     }
                     .disabled(frontend.currentGameInvalidated)
                     
-                    
-                    // TODO: Implement these features!
-                    /*
-                    Button("Enter Game ID") { // Display Advanced Game Options?
-                        
+                    Menu("Load Custom") {
+                        Button("Enter Game ID") { // Display Advanced Game Options?
+                            displayingGameIdView = true
+                        }
+                        Button("Enter Random Seed") {
+                            displayingCustomSeedView = true
+                        }
                     }
-                    Button("New Game by Random Seed") {
-                        
-                    }
-                     */
                     
                     // Display this section if we can auto-solve OR if the game has some overflow controls
                     if frontend.canSolve || !overflowMenuControls.isEmpty {

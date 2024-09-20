@@ -79,7 +79,18 @@ class Midend {
             return String(cString: unwrappedId)
         }
         
-        return "no-game-id-found"
+        return ""
+    }
+    
+    func getGameSeed() -> String {
+        let seed = midend_get_random_seed(midendPointer)
+        
+        if let unwrappedSeed = seed {
+            return String(cString: unwrappedSeed)
+        } else {
+            return ""
+        }
+        
     }
     
     func getTilesize() -> Int {

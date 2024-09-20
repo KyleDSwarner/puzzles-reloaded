@@ -98,6 +98,59 @@ struct SettingsView: View {
                         }
                     }
                     
+                    NavigationLink("View Game Parameters") {
+                        Form {
+                            Section {
+                                if let seed = frontend?.midend.getGameSeed() {
+                                    if !seed.isEmpty {
+                                        HStack {
+                                            VStack(alignment: .leading) {
+                                                Text("Random Seed")
+                                                    .foregroundStyle(.secondary)
+                                                    .font(.caption)
+                                                    //.padding([.bottom], 5)
+                                                Button(seed) {
+                                                    print("Copied Game Seed to clipboard")
+                                                    UIPasteboard.general.string = seed
+                                                }
+                                                .foregroundStyle(.primary)
+                                                    
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                if let gameId = frontend?.gameId {
+                                    if !gameId.isEmpty {
+                                        HStack {
+                                            VStack(alignment: .leading) {
+                                                Text("Game ID")
+                                                    .foregroundStyle(.secondary)
+                                                    .font(.caption)
+                                                    //.padding([.bottom], 5)
+                                                Button(gameId) {
+                                                    print("Copied game ID to clipboard")
+                                                    UIPasteboard.general.string = gameId
+                                                }
+                                                .foregroundStyle(.primary)
+                                                    
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                
+                            } footer: {
+                                Text("These values were used to generate the puzzle you're playing. Tap these sections to copy them to your clipboard.")
+                            }
+                        }
+                        .navigationTitle("Game Parameters")
+                        .navigationBarTitleDisplayMode(.inline)
+                    }
+                    
+                    
+
+                    
                     /*
                     NavigationLink("Game Statistics") {
                         Text("Games Played: \(game.settings.stats.gamesPlayed)")

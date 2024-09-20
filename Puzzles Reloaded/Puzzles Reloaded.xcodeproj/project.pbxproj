@@ -129,6 +129,7 @@
 		92BBCF0C2C17B09500893703 /* GameCustomSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */; };
 		92C23B052C9DAD55001078FE /* GameUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C23B032C9DAD55001078FE /* GameUserSettings.swift */; };
 		92C23B062C9DAD55001078FE /* UserSettingsV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C23B042C9DAD55001078FE /* UserSettingsV1.swift */; };
+		92C23B092C9DB6A3001078FE /* GameIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C23B082C9DB6A3001078FE /* GameIDView.swift */; };
 		92C9E6442C809F1F004F9944 /* TargetDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C9E6432C809F1F004F9944 /* TargetDevice.swift */; };
 		92C9E6462C80B496004F9944 /* WelcomeMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C9E6452C80B496004F9944 /* WelcomeMessageView.swift */; };
 		92D8D8692C57C4CD00E1E9E3 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */; };
@@ -276,6 +277,7 @@
 		92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCustomSettingsView.swift; sourceTree = "<group>"; };
 		92C23B032C9DAD55001078FE /* GameUserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUserSettings.swift; sourceTree = "<group>"; };
 		92C23B042C9DAD55001078FE /* UserSettingsV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsV1.swift; sourceTree = "<group>"; };
+		92C23B082C9DB6A3001078FE /* GameIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameIDView.swift; sourceTree = "<group>"; };
 		92C527442C062A7400F421D6 /* Untangle-Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Untangle-Config.h"; sourceTree = "<group>"; };
 		92C9E6432C809F1F004F9944 /* TargetDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetDevice.swift; sourceTree = "<group>"; };
 		92C9E6452C80B496004F9944 /* WelcomeMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeMessageView.swift; sourceTree = "<group>"; };
@@ -461,6 +463,7 @@
 				923E64632C00B9890027DF54 /* GameControlsView.swift */,
 				923E64642C00B9890027DF54 /* PuzzleImageManager.swift */,
 				92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */,
+				92C23B082C9DB6A3001078FE /* GameIDView.swift */,
 			);
 			path = GameView;
 			sourceTree = "<group>";
@@ -833,6 +836,7 @@
 				9208F0032C29FDFA00FD14BD /* SaveContext.swift in Sources */,
 				923E64AC2C00BED00027DF54 /* undead.c in Sources */,
 				923E64B22C00BED00027DF54 /* tracks.c in Sources */,
+				92C23B092C9DB6A3001078FE /* GameIDView.swift in Sources */,
 				923E65232C00C7B40027DF54 /* dsf.c in Sources */,
 				923E64322C00B9680027DF54 /* Midend.swift in Sources */,
 				923E64AA2C00BED00027DF54 /* unequal.c in Sources */,
@@ -1032,6 +1036,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
 				MARKETING_VERSION = 1.4;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "Simon Tatham Puzzles Reloaded";
 				SDKROOT = iphoneos;
@@ -1081,6 +1086,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
 				MARKETING_VERSION = 1.4;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

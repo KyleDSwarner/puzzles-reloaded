@@ -34,6 +34,9 @@
     "Back" : {
 
     },
+    "By Game Id" : {
+
+    },
     "Cancel" : {
 
     },
@@ -73,6 +76,9 @@
     "Custom" : {
 
     },
+    "Custom Seed View" : {
+
+    },
     "Developer of first Simon Tatham collection for iOS, without which this app would not exist" : {
 
     },
@@ -100,6 +106,12 @@
     "Enable swiping back to exit puzzles. May interfere with long presses in some games!" : {
 
     },
+    "Enter Game ID" : {
+
+    },
+    "Enter Random Seed" : {
+
+    },
     "Favorite" : {
 
     },
@@ -109,6 +121,12 @@
     "Fill Blocks" : {
 
     },
+    "Game ID" : {
+
+    },
+    "Game ID: %@" : {
+
+    },
     "Game Parameters" : {
       "comment" : "Heading for the 'game parameters' section on the help page"
     },
@@ -116,6 +134,9 @@
 
     },
     "Generating Puzzle" : {
+
+    },
+    "Generation Seed" : {
 
     },
     "Get Involved" : {
@@ -146,6 +167,18 @@
 
     },
     "License" : {
+
+    },
+    "Load Custom" : {
+
+    },
+    "Load from Game ID" : {
+
+    },
+    "Load from Random Seed" : {
+
+    },
+    "Load Specific Game" : {
 
     },
     "Lock" : {
@@ -188,6 +221,9 @@
 
     },
     "Puzzles" : {
+
+    },
+    "Random Seed" : {
 
     },
     "Rate the App" : {
@@ -235,6 +271,9 @@
     "Swipe to Exit Game" : {
 
     },
+    "These values were used to generate the puzzle you're playing. Tap these sections to copy them to your clipboard." : {
+
+    },
     "This game will always be totally free and will never have ads. Enjoy!" : {
 
     },
@@ -269,6 +308,9 @@
           }
         }
       }
+    },
+    "View Game Parameters" : {
+
     },
     "Welcome!" : {
 
