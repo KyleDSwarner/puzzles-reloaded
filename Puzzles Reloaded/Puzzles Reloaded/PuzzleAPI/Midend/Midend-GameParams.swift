@@ -104,6 +104,25 @@ extension Midend {
         return getPuzzleConfig(for: PuzzleConfigTypes.gameId)
     }
     
+    /**
+     Set a custom game seed or ID, depending on the `ConfigType` passed in. Value should be of type `PuzzleConfigTypes.gameSeed` or `PuzzleConfigTypes.gameId`
+     */
+    public func setCustomGameGenerationValue(_ gameValue: String, configType: Int) -> String? {
+        let puzzleConfig = getPuzzleConfig(for: configType)
+        
+        guard let puzzleConfig = puzzleConfig else {
+            return "Unable to set game ID for current game type"
+        }
+        
+        guard puzzleConfig.menu.count == 1 else {
+            return "Unable to set game ID for current game type"
+        }
+        
+        // Set the new Game ID into the config object
+        puzzleConfig.menu[0].stringValue = gameValue
+        
+        return setPuzzleConfig(choices: puzzleConfig.menu, for: configType)
+    }
     
     /**
      Retuns the options that can be provided to the user for custom game configuration

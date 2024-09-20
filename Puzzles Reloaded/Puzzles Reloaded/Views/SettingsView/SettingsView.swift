@@ -13,6 +13,7 @@ struct SettingsView: View {
     
     // The settings page doesn't use the UserPreferences shared class to avoid an odd bug where the settings buttons didn't work correctly on first press
     @AppStorage(AppSettings.key) var appSettings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
+    
     @State private var gameSettingsMenu: [CustomMenuItem] = []
     
     // Game, to be provided when the settings menu is selected from within a game
@@ -65,6 +66,13 @@ struct SettingsView: View {
                 } footer: {
                     Text("Enable swiping back to exit puzzles. May interfere with long presses in some games!")
                 }
+                
+                Section {
+                    Toggle("Display Game ID & Seed Menus", isOn: $appSettings.value.displayCustomLoadMenu)
+                } footer: {
+                    Text("Enables the display of menu to load game menus by specific game IDs and seeds.")
+                }
+                
                 
                 if let game = game {
                     
@@ -141,7 +149,7 @@ struct SettingsView: View {
                                 
                                 
                             } footer: {
-                                Text("These values were used to generate the puzzle you're playing. Tap these sections to copy them to your clipboard.")
+                                Text("These values were used to generate the current puzzle. Tap these sections to copy them to your clipboard.")
                             }
                         }
                         .navigationTitle("Game Parameters")

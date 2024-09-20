@@ -103,7 +103,7 @@ struct GameView: View {
                                 .interpolation(.high)
                                 .scaledToFit()
                                 .focusable()
-                                .focused($imageIsFocused)
+                                // .focused($imageIsFocused) Disabled for now as it breaks keyboard entry on other pages
                             #if os(iOS)
                                 .overlay {
                                     // MARK: Puzzle Interactions & Gestures
@@ -159,7 +159,6 @@ struct GameView: View {
                     .onChange(of: geometry.size) {
                         // print("width: \(geometry.size.width), height: \(geometry.size.height)")
                         currentGeometry = geometry.size
-                        imageIsFocused = true
                     }
                     
                     if frontend.displayLoadingScreen {
@@ -278,11 +277,11 @@ struct GameView: View {
         }
         // MARK: Game ID Sheet
         .sheet(isPresented: $displayingGameIdView) {
-            GameIDView(frontend: frontend)
+            CustomGameIDView(frontend: frontend, newGameCallback: newGame)
         }
         // MARK: Custom Seed Sheet
         .sheet(isPresented: $displayingCustomSeedView) {
-            Text("Custom Seed View")
+            CustomGameSeedView(frontend: frontend, newGameCallback: newGame)
         }
         // MARK: Settings Page Sheet
         .sheet(isPresented: $settingsPageDisplayed) {
@@ -326,9 +325,6 @@ struct GameView: View {
                         newGame()
                     } label: {
                         Label("New Game", systemImage: "plus.circle")
-                            .onLongPressGesture {
-                                displayingGameIdView = true
-                            }
                     }
                     
                     Button() {
@@ -340,12 +336,14 @@ struct GameView: View {
                     }
                     .disabled(frontend.currentGameInvalidated)
                     
-                    Menu("Load Custom") {
-                        Button("Enter Game ID") { // Display Advanced Game Options?
-                            displayingGameIdView = true
-                        }
-                        Button("Enter Random Seed") {
-                            displayingCustomSeedView = true
+                    if(appSettings.value.displayCustomLoadMenu) {
+                        Menu("Load By...", systemImage: "folder") {
+                            Button("Game ID") { // Display Advanced Game Options?
+                                displayingGameIdView = true
+                            }
+                            Button("Random Seed") {
+                                displayingCustomSeedView = true
+                            }
                         }
                     }
                     

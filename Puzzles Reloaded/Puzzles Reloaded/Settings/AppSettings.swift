@@ -22,18 +22,48 @@ struct AppSettings: Codable {
     
     var enableHaptics: Bool = true
     var enableSounds: Bool = true
-    var showExperimentalGames: Bool = false
+    var showExperimentalGames: Bool = false // Deprecated
     var disableGameStatusbar: Bool = false
     var showFirstRunMessage: Bool = true
     var enableSwipeBack: Bool = false
     var enableStatistics: Bool = true
+    var displayCustomLoadMenu: Bool = false
     var gameListView: GameListViewSetting = GameListViewSetting.listView
     var appTheme: AppTheme = AppTheme.auto
     
-    var longPressTime = 500.0 // in ms
+    var longPressTime: Double = 500.0 // in ms
     
     mutating func toggleGameListView() {
         self.gameListView = self.gameListView == .listView ? .gridView : .listView
+    }
+    
+    init() {
+        // Take Default Values
+    }
+    
+    enum CodingsKeys: String, CodingKey {
+        case enableHaptics, enableSounds, showExperimentalGames, disableGameStatusbar, showFirstRunMessage, enableSwipeBack, enableStatistics, gameListView, appTheme, longPressTime, displayCustomLoadMenu
+    }
+    
+    /**
+        Custom decoder method allows for smooth migrations when we add or remove fields, otherwise data will be lost when the decoder can't create the new model.
+     */
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        showFirstRunMessage = try values.decodeIfPresent(Bool.self, forKey: .showFirstRunMessage) ?? true
+        enableHaptics = try values.decodeIfPresent(Bool.self, forKey: .enableHaptics) ?? true
+        enableSounds = try values.decodeIfPresent(Bool.self, forKey: .enableSounds) ?? true
+        // showExperimentalGames = try values.decodeIfPresent(Bool.self, forKey: .showExperimentalGames) ??
+        enableSwipeBack = try values.decodeIfPresent(Bool.self, forKey: .enableSwipeBack) ?? false
+        enableStatistics = try values.decodeIfPresent(Bool.self, forKey: .enableStatistics) ?? true
+        gameListView = try values.decodeIfPresent(GameListViewSetting.self, forKey: .gameListView) ?? GameListViewSetting.listView
+        longPressTime = try values.decodeIfPresent(Double.self, forKey: .longPressTime) ?? 500.0
+        
+        appTheme = try values.decodeIfPresent(AppTheme.self, forKey: .appTheme) ?? AppTheme.auto
+        disableGameStatusbar = try values.decodeIfPresent(Bool.self, forKey: .disableGameStatusbar) ?? false
+        displayCustomLoadMenu = try values.decodeIfPresent(Bool.self, forKey: .displayCustomLoadMenu) ?? false
+        
     }
 }
 
@@ -42,5 +72,3 @@ extension AppSettings {
         CodableWrapper.init(value: AppSettings())
     }
 }
-
-

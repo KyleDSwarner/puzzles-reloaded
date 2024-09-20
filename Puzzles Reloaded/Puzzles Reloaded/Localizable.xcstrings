@@ -34,9 +34,6 @@
     "Back" : {
 
     },
-    "By Game Id" : {
-
-    },
     "Cancel" : {
 
     },
@@ -73,10 +70,13 @@
     "Counter-Clockwise" : {
 
     },
-    "Custom" : {
+    "Current Game ID" : {
 
     },
-    "Custom Seed View" : {
+    "Current Seed" : {
+
+    },
+    "Custom" : {
 
     },
     "Developer of first Simon Tatham collection for iOS, without which this app would not exist" : {
@@ -97,6 +97,9 @@
     "Display First Run Message" : {
 
     },
+    "Display Game ID & Seed Menus" : {
+
+    },
     "Done" : {
 
     },
@@ -104,6 +107,9 @@
 
     },
     "Enable swiping back to exit puzzles. May interfere with long presses in some games!" : {
+
+    },
+    "Enables the display of menu to load game menus by specific game IDs and seeds." : {
 
     },
     "Enter Game ID" : {
@@ -136,9 +142,6 @@
     "Generating Puzzle" : {
 
     },
-    "Generation Seed" : {
-
-    },
     "Get Involved" : {
       "comment" : "Heading on about page"
     },
@@ -169,16 +172,16 @@
     "License" : {
 
     },
-    "Load Custom" : {
+    "Load By..." : {
 
     },
-    "Load from Game ID" : {
+    "Load Game" : {
 
     },
-    "Load from Random Seed" : {
+    "Load Game ID" : {
 
     },
-    "Load Specific Game" : {
+    "Load Seed" : {
 
     },
     "Lock" : {
@@ -271,7 +274,10 @@
     "Swipe to Exit Game" : {
 
     },
-    "These values were used to generate the puzzle you're playing. Tap these sections to copy them to your clipboard." : {
+    "Tap to copy to clipboard" : {
+
+    },
+    "These values were used to generate the current puzzle. Tap these sections to copy them to your clipboard." : {
 
     },
     "This game will always be totally free and will never have ads. Enjoy!" : {
