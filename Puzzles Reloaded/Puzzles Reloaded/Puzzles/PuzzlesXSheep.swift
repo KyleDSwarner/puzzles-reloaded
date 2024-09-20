@@ -126,8 +126,14 @@ extension Puzzles {
         let puzzleInputArray = inputType == "L" ? Puzzles.AlphaButtons : Puzzles.NumericButtons
         let numButtonsForReal = Int(numButtons?.output ?? "3")
         
+        var buttonControls = Puzzles.createButtonControls(numButtonsForReal ?? 3, keycodes: puzzleInputArray)
+        
+        // Add the custom X and O Buttons for Salad controls
+        buttonControls.append(ControlConfig(label: "X", command: ButtonPress(for: "X")))
+        buttonControls.append(ControlConfig(label: "O", command: ButtonPress(for: "O")))
+        
         //return Puzzles.createButtonControls(numButtons ?? 0)
-        return Puzzles.createButtonControls(numButtonsForReal ?? 3, keycodes: puzzleInputArray)
+        return buttonControls
     })
     
     // MARK: Spokes
