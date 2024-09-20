@@ -39,40 +39,51 @@ struct SettingsView: View {
                     
                 }
                 
-                Section {
-                    HStack {
-                        Text("Long Press Duration")
-                        Spacer()
-                        Text("\(appSettings.value.longPressTime.formatted(.number.precision(.fractionLength(0))))ms")
-                        //Text(Duration.milliseconds(appSettings.value.longPressTime.cle
+                NavigationLink("Controls") {
+                    Form {
+                        Section {
+                            HStack {
+                                Text("Long Press Duration")
+                                Spacer()
+                                Text("\(appSettings.value.longPressTime.formatted(.number.precision(.fractionLength(0))))ms")
+                                //Text(Duration.milliseconds(appSettings.value.longPressTime.cle
+                            }
+                            Slider(value: $appSettings.value.longPressTime, in: 125...1000, step: 125) {
+                                Text("Long Press Duration")
+                            } minimumValueLabel: {
+                                Text("125ms")
+                            } maximumValueLabel: {
+                                Text("1s")
+                            }
+                        }
+                        
+                        Section {
+                            Toggle("Swipe to Exit Game", isOn: $appSettings.value.enableSwipeBack)
+                        } footer: {
+                            Text("Enable swiping back to exit puzzles. May interfere with long presses in some games!")
+                        }
                     }
-                    Slider(value: $appSettings.value.longPressTime, in: 125...1000, step: 125) {
-                        Text("Long Press Duration")
-                    } minimumValueLabel: {
-                        Text("125ms")
-                    } maximumValueLabel: {
-                        Text("1s")
+                    .navigationTitle("Controls")
+                    .navigationBarTitleDisplayMode(.inline)
+                }
+                
+                NavigationLink("Appearance") {
+                    Form {
+                        Section {
+                            Toggle("Disable Game Statusbars", isOn: $appSettings.value.disableGameStatusbar)
+                        } footer: {
+                            Text("Disable game information that appears at the bottom of the screen")
+                        }
+                        
+                        Section {
+                            Toggle("Display Game ID & Seed Menus", isOn: $appSettings.value.displayCustomLoadMenu)
+                        } footer: {
+                            Text("Enables the display of menu to load game menus by specific game IDs and seeds.")
+                        }
                     }
+                    .navigationTitle("Appearance")
+                    .navigationBarTitleDisplayMode(.inline)
                 }
-                
-                Section {
-                    Toggle("Disable Game Statusbars", isOn: $appSettings.value.disableGameStatusbar)
-                } footer: {
-                    Text("Disable game information that appears at the bottom of the screen")
-                }
-                
-                Section {
-                    Toggle("Swipe to Exit Game", isOn: $appSettings.value.enableSwipeBack)
-                } footer: {
-                    Text("Enable swiping back to exit puzzles. May interfere with long presses in some games!")
-                }
-                
-                Section {
-                    Toggle("Display Game ID & Seed Menus", isOn: $appSettings.value.displayCustomLoadMenu)
-                } footer: {
-                    Text("Enables the display of menu to load game menus by specific game IDs and seeds.")
-                }
-                
                 
                 if let game = game {
                     
