@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -127,6 +127,8 @@
 		92B55D522C0F410900517280 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D512C0F410900517280 /* Localizable.xcstrings */; };
 		92B55D542C0F46A500517280 /* Puzzles.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D532C0F46A500517280 /* Puzzles.xcstrings */; };
 		92BBCF0C2C17B09500893703 /* GameCustomSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */; };
+		92C23B052C9DAD55001078FE /* GameUserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C23B032C9DAD55001078FE /* GameUserSettings.swift */; };
+		92C23B062C9DAD55001078FE /* UserSettingsV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C23B042C9DAD55001078FE /* UserSettingsV1.swift */; };
 		92C9E6442C809F1F004F9944 /* TargetDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C9E6432C809F1F004F9944 /* TargetDevice.swift */; };
 		92C9E6462C80B496004F9944 /* WelcomeMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C9E6452C80B496004F9944 /* WelcomeMessageView.swift */; };
 		92D8D8692C57C4CD00E1E9E3 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */; };
@@ -272,6 +274,8 @@
 		92B55D512C0F410900517280 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		92B55D532C0F46A500517280 /* Puzzles.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Puzzles.xcstrings; sourceTree = "<group>"; };
 		92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCustomSettingsView.swift; sourceTree = "<group>"; };
+		92C23B032C9DAD55001078FE /* GameUserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUserSettings.swift; sourceTree = "<group>"; };
+		92C23B042C9DAD55001078FE /* UserSettingsV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsV1.swift; sourceTree = "<group>"; };
 		92C527442C062A7400F421D6 /* Untangle-Config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Untangle-Config.h"; sourceTree = "<group>"; };
 		92C9E6432C809F1F004F9944 /* TargetDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetDevice.swift; sourceTree = "<group>"; };
 		92C9E6452C80B496004F9944 /* WelcomeMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeMessageView.swift; sourceTree = "<group>"; };
@@ -281,10 +285,6 @@
 		92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsManager.swift; sourceTree = "<group>"; };
 		92F694692C6BE2480023D830 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		924DD1092C98B0C500A8FCA2 /* UserPreferences */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = UserPreferences; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		923E63DC2C00B9210027DF54 /* Frameworks */ = {
@@ -422,7 +422,7 @@
 		923E64442C00B9740027DF54 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				924DD1092C98B0C500A8FCA2 /* UserPreferences */,
+				92C23B072C9DB092001078FE /* UserPreferences */,
 				923E64412C00B9740027DF54 /* Game.swift */,
 				923E64432C00B9740027DF54 /* GameManager.swift */,
 			);
@@ -637,6 +637,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		92C23B072C9DB092001078FE /* UserPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				92C23B032C9DAD55001078FE /* GameUserSettings.swift */,
+				92C23B042C9DAD55001078FE /* UserSettingsV1.swift */,
+			);
+			path = UserPreferences;
+			sourceTree = "<group>";
+		};
 		92E7FE2C2C3F15B80020C1F5 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
@@ -670,9 +679,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				924DD1092C98B0C500A8FCA2 /* UserPreferences */,
 			);
 			name = "Puzzles Reloaded";
 			packageProductDependencies = (
@@ -845,6 +851,8 @@
 				923E645D2C00B9840027DF54 /* GameListILargeItem.swift in Sources */,
 				923E650B2C00C4AC0027DF54 /* tree234.c in Sources */,
 				923E64B92C00BEED0027DF54 /* samegame.c in Sources */,
+				92C23B052C9DAD55001078FE /* GameUserSettings.swift in Sources */,
+				92C23B062C9DAD55001078FE /* UserSettingsV1.swift in Sources */,
 				923E64CB2C00BF2D0027DF54 /* net.c in Sources */,
 				92B341392C11E90D006A4466 /* Midend-UserData.swift in Sources */,
 				923E63E32C00B9210027DF54 /* PuzzlesApp.swift in Sources */,
