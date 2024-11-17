@@ -85,6 +85,7 @@ struct SettingsView: View {
                     .navigationBarTitleDisplayMode(.inline)
                 }
                 
+                // MARK: In-Game Settings
                 if let game = game {
                     
                     if displayGameSettingsMenu {
@@ -114,6 +115,12 @@ struct SettingsView: View {
                             Text("No settings available")
                         } header: {
                             Text("\(game.gameConfig.name) Settings")
+                        }
+                    }
+                    
+                    if FeatureFlags.EnableStats {
+                        NavigationLink("Game Statistics") {
+                            GameStatsView(game: game)
                         }
                     }
                     

@@ -87,6 +87,12 @@ enum UserSettingsSchemaV1: VersionedSchema {
         mutating func gameWon(gameId: String) {
             gamesWon += 1
         }
+        
+        mutating func resetStats() {
+            self.gamesPlayed = 0
+            self.gamesWon = 0
+            self.lastPlayed = nil
+        }
     }
     
     struct GameHistory: Codable, Identifiable {

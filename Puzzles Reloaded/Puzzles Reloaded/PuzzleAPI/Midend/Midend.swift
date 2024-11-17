@@ -134,12 +134,12 @@ class Midend {
         
         let colors: UnsafeMutablePointer<Float> = midend_colours(midend, numColorsPointer)
         let numColors = Int(numColorsPointer.pointee)
-        print("Num colors: \(Int(numColors))")
-        
+        // print("Num colors: \(Int(numColors))")
 
         // Color 0 comes from the `frontend_default_colour` function in `GlobalFunctions`. The others are configured per-game.
         for i in 0..<numColors {
             let r = colors[i*3], g = colors[i*3+1], b = colors[i*3+2]
+            // print("Color \(i): \(r), \(g), \(b)")
             let newColor = CGColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: 1.0)
             
             frontend.colors.append(newColor)

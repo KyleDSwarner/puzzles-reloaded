@@ -10,7 +10,13 @@
     "%@ Settings" : {
 
     },
+    "%@ Statistics" : {
+
+    },
     "%@ms" : {
+
+    },
+    "%lld" : {
 
     },
     "1s" : {
@@ -142,6 +148,12 @@
     "Game Size & Options" : {
 
     },
+    "Game Statistics" : {
+
+    },
+    "Games Won" : {
+
+    },
     "Generating Puzzle" : {
 
     },
@@ -205,6 +217,9 @@
     "New Game" : {
 
     },
+    "No Game Provided, global stats go here?" : {
+
+    },
     "No settings available" : {
 
     },
@@ -236,6 +251,9 @@
 
     },
     "Redo previous move" : {
+
+    },
+    "Reset Game Stats" : {
 
     },
     "Restart" : {
@@ -292,6 +310,9 @@
     "This may take a long time for complex puzzles" : {
 
     },
+    "Total Games Played" : {
+
+    },
     "Undo previous move" : {
 
     },
@@ -322,6 +343,9 @@
 
     },
     "Welcome!" : {
+
+    },
+    "Win Percentage" : {
 
     },
     "Zombie" : {
