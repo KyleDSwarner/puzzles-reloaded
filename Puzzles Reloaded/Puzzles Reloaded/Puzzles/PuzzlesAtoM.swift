@@ -130,7 +130,8 @@ extension Puzzles {
     // MARK: Light Up
     static let puzzle_lightup = GameConfig(
         identifier: "lightup",
-        internalGame: lightup
+        internalGame: lightup,
+        allowSingleFingerPanning: true
     )
     
     // MARK: Loopy
