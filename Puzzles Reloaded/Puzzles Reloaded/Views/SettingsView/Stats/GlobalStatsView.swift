@@ -34,6 +34,17 @@ struct GlobalStatsView: View {
         return Double(totalGamesWon) / Double(totalGamesPlayed)
     }
     
+    var formattedWinPercentage: String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .percent
+
+        // Using significant digits
+        numberFormatter.usesSignificantDigits = false
+        numberFormatter.maximumFractionDigits = 2
+        
+        return numberFormatter.string(from: totalWinPercentage as NSNumber)
+    }
+    
     var mostPlayedGame: Game? {
         gameManager.gameModel.sorted(by: { $0.settings.stats.gamesPlayed > $1.settings.stats.gamesPlayed }).first
     }
@@ -61,12 +72,12 @@ struct GlobalStatsView: View {
                     Text("\(totalGamesWon)")
                 }
                 
-                HStack {
-                    Text("Global Win Percentage")
-                    Spacer()
-                    Text(String(format: "%.0f%%", totalWinPercentage.rounded()))
-                    
-                    
+                if let formattedWinPercentage = formattedWinPercentage {
+                    HStack {
+                        Text("Win Percentage")
+                        Spacer()
+                        Text(formattedWinPercentage)
+                    }
                 }
                 
             }

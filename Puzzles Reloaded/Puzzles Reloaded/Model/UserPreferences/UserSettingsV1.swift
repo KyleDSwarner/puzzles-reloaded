@@ -69,7 +69,7 @@ enum UserSettingsSchemaV1: VersionedSchema {
                 return 0
             }
             
-            return Double(gamesWon / gamesPlayed)
+            return Double(gamesWon) / Double(gamesPlayed)
         }
         
         mutating func updateStats_NewGame(gameId: String = "", gameDescription: String = "") {
@@ -85,7 +85,10 @@ enum UserSettingsSchemaV1: VersionedSchema {
         }
         
         mutating func gameWon(gameId: String) {
-            gamesWon += 1
+            // check if games played is greater than zero to cause a side effect where an in-progress game could be completed after clearing stats.
+            if gamesPlayed > 0 {
+                gamesWon += 1
+            }
         }
         
         mutating func resetStats() {

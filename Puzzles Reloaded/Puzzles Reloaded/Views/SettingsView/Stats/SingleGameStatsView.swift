@@ -15,8 +15,19 @@ struct GameStatsView: View {
     // Game, to be provided when the settings menu is selected from within a game
     var game: Game
     
-    var gameStats: UserSettingsSchemaV1.GameStats? {
+    var gameStats: UserSettingsSchemaV1.GameStats {
         game.settings.stats
+    }
+    
+    var formattedWinPercentage: String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .percent
+
+        // Using significant digits
+        numberFormatter.usesSignificantDigits = false
+        numberFormatter.maximumFractionDigits = 2
+        
+        return numberFormatter.string(from: gameStats.winPercentage as NSNumber)
     }
     
     var body: some View {
@@ -34,10 +45,12 @@ struct GameStatsView: View {
                     Text("\(game.settings.stats.gamesWon)")
                 }
                 
-                HStack {
-                    Text("Win Percentage")
-                    Spacer()
-                    Text(String(format: "%.0f%%", game.settings.stats.winPercentage))
+                if let formattedWinPercentage = formattedWinPercentage {
+                    HStack {
+                        Text("Win Percentage")
+                        Spacer()
+                        Text(formattedWinPercentage)
+                    }
                 }
                 
                 
