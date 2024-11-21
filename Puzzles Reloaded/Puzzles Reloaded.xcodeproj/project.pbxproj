@@ -124,7 +124,8 @@
 		923E652E2C00D6DF0027DF54 /* PuzzlesXSheep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E652D2C00D6DF0027DF54 /* PuzzlesXSheep.swift */; };
 		923E65312C00D75E0027DF54 /* GameHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E65302C00D75E0027DF54 /* GameHelpView.swift */; };
 		924181682CE92D7400BBB09E /* FeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924181672CE92D7400BBB09E /* FeatureFlags.swift */; };
-		9241816F2CEA719C00BBB09E /* GameStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241816E2CEA719C00BBB09E /* GameStatsView.swift */; };
+		9241816F2CEA719C00BBB09E /* SingleGameStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241816E2CEA719C00BBB09E /* SingleGameStatsView.swift */; };
+		924181742CEFBEE600BBB09E /* GlobalStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924181732CEFBEE600BBB09E /* GlobalStatsView.swift */; };
 		92B341392C11E90D006A4466 /* Midend-UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B341382C11E90D006A4466 /* Midend-UserData.swift */; };
 		92B55D522C0F410900517280 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D512C0F410900517280 /* Localizable.xcstrings */; };
 		92B55D542C0F46A500517280 /* Puzzles.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D532C0F46A500517280 /* Puzzles.xcstrings */; };
@@ -275,7 +276,8 @@
 		923E65302C00D75E0027DF54 /* GameHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHelpView.swift; sourceTree = "<group>"; };
 		923E653B2C00EC290027DF54 /* generated-games.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "generated-games.h"; sourceTree = "<group>"; };
 		924181672CE92D7400BBB09E /* FeatureFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlags.swift; sourceTree = "<group>"; };
-		9241816E2CEA719C00BBB09E /* GameStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatsView.swift; sourceTree = "<group>"; };
+		9241816E2CEA719C00BBB09E /* SingleGameStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleGameStatsView.swift; sourceTree = "<group>"; };
+		924181732CEFBEE600BBB09E /* GlobalStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStatsView.swift; sourceTree = "<group>"; };
 		92B341382C11E90D006A4466 /* Midend-UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Midend-UserData.swift"; sourceTree = "<group>"; };
 		92B55D512C0F410900517280 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		92B55D532C0F46A500517280 /* Puzzles.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Puzzles.xcstrings; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 				923E643B2C00B96E0027DF54 /* Settings */,
 				923E640D2C00B94E0027DF54 /* Puzzles */,
 				924181692CE92E7F00BBB09E /* Themes */,
+				924181702CEFBC1200BBB09E /* Intents */,
 				92B55D582C0F95B200517280 /* Utils */,
 				92B55D512C0F410900517280 /* Localizable.xcstrings */,
 				92B55D532C0F46A500517280 /* Puzzles.xcstrings */,
@@ -635,13 +638,29 @@
 			path = Themes;
 			sourceTree = "<group>";
 		};
+		924181702CEFBC1200BBB09E /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Intents;
+			sourceTree = "<group>";
+		};
+		924181752CEFD36400BBB09E /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				924181732CEFBEE600BBB09E /* GlobalStatsView.swift */,
+				9241816E2CEA719C00BBB09E /* SingleGameStatsView.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
 		92B55D572C0F6F0800517280 /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
+				924181752CEFD36400BBB09E /* Stats */,
 				92F6946B2C6BEAEF0023D830 /* About */,
 				923E64392C00B96E0027DF54 /* SettingsView.swift */,
 				92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */,
-				9241816E2CEA719C00BBB09E /* GameStatsView.swift */,
 			);
 			path = SettingsView;
 			sourceTree = "<group>";
@@ -835,12 +854,13 @@
 				923E65122C00C72C0027DF54 /* spectre.c in Sources */,
 				923E64CE2C00BF340027DF54 /* misc.c in Sources */,
 				923E649E2C00BEBC0027DF54 /* findloop.c in Sources */,
-				9241816F2CEA719C00BBB09E /* GameStatsView.swift in Sources */,
+				9241816F2CEA719C00BBB09E /* SingleGameStatsView.swift in Sources */,
 				923E64D52C00BF490027DF54 /* matching.c in Sources */,
 				923E645C2C00B9840027DF54 /* GameListGridItem.swift in Sources */,
 				923E64C32C00BF120027DF54 /* pegs.c in Sources */,
 				923E64CC2C00BF2D0027DF54 /* netslide.c in Sources */,
 				923E64F62C00C00A0027DF54 /* seismic.c in Sources */,
+				924181742CEFBEE600BBB09E /* GlobalStatsView.swift in Sources */,
 				923E64D72C00BF490027DF54 /* malloc.c in Sources */,
 				923E64472C00B9740027DF54 /* GameManager.swift in Sources */,
 				923E64FA2C00C00A0027DF54 /* boats.c in Sources */,

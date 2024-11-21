@@ -19,6 +19,28 @@
     "%lld" : {
 
     },
+    "%lld Games" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Game"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%lld Games"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "1s" : {
 
     },
@@ -53,6 +75,9 @@
       "comment" : "Welcome Message, Chunk 2"
     },
     "Clear" : {
+
+    },
+    "Clear All Game Statistics?" : {
 
     },
     "Clear Selected Field" : {
@@ -163,6 +188,9 @@
     "Ghost" : {
 
     },
+    "Global Win Percentage" : {
+
+    },
     "Greg Hewgill" : {
 
     },
@@ -214,10 +242,10 @@
     "More Options" : {
 
     },
-    "New Game" : {
+    "Most Frequently Played" : {
 
     },
-    "No Game Provided, global stats go here?" : {
+    "New Game" : {
 
     },
     "No settings available" : {
@@ -256,6 +284,9 @@
     "Reset Game Stats" : {
 
     },
+    "Reset Statistics" : {
+
+    },
     "Restart" : {
 
     },
@@ -289,6 +320,9 @@
     "Special Thanks" : {
       "comment" : "Heading on about page"
     },
+    "Statistics" : {
+
+    },
     "Submit An Issue" : {
 
     },
@@ -311,6 +345,9 @@
 
     },
     "Total Games Played" : {
+
+    },
+    "Total Games Won" : {
 
     },
     "Undo previous move" : {

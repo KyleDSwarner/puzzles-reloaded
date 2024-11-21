@@ -186,7 +186,14 @@ struct SettingsView: View {
                     }
                     */
                 }
-                else { // About Game / Rate / Welcome message should only show up on the root settings page
+                // MARK: Global Settings Bottom Options
+                else { // Stats / About Game / Rate / Welcome message should only show up on the root settings page
+                    Section {
+                        NavigationLink("Statistics") {
+                            GlobalStatsView()
+                        }
+                    }
+                    
                     Section {
                         NavigationLink("About Puzzles Reloaded") {
                             AboutView()
