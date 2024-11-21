@@ -104,12 +104,28 @@ class DrawingAPI {
 //MARK: Helpers for the drawing functions
 // Functions that help clean up boilerplate in the drawing functions - mostly extracting things from pointers
 
+/**
+ Retrieves the `Frontend` from a pointer to a `drawing` object
+ */
 func retrieveFrontendFromDrawing(_ drawing: UnsafeMutablePointer<drawing>?) -> Frontend {
     let pointer = drawing?.pointee.handle.bindMemory(to: Frontend.self, capacity: 1)
     
     guard let pointer = pointer else {
         //fuck
         fatalError("Drawing object was not available while drawing API within code. Cannot continue.")
+    }
+    
+    return pointer.pointee
+}
+
+/**
+ Retrieves the `Frontend` from an untyped pointer. Used from `GlobalFunctions` in additiona to this class
+ */
+func retrieveFrontendFromPointer(_ fePointer: UnsafeMutableRawPointer?) -> Frontend {
+    let pointer = fePointer?.bindMemory(to: Frontend.self, capacity: 1)
+    
+    guard let pointer = pointer else {
+        fatalError("Frontend could not be obtained from pointer. Critical internal error")
     }
     
     return pointer.pointee
