@@ -59,21 +59,41 @@ enum UserSettingsSchemaV1: VersionedSchema {
             return saveGame != nil && saveGame?.isEmpty == false
         }
         
+        /**
+         When a new game is started and at least one move is taken, this function increments the play counter & logs the game information to the history log.
+         */
         func updateStatsForNewGame(gameId: String, gameDescription: String) {
-            print("Updating Stats for New Game")
             stats.updateStats_NewGame()
             
             let newHistory = GameHistory(gameId: gameId, description: gameDescription)
             playHistory.append(newHistory)
             
+            // Only log the last 20 games, trim excess
+            self.playHistory = self.playHistory.suffix(20)
         }
         
+        /**
+         Update the history element for the game currently played as won
+         */
         func updateStatsForWonGame(gameId: String) {
-            var historyForGame = playHistory.first(where: { $0.gameId == gameId })
+            stats.gameWon(gameId: gameId)
             
-            if var historyForGame = historyForGame {
-                historyForGame.markGameWon()
+            let gameIndex = playHistory.firstIndex(where: { $0.gameId == gameId })
+            
+            
+            if let gameIndex = gameIndex {
+                print("Found Game History, marking as Won")
+                // Mutating a struct must be done in place within the array- so temporary variables!
+                playHistory[gameIndex].markGameWon()
             }
+        }
+        
+        /**
+        Reset the player statistics log. This resets all counters and removed previous game history from the queue.
+         */
+        func resetStatistics() {
+            stats.resetStats()
+            self.playHistory = []
         }
     }
     
@@ -90,19 +110,13 @@ enum UserSettingsSchemaV1: VersionedSchema {
             return Double(gamesWon) / Double(gamesPlayed)
         }
         
-        mutating func updateStats_NewGame() {
+        fileprivate mutating func updateStats_NewGame() {
             // print("New Game Started! id: \(gameId) description: \(gameDescription)") // Note: These values aren't quite ready when the app is starting up, we'll need to refactor this.
             gamesPlayed += 1
             lastPlayed = Date.now
-            
-            //let newHistory = GameHistory(gameId: "test123", description: "Describing")
-            //self.history.append(newHistory)
-            
-            // Limit the size of the history to the last 20 items
-            //self.history = self.history.suffix(20)
         }
         
-        mutating func gameWon(gameId: String) {
+        fileprivate mutating func gameWon(gameId: String) {
             // check if games played is greater than zero to cause a side effect where an in-progress game could be completed after clearing stats.
             // Also runs a sanity check to ensure the number of games won can never exceed the number of games played.
             if gamesPlayed > 0 && gamesWon < gamesPlayed {
@@ -110,7 +124,7 @@ enum UserSettingsSchemaV1: VersionedSchema {
             }
         }
         
-        mutating func resetStats() {
+        fileprivate mutating func resetStats() {
             self.gamesPlayed = 0
             self.gamesWon = 0
             self.lastPlayed = nil

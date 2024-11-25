@@ -92,11 +92,6 @@ struct CustomGameIDView: View {
             dismiss()
             
         }
-        
-        
-        
-        
-        print("Check Me Out")
     }
     
 }

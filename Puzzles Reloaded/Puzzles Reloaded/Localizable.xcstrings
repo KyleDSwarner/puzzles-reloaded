@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "%@" : {
+
+    },
     "%@ Configuration" : {
 
     },
@@ -260,6 +263,9 @@
     "Original developer of the puzzle collection" : {
 
     },
+    "Play History" : {
+
+    },
     "Privacy Policy" : {
 
     },
@@ -324,6 +330,9 @@
 
     },
     "Swipe to Exit Game" : {
+
+    },
+    "Tap a game to copy its Game ID to the clipboard" : {
 
     },
     "Tap to copy to clipboard" : {

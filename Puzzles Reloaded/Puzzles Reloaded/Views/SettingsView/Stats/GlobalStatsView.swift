@@ -125,15 +125,12 @@ struct GlobalStatsView: View {
             }
         .navigationTitle("Statistics")
         .navigationBarTitleDisplayMode(.inline)
-        .onChange(of: totalGamesPlayed) { old, new in
-            print("ON CHANGE: \(new)")
-        }
     }
     
     func resetGameStatistics() {
         gameManager.gameModel.forEach { game in
             withAnimation {
-                game.settings.stats.resetStats()
+                game.settings.resetStatistics()
             }
         }
     }

@@ -92,11 +92,6 @@ struct CustomGameSeedView: View {
             dismiss()
             
         }
-        
-        
-        
-        
-        print("Check Me Out")
     }
     
 }

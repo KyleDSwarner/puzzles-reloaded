@@ -19,6 +19,13 @@ struct GameStatsView: View {
         game.settings.stats
     }
     
+    // Return game history sorted in descending order
+    var sortedGameHistory: [GameHistory] {
+        game.settings.playHistory.sorted {
+            $0.datePlayed > $1.datePlayed
+        }
+    }
+    
     var formattedWinPercentage: String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .percent
@@ -55,6 +62,36 @@ struct GameStatsView: View {
                 
                 
             }
+            
+            if !game.settings.playHistory.isEmpty {
+                Section {
+                    List {
+                        ForEach(sortedGameHistory) { playHistory in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Button(playHistory.description) {
+                                        UIPasteboard.general.string = playHistory.gameId
+                                    }
+                                    .foregroundStyle(.primary)
+                                    
+                                    Text("\(playHistory.datePlayed.formatted(date: .numeric, time: .shortened))")
+                                        .font(.caption)
+                                }
+                                if playHistory.gameWon {
+                                    Spacer()
+                                    Image(systemName: "checkmark.circle.fill")
+                                }
+                                
+                            }
+                        }
+                    }
+                } header: {
+                    Text("Play History")
+                } footer: {
+                    Text("Tap a game to copy its Game ID to the clipboard")
+                }
+            }
+            
             Section {
                 Button("Reset Game Stats") {
                     print("Resetting Game Stats")
@@ -69,7 +106,9 @@ struct GameStatsView: View {
             isPresented: $showingClearStatsDialog
         ) {
                 Button("Reset Statistics", role: .destructive) {
-                    game.settings.stats.resetStats()
+                    withAnimation {
+                        game.settings.resetStatistics()
+                    }
                 }
                 Button("Cancel", role: .cancel) {
                     showingClearStatsDialog = false

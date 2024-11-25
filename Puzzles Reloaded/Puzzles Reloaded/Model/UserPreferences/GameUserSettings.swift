@@ -11,6 +11,7 @@ import SwiftData
 
 typealias GameUserSettings = UserSettingsSchemaV1.GameUserSettings
 typealias GameStats = UserSettingsSchemaV1.GameStats
+typealias GameHistory = UserSettingsSchemaV1.GameHistory
 
 enum GameCategory: Codable {
     case none, favorite, hidden

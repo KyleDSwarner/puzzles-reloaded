@@ -35,7 +35,7 @@ struct GameView: View {
     @State private var frontend: Frontend
     @State private var effectsManager = EffectsManager()
     
-    @State private var gameStarted = false // Gate allows us to only allows gameStarted stats once for each game
+    @State private var gameLoggedToStats = false // Gate allows us to only allows gameStarted stats once for each game
     @State private var gameWon = false // Gate that allows us to know if the game has been won (now or in the past)
     
     @State var puzzleImageTransformation: CGAffineTransform = .identity
@@ -78,6 +78,7 @@ struct GameView: View {
     
     func newGame() {
         Task {
+            self.gameLoggedToStats = false
             await frontend.beginGame()
             
             self.gameWon = false
@@ -139,6 +140,7 @@ struct GameView: View {
                                         enableCompletionAnimation = true
                                         
                                         // Increment the game winning stats. `gameWon` gates this so it can only fire once per game.
+                                        // MARK: Set game as WON
                                         if gameWon == false {
                                             gameWon = true
                                             game.settings.updateStatsForWonGame(gameId: frontend.gameId)
@@ -207,10 +209,7 @@ struct GameView: View {
                         
                         if displayNewGameButton {
                             Button("New Game") {
-                                Task {
-                                    await frontend.beginGame()
-                                }
-                                
+                                newGame()
                             }
                             .padding(5)
                             .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
@@ -247,10 +246,16 @@ struct GameView: View {
                     }
                 }
                 // MARK: Update New Game Statistics On First Move
-                .onChange(of: frontend.movesTakenInGame) { old, new in
+                .onChange(of: frontend.movesTakenInGame) { old, newValue in
                     // The game ID and other information will have also resolved at this point.
-                    print("!!! Game Started! New Game ID: \(frontend.gameId)")
-                    self.game.settings.updateStatsForNewGame(gameId: frontend.gameId, gameDescription: getCurrentGameDescription())
+                    
+                    
+                    // If we haven't already logged the game to stats & the new value is `true`, then log the game to user statistics.
+                    if gameLoggedToStats == false && newValue == true {
+                        print("!!! Game Started! New Game ID: \(frontend.gameId)")
+                        
+                        self.game.settings.updateStatsForNewGame(gameId: frontend.gameId, gameDescription: getCurrentGameDescription())
+                    }
                     /*
                     self.game.settings.stats.updateStats_NewGame(
                         gameId: frontend.gameId,
@@ -485,12 +490,13 @@ struct GameView: View {
             
             Task {
                 let isLoadingFromSavedGame: Bool = game.settings.saveGame != nil
-                await frontend.beginGame(isFirstLoad: true, withSaveGame: game.settings.saveGame, withPreferences: game.settings.userPrefs)
                 
-                // If there's no saved game, increment the 'games played' stat
-                if isLoadingFromSavedGame == false {
-                    // self.game.settings.stats.updateStats_NewGame() TODO New Game Update
+                if isLoadingFromSavedGame {
+                    // Games that are being loaded should not be logged to stats again - set the flag to true to disable future checks.
+                    self.gameLoggedToStats = true
                 }
+                
+                await frontend.beginGame(isFirstLoad: true, withSaveGame: game.settings.saveGame, withPreferences: game.settings.userPrefs)
             }
         }
         // MARK: On Disappear: Save data when leaving
@@ -542,7 +548,8 @@ struct GameView: View {
         }
         else {
             // Custom Game Preset??
-            return "Custom Game, TBD"
+            // TODO: Better titles for custom games, and the ability to name your own games.
+            return "Custom Game"
         }
     }
 
