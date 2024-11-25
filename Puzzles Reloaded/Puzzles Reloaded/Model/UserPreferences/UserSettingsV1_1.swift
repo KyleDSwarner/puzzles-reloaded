@@ -9,11 +9,16 @@
 import Foundation
 @preconcurrency import SwiftData
 
-enum UserSettingsSchemaV1: VersionedSchema {
-    static let versionIdentifier = Schema.Version(1, 0, 0)
+// Intermittent model on the way to migrate to v2: Introduces new fields, but does not yet delete the old ones.
+// V2 will delete the old versions to complete the migration
+
+// This is paused for the time being, as CloudKit is not playing nice with migrations & causing crashes & errors. For now, I'll just store the history object on `GameUserSettings` and we can migrate later if I figure this out.
+
+enum UserSettingsSchemaV1_1: VersionedSchema {
+    static let versionIdentifier = Schema.Version(1, 1, 0)
 
     static var models: [any PersistentModel.Type] {
-        [GameUserSettings.self]
+        [GameUserSettings.self, GameStatistics.self, GameplayHistory.self]
     }
 
     @Model
@@ -28,7 +33,7 @@ enum UserSettingsSchemaV1: VersionedSchema {
         var customDefaultPreset: [CustomMenuItem] = [] // This is populated from the game's custom menu settings view
         var customPuzzlePresets: [CustomGamePreset] = []
         
-        var playHistory: [GameHistory] = []
+        @Relationship(deleteRule: .cascade, inverse: \GameStatistics.parent) var gameStatistics: GameStatistics?
         
         init(identifier: String) {
             self.gameName = identifier
@@ -37,6 +42,7 @@ enum UserSettingsSchemaV1: VersionedSchema {
             self.saveGame = nil
             self.userPrefs = nil
             self.selectedDefaultPreset = nil
+            self.gameStatistics = GameStatistics(gameName: identifier)
         }
         
         func updateGameCategory(_ category: GameCategory) {
@@ -58,22 +64,51 @@ enum UserSettingsSchemaV1: VersionedSchema {
         var hasSavedGame: Bool {
             return saveGame != nil && saveGame?.isEmpty == false
         }
+    }
+    
+    @Model
+    class GameStatistics {
+        private(set) var parent: GameUserSettings?
+        private(set) var gameName: String = ""
+        private(set) var gamesPlayed = 0
+        private(set) var gamesWon = 0
+        private(set) var lastPlayed: Date?
         
-        func updateStatsForNewGame(gameId: String, gameDescription: String) {
-            print("Updating Stats for New Game")
-            stats.updateStats_NewGame()
-            
-            let newHistory = GameHistory(gameId: gameId, description: gameDescription)
-            playHistory.append(newHistory)
-            
+        @Relationship(deleteRule: .cascade, inverse: \GameplayHistory.parent) private(set) var history: [GameplayHistory]? = []
+        
+        init(gameName: String, gamesPlayed: Int = 0, gamesWon: Int = 0) {
+            self.gameName = gameName
+            self.gamesPlayed = gamesPlayed
+            self.gamesWon = gamesWon
+            self.lastPlayed = Date.now
+            self.history = []
         }
         
-        func updateStatsForWonGame(gameId: String) {
-            var historyForGame = playHistory.first(where: { $0.gameId == gameId })
-            
-            if var historyForGame = historyForGame {
-                historyForGame.markGameWon()
+        var winPercentage: Double {
+            guard gamesPlayed > 0 else {
+                return 0
             }
+            
+            return Double(gamesWon) / Double(gamesPlayed)
+        }
+    }
+    
+    @Model class GameplayHistory {
+        var parent: GameStatistics?
+        var gameId: String = ""
+        var gameDescription: String = ""
+        var datePlayed: Date = Date.now
+        var gameWon: Bool = false
+        
+        init(gameId: String, description: String) {
+            self.gameId = gameId
+            self.gameDescription = description
+            self.datePlayed = Date.now
+            self.gameWon = false
+        }
+        
+        func markGameWon() {
+            self.gameWon = true
         }
     }
     
@@ -90,7 +125,7 @@ enum UserSettingsSchemaV1: VersionedSchema {
             return Double(gamesWon) / Double(gamesPlayed)
         }
         
-        mutating func updateStats_NewGame() {
+        mutating func updateStats_NewGame(gameId: String = "", gameDescription: String = "") {
             // print("New Game Started! id: \(gameId) description: \(gameDescription)") // Note: These values aren't quite ready when the app is starting up, we'll need to refactor this.
             gamesPlayed += 1
             lastPlayed = Date.now
@@ -130,10 +165,6 @@ enum UserSettingsSchemaV1: VersionedSchema {
             self.datePlayed = Date.now
             self.gameWon = false
         }
-        
-        mutating func markGameWon() {
-            self.gameWon = true
-        }
     }
 
     struct CustomGamePreset: Codable, Identifiable {
@@ -162,3 +193,4 @@ enum UserSettingsSchemaV1: VersionedSchema {
         }
     }
 }
+

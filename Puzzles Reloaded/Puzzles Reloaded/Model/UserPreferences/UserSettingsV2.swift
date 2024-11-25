@@ -9,18 +9,17 @@
 import Foundation
 @preconcurrency import SwiftData
 
-enum UserSettingsSchemaV1: VersionedSchema {
-    static let versionIdentifier = Schema.Version(1, 0, 0)
+enum UserSettingsSchemaV2: VersionedSchema {
+    static let versionIdentifier = Schema.Version(2, 0, 0)
 
     static var models: [any PersistentModel.Type] {
-        [GameUserSettings.self]
+        [GameUserSettings.self, GameStatistics.self, GameplayHistory.self]
     }
 
     @Model
     class GameUserSettings {
         var gameName: String = ""
         var category: GameCategory = GameCategory.none
-        var stats: GameStats = GameStats()
         var singleFingerPanningEnabled: Bool = false
         var saveGame: String? // Saved game, piped from the internal puzzle app
         var userPrefs: String? // String from the puzzle code to store internal user preferences
@@ -28,15 +27,15 @@ enum UserSettingsSchemaV1: VersionedSchema {
         var customDefaultPreset: [CustomMenuItem] = [] // This is populated from the game's custom menu settings view
         var customPuzzlePresets: [CustomGamePreset] = []
         
-        var playHistory: [GameHistory] = []
+        @Relationship(deleteRule: .cascade, inverse: \GameStatistics.parent) var gameStatistics: GameStatistics?
         
         init(identifier: String) {
             self.gameName = identifier
             self.category = .none
-            self.stats = GameStats()
             self.saveGame = nil
             self.userPrefs = nil
             self.selectedDefaultPreset = nil
+            self.gameStatistics = GameStatistics()
         }
         
         func updateGameCategory(_ category: GameCategory) {
@@ -58,29 +57,23 @@ enum UserSettingsSchemaV1: VersionedSchema {
         var hasSavedGame: Bool {
             return saveGame != nil && saveGame?.isEmpty == false
         }
-        
-        func updateStatsForNewGame(gameId: String, gameDescription: String) {
-            print("Updating Stats for New Game")
-            stats.updateStats_NewGame()
-            
-            let newHistory = GameHistory(gameId: gameId, description: gameDescription)
-            playHistory.append(newHistory)
-            
-        }
-        
-        func updateStatsForWonGame(gameId: String) {
-            var historyForGame = playHistory.first(where: { $0.gameId == gameId })
-            
-            if var historyForGame = historyForGame {
-                historyForGame.markGameWon()
-            }
-        }
     }
     
-    struct GameStats: Codable {
-        var gamesPlayed = 0
-        var gamesWon = 0
-        var lastPlayed: Date?
+    @Model
+    class GameStatistics {
+        private(set) var parent: GameUserSettings?
+        private(set) var gamesPlayed = 0
+        private(set) var gamesWon = 0
+        private(set) var lastPlayed: Date?
+        
+        @Relationship(deleteRule: .cascade, inverse: \GameplayHistory.parent) private(set) var history: [GameplayHistory]? = []
+        
+        init() {
+            self.gamesPlayed = 0
+            self.gamesWon = 0
+            self.lastPlayed = Date.now
+            self.history = []
+        }
         
         var winPercentage: Double {
             guard gamesPlayed > 0 else {
@@ -89,49 +82,23 @@ enum UserSettingsSchemaV1: VersionedSchema {
             
             return Double(gamesWon) / Double(gamesPlayed)
         }
-        
-        mutating func updateStats_NewGame() {
-            // print("New Game Started! id: \(gameId) description: \(gameDescription)") // Note: These values aren't quite ready when the app is starting up, we'll need to refactor this.
-            gamesPlayed += 1
-            lastPlayed = Date.now
-            
-            //let newHistory = GameHistory(gameId: "test123", description: "Describing")
-            //self.history.append(newHistory)
-            
-            // Limit the size of the history to the last 20 items
-            //self.history = self.history.suffix(20)
-        }
-        
-        mutating func gameWon(gameId: String) {
-            // check if games played is greater than zero to cause a side effect where an in-progress game could be completed after clearing stats.
-            // Also runs a sanity check to ensure the number of games won can never exceed the number of games played.
-            if gamesPlayed > 0 && gamesWon < gamesPlayed {
-                gamesWon += 1
-            }
-        }
-        
-        mutating func resetStats() {
-            self.gamesPlayed = 0
-            self.gamesWon = 0
-            self.lastPlayed = nil
-        }
     }
     
-    struct GameHistory: Codable, Identifiable {
-        var id = UUID()
+    @Model class GameplayHistory {
+        var parent: GameStatistics?
         var gameId: String = ""
-        var description: String = ""
+        var gameDescription: String = ""
         var datePlayed: Date = Date.now
         var gameWon: Bool = false
         
         init(gameId: String, description: String) {
             self.gameId = gameId
-            self.description = description
+            self.gameDescription = description
             self.datePlayed = Date.now
             self.gameWon = false
         }
         
-        mutating func markGameWon() {
+        func markGameWon() {
             self.gameWon = true
         }
     }

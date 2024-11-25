@@ -34,6 +34,8 @@ struct GameView: View {
     @FocusState private var imageIsFocused: Bool
     @State private var frontend: Frontend
     @State private var effectsManager = EffectsManager()
+    
+    @State private var gameStarted = false // Gate allows us to only allows gameStarted stats once for each game
     @State private var gameWon = false // Gate that allows us to know if the game has been won (now or in the past)
     
     @State var puzzleImageTransformation: CGAffineTransform = .identity
@@ -77,7 +79,7 @@ struct GameView: View {
     func newGame() {
         Task {
             await frontend.beginGame()
-            self.game.settings.stats.updateStats_NewGame()
+            
             self.gameWon = false
             self.puzzleImageTransformation = .identity
         }
@@ -139,7 +141,8 @@ struct GameView: View {
                                         // Increment the game winning stats. `gameWon` gates this so it can only fire once per game.
                                         if gameWon == false {
                                             gameWon = true
-                                            game.settings.stats.gameWon(gameId: frontend.gameId)
+                                            game.settings.updateStatsForWonGame(gameId: frontend.gameId)
+                                            // game.settings.stats.gameWon(gameId: frontend.gameId)
                                         }
                                         withAnimation(.easeInOut(duration: 0.5)) {
                                             puzzleImageTransformation = .identity
@@ -242,6 +245,17 @@ struct GameView: View {
                         self.displayNewGameButton = false
                         self.displayRestartButton = false
                     }
+                }
+                // MARK: Update New Game Statistics On First Move
+                .onChange(of: frontend.movesTakenInGame) { old, new in
+                    // The game ID and other information will have also resolved at this point.
+                    print("!!! Game Started! New Game ID: \(frontend.gameId)")
+                    self.game.settings.updateStatsForNewGame(gameId: frontend.gameId, gameDescription: getCurrentGameDescription())
+                    /*
+                    self.game.settings.stats.updateStats_NewGame(
+                        gameId: frontend.gameId,
+                        gameDescription: getCurrentGameDescription())
+                     */
                 }
             }
             
@@ -475,13 +489,12 @@ struct GameView: View {
                 
                 // If there's no saved game, increment the 'games played' stat
                 if isLoadingFromSavedGame == false {
-                    self.game.settings.stats.updateStats_NewGame()
+                    // self.game.settings.stats.updateStats_NewGame() TODO New Game Update
                 }
             }
         }
         // MARK: On Disappear: Save data when leaving
         .onDisappear {
-            print("On Disappear!")
             saveUserData()
         }
         // MARK: Single Finger Navigation Sync
@@ -519,6 +532,18 @@ struct GameView: View {
          This recreates the midend from scratch to avoid these issues (and has the added benefit of resetting the custom game settings, which feels cleaner)
          */
         frontend.midend.createMidend(frontend: &frontend)
+    }
+    
+    func getCurrentGameDescription() -> String {
+        let gameDescription = frontend.gamePresets.first(where: { $0.id == frontend.currentPreset})?.title
+        
+        if let gameDescription = gameDescription {
+            return gameDescription
+        }
+        else {
+            // Custom Game Preset??
+            return "Custom Game, TBD"
+        }
     }
 
     func saveUserData() {

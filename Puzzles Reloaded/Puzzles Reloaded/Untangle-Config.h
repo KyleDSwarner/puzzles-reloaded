@@ -8,7 +8,7 @@
 
 // This file is attached to untangle.c during compilation to modify definitions. This is needed to affect the presentation of dots to a reasonable size on touchscreens.
 
-// NOTE: requires we modify untangle.c in order to allow these definitions to take effect. The push upstream is pending!Darra3.fia
+// NOTE: requires we modify untangle.c in order to allow these definitions to take effect. The push upstream is pending!
 
 
 #ifndef Untangle_Config_h
