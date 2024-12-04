@@ -136,12 +136,17 @@ enum UserSettingsSchemaV1: VersionedSchema {
         var gameId: String = ""
         var description: String = ""
         var datePlayed: Date = Date.now
+        // var timeTaken: TimeInterval = 0 // Currently Unused
+        // var undoUsed: Bool = false // Currently Unused
         var gameWon: Bool = false
         
         init(gameId: String, description: String) {
             self.gameId = gameId
             self.description = description
             self.datePlayed = Date.now
+            // self.timeTaken = 0
+            // self.undoUsed = false
+            // (Above values trigger migration failures, we'll need to get migrations working to add them)
             self.gameWon = false
         }
         

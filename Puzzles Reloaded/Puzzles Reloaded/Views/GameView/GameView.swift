@@ -35,6 +35,8 @@ struct GameView: View {
     @State private var frontend: Frontend
     @State private var effectsManager = EffectsManager()
     
+    @State private var undoUsed = false
+    @State private var gameAutosolved = false
     @State private var gameLoggedToStats = false // Gate allows us to only allows gameStarted stats once for each game
     @State private var gameWon = false // Gate that allows us to know if the game has been won (now or in the past)
     
@@ -79,6 +81,8 @@ struct GameView: View {
     func newGame() {
         Task {
             self.gameLoggedToStats = false
+            self.gameAutosolved = false
+            self.undoUsed = false
             await frontend.beginGame()
             
             self.gameWon = false
@@ -134,14 +138,15 @@ struct GameView: View {
                                 }
                                  */
                                 
-                                .onChange(of: frontend.puzzleStatus) { old, new in
+                                .onChange(of: frontend.puzzleStatus) { _, new in
                                     if(new == .SOLVED) {
                                         //TODO: The affine transform is not animable, and I haven't found a way to animate completions while also keeping the navigation fluid.
                                         enableCompletionAnimation = true
                                         
                                         // Increment the game winning stats. `gameWon` gates this so it can only fire once per game.
+                                        // We also don't mark this as won if the autosolver was used.
                                         // MARK: Set game as WON
-                                        if gameWon == false {
+                                        if gameWon == false && gameAutosolved == false {
                                             gameWon = true
                                             game.settings.updateStatsForWonGame(gameId: frontend.gameId)
                                             // game.settings.stats.gameWon(gameId: frontend.gameId)
@@ -385,7 +390,7 @@ struct GameView: View {
                             
                             if frontend.canSolve {
                                 Button("Auto-Solve") {
-                                    frontend.midend.solvePuzzle()
+                                    triggerAutosolver()
                                 }
                                 .disabled(frontend.currentGameInvalidated)
                             }
@@ -575,8 +580,10 @@ struct GameView: View {
         game.settings.userPrefs = prefs
     }
     
-    func updateLocation(_ location: CGPoint) {
-        print(location)
+    func triggerAutosolver() {
+        print("!!! Puzzle Autosolver used")
+        self.gameAutosolved = true
+        frontend.midend.solvePuzzle()
     }
     
 }
