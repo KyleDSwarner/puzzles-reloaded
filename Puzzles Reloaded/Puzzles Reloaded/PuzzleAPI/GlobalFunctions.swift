@@ -46,13 +46,13 @@ func get_random_seed(randseed: UnsafeMutablePointer<UnsafeMutableRawPointer?>, r
 @_cdecl("activate_timer")
 func activate_timer(frontend: OpaquePointer) {
     let convertedFrontendPointer = UnsafeMutableRawPointer(frontend)
-    retrieveFrontendFromPointer(convertedFrontendPointer).startTimer()
+    retrieveFrontendFromPointer(convertedFrontendPointer).startAnimationTimer()
 }
 
 @_cdecl("deactivate_timer")
 func deactivate_timer(frontend: OpaquePointer) {
     let convertedFrontendPointer = UnsafeMutableRawPointer(frontend)
-    retrieveFrontendFromPointer(convertedFrontendPointer).stopTimer()
+    retrieveFrontendFromPointer(convertedFrontendPointer).stopAnimationTimer()
 }
 
 @_cdecl("fatal")

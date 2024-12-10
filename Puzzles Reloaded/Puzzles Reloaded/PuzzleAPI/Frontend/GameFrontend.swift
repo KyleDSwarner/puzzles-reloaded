@@ -222,20 +222,18 @@ class Frontend: @unchecked Sendable {
  The midend will trigger these via methods from `GlobalFunctions` and need not be called manually.
 */
 extension Frontend {
-    func startTimer() {
+    func startAnimationTimer() {
         if(animationTimer.isValid) {
             animationTimer.invalidate()
         }
         
-        self.animationTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
-            //print("Timer First WOO")
+        self.animationTimer = Timer.scheduledTimer(withTimeInterval: PuzzleConstants.animationRedrawDelay, repeats: true) { _ in
             self.midend.triggerTimer()
         }
         
     }
     
-    func stopTimer() {
-        //print("Stopping Timer beooooooo")
+    func stopAnimationTimer() {
         animationTimer.invalidate()
     }
 }

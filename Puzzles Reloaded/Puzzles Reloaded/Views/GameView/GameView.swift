@@ -78,11 +78,38 @@ struct GameView: View {
         frontend.fireButton(button)
     }
     
+    // First Load function, run after the view is loaded & first appears.
+    func gameFirstLoad() {
+        frontend.midend.createMidend(frontend: &frontend)
+        imageIsFocused = true
+        
+        // Update the single finger scrolling value
+        singleFingerScrolling = game.settings.singleFingerPanningEnabled
+        
+        Task {
+            let saveGame: String? = game.settings.saveGame
+            let isLoadingFromSavedGame: Bool = saveGame != nil
+            
+            if isLoadingFromSavedGame {
+                // Games that are being loaded should not be logged to stats again - set the flag to true to disable future checks.
+                self.gameLoggedToStats = true
+                
+                // Intentionally clear out the existing save as we're loading
+                // This hellp prevent any errors that arise from malformed saves from reoccurring
+                game.settings.saveGame = nil
+            }
+            
+            await frontend.beginGame(isFirstLoad: true, withSaveGame: saveGame, withPreferences: game.settings.userPrefs)
+        }
+    }
+    
     func newGame() {
         Task {
             self.gameLoggedToStats = false
             self.gameAutosolved = false
             self.undoUsed = false
+            
+            frontend.stopAnimationTimer()
             await frontend.beginGame()
             
             self.gameWon = false
@@ -313,7 +340,7 @@ struct GameView: View {
         }
         .sheet(isPresented: $customGameSettingsDisplayed) {
             GameCustomSettingsView(gameTitle: game.gameConfig.name, frontend: frontend, newGameCallback: newGame)
-                .presentationDetents([.medium, .large])
+               //  .presentationDetents([.medium, .large]) (Not rendering correctly on iPads)
         }
         
         // MARK: Toolbar
@@ -487,22 +514,7 @@ struct GameView: View {
         
         // MARK: On Appear: Configure Frontend & Start Game
         .onAppear {
-            frontend.midend.createMidend(frontend: &frontend)
-            imageIsFocused = true
-            
-            // Update the single finger scrolling value
-            singleFingerScrolling = game.settings.singleFingerPanningEnabled
-            
-            Task {
-                let isLoadingFromSavedGame: Bool = game.settings.saveGame != nil
-                
-                if isLoadingFromSavedGame {
-                    // Games that are being loaded should not be logged to stats again - set the flag to true to disable future checks.
-                    self.gameLoggedToStats = true
-                }
-                
-                await frontend.beginGame(isFirstLoad: true, withSaveGame: game.settings.saveGame, withPreferences: game.settings.userPrefs)
-            }
+            gameFirstLoad()
         }
         // MARK: On Disappear: Save data when leaving
         .onDisappear {

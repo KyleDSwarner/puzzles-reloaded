@@ -52,7 +52,8 @@ struct CustomGameSeedView: View {
                         Text("Tap to copy to clipboard")
                     }
                 }
-            }.onAppear() {
+            }
+            .onAppear() {
                 currentSeed = frontend.midend.getGameSeed()
             }
             .toolbar {

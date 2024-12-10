@@ -31,7 +31,7 @@ class Midend {
     }
     
     func triggerTimer() {
-        midend_timer(midendPointer, 0.01)
+        midend_timer(midendPointer, Float(PuzzleConstants.animationRedrawDelay))
     }
     
     func undo() {

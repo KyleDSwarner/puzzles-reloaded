@@ -138,6 +138,7 @@ enum UserSettingsSchemaV1: VersionedSchema {
         var datePlayed: Date = Date.now
         // var timeTaken: TimeInterval = 0 // Currently Unused
         // var undoUsed: Bool = false // Currently Unused
+        // var autosolverUsed: Bool = false // Currently Unused (We'll need this to prevent future cheating via Solve -> New Game -> Undo)
         var gameWon: Bool = false
         
         init(gameId: String, description: String) {

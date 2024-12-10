@@ -34,7 +34,9 @@ struct GameCustomSettingsView: View {
     var body: some View {
         NavigationStack {
                 Form {
-                    CustomGameConfigView(gameMenu: $gameMenu)
+                    Section {
+                        CustomGameConfigView(gameMenu: $gameMenu)
+                    }
                     
                     Section {
                         Button("Save Changes") {
@@ -43,9 +45,11 @@ struct GameCustomSettingsView: View {
                     }
                 }
                 .navigationTitle("\(gameTitle) Configuration")
-            /*
+            
+                #if os(iOS)
                 .navigationBarTitleDisplayMode(.inline)
-
+                #endif
+            
                 .toolbar {
                     ToolbarItemGroup(placement: .topBarLeading) {
                         Button("Cancel") {
@@ -65,7 +69,6 @@ struct GameCustomSettingsView: View {
                     }
                     #endif
                 }
-             */
             }
         // MARK: Create Game Menu Object
         .onAppear {
