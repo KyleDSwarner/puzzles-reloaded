@@ -20,7 +20,8 @@ extension Puzzles {
         puzzle_rome,
         puzzle_salad,
         puzzle_spokes,
-        puzzle_sticks
+        puzzle_sticks,
+        puzzle_subsets
     ]}
     
     // MARK: ABCD
@@ -147,5 +148,11 @@ extension Puzzles {
         identifier: "sticks",
         customParamInfo: String(localized: "sticks_params", table: "Puzzles"),
         internalGame: sticks
+    )
+    
+    static let puzzle_subsets = GameConfig(
+        identifier: "subsets",
+        customParamInfo: String(localized: "subsets_params", table: "Puzzles"),
+        internalGame: subsets
     )
 }

@@ -12,6 +12,7 @@
 		9208F0032C29FDFA00FD14BD /* SaveContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208F0022C29FDFA00FD14BD /* SaveContext.swift */; };
 		9208F0052C29FE1F00FD14BD /* CustomConfigMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208F0042C29FE1F00FD14BD /* CustomConfigMenu.swift */; };
 		92123DDF2C19E5570020DB69 /* CustomGameConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */; };
+		9213E9BD2D343FAD00AE7092 /* subsets.c in Sources */ = {isa = PBXBuildFile; fileRef = 927CB9702D343ED700ECFF6F /* subsets.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		922D3DDD2C5D0F2F00DD7300 /* PuzzleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922D3DDC2C5D0F2F00DD7300 /* PuzzleStatus.swift */; };
 		92339D5C2C737718002D84FF /* KeyboardInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92339D5B2C737718002D84FF /* KeyboardInputHandler.swift */; };
 		923E63E32C00B9210027DF54 /* PuzzlesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63E22C00B9210027DF54 /* PuzzlesApp.swift */; };
@@ -280,6 +281,7 @@
 		924181672CE92D7400BBB09E /* FeatureFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlags.swift; sourceTree = "<group>"; };
 		9241816E2CEA719C00BBB09E /* SingleGameStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleGameStatsView.swift; sourceTree = "<group>"; };
 		924181732CEFBEE600BBB09E /* GlobalStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStatsView.swift; sourceTree = "<group>"; };
+		927CB9702D343ED700ECFF6F /* subsets.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = subsets.c; path = "../submodules/x-sheep-puzzles/subsets.c"; sourceTree = SOURCE_ROOT; };
 		928969152CF3BB9F004CB7D9 /* UserSettingsV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsV2.swift; sourceTree = "<group>"; };
 		928969172CF3BC28004CB7D9 /* UserSettingsMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsMigration.swift; sourceTree = "<group>"; };
 		9289691D2CF3D03F004CB7D9 /* UserSettingsV1_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsV1_1.swift; sourceTree = "<group>"; };
@@ -623,6 +625,7 @@
 				923E64EA2C00C00A0027DF54 /* seismic.c */,
 				923E64EF2C00C00A0027DF54 /* spokes.c */,
 				923E64EC2C00C00A0027DF54 /* sticks.c */,
+				927CB9702D343ED700ECFF6F /* subsets.c */,
 			);
 			name = Puzzles;
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				928969142CF3A68D004CB7D9 /* untangle.c in Sources */,
 				923E65002C00C00A0027DF54 /* crossing.c in Sources */,
 				923E64F92C00C00A0027DF54 /* mathrax.c in Sources */,
+				9213E9BD2D343FAD00AE7092 /* subsets.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1085,7 +1089,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.6;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "Simon Tatham Puzzles Reloaded";
@@ -1135,7 +1139,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.5.1;
+				MARKETING_VERSION = 1.6;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "$(TARGET_NAME)";

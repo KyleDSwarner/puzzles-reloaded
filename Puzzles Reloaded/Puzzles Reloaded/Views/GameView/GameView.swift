@@ -498,10 +498,14 @@ struct GameView: View {
                             }
                         }
                     }
-                    Button {
-                        customGameSettingsDisplayed = true
-                    } label: {
-                        Label("Custom", systemImage: "chevron.right")
+                    
+                    // Display custom game menu if the game allows
+                    if frontend.midend.canConfigureGameParams() {
+                        Button {
+                            customGameSettingsDisplayed = true
+                        } label: {
+                            Label("Custom", systemImage: "chevron.right")
+                        }
                     }
                 } label: {
                     Image(systemName: "square.resize")

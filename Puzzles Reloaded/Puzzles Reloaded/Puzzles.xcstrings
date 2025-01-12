@@ -1930,6 +1930,61 @@
         }
       }
     },
+    "subsets_controls" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every letter has a fixed position in each set.  Taps rotate between adding the letter for that square, or marking it as a known empty square."
+          }
+        }
+      }
+    },
+    "subsets_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Place each set once, in accordance with the subset clues"
+          }
+        }
+      }
+    },
+    "subsets_instructions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You are given a grid and a list of sets. Place every set into the grid exactly once. Some sets are given.\n\nA horseshoe symbol ⊃ points from a superset to a subset. In other words, the set on the open end must contain every letter in the set on the closed rounded end.\nAll possible horseshoe symbols are given. This means that each set must contain a letter that doesn't appear in the adjacent set, if there is no symbol between them.\nThis puzzle type was invented by Inaba Naoki under the name サブセットリンク, released as a Java Applet with a puzzle generator.\n\nSubsets was made for this puzzle collection by Leonard Sprong."
+          }
+        }
+      }
+    },
+    "subsets_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subsets"
+          }
+        }
+      }
+    },
+    "subsets_params" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom parameters are not yet supported by this game."
+          }
+        }
+      }
+    },
     "tents_controls" : {
       "extractionState" : "manual",
       "localizations" : {
