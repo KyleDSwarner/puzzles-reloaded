@@ -129,6 +129,9 @@ class Midend {
         //initGame()
     }
     
+    /**
+        Retrieve configured colors from the puzzles's setup and store them on the frontend
+     */
     func buildGameColors(midend: OpaquePointer?, frontend: Frontend) {
         let numColorsPointer = UnsafeMutablePointer<Int32>.allocate(capacity: 1)
         
@@ -214,6 +217,10 @@ class Midend {
     func drawPuzzle() {
         // Ensure puzzle settings have been configured correctly before running this!
         midend_redraw(midendPointer)
+    }
+    
+    func redrawPuzzle() {
+        midend_force_redraw(midendPointer)
     }
     
     func setGameParams(params: OpaquePointer?) {

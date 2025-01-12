@@ -150,7 +150,8 @@ func getColorByIndex(drawing: UnsafeMutablePointer<drawing>?, colorIndex: Int32)
         return CGColor(red: 0, green: 0, blue: 0, alpha: 1) // Return black as a default color
     }
     
-    return frontend.colors[colorIndexInt]
+    // If dark mode is enabled, this frontend method will perform inplace color replacements for us
+    return frontend.getColor(colorIndexInt)
 }
 
 /**

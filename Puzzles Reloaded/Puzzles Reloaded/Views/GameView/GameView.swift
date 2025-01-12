@@ -12,6 +12,7 @@ struct GameView: View {
     
     @AppStorage(AppSettings.key) var appSettings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme
     
     @State private var displayingGameMenu = false
     @State private var displayingGameTypeMenu = false
@@ -82,6 +83,7 @@ struct GameView: View {
     func gameFirstLoad() {
         frontend.midend.createMidend(frontend: &frontend)
         imageIsFocused = true
+        setColorTheme()
         
         // Update the single finger scrolling value
         singleFingerScrolling = game.settings.singleFingerPanningEnabled
@@ -101,6 +103,15 @@ struct GameView: View {
             
             await frontend.beginGame(isFirstLoad: true, withSaveGame: saveGame, withPreferences: game.settings.userPrefs)
         }
+    }
+    
+    /**
+     Set the theme to dark if the dark theme is explicitly selected, or if the user's device theme is dark mode & the theme is set to automatic.
+     */
+    func setColorTheme() {
+        frontend.useDarkTheme = FeatureFlags.EnableDarkTheme == true && (
+            appSettings.value.appTheme == .dark
+            || (colorScheme == .dark && appSettings.value.appTheme == .auto))
     }
     
     func newGame() {
@@ -182,6 +193,12 @@ struct GameView: View {
                                             puzzleImageTransformation = .identity
                                         }
                                     }
+                                }
+                                // MARK: Theme Change: Redraw current puzzle
+                                .onChange(of: appSettings.value.appTheme) {
+                                    print("!!!!!!!! Hey, the theme changed!")
+                                    setColorTheme()
+                                    frontend.midend.redrawPuzzle() // Redraw the puzzle using the new theme settings
                                 }
 
                                 .blur(radius: frontend.currentGameInvalidated ? 5 : 0)

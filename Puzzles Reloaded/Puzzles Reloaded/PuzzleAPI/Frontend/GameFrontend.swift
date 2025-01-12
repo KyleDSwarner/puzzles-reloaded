@@ -17,6 +17,7 @@ import CoreGraphics
 class Frontend: @unchecked Sendable {
     var midend: Midend // Reference to the midend
     var colors: [CGColor] = [] // Array of colors used to build the puzzle. Set from the midend when building the puzzle.
+    var useDarkTheme: Bool = false
     
     var gameHasStatusbar = false
     var movesTakenInGame = false
@@ -186,9 +187,19 @@ class Frontend: @unchecked Sendable {
         return save?.saveToString() ?? nil
     }
     
-    //
     func setNewGamePreset(_ parameters: OpaquePointer?) {
         midend.setGameParams(params: parameters)
+    }
+    
+    func getColor(_ index: Int) -> CGColor {
+        
+        // Replace background color for dark mode:
+        if index == 0 && useDarkTheme == true {
+            return CGColor(red: 0, green: 0, blue: 0, alpha: 1)
+        }
+        
+        return colors[index]
+        // TODO: Dark Mode Adjustments here!
     }
     
     /**

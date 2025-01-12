@@ -69,6 +69,17 @@ struct SettingsView: View {
                 
                 NavigationLink("Appearance") {
                     Form {
+                        
+                        if FeatureFlags.EnableDarkTheme {
+                            Section {
+                                Picker("Puzzle Theme", selection: $appSettings.value.appTheme) {
+                                    Text("Auto").tag(AppTheme.auto)
+                                    Text("Light").tag(AppTheme.light)
+                                    Text("Dark").tag(AppTheme.dark)
+                                }
+                            }
+                        }
+                        
                         Section {
                             Toggle("Disable Game Statusbars", isOn: $appSettings.value.disableGameStatusbar)
                         } footer: {
@@ -80,6 +91,8 @@ struct SettingsView: View {
                         } footer: {
                             Text("Enables the display of menu to load game menus by specific game IDs and seeds.")
                         }
+                        
+                        
                     }
                     .navigationTitle("Appearance")
                     .navigationBarTitleDisplayMode(.inline)
@@ -118,10 +131,8 @@ struct SettingsView: View {
                         }
                     }
                     
-                    if FeatureFlags.EnableStats {
-                        NavigationLink("Game Statistics") {
-                            GameStatsView(game: game)
-                        }
+                    NavigationLink("Game Statistics") {
+                        GameStatsView(game: game)
                     }
                     
                     NavigationLink("View Game Parameters") {

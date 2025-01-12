@@ -65,6 +65,9 @@
     "Appearance" : {
 
     },
+    "Auto" : {
+
+    },
     "Auto-Solve" : {
 
     },
@@ -117,6 +120,9 @@
 
     },
     "Custom" : {
+
+    },
+    "Dark" : {
 
     },
     "Developer of first Simon Tatham collection for iOS, without which this app would not exist" : {
@@ -218,6 +224,9 @@
     "License" : {
 
     },
+    "Light" : {
+
+    },
     "Load By..." : {
 
     },
@@ -270,6 +279,9 @@
 
     },
     "Privacy Policy" : {
+
+    },
+    "Puzzle Theme" : {
 
     },
     "Puzzle View" : {

@@ -11,5 +11,4 @@ import Foundation
 struct FeatureFlags {
     static let EnableCustomGames = false
     static let EnableDarkTheme = false
-    static let EnableStats = true
 }
