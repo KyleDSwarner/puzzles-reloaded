@@ -59,6 +59,10 @@ enum UserSettingsSchemaV1: VersionedSchema {
             return saveGame != nil && saveGame?.isEmpty == false
         }
         
+        func abandonSave() {
+            self.saveGame = nil
+        }
+        
         /**
          When a new game is started and at least one move is taken, this function increments the play counter & logs the game information to the history log.
          */

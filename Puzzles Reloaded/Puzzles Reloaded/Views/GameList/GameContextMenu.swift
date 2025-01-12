@@ -43,6 +43,17 @@ struct GameContextMenu: View {
                 }
             }
         }
+        
+        if(game.settings.hasSavedGame) {
+            Button {
+                withAnimation {
+                    game.settings.abandonSave()
+                }
+            } label: {
+                Label("Abandon Save", systemImage: "trash")
+            }
+            .tint(.red)
+        }
     }
 }
 
