@@ -1958,7 +1958,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You are given a grid and a list of sets. Place every set into the grid exactly once. Some sets are given.\n\nA horseshoe symbol ⊃ points from a superset to a subset. In other words, the set on the open end must contain every letter in the set on the closed rounded end.\nAll possible horseshoe symbols are given. This means that each set must contain a letter that doesn't appear in the adjacent set, if there is no symbol between them.\nThis puzzle type was invented by Inaba Naoki under the name サブセットリンク, released as a Java Applet with a puzzle generator.\n\nSubsets was made for this puzzle collection by Leonard Sprong."
+            "value" : "You are given a grid and a list of sets. Place every set into the grid exactly once. Some sets are given.\n\nA horseshoe symbol ⊃ points from a superset to a subset. In other words, the set on the open end must contain every letter in the set on the closed rounded end.\nAll possible horseshoe symbols are given. This means that each set must contain a letter that doesn't appear in the adjacent set, if there is no symbol between them.\nThis puzzle type was invented by Inaba Naoki under the name サブセットリンク, released as a Java Applet with a puzzle generator.\n\nSubsets was made for this puzzle collection by Lennard Sprong."
           }
         }
       }
