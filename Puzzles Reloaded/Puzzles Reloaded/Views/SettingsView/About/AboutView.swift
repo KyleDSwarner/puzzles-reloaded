@@ -62,7 +62,7 @@ struct AboutView: View {
                     }
                     
                     VStack(alignment: .leading) {
-                        Text("Leonard Sprong")
+                        Text("Lennard Sprong")
                         Text("Contributor of 10 new puzzles to this collection")
                             .font(.caption)
                     }
