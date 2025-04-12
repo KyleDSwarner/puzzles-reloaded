@@ -237,7 +237,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Objective of the game: Shade several cells in the hexagonal grid while following these rules:\n\nEach shaded cell must have at least one shaded cell below it (unless it's on the bottom row).\nThere can not be 3 or more shaded cells in a horizontal row.\nA number indicates the amount of shaded cells around it.\nCells with numbers cannot be shaded.\nThis genre was invented by Nikoli under the name Tawamurenga."
+            "value" : "Objective of the game: Shade several cells in the hexagonal grid while following these rules:\n\n1. Each shaded cell must have at least one shaded cell below it (unless it's on the bottom row).\n2. There can’t be 3 or more shaded cells in a horizontal row.\n3. A number indicates the amount of shaded cells around it.\n4. Cells with numbers cannot be shaded.\n\nThis genre was invented by Nikoli under the name Tawamurenga."
           }
         }
       }
