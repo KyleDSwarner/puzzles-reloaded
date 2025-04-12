@@ -35,9 +35,9 @@ extension Puzzles {
     )
     .numericButtonsBuilder({ gameId in
         // Game ID looks like: 5x5n4:0,2,2,1,1,1,1,2,0,1,3,1,1,1,1,2,2,1,1,1,0,2,2,1,2,1,0,2,1,0,2,2,1,1,2,1,0,2,2,1,
-        // {width}x{height}n{numLetters}:...
+        // {width}x{height}n{numLetters}{D for disable diagonals}:...
         
-        let regex = gameId.firstMatch(of: /n(\d+):/)
+        let regex = gameId.firstMatch(of: /n(\d+)[D]?:/)
         let numButtons = Int(regex?.1 ?? "0")
         //print("ABCD: NumButtons: \(numButtons!)")
         

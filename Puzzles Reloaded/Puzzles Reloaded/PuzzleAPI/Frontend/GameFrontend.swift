@@ -195,7 +195,8 @@ class Frontend: @unchecked Sendable {
         
         // Replace background color for dark mode:
         if index == 0 && useDarkTheme == true {
-            return CGColor(red: 0, green: 0, blue: 0, alpha: 1)
+            print("Replacing background with dark theme color")
+            return CGColor(red: 0.0902, green: 0.0902, blue: 0.0902, alpha: 1)
         }
         
         return colors[index]
