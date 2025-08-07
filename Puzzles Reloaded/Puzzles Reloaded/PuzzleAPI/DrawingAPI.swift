@@ -450,8 +450,8 @@ func saveBlitter(drawing: UnsafeMutablePointer<drawing>?, blitterPointer: Opaque
         blitter.img = image
         
         // Save the info we used to obtain the image; This will all be needed later when reloading the image.
-        blitter.x = Int(x)
-        blitter.y = Int(y)
+        //blitter.x = Int(x)
+        //blitter.y = Int(y)
         blitter.widthAdjusted = Int(visibleArea.width)
         blitter.heightAdjusted = Int(visibleArea.height)
         blitter.xAdjustment = xAdjustment
@@ -477,10 +477,8 @@ func loadBlitter(drawing: UnsafeMutablePointer<drawing>?, blitterPointer: Opaque
             return
         }
         
-        // The x & y values either be placement positions OR the special value 'BLITTER_FROMSAVED'
-        // When this occurs, restore the saved image to the location it was originally taken from.
-        var xPosition = x == BLITTER_FROMSAVED ? blitter.x : Int(x)
-        var yPosition = y == BLITTER_FROMSAVED ? blitter.y : Int(y)
+        var xPosition = Int(x)
+        var yPosition = Int(y)
         
         // Apply the adjustments from above to account for out-of-bounds drawing.
         xPosition += blitter.xAdjustment

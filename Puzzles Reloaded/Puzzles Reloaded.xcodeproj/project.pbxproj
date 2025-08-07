@@ -131,6 +131,7 @@
 		928969162CF3BB9F004CB7D9 /* UserSettingsV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928969152CF3BB9F004CB7D9 /* UserSettingsV2.swift */; };
 		928969182CF3BC28004CB7D9 /* UserSettingsMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928969172CF3BC28004CB7D9 /* UserSettingsMigration.swift */; };
 		9289691E2CF3D03F004CB7D9 /* UserSettingsV1_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289691D2CF3D03F004CB7D9 /* UserSettingsV1_1.swift */; };
+		929145A22E45296800524E0E /* subsets.c in Sources */ = {isa = PBXBuildFile; fileRef = 929145A12E45296800524E0E /* subsets.c */; };
 		92B341392C11E90D006A4466 /* Midend-UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B341382C11E90D006A4466 /* Midend-UserData.swift */; };
 		92B55D522C0F410900517280 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D512C0F410900517280 /* Localizable.xcstrings */; };
 		92B55D542C0F46A500517280 /* Puzzles.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D532C0F46A500517280 /* Puzzles.xcstrings */; };
@@ -287,6 +288,7 @@
 		928969152CF3BB9F004CB7D9 /* UserSettingsV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsV2.swift; sourceTree = "<group>"; };
 		928969172CF3BC28004CB7D9 /* UserSettingsMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsMigration.swift; sourceTree = "<group>"; };
 		9289691D2CF3D03F004CB7D9 /* UserSettingsV1_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsV1_1.swift; sourceTree = "<group>"; };
+		929145A12E45296800524E0E /* subsets.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = subsets.c; path = "../submodules/x-sheep-puzzles/subsets.c"; sourceTree = SOURCE_ROOT; };
 		92B341382C11E90D006A4466 /* Midend-UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Midend-UserData.swift"; sourceTree = "<group>"; };
 		92B55D512C0F410900517280 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		92B55D532C0F46A500517280 /* Puzzles.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Puzzles.xcstrings; sourceTree = "<group>"; };
@@ -586,6 +588,7 @@
 				923E64BF2C00BF120027DF54 /* pegs.c */,
 				923E64BB2C00BEF40027DF54 /* range.c */,
 				923E64B82C00BEED0027DF54 /* rect.c */,
+				929145A12E45296800524E0E /* subsets.c */,
 				923E64B72C00BEED0027DF54 /* samegame.c */,
 				923E64B52C00BEE20027DF54 /* signpost.c */,
 				923E64B32C00BEDE0027DF54 /* singles.c */,
@@ -907,6 +910,7 @@
 				923E64542C00B97A0027DF54 /* PuzzleTapView.swift in Sources */,
 				923E65312C00D75E0027DF54 /* GameHelpView.swift in Sources */,
 				923E64C82C00BF1C0027DF54 /* nullgame.c in Sources */,
+				929145A22E45296800524E0E /* subsets.c in Sources */,
 				92E7FE2E2C3F15C70020C1F5 /* EffectsManager.swift in Sources */,
 				923E645D2C00B9840027DF54 /* GameListILargeItem.swift in Sources */,
 				923E650B2C00C4AC0027DF54 /* tree234.c in Sources */,
@@ -1093,7 +1097,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.7.0;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "Simon Tatham Puzzles Reloaded";
@@ -1143,7 +1147,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.7.0;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "$(TARGET_NAME)";
