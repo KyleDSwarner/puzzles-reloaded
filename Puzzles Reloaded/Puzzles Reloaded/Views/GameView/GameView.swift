@@ -16,8 +16,6 @@ struct GameView: View {
     
     @State private var displayingGameMenu = false
     @State private var displayingGameTypeMenu = false
-    @State private var displayNewGameButton = false
-    @State private var displayRestartButton = false
 
     @State private var enableCompletionAnimation = false
     @State private var tapAnchor: CGPoint = .zero
@@ -271,70 +269,7 @@ struct GameView: View {
             
             // MARK: Statusbar & Button Popups
             if(!appSettings.value.disableGameStatusbar) {
-                VStack {
-                    Spacer()
-                    HStack {
-                        if(frontend.gameHasStatusbar) {
-                            Text(frontend.statusbarText)
-                                .padding(5)
-                                .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
-                        }
-                        
-                        if displayNewGameButton {
-                            Button("New Game") {
-                                newGame()
-                            }
-                            .padding(5)
-                            .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
-                            //.transition(AnyTransition.opacity.combined(with: .slide))
-                        }
-                        
-                        if displayRestartButton {
-                            Button("Restart") {
-                                frontend.midend.restartGame()
-                            }
-                            .padding(5)
-                            .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
-                            //.transition(AnyTransition.opacity.combined(with: .slide))
-                        }
-                    }
-                }
-                .frame(height: currentGeometry.width < 600 ? 80 : 40) // <-- Keep a minimum height on this stack to prevent puzzle resizing when the new game button appears
-                // MARK: New Game & Restart Button Popup Config
-                .onChange(of: frontend.puzzleStatus) { old, new in
-                    // When the game is solved, animate the appearance of the new game button
-                    if(new == .SOLVED || new == .UNSOLVABLE) {
-                        withAnimation(.smooth(duration: 0.5)) {
-                            self.displayNewGameButton = true
-                            
-                            if new == .UNSOLVABLE {
-                                self.displayRestartButton = true
-                            }
-                        }
-                    }
-                    else {
-                        // New games shouldn't animate the disappearance
-                        self.displayNewGameButton = false
-                        self.displayRestartButton = false
-                    }
-                }
-                // MARK: Update New Game Statistics On First Move
-                .onChange(of: frontend.movesTakenInGame) { old, newValue in
-                    // The game ID and other information will have also resolved at this point.
-                    
-                    
-                    // If we haven't already logged the game to stats & the new value is `true`, then log the game to user statistics.
-                    if gameLoggedToStats == false && newValue == true {
-                        print("!!! Game Started! New Game ID: \(frontend.gameId)")
-                        
-                        self.game.settings.updateStatsForNewGame(gameId: frontend.gameId, gameDescription: getCurrentGameDescription())
-                    }
-                    /*
-                    self.game.settings.stats.updateStats_NewGame(
-                        gameId: frontend.gameId,
-                        gameDescription: getCurrentGameDescription())
-                     */
-                }
+                GameViewStatusbar(frontend: frontend, newGame: newGame, restartGame: restartGame, currentGeometry: currentGeometry)
             }
             
             // MARK: Game Controls View
@@ -409,6 +344,22 @@ struct GameView: View {
         // MARK: On Disappear: Save data when leaving
         .onDisappear {
             saveUserData()
+        }
+        // MARK: Update New Game Statistics On First Move
+        .onChange(of: frontend.movesTakenInGame) { old, newValue in
+            // The game ID and other information will have also resolved at this point.
+            
+            // If we haven't already logged the game to stats & the new value is `true`, then log the game to user statistics.
+            if gameLoggedToStats == false && newValue == true {
+                print("!!! Game Started! New Game ID: \(frontend.gameId)")
+                
+                self.game.settings.updateStatsForNewGame(gameId: frontend.gameId, gameDescription: getCurrentGameDescription())
+            }
+            /*
+            self.game.settings.stats.updateStats_NewGame(
+                gameId: frontend.gameId,
+                gameDescription: getCurrentGameDescription())
+             */
         }
         // MARK: Single Finger Navigation Sync
         .onChange(of: singleFingerScrolling) {
