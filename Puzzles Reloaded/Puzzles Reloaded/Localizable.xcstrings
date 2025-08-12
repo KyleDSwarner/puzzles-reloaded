@@ -272,6 +272,12 @@
     "Open Game Menu" : {
 
     },
+    "Open the help page" : {
+
+    },
+    "Open the settings menu for the current game" : {
+
+    },
     "Original developer of the puzzle collection" : {
 
     },
@@ -321,6 +327,9 @@
 
     },
     "Settings" : {
+
+    },
+    "Share current game with others" : {
 
     },
     "Shift" : {

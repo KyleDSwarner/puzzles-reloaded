@@ -45,7 +45,7 @@ class GameIdentifier {
             // First check for errors
             if error != nil {
                 let errorMessage = String.init(cString: error!)
-                
+                print("Error when opening savegame: \(errorMessage)")               
             // Then check to see if a valid game was returned
             } else if let result = gameNamePointer.pointee {
                 returnValue = String.init(cString: result)

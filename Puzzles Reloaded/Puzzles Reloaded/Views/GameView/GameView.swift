@@ -128,12 +128,36 @@ struct GameView: View {
         }
     }
     
+    func restartGame() {
+        frontend.midend.restartGame()
+        self.puzzleImageTransformation = .identity
+    }
+    
     func setNewGamePreset(_ preset: PresetMenuItem) {
         frontend.setNewGamePreset(preset.params)
         
         frontend.setPuzzlePreset(defaultPreset: preset)
         
         newGame()
+    }
+    
+    func undoMove() {
+        effectsManager.triggerShortPressEffects()
+        frontend.undoMove()
+    }
+    
+    func redoMove() {
+        effectsManager.triggerShortPressEffects()
+        frontend.redoMove()
+    }
+    
+    func clearPuzzleSelection() {
+        effectsManager.triggerShortPressEffects()
+        frontend.fireButton(PuzzleKeycodes.ClearButton)
+    }
+    
+    func generateGameToExport() -> SaveContext {
+        return SaveContext(savegame: frontend.saveGame())
     }
     
     var body: some View {
@@ -359,179 +383,24 @@ struct GameView: View {
             GameCustomSettingsView(gameTitle: game.gameConfig.name, frontend: frontend, newGameCallback: newGame)
                //  .presentationDetents([.medium, .large]) (Not rendering correctly on iPads)
         }
-        
-        // MARK: Toolbar
-#if os(iOS)
-        .toolbar {
-            // MARK: Top Toolbar
-            if !appSettings.value.enableSwipeBack {
-                // Add a separate back button when swipeBack is disabled.
-                ToolbarItem(placement: .topBarLeading) {
-                    Button("Back") {
-                        cleanupAndBack()
-                    }
-                }
-            }
-            ToolbarItemGroup(placement: .topBarTrailing) {
-                Button {
-                    helpPageDisplayed = true
-                } label: {
-                    Image(systemName: "questionmark.circle")
-                }
-                Button() {
-                    settingsPageDisplayed = true
-                } label: {
-                    Image(systemName: "gearshape")
-                }
-                
-            }
-            
-            // MARK: Bottom Toolbar
-            ToolbarItemGroup(placement: .bottomBar) {
-                Menu("Open Game Menu", systemImage: "menucard") {
-                    Button {
-                        newGame()
-                    } label: {
-                        Label("New Game", systemImage: "plus.circle")
-                    }
-                    
-                    Button() {
-                        frontend.midend.restartGame()
-                        self.puzzleImageTransformation = .identity
-                        
-                    } label: {
-                        Label("Restart Game", systemImage: "arrow.circlepath")
-                    }
-                    .disabled(frontend.currentGameInvalidated)
-                    
-                    if(appSettings.value.displayCustomLoadMenu) {
-                        Menu("Load By...", systemImage: "folder") {
-                            Button("Game ID") { // Display Advanced Game Options?
-                                displayingGameIdView = true
-                            }
-                            Button("Random Seed") {
-                                displayingCustomSeedView = true
-                            }
-                        }
-                    }
-                    
-                    // Display this section if we can auto-solve OR if the game has some overflow controls
-                    if frontend.canSolve || !overflowMenuControls.isEmpty {
-                        Section {
-                            
-                            ForEach(overflowMenuControls, id: \.id) { control in
-                                Button {
-                                    frontend.fireButton(control.buttonCommand)
-                                } label: {
-                                    if !control.imageName.isEmpty {
-                                        Label(control.label, systemImage: control.imageName)
-                                    } else {
-                                        Text(control.label)
-                                    }
-                                }
-                                .disabled(frontend.currentGameInvalidated)
-                            }
-                            
-                            if frontend.canSolve {
-                                Button("Auto-Solve") {
-                                    triggerAutosolver()
-                                }
-                                .disabled(frontend.currentGameInvalidated)
-                            }
-                        }
-                    }
-                    
-                    // Exit Button
-                    Section {
-                        Button() {
-                            cleanupAndBack()
-                        } label: {
-                            Label("Back", systemImage: "chevron.backward")
-                        }
-                    }
-                    
-                }
-                
-                Spacer()
-                
-                if game.gameConfig.displayClearButtonInToolbar {
-                    Button() {
-                        effectsManager.triggerShortPressEffects()
-                        frontend.fireButton(PuzzleKeycodes.ClearButton)
-                    } label: {
-                        Image(systemName: "square.slash")
-                            .accessibilityLabel("Clear Selected Field")
-                    }
-                }
-                
-                Button() {
-                    effectsManager.triggerShortPressEffects()
-                    frontend.undoMove()
-                } label: {
-                    Image(systemName: "arrow.uturn.backward")
-                        .accessibilityLabel("Undo previous move")
-                }
-                .disabled(!frontend.canUndo)
-                
-                Button() {
-                    effectsManager.triggerShortPressEffects()
-                    frontend.redoMove()
-                } label: {
-                    Image(systemName: "arrow.uturn.forward")
-                        .accessibilityLabel("Redo previous move")
-                }
-                .disabled(!frontend.canRedo)
-                
-                Spacer()
-                
-                
-                // MARK: Game Presets Menu
-                Menu() {
-                    ForEach(frontend.gamePresetsPrimaryMenu) { preset in
-                        Button() {
-                            setNewGamePreset(preset)
-                        } label: {
-                            if preset.id == frontend.currentPreset {
-                                Label(preset.title, systemImage: "checkmark.circle")
-                            } else {
-                                Text(preset.title)
-                            }
-                            
-                        }
-                    }
-                    if !frontend.gamePresetsOverflowMenu.isEmpty {
-                        Menu("More Options") {
-                            ForEach(frontend.gamePresetsOverflowMenu) { preset in
-                                Button() {
-                                    setNewGamePreset(preset)
-                                } label: {
-                                    if preset.id == frontend.currentPreset {
-                                        Label(preset.title, systemImage: "checkmark.circle")
-                                    } else {
-                                        Text(preset.title)
-                                    }
-                                    
-                                }
-                            }
-                        }
-                    }
-                    
-                    // Display custom game menu if the game allows
-                    if frontend.midend.canConfigureGameParams() {
-                        Button {
-                            customGameSettingsDisplayed = true
-                        } label: {
-                            Label("Custom", systemImage: "chevron.right")
-                        }
-                    }
-                } label: {
-                    Image(systemName: "square.resize")
-                        .accessibilityLabel("Game Size & Options")
-                }
-                .menuOrder(.fixed)
-            }
-        }
-        #endif
+        // MARK: Toolbar View
+        .modifier(GameViewToolbars(
+            frontend: frontend,
+            gameAdditionalMenuOptions: overflowMenuControls,
+            displayClearButton: game.gameConfig.displayClearButtonInToolbar,
+            exitGame: cleanupAndBack,
+            newGame: newGame,
+            restartGame: restartGame,
+            setNewGamePreset: setNewGamePreset,
+            clearSelection: clearPuzzleSelection,
+            undoMove: undoMove,
+            redoMove: redoMove,
+            autosolvePuzzle: triggerAutosolver,
+            helpPageDisplayed: $helpPageDisplayed,
+            settingsPageDisplayed: $settingsPageDisplayed,
+            displayingGameIdView: $displayingGameIdView,
+            displayingCustomSeedView: $displayingCustomSeedView,
+            customGameSettingsDisplayed: $customGameSettingsDisplayed))
         
         // MARK: On Appear: Configure Frontend & Start Game
         .onAppear {

@@ -11,6 +11,7 @@
 		9208F0002C29FDB900FD14BD /* PresetMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208EFFF2C29FDB900FD14BD /* PresetMenuItem.swift */; };
 		9208F0032C29FDFA00FD14BD /* SaveContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208F0022C29FDFA00FD14BD /* SaveContext.swift */; };
 		9208F0052C29FE1F00FD14BD /* CustomConfigMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9208F0042C29FE1F00FD14BD /* CustomConfigMenu.swift */; };
+		92090B7D2E4BBC5A00484E9B /* GameView-Toolbars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92090B7C2E4BBC5500484E9B /* GameView-Toolbars.swift */; };
 		92123DDF2C19E5570020DB69 /* CustomGameConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */; };
 		9213E9BF2D34515900AE7092 /* DarkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213E9BE2D34515900AE7092 /* DarkTheme.swift */; };
 		922D3DDD2C5D0F2F00DD7300 /* PuzzleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922D3DDC2C5D0F2F00DD7300 /* PuzzleStatus.swift */; };
@@ -153,6 +154,7 @@
 		9208EFFF2C29FDB900FD14BD /* PresetMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetMenuItem.swift; sourceTree = "<group>"; };
 		9208F0022C29FDFA00FD14BD /* SaveContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveContext.swift; sourceTree = "<group>"; };
 		9208F0042C29FE1F00FD14BD /* CustomConfigMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomConfigMenu.swift; sourceTree = "<group>"; };
+		92090B7C2E4BBC5500484E9B /* GameView-Toolbars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameView-Toolbars.swift"; sourceTree = "<group>"; };
 		92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameConfigView.swift; sourceTree = "<group>"; };
 		9213E9BE2D34515900AE7092 /* DarkTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkTheme.swift; sourceTree = "<group>"; };
 		922D3DDC2C5D0F2F00DD7300 /* PuzzleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleStatus.swift; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 			isa = PBXGroup;
 			children = (
 				923E64622C00B9890027DF54 /* GameView.swift */,
+				92090B7C2E4BBC5500484E9B /* GameView-Toolbars.swift */,
 				923E64632C00B9890027DF54 /* GameControlsView.swift */,
 				923E64642C00B9890027DF54 /* PuzzleImageManager.swift */,
 				92BBCF0B2C17B09500893703 /* GameCustomSettingsView.swift */,
@@ -889,6 +892,7 @@
 				923E64312C00B9680027DF54 /* Midend-GameParams.swift in Sources */,
 				928B22FD2E4B6AC000E90C5B /* GameIdentifier.swift in Sources */,
 				923E65292C00C86A0027DF54 /* sort.c in Sources */,
+				92090B7D2E4BBC5A00484E9B /* GameView-Toolbars.swift in Sources */,
 				923E64402C00B96E0027DF54 /* UserPreferences.swift in Sources */,
 				923E65272C00C84F0027DF54 /* printing.c in Sources */,
 				923E65072C00C25D0027DF54 /* galaxies.c in Sources */,
