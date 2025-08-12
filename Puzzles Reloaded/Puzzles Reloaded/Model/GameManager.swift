@@ -70,6 +70,12 @@ class GameManager {
         return preferences.first(where: { $0.gameName == game.identifier})
     }
     
+    func findGameBySaveName(name: String) -> Game? {
+        gameModel.first(where: { game in
+            return game.gameConfig.savegameIdentifier.caseInsensitiveCompare(name) == .orderedSame
+        })
+    }
+    
     func filterGameList(category: GameCategory, showExperimentalGames: Bool) -> [Game] {
         gameModel.filter { game in
             game.settings.category == category && (showExperimentalGames || !game.gameConfig.isExperimental)

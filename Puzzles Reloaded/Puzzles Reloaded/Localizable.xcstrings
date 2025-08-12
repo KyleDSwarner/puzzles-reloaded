@@ -287,9 +287,6 @@
     "Puzzle View" : {
 
     },
-    "Puzzles" : {
-
-    },
     "Random Seed" : {
 
     },
@@ -317,6 +314,9 @@
     "Save Changes" : {
 
     },
+    "Save Import Failed" : {
+
+    },
     "Selector" : {
 
     },
@@ -327,6 +327,9 @@
 
     },
     "Simon Tatham" : {
+
+    },
+    "Simon Tatham Puzzles" : {
 
     },
     "Simon Tatham Puzzles Reloaded" : {
@@ -354,6 +357,9 @@
 
     },
     "Tap to copy to clipboard" : {
+
+    },
+    "The file you tried to import is not a valid savegame." : {
 
     },
     "These values were used to generate the current puzzle. Tap these sections to copy them to your clipboard." : {

@@ -30,6 +30,7 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
     var identifier: String
     var imageName: String
     var isExperimental: Bool
+    var savegameIdentifier: String
     
     // var instructions: String?
     // var controlInfo: String?
@@ -61,6 +62,7 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
         overflowMenuControls: [ControlConfig] = []) {
             
             self.identifier = identifier
+            self.savegameIdentifier = identifier // The internal savegame name may not always be consistent - if needed, set this via `.setSaveIdentifier`
         
             self.imageName = imageName ?? identifier // In case we need to pass in a cusom image name, otherwise reuse the main identifier.
             self.isExperimental = isExperimental
@@ -100,6 +102,11 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
     func numericButtonsBuilder(_ numericButtonsBuilder: @escaping NumButtonsFunction) -> Self {
         self.numericButtonsBuilder = numericButtonsBuilder
         self.displayClearButtonInToolbar = true
+        return self
+    }
+    
+    func setSaveIdentifier(_ saveIdentifier: String) -> Self {
+        self.savegameIdentifier = saveIdentifier
         return self
     }
     

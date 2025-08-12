@@ -112,7 +112,7 @@ extension Puzzles {
         identifier: "samegame",
         customParamInfo: String(localized: "samegame_params", table: "Puzzles"),
         internalGame: samegame,
-        isExperimental: false)
+        isExperimental: false).setSaveIdentifier("Same Game")
     
     // MARK: Signpost
     static let puzzle_signpost = GameConfig(
@@ -216,7 +216,8 @@ extension Puzzles {
     static let puzzle_tracks = GameConfig(
         identifier: "tracks",
         internalGame: tracks
-    )
+    ).setSaveIdentifier("Train Tracks")
+
     
     // MARK: Twiddle
     static let puzzle_twiddle = GameConfig(

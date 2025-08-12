@@ -37,7 +37,7 @@ extension Puzzles {
     static let puzzle_blackbox = GameConfig(
         identifier: "blackbox",
         internalGame: blackbox
-    )
+    ).setSaveIdentifier("Black Box")
     
     // MARK: Bridges
     static let puzzle_bridges = GameConfig(
@@ -132,7 +132,7 @@ extension Puzzles {
         identifier: "lightup",
         internalGame: lightup,
         allowSingleFingerPanning: true
-    )
+    ).setSaveIdentifier("Light Up")
     
     // MARK: Loopy
     static let puzzle_loopy = GameConfig(

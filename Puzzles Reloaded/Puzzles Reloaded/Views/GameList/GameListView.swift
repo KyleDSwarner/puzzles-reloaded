@@ -15,9 +15,11 @@ struct GameListView: View {
     @Environment(GameManager.self) var gameManager: GameManager
     @AppStorage(AppSettings.key) var appSettings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
     
+    @State private var navPath = NavigationPath()
     @State private var isHiddenSectionExpanded = false
     @State private var settingsPageDisplayed = false
     @State private var welcomeMessageDisplayed = false
+    @State private var showingSavegameFailAlert = false
     
     
     let columns = [
@@ -67,8 +69,32 @@ struct GameListView: View {
         //UINavigationBar.appearance().tintColor = .white
     }
     
+    func identifyAndOpenGame(savegame: SaveContext) -> Bool {
+        guard let gameName = GameIdentifier.identifyGame(savegame) else {
+            return false
+        }
+        
+        print("Game Identified: \(gameName)")
+        
+        if let game = gameManager.findGameBySaveName(name: gameName) {
+            print("Game Found! Loading \(game.gameConfig.identifier)")
+            
+            // Load the imported savegame into the game's context
+            game.settings.saveGame = savegame.saveToString()
+            
+            // Navigate to the game!
+            navPath.append(game)
+            
+            return true
+        } else {
+            print("Failed to find game for name: \(gameName)")
+            return false
+        }
+        
+    }
+    
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navPath) {
             VStack {
                 
                 // MARK: First Run Message
@@ -193,7 +219,7 @@ struct GameListView: View {
             .navigationDestination(for: Game.self) { gameModel in
                 GameView(game: gameModel)
             }
-            .navigationTitle("Puzzles")
+            .navigationTitle("Simon Tatham Puzzles")
             .toolbar {
                 if(appSettings.value.gameListView == .gridView && !gameManager.hiddenGames.isEmpty) {
                     Button() {
@@ -222,6 +248,27 @@ struct GameListView: View {
                     Image(systemName: "gearshape")
                 }
                 //EditButton()
+            }
+            .onOpenURL { url in
+                print("Open URL: %s\n", url.absoluteString)
+                let save = try! String(contentsOf: url)
+                print(save)
+                
+                if let savegame = GameIdentifier.openSavegameFromURL(url) {
+                    let loadingResult = identifyAndOpenGame(savegame: savegame)
+                    
+                    if loadingResult == false {
+                        showingSavegameFailAlert = true
+                    }
+                } else {
+                    showingSavegameFailAlert = true
+                }
+
+            }
+            .alert("Save Import Failed", isPresented: $showingSavegameFailAlert) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text("The file you tried to import is not a valid savegame.")
             }
         }
     }
