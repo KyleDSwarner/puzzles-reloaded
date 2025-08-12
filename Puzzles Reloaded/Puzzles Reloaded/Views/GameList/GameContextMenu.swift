@@ -20,10 +20,10 @@ struct GameContextMenu: View {
                 }
             } label: {
                 if(!game.isFavorite) {
-                    Label("Favorite", systemImage: "star")
+                    Label("Favorite", systemImage: "star.fill")
                 }
                 else {
-                    Label("Unfavorite", systemImage: "star.slash")
+                    Label("Unfavorite", systemImage: "star.slash.fill")
                 }
             }
             .tint(.yellow)

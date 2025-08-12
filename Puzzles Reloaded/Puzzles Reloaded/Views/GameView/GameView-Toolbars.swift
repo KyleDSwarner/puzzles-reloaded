@@ -40,11 +40,15 @@ struct GameViewToolbars: ViewModifier {
             if !appSettings.value.enableSwipeBack {
                 // Add a separate back button when swipeBack is disabled.
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Back") {
+                    Button {
                         exitGame()
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                            .accessibilityHint("Exit game and return to main menu")
                     }
                 }
             }
+            
             ToolbarItemGroup(placement: .topBarTrailing) {
                 //ShareLink(item: generateGameToExport())
                 Button {
@@ -79,7 +83,6 @@ struct GameViewToolbars: ViewModifier {
                     
                     Button() {
                         restartGame()
-                        
                     } label: {
                         Label("Restart Game", systemImage: "arrow.circlepath")
                     }
@@ -114,8 +117,10 @@ struct GameViewToolbars: ViewModifier {
                             }
                             
                             if frontend.canSolve {
-                                Button("Auto-Solve") {
+                                Button {
                                     autosolvePuzzle()
+                                } label: {
+                                    Label("Auto-Solve", systemImage: "wand.and.rays")
                                 }
                                 .disabled(frontend.currentGameInvalidated)
                             }

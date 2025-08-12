@@ -8,6 +8,30 @@
 
 import SwiftUI
 
+// Apply the glass effect for platforms that support it, otherwise fall back to the old background design
+struct ButtonDesigner: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content.glassEffect(.regular.interactive())
+        } else {
+            content.background(.thickMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+        }
+    }
+}
+
+struct ButtonTextColor: ViewModifier {
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) { // Trigger black/white test to match liquid glass design on 26+
+            content.foregroundStyle(colorScheme == .dark ? .white : .black)
+        } else {
+            content // No change!
+        }
+    }
+}
+
 struct ButtonLabel: View {
     
     @Environment(\.colorScheme) var colorScheme
@@ -18,11 +42,12 @@ struct ButtonLabel: View {
     var body: some View {
         if control.imageName.isEmpty {
             Text(control.label)
-                //.foregroundStyle(colorScheme == .dark ? .white : .black)
+                .modifier(ButtonTextColor())
         }
         else if control.displayTextWithIcon {
             Label {
                 Text(control.label)
+                    .modifier(ButtonTextColor())
             } icon: {
                 buildImage()
                     .resizable()
@@ -131,15 +156,17 @@ struct GameControlsView: View, Equatable {
                 }
                 .pickerStyle(.segmented)
                 //.fixedSize()
-                .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+                //.background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
             }
             
             // Only use the grid if there are number buttons - otherwise just spit them out
             if numericButtons.count > 0 {
                 GeometryReader { proxy in
                     // Since the number of buttons can vary wildly (Over 30 on the largest Solo boards), we use a grid to adapt
-                    // The `computerGridColumns` function helps figure out how many columns we need & allow for center alignment.
+                    // The `computeGridColumns` function helps figure out how many columns we need & allow for center alignment.
                     LazyVGrid(columns: computeGridColumns(proxy: proxy, numButtons: numericButtons.count + buttonControls.count), spacing: gridSpacing) {
+                        
+                        
                         ForEach(0..<numericButtons.count, id:\.self) { index in
                             Button() {
                                 buttonPressEmitter(numericButtons[index].buttonCommand)
@@ -148,7 +175,7 @@ struct GameControlsView: View, Equatable {
                                     .frame(maxHeight: 30)
                             }
                             .frame(minWidth: 30, minHeight: 30)
-                            .background(.thickMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+                            .modifier(ButtonDesigner())
                         }
                         
                         ForEach(0..<buttonControls.count, id:\.self) { index in
@@ -170,7 +197,7 @@ struct GameControlsView: View, Equatable {
                                  */
                             }
                             .frame(minWidth: 30, minHeight: 30)
-                            .background(.thickMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+                            .modifier(ButtonDesigner())
                         }
                         
                     }
@@ -196,7 +223,7 @@ struct GameControlsView: View, Equatable {
                             .frame(maxHeight: 30)
                     }
                     .padding(10)
-                    .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+                    .modifier(ButtonDesigner())
                 }
             }
             Spacer()

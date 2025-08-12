@@ -29,23 +29,71 @@ struct GameViewStatusbar: View {
                         .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
                 }
                 
-                if displayNewGameButton {
-                    Button("New Game") {
-                        newGame()
+                if #available(iOS 26.0, *) {
+                    GlassEffectContainer {
+                        HStack {
+                            if displayNewGameButton {
+                                Button {
+                                    newGame()
+                                } label: {
+                                    Image(systemName: "plus.circle")
+                                        .accessibilityHint("Start a new game")
+                                }
+                                .padding(10)
+                                .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 5.0))
+                                //.modifier(ButtonDesigner())
+                                .modifier(ButtonTextColor())
+                                //.background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+                                
+                                //.transition(AnyTransition.opacity.combined(with: .slide))
+                            }
+                            
+                            if displayRestartButton {
+                                Button {
+                                    frontend.midend.restartGame()
+                                } label: {
+                                    Image(systemName: "arrow.circlepath")
+                                        .accessibilityHint("Restart the current game")
+                                }
+                                .padding(10)
+                                .modifier(ButtonDesigner())
+                                .modifier(ButtonTextColor())
+                                //.transition(AnyTransition.opacity.combined(with: .slide))
+                            }
+                        }
                     }
-                    .padding(5)
-                    .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
-                    //.transition(AnyTransition.opacity.combined(with: .slide))
+                    
+                } else {
+                    if displayNewGameButton {
+                        Button {
+                            newGame()
+                        } label: {
+                            Image(systemName: "plus.circle")
+                                .accessibilityHint("Start a new game")
+                        }
+                        .padding(5)
+                        .modifier(ButtonDesigner())
+                        //.modifier(ButtonTextColor())
+                        //.background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+                        
+                        //.transition(AnyTransition.opacity.combined(with: .slide))
+                    }
+                    
+                    if displayRestartButton {
+                        Button {
+                            frontend.midend.restartGame()
+                        } label: {
+                            Image(systemName: "arrow.circlepath")
+                                .accessibilityHint("Restart the current game")
+                        }
+                        .padding(5)
+                        .modifier(ButtonDesigner())
+                        .modifier(ButtonTextColor())
+                        //.transition(AnyTransition.opacity.combined(with: .slide))
+                    }
                 }
                 
-                if displayRestartButton {
-                    Button("Restart") {
-                        frontend.midend.restartGame()
-                    }
-                    .padding(5)
-                    .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
-                    //.transition(AnyTransition.opacity.combined(with: .slide))
-                }
+                
             }
         }
         .frame(height: currentGeometry.width < 600 ? 80 : 40) // <-- Keep a minimum height on this stack to prevent puzzle resizing when the new game button appears
@@ -68,5 +116,57 @@ struct GameViewStatusbar: View {
             }
         }
         
+    }
+}
+
+/*
+struct StatusbarButtons: View {
+    var body: some View {
+        if displayNewGameButton {
+            Button("New Game") {
+                newGame()
+            }
+            .padding(5)
+            .modifier(ButtonDesigner())
+            //.modifier(ButtonTextColor())
+            //.background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+            
+            //.transition(AnyTransition.opacity.combined(with: .slide))
+        }
+        
+        if displayRestartButton {
+            Button("Restart") {
+                frontend.midend.restartGame()
+            }
+            .padding(5)
+            .modifier(ButtonDesigner())
+            .modifier(ButtonTextColor())
+            //.transition(AnyTransition.opacity.combined(with: .slide))
+        }
+    }
+}
+ */
+
+// Apply the glass effect for platforms that support it, otherwise fall back to the old background design
+struct StatusbarDesigner: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content.glassEffect()
+        } else {
+            content.background(.thickMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+        }
+    }
+}
+
+struct StatusbarTextColor: ViewModifier {
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) { // Trigger black/white test to match liquid glass design on 26+
+            content.foregroundStyle(colorScheme == .dark ? .white : .black)
+        } else {
+            content // No change!
+        }
     }
 }

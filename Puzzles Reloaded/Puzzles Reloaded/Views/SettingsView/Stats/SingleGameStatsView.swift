@@ -98,22 +98,23 @@ struct GameStatsView: View {
                     showingClearStatsDialog = true
                     
                 }
+                .confirmationDialog(
+                    "Clear Statistics For \(game.gameConfig.name)?",
+                    isPresented: $showingClearStatsDialog
+                ) {
+                    Button("Reset Statistics", role: .destructive) {
+                        withAnimation {
+                            game.settings.resetStatistics()
+                        }
+                    }
+                    Button("Cancel", role: .cancel) {
+                        showingClearStatsDialog = false
+                    }
+                }
             }
             
         }
-        .confirmationDialog(
-            "Clear Statistics For \(game)?",
-            isPresented: $showingClearStatsDialog
-        ) {
-                Button("Reset Statistics", role: .destructive) {
-                    withAnimation {
-                        game.settings.resetStatistics()
-                    }
-                }
-                Button("Cancel", role: .cancel) {
-                    showingClearStatsDialog = false
-                }
-            }
+
         .navigationTitle("\(game.gameConfig.name) Statistics")
         .navigationBarTitleDisplayMode(.inline)
         
