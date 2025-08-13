@@ -191,14 +191,37 @@ class Frontend: @unchecked Sendable {
         midend.setGameParams(params: parameters)
     }
     
-    func getColor(_ index: Int) -> CGColor {
+    func setColors(colors: [CGColor]) {
+        self.numColors = colors.count
         
-        // Replace background color for dark mode:
-        if index == 0 && useDarkTheme == true {
-            print("Replacing background with dark theme color")
-            return CGColor(red: 0.0902, green: 0.0902, blue: 0.0902, alpha: 1)
+        // MARK: Dark mode color replacement
+        if useDarkTheme == true {
+            var darkModeColors = [CGColor]()
+            
+            for index in colors.indices {
+                if index == 0 {
+                    // Always repalce index 0 with the background color
+                    darkModeColors.append(Theming.background)
+                }
+                else if let replacementColor = game.gameConfig.darkModeColorReplacements[index] {
+                    // If there's a replacement color in the game config, use that color
+                    darkModeColors.append(replacementColor.color)
+                } else {
+                    // otherwise, just apply the color provided by the system.
+                    darkModeColors.append(colors[index])
+                }
+                
+            }
+            
+            self.colors = darkModeColors
+            
+        }else {
+            // Light mode, just apply the existing color array
+            self.colors = colors
         }
-        
+    }
+    
+    func getColor(_ index: Int) -> CGColor {
         return colors[index]
         // TODO: Dark Mode Adjustments here!
     }

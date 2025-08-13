@@ -14,7 +14,7 @@
 		92090B7D2E4BBC5A00484E9B /* GameView-Toolbars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92090B7C2E4BBC5500484E9B /* GameView-Toolbars.swift */; };
 		92090B802E4BC5E200484E9B /* GameView-Statusbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92090B7F2E4BC5E200484E9B /* GameView-Statusbar.swift */; };
 		92123DDF2C19E5570020DB69 /* CustomGameConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */; };
-		9213E9BF2D34515900AE7092 /* DarkTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213E9BE2D34515900AE7092 /* DarkTheme.swift */; };
+		9213E9BF2D34515900AE7092 /* Theming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213E9BE2D34515900AE7092 /* Theming.swift */; };
 		922D3DDD2C5D0F2F00DD7300 /* PuzzleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922D3DDC2C5D0F2F00DD7300 /* PuzzleStatus.swift */; };
 		92339D5C2C737718002D84FF /* KeyboardInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92339D5B2C737718002D84FF /* KeyboardInputHandler.swift */; };
 		923E63E32C00B9210027DF54 /* PuzzlesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63E22C00B9210027DF54 /* PuzzlesApp.swift */; };
@@ -159,7 +159,7 @@
 		92090B7C2E4BBC5500484E9B /* GameView-Toolbars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameView-Toolbars.swift"; sourceTree = "<group>"; };
 		92090B7F2E4BC5E200484E9B /* GameView-Statusbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameView-Statusbar.swift"; sourceTree = "<group>"; };
 		92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGameConfigView.swift; sourceTree = "<group>"; };
-		9213E9BE2D34515900AE7092 /* DarkTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkTheme.swift; sourceTree = "<group>"; };
+		9213E9BE2D34515900AE7092 /* Theming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theming.swift; sourceTree = "<group>"; };
 		922D3DDC2C5D0F2F00DD7300 /* PuzzleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleStatus.swift; sourceTree = "<group>"; };
 		92339D5B2C737718002D84FF /* KeyboardInputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardInputHandler.swift; sourceTree = "<group>"; };
 		923E63DF2C00B9210027DF54 /* Simon Tatham Puzzles Reloaded.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simon Tatham Puzzles Reloaded.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -655,7 +655,7 @@
 		924181692CE92E7F00BBB09E /* Themes */ = {
 			isa = PBXGroup;
 			children = (
-				9213E9BE2D34515900AE7092 /* DarkTheme.swift */,
+				9213E9BE2D34515900AE7092 /* Theming.swift */,
 			);
 			path = Themes;
 			sourceTree = "<group>";
@@ -850,7 +850,7 @@
 				92123DDF2C19E5570020DB69 /* CustomGameConfigView.swift in Sources */,
 				923E64912C00BE940027DF54 /* cube.c in Sources */,
 				9208EFFE2C29FB7000FD14BD /* PuzzleConstants.swift in Sources */,
-				9213E9BF2D34515900AE7092 /* DarkTheme.swift in Sources */,
+				9213E9BF2D34515900AE7092 /* Theming.swift in Sources */,
 				923E64B12C00BED00027DF54 /* towers.c in Sources */,
 				923E64862C00BE620027DF54 /* penrose.c in Sources */,
 				923E65152C00C74A0027DF54 /* hat.c in Sources */,

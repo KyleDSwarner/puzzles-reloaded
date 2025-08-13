@@ -68,7 +68,7 @@ struct GameView: View {
         }
     }
     
-    func cleanupAndBack() {
+    func exitGame() {
         dismiss()
     }
     
@@ -79,9 +79,10 @@ struct GameView: View {
     
     // First Load function, run after the view is loaded & first appears.
     func gameFirstLoad() {
+        setColorTheme()
         frontend.midend.createMidend(frontend: &frontend)
         imageIsFocused = true
-        setColorTheme()
+        
         
         // Update the single finger scrolling value
         singleFingerScrolling = game.settings.singleFingerPanningEnabled
@@ -181,7 +182,7 @@ struct GameView: View {
                                 // MARK: Keyboard Handling
                                 .onKeyPress { key in                                    
                                     if key.key == .escape {
-                                        self.cleanupAndBack()
+                                        self.exitGame()
                                         return .handled
                                     }
                                     
@@ -220,7 +221,7 @@ struct GameView: View {
                                 .onChange(of: appSettings.value.appTheme) {
                                     print("!!!!!!!! Hey, the theme changed!")
                                     setColorTheme()
-                                    frontend.midend.redrawPuzzle() // Redraw the puzzle using the new theme settings
+                                    frontend.midend.redrawPuzzle(frontend: frontend) // Redraw the puzzle using the new theme settings
                                 }
 
                                 .blur(radius: frontend.currentGameInvalidated ? 5 : 0)
@@ -323,7 +324,7 @@ struct GameView: View {
             frontend: frontend,
             gameAdditionalMenuOptions: overflowMenuControls,
             displayClearButton: game.gameConfig.displayClearButtonInToolbar,
-            exitGame: cleanupAndBack,
+            exitGame: exitGame,
             newGame: newGame,
             restartGame: restartGame,
             setNewGamePreset: setNewGamePreset,

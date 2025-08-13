@@ -44,12 +44,43 @@ extension Puzzles {
         //let numButtons = Int(gameId.split(separator: ":")[0])
         return Puzzles.createButtonControls(numButtons ?? 0, keycodes: Puzzles.AlphaButtons)
     })
+    .setDarkModeColors([
+        1: (Theming.background, "Innter Background"),
+        2: (Theming.white, "Grid"),
+        3: (Theming.midGray, "Border Letter"),
+        4: (Theming.text, "Text"),
+        8: (Theming.veryDarkGray, "Highlight")
+    ])
+    
     
     // MARK: Ascent
     static let puzzle_ascent = GameConfig(
         identifier: "ascent",
         internalGame: ascent
     )
+    .setDarkModeColors([
+        1: (Theming.veryDarkGray, "Selected Field"),
+        2: (Theming.darkGray, "Line & Endpoints"),
+        3: (Theming.text, "Border and Entered Clues"),
+        //4: (Theming.turboBlue, "Line"),
+        5: (Theming.highlightBlueText, "Immutable Text"),
+        //6: (Theming.veryDarkGray, "Error")
+    ])
+    
+    /*
+     enum {
+         COL_MIDLIGHT,
+         COL_LOWLIGHT,
+         COL_HIGHLIGHT,
+         COL_BORDER,
+         COL_LINE,
+         COL_IMMUTABLE,
+         COL_ERROR,
+         COL_CURSOR,
+         COL_ARROW,
+         NCOLOURS
+     };
+     */
     
     // MARK: Boats
     static let puzzle_boats = GameConfig(
@@ -69,6 +100,9 @@ extension Puzzles {
         identifier: "clusters",
         internalGame: clusters
     )
+    .setDarkModeColors([
+        1: (Theming.text, "Grid"),
+    ])
     
     // MARK: Mathrax
     static let puzzle_mathrax = GameConfig(

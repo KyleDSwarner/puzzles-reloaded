@@ -135,6 +135,8 @@ class Midend {
     func buildGameColors(midend: OpaquePointer?, frontend: Frontend) {
         let numColorsPointer = UnsafeMutablePointer<Int32>.allocate(capacity: 1)
         
+        var cgColors = [CGColor]()
+        
         let colors: UnsafeMutablePointer<Float> = midend_colours(midend, numColorsPointer)
         let numColors = Int(numColorsPointer.pointee)
         // print("Num colors: \(Int(numColors))")
@@ -145,10 +147,12 @@ class Midend {
             // print("Color \(i): \(r), \(g), \(b)")
             let newColor = CGColor(red: CGFloat(r), green: CGFloat(g), blue: CGFloat(b), alpha: 1.0)
             
-            frontend.colors.append(newColor)
+            cgColors.append(newColor)
+            //frontend.colors.append(newColor)
+            
         }
         
-        frontend.numColors = numColors
+        frontend.setColors(colors: cgColors);
     }
     
     func initGame(savegame: String? = nil, preferences: String? = nil) async -> (x: Int, y: Int) {
@@ -219,7 +223,9 @@ class Midend {
         midend_redraw(midendPointer)
     }
     
-    func redrawPuzzle() {
+    func redrawPuzzle(frontend: Frontend) {
+        // Recalculate colors & apply light/dark mode colors as appropriate
+        buildGameColors(midend: midendPointer, frontend: frontend)
         midend_force_redraw(midendPointer)
     }
     

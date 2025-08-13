@@ -238,6 +238,10 @@ extension Puzzles {
             ControlConfig(label: String(localized: "Zombie"), command: ButtonPress(for: "Z"), imageName: "zombie", isSystemImage: false, displayTextWithIcon: false),
         ]
     )
+    .setDarkModeColors([
+        1: (Theming.white, "Grid"),
+        2: (Theming.white, "Text"),
+    ])
     
     // MARK: Unequal
     static let puzzle_unequal = GameConfig(

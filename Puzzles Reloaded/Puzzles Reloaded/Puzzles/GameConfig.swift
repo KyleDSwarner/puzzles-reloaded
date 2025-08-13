@@ -11,6 +11,7 @@ import SwiftUI
 
 typealias NumButtonsFunction = (_ gameId: String) -> [ControlConfig]
 typealias FireButtonFunction = (_ button: ButtonPress?) -> Void
+typealias ColorReplacement = (color: CGColor, description: String)
 
 // Intent: Representation of the game data fed from the on-device tatham games.
 @Observable
@@ -41,6 +42,8 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
     var buttonControls: [ControlConfig]
     var overflowMenuControls: [ControlConfig]
     
+    //var darkModeColorReplacements: [(id: Int, color: CGColor, desc: String?)]
+    var darkModeColorReplacements: [Int: ColorReplacement] = [:]
     // Optionally provide a custom function that returns the number of numeric buttons to display for the given game type
     var numericButtonsBuilder: NumButtonsFunction
     var allowSingleFingerPanning: Bool // <-- Games that require dragging to select multiple boxes will need two-finger panning.
@@ -75,6 +78,7 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
             self.overflowMenuControls = overflowMenuControls
             
             self.numericButtonsBuilder = { _ in []}
+            self.darkModeColorReplacements = [:]
     }
     
     // MARK: Localized Strings
@@ -110,6 +114,24 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
         return self
     }
     
+    /*
+    func setDarkModeColorsefef(_ replacements: [ColorReplacement]) -> Self {
+        //self.darkModeColorReplacements = replacements
+        return self
+    }
+    
+    func setDarkModeColors(_ replacements: [(id: Int, color: CGColor)]) -> Self {
+        self.darkModeColorReplacements = replacements
+        return self
+    }
+     */
+    
+    func setDarkModeColors(_ replacements: [Int: ColorReplacement]) -> Self {
+        self.darkModeColorReplacements = replacements
+        return self
+    }
+    
+    
     var hasCustomControls: Bool {
         !touchControls.isEmpty || !buttonControls.isEmpty
     }
@@ -121,3 +143,14 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
         imageName: "signpost",
         internalGame: net)
 }
+
+/*
+struct ColorReplacement {
+    let id: Int
+    let color: CGColor
+}
+ */
+
+//let thingy: ColorReplacement = ColorReplacement(id: <#T##Int#>, color: <#T##CGColor#>)
+
+//let things: [ColorReplacement] = [.init(1, CGColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>))]

@@ -37,7 +37,13 @@ extension Puzzles {
     static let puzzle_blackbox = GameConfig(
         identifier: "blackbox",
         internalGame: blackbox
-    ).setSaveIdentifier("Black Box")
+    )
+    .setSaveIdentifier("Black Box")
+    .setDarkModeColors([
+        3: (Theming.white, "Text"),
+        2: (Theming.white, "Text"),
+    ])
+    
     
     // MARK: Bridges
     static let puzzle_bridges = GameConfig(
@@ -47,23 +53,54 @@ extension Puzzles {
             ControlConfig(label: "Mark Neighbors", command: ButtonPress(for: "G"))
         ]
     )
+    .setDarkModeColors([
+        //1: (Theming.white, "Grid"),
+        1: (Theming.text, "Primary Grid Color"),
+        2: (Theming.lightGray, "Highlight - Finished Puzzle"),
+        //4: (Theming.turboBlue, "Selected Box"),
+        5: (Theming.darkGray, "Marked and Locked Islands"),
+        6: (Theming.veryDarkGray, "Hint"), // Mark Neighbors
+        7: (Theming.white, "Grid"),
+        //8: (Theming.warningRed, "Warning Color")
+    ])
     
     // MARK: Cube
     static let puzzle_cube = GameConfig(
         identifier: "cube",
         internalGame: cube)
+    .setDarkModeColors([
+        //1: (Theming.white, "Grid"),
+        1: (Theming.white, "Border"),
+        // 2: (Theming.lightGray, "Blue Color"),
+        //8: (Theming.warningRed, "Warning Color")
+    ])
     
     // MARK: Dominosa
     static let puzzle_dominosa = GameConfig(
         identifier: "dominosa",
         internalGame: dominosa
     )
+    .setDarkModeColors([
+        //1: (Theming.white, "Grid"),
+        1: (Theming.text, "Text"),
+        2: (Theming.darkGray, "Domino"),
+        4: (Theming.text, "Domino Text"),
+    ])
+    
+    
+
     
     // MARK: Fifteen
     static let puzzle_fifteen = GameConfig(
         identifier: "fifteen",
         internalGame: fifteen
     )
+    .setDarkModeColors([
+        //1: (Theming.white, "Grid"),
+        1: (Theming.text, "Text"),
+        2: (Theming.lightGray, "Highlight"),
+        4: (Theming.darkGray, "Lowlight")
+    ])
     
     // MARK: Filling
     static let puzzle_filling = GameConfig(
@@ -75,6 +112,15 @@ extension Puzzles {
         // The game ID doesn't provide any additional information -> 13x9:5a6b777a4b455b7a7765e5b8c4a3a4a9c8a6b3a8a9a5d2724b9d63e8d3b3a7b433a82b2e3b9c53b
         return Puzzles.createButtonControls(10)
     })
+        .setDarkModeColors([
+            //1: (Theming.white, "Grid"),
+            1: (Theming.white, "Grid"),
+            2: (Theming.darkGray, "Highlight Selection"),
+            3: (Theming.veryDarkGray, "Locked Box Highlight"),
+            4: (Theming.warningRed, "Error Box"),
+            5: (Theming.enteredTextGreen, "Player Guess")
+            //3: (Theming.warningRed, "Lowlight")
+        ])
     
     // MARK: Flip
     static let puzzle_flip = GameConfig(
@@ -95,6 +141,13 @@ extension Puzzles {
         internalGame: galaxies,
         allowSingleFingerPanning: false
     )
+    .setDarkModeColors([
+        //1: (Theming.white, "Grid"),
+        1: (Theming.darkGray, "Background for Completed Squares"),
+        3: (Theming.midGray, "Dots"),
+        5: (Theming.white, "Grid"),
+        6: (Theming.midGray, "Game Border")
+    ])
     
     // MARK: Guess
     static let puzzle_guess = GameConfig(
@@ -102,6 +155,14 @@ extension Puzzles {
         internalGame: guess,
         allowSingleFingerPanning: false
     )
+        .setDarkModeColors([
+            1: (Theming.darkGray, "Grid"),
+            //1: (Theming.darkGray, "Background for Completed Squares"),
+            //3: (Theming.midGray, "Dots"),
+            5: (Theming.darkGray, "Empty Field"),
+            16: (Theming.enteredTextGreen, "Correct Guess"),
+            //6: (Theming.midGray, "Game Border")
+        ])
     
     // MARK: Inertia
     static let puzzle_intertia = GameConfig(
