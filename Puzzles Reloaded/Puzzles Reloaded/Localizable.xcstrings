@@ -150,6 +150,9 @@
     "Display Game ID & Seed Menus" : {
 
     },
+    "Display Share Menu" : {
+
+    },
     "Done" : {
 
     },
@@ -160,6 +163,9 @@
 
     },
     "Enables the display of menu to load game menus by specific game IDs and seeds." : {
+
+    },
+    "Enables the display of the share button within game options." : {
 
     },
     "Enter Game ID" : {

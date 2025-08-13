@@ -92,6 +92,12 @@ struct SettingsView: View {
                             Text("Enables the display of menu to load game menus by specific game IDs and seeds.")
                         }
                         
+                        Section {
+                            Toggle("Display Share Menu", isOn: $appSettings.value.displayShareMenu)
+                        } footer: {
+                            Text("Enables the display of the share button within game options.")
+                        }
+                        
                         
                     }
                     .navigationTitle("Appearance")

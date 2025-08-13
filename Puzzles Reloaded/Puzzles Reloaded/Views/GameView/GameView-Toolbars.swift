@@ -51,11 +51,13 @@ struct GameViewToolbars: ViewModifier {
             
             ToolbarItemGroup(placement: .topBarTrailing) {
                 //ShareLink(item: generateGameToExport())
-                Button {
-                    print("Share Button Pressed")
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                        .accessibilityHint("Share current game with others")
+                if appSettings.value.displayShareMenu {
+                    Button {
+                        print("Share Button Pressed")
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                            .accessibilityHint("Share current game with others")
+                    }
                 }
                 Button {
                     helpPageDisplayed = true

@@ -28,6 +28,7 @@ struct AppSettings: Codable {
     var enableSwipeBack: Bool = false
     var enableStatistics: Bool = true
     var displayCustomLoadMenu: Bool = false
+    var displayShareMenu: Bool = true
     var gameListView: GameListViewSetting = GameListViewSetting.listView
     var appTheme: AppTheme = AppTheme.auto
     
@@ -42,7 +43,7 @@ struct AppSettings: Codable {
     }
     
     enum CodingsKeys: String, CodingKey {
-        case enableHaptics, enableSounds, showExperimentalGames, disableGameStatusbar, showFirstRunMessage, enableSwipeBack, enableStatistics, gameListView, appTheme, longPressTime, displayCustomLoadMenu
+        case enableHaptics, enableSounds, showExperimentalGames, disableGameStatusbar, showFirstRunMessage, enableSwipeBack, enableStatistics, gameListView, appTheme, longPressTime, displayCustomLoadMenu, displayShareMenu
     }
     
     /**
@@ -63,6 +64,7 @@ struct AppSettings: Codable {
         appTheme = try values.decodeIfPresent(AppTheme.self, forKey: .appTheme) ?? AppTheme.auto
         disableGameStatusbar = try values.decodeIfPresent(Bool.self, forKey: .disableGameStatusbar) ?? false
         displayCustomLoadMenu = try values.decodeIfPresent(Bool.self, forKey: .displayCustomLoadMenu) ?? false
+        displayShareMenu = try values.decodeIfPresent(Bool.self, forKey: .displayShareMenu) ?? true
         
     }
 }
