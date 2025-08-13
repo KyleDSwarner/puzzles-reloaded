@@ -26,7 +26,8 @@ struct GameViewStatusbar: View {
                 if(frontend.gameHasStatusbar) {
                     Text(frontend.statusbarText)
                         .padding(5)
-                        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+                        .modifier(StatusbarDesigner())
+                        .modifier(ButtonTextColor())
                 }
                 
                 if #available(iOS 26.0, *) {
@@ -39,8 +40,9 @@ struct GameViewStatusbar: View {
                                     Image(systemName: "plus.circle")
                                         .accessibilityHint("Start a new game")
                                 }
-                                .padding(10)
-                                .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 5.0))
+                                //.padding(5)
+                                .buttonStyle(.glass)
+                                //.glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 5.0))
                                 //.modifier(ButtonDesigner())
                                 .modifier(ButtonTextColor())
                                 //.background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
@@ -55,8 +57,9 @@ struct GameViewStatusbar: View {
                                     Image(systemName: "arrow.circlepath")
                                         .accessibilityHint("Restart the current game")
                                 }
-                                .padding(10)
-                                .modifier(ButtonDesigner())
+                                //.padding(5)
+                                .buttonStyle(.glass)
+                                //.modifier(ButtonDesigner())
                                 .modifier(ButtonTextColor())
                                 //.transition(AnyTransition.opacity.combined(with: .slide))
                             }
@@ -151,9 +154,9 @@ struct StatusbarButtons: View {
 struct StatusbarDesigner: ViewModifier {
     func body(content: Content) -> some View {
         if #available(iOS 26.0, *) {
-            content.glassEffect()
+            content.glassEffect(.regular, in: RoundedRectangle(cornerRadius: 5.0))
         } else {
-            content.background(.thickMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+            content.background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
         }
     }
 }

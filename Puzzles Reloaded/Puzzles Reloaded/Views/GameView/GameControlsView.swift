@@ -201,6 +201,7 @@ struct GameControlsView: View, Equatable {
                         }
                         
                     }
+                    .padding([.bottom], 10)
                     .overlay() { GeometryReader { geom in
                         // This overlay gets the total height of the VStack, then stores the height
                         // We use this to set the height of the wrapping GeometryReader so it doesn't mess with the overall view.
