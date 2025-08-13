@@ -128,6 +128,7 @@
 		924181682CE92D7400BBB09E /* FeatureFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924181672CE92D7400BBB09E /* FeatureFlags.swift */; };
 		9241816F2CEA719C00BBB09E /* SingleGameStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241816E2CEA719C00BBB09E /* SingleGameStatsView.swift */; };
 		924181742CEFBEE600BBB09E /* GlobalStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924181732CEFBEE600BBB09E /* GlobalStatsView.swift */; };
+		9260A0282E4CC5FC006D7FBD /* PuzzlesReloaded-Icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 9260A0272E4CC5FC006D7FBD /* PuzzlesReloaded-Icon.icon */; };
 		928969142CF3A68D004CB7D9 /* untangle.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64A42C00BED00027DF54 /* untangle.c */; settings = {COMPILER_FLAGS = "-w -include Untangle-Config.h"; }; };
 		928969162CF3BB9F004CB7D9 /* UserSettingsV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928969152CF3BB9F004CB7D9 /* UserSettingsV2.swift */; };
 		928969182CF3BC28004CB7D9 /* UserSettingsMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928969172CF3BC28004CB7D9 /* UserSettingsMigration.swift */; };
@@ -288,6 +289,7 @@
 		924181672CE92D7400BBB09E /* FeatureFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureFlags.swift; sourceTree = "<group>"; };
 		9241816E2CEA719C00BBB09E /* SingleGameStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleGameStatsView.swift; sourceTree = "<group>"; };
 		924181732CEFBEE600BBB09E /* GlobalStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStatsView.swift; sourceTree = "<group>"; };
+		9260A0272E4CC5FC006D7FBD /* PuzzlesReloaded-Icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = "PuzzlesReloaded-Icon.icon"; sourceTree = "<group>"; };
 		928969152CF3BB9F004CB7D9 /* UserSettingsV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsV2.swift; sourceTree = "<group>"; };
 		928969172CF3BC28004CB7D9 /* UserSettingsMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsMigration.swift; sourceTree = "<group>"; };
 		9289691D2CF3D03F004CB7D9 /* UserSettingsV1_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsV1_1.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				92C527442C062A7400F421D6 /* Untangle-Config.h */,
 				923E64792C00BDCE0027DF54 /* Submodules */,
 				923E63E62C00B9220027DF54 /* Assets.xcassets */,
+				9260A0272E4CC5FC006D7FBD /* PuzzlesReloaded-Icon.icon */,
 				923E63E82C00B9220027DF54 /* Puzzles_Reloaded.entitlements */,
 				92D8D86A2C57CA7800E1E9E3 /* README.md */,
 				923E63E92C00B9220027DF54 /* Preview Content */,
@@ -791,6 +794,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92B55D542C0F46A500517280 /* Puzzles.xcstrings in Resources */,
+				9260A0282E4CC5FC006D7FBD /* PuzzlesReloaded-Icon.icon in Resources */,
 				923E63EB2C00B9220027DF54 /* Preview Assets.xcassets in Resources */,
 				92D8D86B2C57CA7800E1E9E3 /* README.md in Resources */,
 				92B55D522C0F410900517280 /* Localizable.xcstrings in Resources */,
@@ -1068,7 +1072,7 @@
 		923E63EF2C00B9220027DF54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "PuzzlesReloaded-Icon";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = "Puzzles Reloaded/Puzzles_Reloaded.entitlements";
@@ -1122,7 +1126,7 @@
 		923E63F02C00B9220027DF54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "PuzzlesReloaded-Icon";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = "Puzzles Reloaded/Puzzles_Reloaded.entitlements";
