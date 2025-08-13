@@ -87,9 +87,6 @@ extension Puzzles {
         4: (Theming.text, "Domino Text"),
     ])
     
-    
-
-    
     // MARK: Fifteen
     static let puzzle_fifteen = GameConfig(
         identifier: "fifteen",
@@ -127,6 +124,28 @@ extension Puzzles {
         identifier: "flip",
         internalGame: flip
     )
+    .setDarkModeColors([
+        //1: (Theming.white, "Grid"),
+        1: (Theming.veryDarkGray, "Wrong"),
+        2: (Theming.lightGray, "Right"),
+        //3: (Theming.veryDarkGray, "Locked Box Highlight"),
+        //4: (Theming.warningRed, "Error Box"),
+        //5: (Theming.enteredTextGreen, "Player Guess")
+        //3: (Theming.warningRed, "Lowlight")
+    ])
+    
+    /*
+    enum {
+        COL_BACKGROUND,
+        COL_WRONG,
+        COL_RIGHT,
+        COL_GRID,
+        COL_DIAG,
+        COL_HINT,
+        COL_CURSOR,
+        NCOLOURS
+    };
+     */
     
     // MARK: Flood
     static let puzzle_flood = GameConfig(
@@ -170,6 +189,19 @@ extension Puzzles {
         internalGame: inertia,
         allowSingleFingerPanning: false
     )
+    .setDarkModeColors([
+        1: (Theming.lightGray, "Outline"),
+        2: (Theming.lightGray, "Highlight"),
+        3: (Theming.darkGray, "Lowlight"),
+        6: (Theming.darkGray, "Mines"),
+        8: (Theming.midGray, "Walls"),
+        //1: (Theming.darkGray, "Background for Completed Squares"),
+        //3: (Theming.midGray, "Dots"),
+        //5: (Theming.darkGray, "Empty Field"),
+        //16: (Theming.enteredTextGreen, "Correct Guess"),
+        //6: (Theming.midGray, "Game Border")
+    ])
+
     
     // MARK: Keen
     static let puzzle_keen = GameConfig(
@@ -187,6 +219,11 @@ extension Puzzles {
             let numButtons = Int(gameId.split(separator: ":")[0])
             return Puzzles.createButtonControls(numButtons ?? 0)
     })
+    .setDarkModeColors([
+        1: (Theming.text, "Grid"),
+        2: (Theming.text, "User Entry"),
+        3: (Theming.darkGray, "Highlight"),
+    ])
     
     // MARK: Light Up
     static let puzzle_lightup = GameConfig(
@@ -194,6 +231,24 @@ extension Puzzles {
         internalGame: lightup,
         allowSingleFingerPanning: true
     ).setSaveIdentifier("Light Up")
+    .setDarkModeColors([
+        1: (Theming.midGray, "Grid"),
+    ])
+    
+    /*
+     enum {
+         COL_BACKGROUND,
+         COL_GRID,
+         COL_BLACK,                   /* black */
+         COL_LIGHT,                   /* white */
+         COL_LIT,                   /* yellow */
+         COL_ERROR,                   /* red */
+         COL_CURSOR,
+         NCOLOURS
+     };
+     
+     <color name="lightup_night_colour_black">#666666</color>
+     */
     
     // MARK: Loopy
     static let puzzle_loopy = GameConfig(
@@ -201,12 +256,41 @@ extension Puzzles {
         internalGame: loopy,
         allowSingleFingerPanning: true
     )
+    .setDarkModeColors([
+        1: (Theming.white, "Foreground"),
+        2: (Theming.darkGray, "Line Unknown"), // The highlighter Yellow Monstrosity
+        5: (Theming.white, "Satisfied Number"),
+        6: (Theming.veryDarkGray, "Faint Line")
+        
+    ])
     
     // MARK: Magnets
     static let puzzle_magnets = GameConfig(
         identifier: "magnets",
         internalGame: magnets
     )
+    .setDarkModeColors([
+        1: (Theming.white, "Highlight"),
+        2: (Theming.midGray, "Lowlight"),
+        3: (Theming.text, "Text"),
+        6: (Theming.darkGray, "Deemphasied Text"),
+        11: (Theming.text, "Magnet Symbols")
+        // TODO: Symbols inside magnets use background color; Add new color to adapt?
+        //10: (Theming.turboBlue, "Not")
+        //9: (Theming.warningRed, "Positive Pole")
+        
+    ])
+    /*
+     
+     enum {
+         COL_BACKGROUND, COL_HIGHLIGHT, COL_LOWLIGHT,
+         COL_TEXT, COL_ERROR, COL_CURSOR, COL_DONE,
+         COL_NEUTRAL, COL_NEGATIVE, COL_POSITIVE, COL_NOT, /* COL_SYMBOL */
+         NCOLOURS
+     };
+     <color name="magnets_night_colour_highlight">#888888</color>
+         <color name="magnets_night_colour_text">#ffffff</color>
+     */
     
     // MARK: Map
     static let puzzle_map = GameConfig(
@@ -217,6 +301,10 @@ extension Puzzles {
             ControlConfig(label: "Add Labels", command: ButtonPress(for: "L"))
         ]
     )
+    .setDarkModeColors([
+        1: (Theming.lightGray, "Grid"),
+        7: (Theming.white, "Error Text")
+    ])
     
     // MARK: Mines
     static let puzzle_mines = GameConfig(
@@ -224,7 +312,14 @@ extension Puzzles {
         internalGame: mines,
         allowSingleFingerPanning: true
     )
-    
+    .setDarkModeColors([
+        // 1: (Theming.darkGray, "Background 2"),
+        14: (Theming.white, "Flagbase"),
+        15: (Theming.text, "Query"),
+        16: (Theming.darkGray, "Highlight"),
+        17: (Theming.veryDarkGray, "Lowlight")
+    ])
+
     // MARK: Mosaic
     static let puzzle_mosaic = GameConfig(
         identifier: "mosaic",
