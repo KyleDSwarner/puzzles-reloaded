@@ -100,33 +100,7 @@ struct GameListView: View {
                 // MARK: First Run Message
                 // Note: `welcomeMessageDisplayed` is a separate boolean in order for animations to work properly. Toggling animations based on the appSettings wrapper didn't work properly.
                 if(appSettings.value.showFirstRunMessage && welcomeMessageDisplayed) {
-                    VStack(alignment: .leading) {
-                        WelcomeMessageView()
-                       
-                        Button("Dismiss Message") {
-                            withAnimation {
-                                welcomeMessageDisplayed = false
-                            } completion: {
-                                appSettings.value.showFirstRunMessage = false
-                            }
-                        }.buttonStyle(.bordered)
-                        
-                    }
-                    .frame(
-                      minWidth: 0,
-                      maxWidth: .infinity,
-                      minHeight: 0,
-                      maxHeight: .infinity,
-                      alignment: .topLeading
-                    )
-                    .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                    .padding(20)
-                    
-                    //.border(.green, 3)
-                    .border(.blue, width: 3)
-                    
-                    .clipShape(RoundedRectangle(cornerRadius: 3))
-                    .padding(10)
+                    WelcomeMessageView(welcomeMessageDisplayed: $welcomeMessageDisplayed)
                 }
                 
                 if(appSettings.value.gameListView == .listView) {

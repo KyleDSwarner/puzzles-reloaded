@@ -9,6 +9,42 @@
 import SwiftUI
 
 struct WelcomeMessageView: View {
+    
+    @AppStorage(AppSettings.key) var appSettings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
+    @Binding var welcomeMessageDisplayed: Bool
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            WelcomeMessageTextView()
+           
+            Button("Dismiss Message") {
+                withAnimation {
+                    welcomeMessageDisplayed = false
+                } completion: {
+                    appSettings.value.showFirstRunMessage = false
+                }
+            }
+            .modifier(WelcomeMessageDismissButtonModifier())
+            //.modifier(ButtonTextColor())
+            
+        }
+        .frame(
+          minWidth: 0,
+          maxWidth: .infinity,
+          minHeight: 0,
+          maxHeight: .infinity,
+          alignment: .topLeading
+        )
+        .fixedSize(horizontal: false, vertical: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+        .padding(20)
+        .border(.thinMaterial, width: 3)
+        
+        .clipShape(RoundedRectangle(cornerRadius: 3))
+        .padding(10)
+    }
+}
+
+struct WelcomeMessageTextView: View {
     var body: some View {
         Text("Welcome!").font(.title).padding(.bottom, 5)
         Text("This is a collection of \(Puzzles.allPuzzles.count) puzzles with infinite generation. You'll never fail to find a new challenge!")
@@ -30,6 +66,20 @@ Different difficulty settings for each game can be found on the bottom right of 
     }
 }
 
-#Preview {
-    WelcomeMessageView()
+struct WelcomeMessageDismissButtonModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content.buttonStyle(.glassProminent)
+        } else {
+            content
+        }
+    }
 }
+
+#Preview {
+    @Previewable @State var welcomeMessageDisplayed: Bool = true
+    WelcomeMessageView(welcomeMessageDisplayed: $welcomeMessageDisplayed)
+}
+
+
+
