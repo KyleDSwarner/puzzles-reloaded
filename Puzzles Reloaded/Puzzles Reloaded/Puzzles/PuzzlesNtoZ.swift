@@ -56,19 +56,38 @@ extension Puzzles {
             ControlConfig(label: "Shuffle Blocks", command: ButtonPress(for: "j")),
         ]
 
-    )
+    ).setDarkModeColors([
+        1: (Theming.veryDarkGray, "Locked Tile"),
+        2: (Theming.veryDarkGray, "Gridlines"),
+        3: (Theming.midGray, "Wire"),
+        //4: (Theming.boxBlue, "Endpoint"),
+        //5: (Theming.highlightTeal, "Powered Wire")
+    ])
     
     // MARK: Netslide
     static let puzzle_netslide = GameConfig(
         identifier: "netslide",
         internalGame: netslide
     )
+        .setDarkModeColors([
+            1: (Theming.darkGray, "Flashing"),
+            //2: (Theming.veryDarkGray, "Gridlines"),
+            3: (Theming.midGray, "Wire"),
+        ])
+    
     
     // MARK: Palisade
     static let puzzle_palisade = GameConfig(
         identifier: "palisade",
         internalGame: palisade
     )
+    .setDarkModeColors([
+        1: (Theming.darkGray, "Flashing"),
+        2: (Theming.lightGray, "Grid"),
+        3: (Theming.darkGray, "Clue"),
+        4: (Theming.veryVeryDarkGray, "Line Maybe"), //Deemphasis
+        //5: (Theming.turboBlue, "Line No")
+    ])
     
     // MARK: Pattern
     static let puzzle_pattern = GameConfig(
@@ -80,6 +99,9 @@ extension Puzzles {
             ControlConfig(label: "Clear", shortPress: PuzzleKeycodes.middleKeypress, longPress: .none, imageName: "square.slash"),
         ]
     )
+    .setDarkModeColors([
+        3: (Theming.text, "Text"),
+    ])
     
     // MARK: Pearl
     static let puzzle_pearl = GameConfig(
@@ -87,6 +109,11 @@ extension Puzzles {
         internalGame: pearl,
         allowSingleFingerPanning: false
     )
+    .setDarkModeColors([
+        3: (Theming.darkGray, "Black Box"),
+        4: (Theming.lightGray, "White Box")
+        //8: (Theming.turboBlue, "Drag On")
+    ])
     
     // MARK: Pegs
     static let puzzle_pegs = GameConfig(
@@ -94,49 +121,139 @@ extension Puzzles {
         internalGame: pegs,
         allowSingleFingerPanning: false
     )
+    .setDarkModeColors([
+        1: (Theming.midGray, "Highlight"),
+        2: (Theming.darkGray, "Lowlight")
+        //3: (Theming.boxBlue, "Pegs")
+    ])
     
     // MARK: Range
     static let puzzle_range = GameConfig(
         identifier: "range",
         internalGame: range
     )
+    .setDarkModeColors([
+        1: (Theming.lightGray, "Grid"),
+        //2: (Theming.warningRed, "Error"),
+        3: (Theming.darkGray, "Lowlight")
+    ])
     
     // MARK: Rectangles
     static let puzzle_rectangles = GameConfig(
         identifier: "rectangles",
         internalGame: rect
     )
+    .setDarkModeColors([
+       
+        2: (Theming.white, "Drawn Line"),
+        3: (Theming.text, "Text"),
+        1: (Theming.white, "Grid"),
+    ])
     
     // MARK: Samegame
     static let puzzle_samegame = GameConfig(
         identifier: "samegame",
         customParamInfo: String(localized: "samegame_params", table: "Puzzles"),
         internalGame: samegame,
-        isExperimental: false).setSaveIdentifier("Same Game")
+        isExperimental: false)
+    .setSaveIdentifier("Same Game")
+    .setDarkModeColors([
+        11: (Theming.midGray, "Selected Box"),
+        12: (Theming.midGray, "Highlight"),
+        13: (Theming.darkGray, "Lowlight")
+    ])
+    
     
     // MARK: Signpost
     static let puzzle_signpost = GameConfig(
         identifier: "signpost",
         internalGame: signpost
     )
+    .setDarkModeColors([
+        1: (Theming.midGray, "Highlight"),
+        2: (Theming.veryDarkGray, "Lowlight"),
+        3: (Theming.darkGray, "Grid"),
+        7: (Theming.darkGray, "Arrow"),
+        8: (Theming.veryDarkGray, "Dim Arrow"),
+        // 10: (Theming.black, "Text color for Locked Squares"),
+        //11: (Theming.veryDarkGray, "Locked-In Number"),
+        12: (Theming.lightGray, "Background for Locked Squares"),
+        //13: (Theming.enteredTextGreen, "Mid Arrow"),
+        // 14: (Theming.veryDarkGray, "Dim Arrow"), //d0
+        // 15: (Theming.veryDarkGray, "Dim Arrow 2"), //x0
+    ])
+    
+    /*
+     
+     enum {
+         COL_BACKGROUND,
+     COL_HIGHLIGHT, 1
+     COL_LOWLIGHT, 2
+         COL_GRID,  3
+     COL_CURSOR, 4
+     COL_ERROR, 5
+     COL_DRAG_ORIGIN, 6
+         COL_ARROW, 7
+     COL_ARROW_BG_DIM, 8
+         COL_NUMBER, 9
+     COL_NUMBER_SET,10
+     COL_NUMBER_SET_MID, 11
+         COL_B0,                             /* background colours */
+         COL_M0 =   COL_B0 + 1*NBACKGROUNDS, /* mid arrow colours */
+         COL_D0 =   COL_B0 + 2*NBACKGROUNDS, /* dim arrow colours */
+         COL_X0 =   COL_B0 + 3*NBACKGROUNDS, /* dim arrow colours */
+         NCOLOURS = COL_B0 + 4*NBACKGROUNDS
+     };
+     
+     <color name="signpost_night_colour_arrow">#999999</color>
+         <color name="signpost_night_colour_arrow_bg_dim">#cccccc</color>
+         <color name="signpost_night_colour_number">#000000</color>
+         <color name="signpost_night_colour_number0">#888888</color>
+         <color name="signpost_night_colour_number_set">#aaaaff</color>
+         <color name="signpost_night_colour_number_set_mid">#4444ee</color>
+         <color name="signpost_night_colour_empty">#dddddd</color>
+         <color name="signpost_night_colour_b0">#000000</color>
+         <color name="signpost_night_colour_m0">#555555</color>
+         <color name="signpost_night_colour_d0">#000000</color>
+         <color name="signpost_night_colour_x0">#000000</color>
+     */
     
     // MARK: Singles
     static let puzzle_singles = GameConfig(
         identifier: "singles",
         internalGame: singles
     )
+    .setDarkModeColors([
+        3: (Theming.text, "Black"),
+        4: (Theming.veryDarkGray, "White"),
+        5: (Theming.midGray, "Black Color")
+    ])
     
     // MARK: Sixteen
     static let puzzle_sixteen = GameConfig(
         identifier: "sixteen",
         internalGame: sixteen
     )
+    .setDarkModeColors([
+        1: (Theming.text, "Text"),
+        2: (Theming.darkGray, "Highlight"),
+        3: (Theming.veryDarkGray, "Lowlight")
+    ])
+    
     
     // MARK: Slant
     static let puzzle_slant = GameConfig(
         identifier: "slant",
         internalGame: slant
     )
+    .setDarkModeColors([
+        //1: (Theming.text, "Text"),
+        2: (Theming.text, "Ink"),
+        3: (Theming.white, "slant 1"),
+        4: (Theming.white, "slant 2"),
+        7: (Theming.background, "Filled Square"),
+        8: (Theming.veryDarkGray, "Grounded Line")
+    ])
     
     // MARK: Solo
     static let puzzle_solo = GameConfig(
@@ -174,6 +291,15 @@ extension Puzzles {
         return Puzzles.createButtonControls(numButtons, keycodes: Puzzles.HexidecimalButtons)
             
     })
+    .setDarkModeColors([
+        //1: (Theming.text, "Text"),
+        1: (Theming.veryDarkGray, "X Diagonals"),
+        2: (Theming.darkGray, "Grid"),
+        3: (Theming.text, "Clue"),
+        4: (Theming.enteredTextBlue, "User Entered Value"),
+        //7: (CGColor(red: 0.533, green: 0.533, blue: 1, alpha: 1), "Pencil Marks"),
+        8: (Theming.text, "Killer Mode Data")
+    ])
     
     // MARK: Tents
     static let puzzle_tents = GameConfig(
@@ -185,6 +311,15 @@ extension Puzzles {
             // ControlConfig(label: "Clear", shortPress: PuzzleKeycodes.middleKeypress, longPress: .none, imageName: "square.slash") (Tents does not support a dedicated clear button)
         ]
     )
+        .setDarkModeColors([
+            //1: (Theming.text, "Text"),
+            1: (Theming.white, "Grid"),
+            2: (Theming.darkGray, "Grass"),
+            //3: (Theming.text, "Clue"),
+            //4: (Theming.enteredTextBlue, "User Entered Value"),
+            //7: (CGColor(red: 0.533, green: 0.533, blue: 1, alpha: 1), "Pencil Marks"),
+            //8: (Theming.text, "Killer Mode Data")
+        ])
     
     // MARK: Towers
     static let puzzle_towers = GameConfig(
@@ -211,13 +346,45 @@ extension Puzzles {
         let numButtons = Int(gameId.split(separator: ":")[0])
         return Puzzles.createButtonControls(numButtons ?? 0)
     })
+    .setDarkModeColors([
+        1: (Theming.text, "Grid"),
+        2: (Theming.enteredTextBlue, "User Entered Guess")
+    ])
+    
+    /*
+     
+     enum {
+         COL_BACKGROUND,
+         COL_GRID,
+         COL_USER,
+         COL_HIGHLIGHT,
+         COL_ERROR,
+         COL_PENCIL,
+         COL_DONE,
+         NCOLOURS
+     };
+     <color name="towers_night_colour_grid">#ffffff</color>
+         <color name="towers_night_colour_user">#00ff00</color>
+         <color name="towers_night_colour_pencil">#8888ff</color>
+     */
     
     // MARK: Tracks
     static let puzzle_tracks = GameConfig(
         identifier: "tracks",
         internalGame: tracks
-    ).setSaveIdentifier("Train Tracks")
-
+    )
+    .setSaveIdentifier("Train Tracks")
+    .setDarkModeColors([
+        1: (Theming.midGray, "Track Background"),
+        2: (Theming.text, "Grid"),
+        3: (Theming.text, "Clue"),
+        5: (Theming.darkGray, "User Entered Track"),
+        6: (Theming.black, "Track Clue"),
+        //7: (Theming.turboBlue, "Sleeper (Bottom of Track)"),
+        8: (Theming.darkGray, "Drag On"),
+        11: (Theming.darkGray, "Flash"),
+        12: (Theming.veryDarkGray, "Error Background")
+    ])
     
     // MARK: Twiddle
     static let puzzle_twiddle = GameConfig(
@@ -225,6 +392,14 @@ extension Puzzles {
         internalGame: twiddle,
         touchControls: [ControlConfig(label: String(localized: "Clockwise"), shortPress: PuzzleKeycodes.rightKeypress, longPress: PuzzleKeycodes.leftKeypress, imageName: "arrow.clockwise")] // Single touch controls makes the default tap command move objects clockwise
     )
+    .setDarkModeColors([
+        1: (Theming.text, "Text"),
+        2: (Theming.midGray, "Highlight"),
+        3: (Theming.darkGray, "Gentle Highlight"),
+        4: (Theming.darkGray, "Lowlight"),
+        5: (Theming.veryDarkGray, "Lowlight Gentle"),
+    ])
+    
     
     // MARK: Undead
     static let puzzle_undead = GameConfig(
@@ -239,8 +414,8 @@ extension Puzzles {
         ]
     )
     .setDarkModeColors([
-        1: (Theming.white, "Grid"),
-        2: (Theming.white, "Text"),
+        1: (Theming.text, "Grid"),
+        2: (Theming.text, "Text"),
     ])
     
     // MARK: Unequal
@@ -267,6 +442,14 @@ extension Puzzles {
         
         return Puzzles.createButtonControls(numButtons ?? 0)
     })
+    .setDarkModeColors([
+        1: (Theming.text, "Grid"),
+        2: (Theming.text, "Text"),
+        3: (Theming.enteredTextBlue, "User Guess"),
+        6: (Theming.darkGray, "Highlight"),
+        7: (Theming.veryDarkGray, "Lowlight"),
+    ])
+    
     
     // MARK: Unruly
     static let puzzle_unruly = GameConfig(
@@ -280,6 +463,10 @@ extension Puzzles {
             ControlConfig(label: String(localized: "Clear"), shortPress: PuzzleKeycodes.middleKeypress, longPress: PuzzleKeycodes.leftKeypress, imageName: "square.slash")
         ]
     )
+    .setDarkModeColors([
+        1: (Theming.darkGray, "Grid"),
+        2: (Theming.midGray, "Empty Grid"),
+    ])
     
     // MARK: Untangle
     static let puzzle_untangle = GameConfig(
@@ -288,4 +475,9 @@ extension Puzzles {
         allowSingleFingerPanning: false,
         touchControls: [ControlConfig(label: "", shortPress: PuzzleKeycodes.leftKeypress, longPress: .none)] // Left click only, disables long presses
     )
+    .setDarkModeColors([
+        1: (Theming.background, "Background"),
+        2: (Theming.white, "Line"),
+        4: (Theming.white, "Outline")
+    ])
 }
