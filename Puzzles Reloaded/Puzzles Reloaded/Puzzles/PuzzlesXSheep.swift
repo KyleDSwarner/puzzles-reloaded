@@ -67,33 +67,36 @@ extension Puzzles {
         //6: (Theming.veryDarkGray, "Error")
     ])
     
-    /*
-     enum {
-         COL_MIDLIGHT,
-         COL_LOWLIGHT,
-         COL_HIGHLIGHT,
-         COL_BORDER,
-         COL_LINE,
-         COL_IMMUTABLE,
-         COL_ERROR,
-         COL_CURSOR,
-         COL_ARROW,
-         NCOLOURS
-     };
-     */
-    
     // MARK: Boats
     static let puzzle_boats = GameConfig(
         identifier: "boats",
         customParamInfo: String(localized: "boats_params", table: "Puzzles"),
         internalGame: boats
     )
+    .setDarkModeColors([
+        1: (Theming.midGray, "Grid"),
+        4: (Theming.darkGray, "Water"),
+        //3: (Theming.text, "Border and Entered Clues"),
+        //4: (Theming.turboBlue, "Line"),
+        5: (Theming.black, "Unchangable Ship Clue"),
+        6: (Theming.enteredTextBlue, "Ship Guess"),
+        11: (Theming.text, "Numbers")
+        //6: (Theming.veryDarkGray, "Error")
+    ])
     
     // MARK: Bricks
     static let puzzle_bricks = GameConfig(
         identifier: "bricks",
         internalGame: bricks
     )
+    .setDarkModeColors([
+        1: (Theming.darkGray, "Lowlight"),
+        2: (Theming.darkGray, "Starting Clues and Deselected"),
+        3: (Theming.text, "Border"),
+        4: (Theming.enteredTextBlue, "Shaded Boxes")
+        
+    ])
+
     
     // MARK: Clusters
     static let puzzle_clusters = GameConfig(
@@ -121,12 +124,30 @@ extension Puzzles {
         let numButtons = Int(gameId.split(separator: ":")[0])
         return Puzzles.createButtonControls(numButtons ?? 0)
     })
+    .setDarkModeColors([
+        1: (Theming.darkGray, "Highlight - Clue Circles"),
+        2: (Theming.veryDarkGray, "Lowlight - Selected Fields"),
+        3: (Theming.white, "Border"),
+        4: (Theming.enteredTextBlue, "Guess"),
+        7: (Theming.warningRed, "Error Background")
+    ])
     
     // MARK: Rome
     static let puzzle_rome = GameConfig(
         identifier: "rome",
         internalGame: rome
     )
+    .setDarkModeColors([
+        1: (Theming.midGray, "Highlight"),
+        2: (Theming.darkGray, "Lowlight"),
+        3: (Theming.midGray, "Border"),
+        4: (Theming.lightGray, "Fixed Arrow"),
+        5: (Theming.enteredTextGreen, "Guessed Arrow"),
+        8: (Theming.enteredTextBlue, "Arrow Entry"),
+        9: (Theming.midGray, "Error Background"),
+        10: (Theming.darkGray, "Goal Background"),
+        //11: (Theming.warningRed, "Goal")
+    ])
     
     // MARK: Salad
     static let puzzle_salad = GameConfig(
@@ -170,12 +191,34 @@ extension Puzzles {
         //return Puzzles.createButtonControls(numButtons ?? 0)
         return buttonControls
     })
+    .setDarkModeColors([
+        1: (Theming.midGray, "Highlight"),
+        2: (Theming.darkGray, "Lowlight"),
+        3: (Theming.midGray, "Border"),
+        4: (Theming.text, "Border Clue"),
+        6: (Theming.text, "Immutable - Number"),
+        7: (Theming.lightGray, "Immutable - Ball"),
+        8: (Theming.darkGray, "Immutable - Ball Background"),
+        9: (Theming.text, "Immutable - Hole"),
+        10: (Theming.enteredTextBlue, "Guess - Number"),
+        11: (Theming.enteredTextBlue, "Guess - Ball Outline"),
+        12: (Theming.darkGray, "Guess - Ball Background"),
+        13: (Theming.enteredTextBlue, "Guess - Hole")
+    ])
     
     // MARK: Spokes
     static let puzzle_spokes = GameConfig(
         identifier: "spokes",
         internalGame: spokes
     )
+    .setDarkModeColors([
+        1: (Theming.darkGray, "Border"),
+        2: (Theming.enteredTextGreen, "Holding"),
+        3: (Theming.white, "Line & Text"),
+        4: (Theming.enteredTextBlue, "Mark"),
+        5: (Theming.veryDarkGray, "Done")
+    ])
+
     
     // MARK: Sticks
     static let puzzle_sticks = GameConfig(
@@ -183,10 +226,23 @@ extension Puzzles {
         customParamInfo: String(localized: "sticks_params", table: "Puzzles"),
         internalGame: sticks
     )
+    .setDarkModeColors([
+        1: (Theming.lightGray, "Grid"),
+        2: (Theming.turboBlue, "Line"),
+        3: (Theming.black, "Number"),
+    ])
     
     static let puzzle_subsets = GameConfig(
         identifier: "subsets",
         customParamInfo: String(localized: "subsets_params", table: "Puzzles"),
         internalGame: subsets
     )
+    .setDarkModeColors([
+        1: (Theming.midGray, "Inner Background - Guessing Squares"),
+        2: (Theming.white, "Grid"),
+        3: (Theming.veryDarkGray, "Highlight - Selected Squares"),
+        4: (Theming.darkGray, "Lowlight"),
+        5: (Theming.text, "Fixed Clue"),
+        6: (Theming.enteredTextBlue, "Guess")
+    ])
 }
