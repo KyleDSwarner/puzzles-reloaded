@@ -155,10 +155,6 @@ struct GameView: View {
         frontend.fireButton(PuzzleKeycodes.ClearButton)
     }
     
-    func generateGameToExport() -> SaveContext {
-        return SaveContext(savegame: frontend.saveGame())
-    }
-    
     var body: some View {
         VStack {            
             GeometryReader { geometry in
@@ -414,7 +410,7 @@ struct GameView: View {
 
     func saveUserData() {
         // Save Game
-        let save = frontend.saveGame()
+        let save = frontend.saveGameIfMovesTaken()
         
         if save != nil {
             print("Game Saved")
@@ -422,7 +418,7 @@ struct GameView: View {
             print("Game not saved: nothing to store")
         }
         // Save the game, or null it out if the game should not be saved
-        game.settings.saveGame = save
+        game.settings.saveGame = save?.saveToString()
         
         
         let prefs = frontend.midend.saveUserPrefs()

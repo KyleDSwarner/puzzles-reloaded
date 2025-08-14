@@ -25,6 +25,16 @@ struct GameViewToolbars: ViewModifier {
     var redoMove: () -> Void
     var autosolvePuzzle: () -> Void
     
+    func generateSavegameExport() -> SavegameExporter {
+        return SavegameExporter() {
+            frontend.midend.restartGame() // Restart the game to give users on shared games a clean slate.
+            let savegame = frontend.saveGame()
+            frontend.undoMove() // Undo the move so the restart is not persistent for the user.
+            
+            return savegame
+        }
+    }
+    
     @Binding var helpPageDisplayed: Bool
     @Binding var settingsPageDisplayed: Bool
     @Binding var displayingGameIdView: Bool
@@ -52,8 +62,8 @@ struct GameViewToolbars: ViewModifier {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 //ShareLink(item: generateGameToExport())
                 if appSettings.value.displayShareMenu {
-                    Button {
-                        print("Share Button Pressed")
+                    ShareLink(items: [generateSavegameExport()]) { data in
+                        SharePreview("Puzzle Savegame", image: Image("puzzles-logo"))
                     } label: {
                         Image(systemName: "square.and.arrow.up")
                             .accessibilityHint("Share current game with others")

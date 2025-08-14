@@ -176,15 +176,17 @@ class Frontend: @unchecked Sendable {
         self.canSolve = midend.isPuzzleAutoSolvable()
     }
     
-    func saveGame() -> String? {
-        
-        guard movesTakenInGame == true else {
+    func saveGame() -> SaveContext {        
+        return midend.saveGame()
+    }
+    
+    func saveGameIfMovesTaken() -> SaveContext? {
+        guard movesTakenInGame == true, puzzleStatus == .INPROGRESS else {
             print("no moves taken in current game - not saving game")
             return nil
         }
         
-        let save = midend.saveInProgressGame()
-        return save?.saveToString() ?? nil
+        return saveGame()
     }
     
     func setNewGamePreset(_ parameters: OpaquePointer?) {

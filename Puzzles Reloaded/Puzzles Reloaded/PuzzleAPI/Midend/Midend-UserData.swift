@@ -112,15 +112,7 @@ extension Midend {
  Extension methods for saving & loading saved games
  */
 extension Midend {
-    func saveInProgressGame() -> SaveContext? {
-        print("Attempting to Save Game")
-        // Verify we should save a game - if we're at the beginning or end of a game, we shouldn't!
-        let shouldSave = midend_can_undo(midendPointer) && self.getPuzzleStatus() == .INPROGRESS
-        
-        if !shouldSave {
-            print("Game Not In Progress, closing")
-            return nil
-        }
+    func saveGame() -> SaveContext {
         
         var newSave = SaveContext()
         

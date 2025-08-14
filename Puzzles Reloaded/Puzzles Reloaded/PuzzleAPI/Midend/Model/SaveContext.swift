@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SaveContext {
+class SaveContext: @unchecked Sendable {
     var position: Int = 0 // Since file reads occur in chunks, this keeps track of what has already been read.
     var prefData: NSMutableString = ""
     

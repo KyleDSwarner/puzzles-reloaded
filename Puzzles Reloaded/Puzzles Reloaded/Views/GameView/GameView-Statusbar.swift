@@ -25,75 +25,36 @@ struct GameViewStatusbar: View {
             HStack {
                 if(frontend.gameHasStatusbar) {
                     Text(frontend.statusbarText)
-                        .padding(5)
+                        .padding(8)
                         .modifier(StatusbarDesigner())
                         .modifier(ButtonTextColor())
                 }
                 
-                if #available(iOS 26.0, *) {
-                    GlassEffectContainer {
-                        HStack {
-                            if displayNewGameButton {
-                                Button {
-                                    newGame()
-                                } label: {
-                                    Image(systemName: "plus.circle")
-                                        .accessibilityHint("Start a new game")
-                                }
-                                //.padding(5)
-                                .buttonStyle(.glass)
-                                //.glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 5.0))
-                                //.modifier(ButtonDesigner())
-                                .modifier(ButtonTextColor())
-                                //.background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
-                                
-                                //.transition(AnyTransition.opacity.combined(with: .slide))
-                            }
-                            
-                            if displayRestartButton {
-                                Button {
-                                    frontend.midend.restartGame()
-                                } label: {
-                                    Image(systemName: "arrow.circlepath")
-                                        .accessibilityHint("Restart the current game")
-                                }
-                                //.padding(5)
-                                .buttonStyle(.glass)
-                                //.modifier(ButtonDesigner())
-                                .modifier(ButtonTextColor())
-                                //.transition(AnyTransition.opacity.combined(with: .slide))
-                            }
-                        }
+                if displayNewGameButton {
+                    Button {
+                        newGame()
+                    } label: {
+                        Image(systemName: "plus.circle")
+                            .accessibilityHint("Start a new game")
                     }
                     
-                } else {
-                    if displayNewGameButton {
-                        Button {
-                            newGame()
-                        } label: {
-                            Image(systemName: "plus.circle")
-                                .accessibilityHint("Start a new game")
-                        }
-                        .padding(5)
-                        .modifier(ButtonDesigner())
-                        //.modifier(ButtonTextColor())
-                        //.background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
-                        
-                        //.transition(AnyTransition.opacity.combined(with: .slide))
-                    }
+                    .modifier(ButtonDesigner())
+                    .modifier(ButtonTextColor())
+                    //.background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
                     
-                    if displayRestartButton {
-                        Button {
-                            frontend.midend.restartGame()
-                        } label: {
-                            Image(systemName: "arrow.circlepath")
-                                .accessibilityHint("Restart the current game")
-                        }
-                        .padding(5)
-                        .modifier(ButtonDesigner())
-                        .modifier(ButtonTextColor())
-                        //.transition(AnyTransition.opacity.combined(with: .slide))
+                    //.transition(AnyTransition.opacity.combined(with: .slide))
+                }
+                
+                if displayRestartButton {
+                    Button {
+                        frontend.midend.restartGame()
+                    } label: {
+                        Image(systemName: "arrow.circlepath")
+                            .accessibilityHint("Restart the current game")
                     }
+                    .modifier(ButtonDesigner())
+                    .modifier(ButtonTextColor())
+                    //.transition(AnyTransition.opacity.combined(with: .slide))
                 }
                 
                 

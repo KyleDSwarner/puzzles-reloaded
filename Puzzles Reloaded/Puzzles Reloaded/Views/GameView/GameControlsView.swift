@@ -12,7 +12,8 @@ import SwiftUI
 struct ButtonDesigner: ViewModifier {
     func body(content: Content) -> some View {
         if #available(iOS 26.0, *) {
-            content.glassEffect(.regular.interactive())
+            content
+                .buttonStyle(.glass)
         } else {
             content.background(.thickMaterial, in: RoundedRectangle(cornerRadius: 5.0))
         }
