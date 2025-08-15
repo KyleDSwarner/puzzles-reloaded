@@ -18,6 +18,7 @@
 		9226A9352E4E605900256EA1 /* SavegameExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9226A9342E4E605900256EA1 /* SavegameExporter.swift */; };
 		9226A9382E4FB31C00256EA1 /* magnets.c in Sources */ = {isa = PBXBuildFile; fileRef = 9226A9362E4FB31C00256EA1 /* magnets.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		9226A9392E4FB31C00256EA1 /* undead.c in Sources */ = {isa = PBXBuildFile; fileRef = 9226A9372E4FB31C00256EA1 /* undead.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		9226A93D2E4FBB2A00256EA1 /* GlassViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9226A93C2E4FBB2500256EA1 /* GlassViewModifiers.swift */; };
 		922D3DDD2C5D0F2F00DD7300 /* PuzzleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922D3DDC2C5D0F2F00DD7300 /* PuzzleStatus.swift */; };
 		92339D5C2C737718002D84FF /* KeyboardInputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92339D5B2C737718002D84FF /* KeyboardInputHandler.swift */; };
 		923E63E32C00B9210027DF54 /* PuzzlesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923E63E22C00B9210027DF54 /* PuzzlesApp.swift */; };
@@ -164,6 +165,7 @@
 		9226A9342E4E605900256EA1 /* SavegameExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavegameExporter.swift; sourceTree = "<group>"; };
 		9226A9362E4FB31C00256EA1 /* magnets.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = magnets.c; path = "../local-games/magnets.c"; sourceTree = SOURCE_ROOT; };
 		9226A9372E4FB31C00256EA1 /* undead.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = undead.c; path = "../local-games/undead.c"; sourceTree = SOURCE_ROOT; };
+		9226A93C2E4FBB2500256EA1 /* GlassViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassViewModifiers.swift; sourceTree = "<group>"; };
 		922D3DDC2C5D0F2F00DD7300 /* PuzzleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzleStatus.swift; sourceTree = "<group>"; };
 		92339D5B2C737718002D84FF /* KeyboardInputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardInputHandler.swift; sourceTree = "<group>"; };
 		923E63DF2C00B9210027DF54 /* Simon Tatham Puzzles Reloaded.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simon Tatham Puzzles Reloaded.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -347,6 +349,14 @@
 			path = "Local Games";
 			sourceTree = "<group>";
 		};
+		9226A93B2E4FBB1000256EA1 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				9226A93C2E4FBB2500256EA1 /* GlassViewModifiers.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
 		922D3DDA2C5D0F1C00DD7300 /* Frontend */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,6 +530,7 @@
 				923E64652C00B9890027DF54 /* GameView */,
 				923E652F2C00D7490027DF54 /* HelpView */,
 				92B55D572C0F6F0800517280 /* SettingsView */,
+				9226A93B2E4FBB1000256EA1 /* ViewModifiers */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -774,7 +785,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 2600;
 				ORGANIZATIONNAME = "Kyle Swarner";
 				TargetAttributes = {
 					923E63DE2C00B9210027DF54 = {
@@ -856,6 +867,7 @@
 				923E64B42C00BEDE0027DF54 /* singles.c in Sources */,
 				9289691E2CF3D03F004CB7D9 /* UserSettingsV1_1.swift in Sources */,
 				923E65202C00C7880027DF54 /* slant.c in Sources */,
+				9226A93D2E4FBB2A00256EA1 /* GlassViewModifiers.swift in Sources */,
 				92C9E6462C80B496004F9944 /* WelcomeMessageView.swift in Sources */,
 				923E64BC2C00BEF40027DF54 /* range.c in Sources */,
 				923E652C2C00D62A0027DF54 /* PuzzlesNtoZ.swift in Sources */,
@@ -1003,6 +1015,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 9SA9A2VPKQ;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1024,6 +1037,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1066,6 +1080,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 9SA9A2VPKQ;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1080,6 +1095,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
@@ -1095,9 +1111,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Puzzles Reloaded/Preview Content\"";
-				DEVELOPMENT_TEAM = 9SA9A2VPKQ;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					COMBINED,
@@ -1151,9 +1168,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Puzzles Reloaded/Preview Content\"";
-				DEVELOPMENT_TEAM = 9SA9A2VPKQ;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GCC_PREPROCESSOR_DEFINITIONS = COMBINED;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Puzzles-Reloaded-Info.plist";

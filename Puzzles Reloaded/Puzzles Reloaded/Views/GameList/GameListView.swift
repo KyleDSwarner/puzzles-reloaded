@@ -303,9 +303,6 @@ struct GameListView: View {
         }
         .searchable(text: $searchText, placement: .automatic, prompt: "Find a Game")
         .textInputAutocapitalization(.never)
-        .onChange(of: searchText) { old, new in
-            print("New Query: \(new)")
-        }
         
         // MARK: Game Not Found overlay
         .overlay {
