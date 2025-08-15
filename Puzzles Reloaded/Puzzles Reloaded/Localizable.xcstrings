@@ -51,6 +51,28 @@
         }
       }
     },
+    "%lld games found" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld game found"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "new",
+                  "value" : "%lld games found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "1s" : {
 
     },

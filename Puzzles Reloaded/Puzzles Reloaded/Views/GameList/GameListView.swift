@@ -143,20 +143,23 @@ struct GameListView: View {
                 }
                 
                 // MARK: Search Results
-                if(!searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
+                if(!searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && filteredGames.count > 0) {
                     if(appSettings.value.gameListView == .listView) {
                         List {
-                            ForEach(filteredGames) { gameModel in
-                                GameListLargeItem(game: gameModel)
+                            Section("\(filteredGames.count) games found") {
+                                ForEach(filteredGames) { gameModel in
+                                    GameListLargeItem(game: gameModel)
+                                }
                             }
                         }
-                        .padding()
                     } else {
                         // Search Grid View
                         ScrollView {
                             LazyVGrid(columns: columns, alignment: .leading) {
-                                ForEach(filteredGames) { gameModel in
-                                    GameListGridItem(game: gameModel)
+                                Section("\(filteredGames.count) games found") {
+                                    ForEach(filteredGames) { gameModel in
+                                        GameListGridItem(game: gameModel)
+                                    }
                                 }
                             }
                             .padding()
@@ -226,9 +229,6 @@ struct GameListView: View {
                         .padding()
                         
                     }
-                    
-                    Spacer()
-                    
                 }
             }
             // MARK: Game Manager Setup Task
