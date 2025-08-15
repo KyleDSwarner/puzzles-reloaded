@@ -10,6 +10,9 @@
     "%@ Configuration" : {
 
     },
+    "%@ Savegame" : {
+
+    },
     "%@ Settings" : {
 
     },
@@ -298,9 +301,6 @@
 
     },
     "Privacy Policy" : {
-
-    },
-    "Puzzle Savegame" : {
 
     },
     "Puzzle Theme" : {

@@ -16,7 +16,7 @@ extension UTType {
 
 struct SavegameExporter : Transferable {
     
-    let generateSavegame: @Sendable () -> SaveContext
+    let generateSavegame: @Sendable () -> (filename: String, save: SaveContext)
     
     static var transferRepresentation: some TransferRepresentation {
 
@@ -31,15 +31,17 @@ struct SavegameExporter : Transferable {
          */
         
         FileRepresentation(exportedContentType: .puzzleSavegame, exporting: { exporter in
-            let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent("savegame", conformingTo: .puzzleSavegame)
             
-            let savegame = exporter.generateSavegame()
-            let data = savegame.prefData as String
+            
+            let saveInfo = exporter.generateSavegame()
+            let data = saveInfo.save.prefData as String
+            
+            let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(saveInfo.filename, conformingTo: .puzzleSavegame)
             
             try data.write(to: fileURL, atomically: true, encoding: .utf8)
             
             return SentTransferredFile(fileURL)
-        }).suggestedFileName("savegame.sgtp")
+        })
     }
     
 }

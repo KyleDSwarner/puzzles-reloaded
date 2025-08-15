@@ -13,6 +13,7 @@ struct GameViewToolbars: ViewModifier {
     @AppStorage(AppSettings.key) var appSettings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
 
     var frontend: Frontend
+    var gameName: String
     var gameAdditionalMenuOptions: [ControlConfig]
     var displayClearButton: Bool
     
@@ -26,12 +27,26 @@ struct GameViewToolbars: ViewModifier {
     var autosolvePuzzle: () -> Void
     
     func generateSavegameExport() -> SavegameExporter {
+        
         return SavegameExporter() {
             frontend.midend.restartGame() // Restart the game to give users on shared games a clean slate.
             let savegame = frontend.saveGame()
             frontend.undoMove() // Undo the move so the restart is not persistent for the user.
             
-            return savegame
+            var filename = ""
+            
+            let currentPreset = frontend.currentPreset
+            
+            // Custom presets have an ID of -1, double check before grabbing the preset information
+            if currentPreset >= 0, frontend.gamePresets.count >= currentPreset {
+                let presetName = frontend.gamePresets[currentPreset].title
+                
+                filename = "\(gameName) \(presetName)"
+            } else {
+                filename = "\(gameName) Custom Game"
+            }
+            
+            return (filename, savegame)
         }
     }
     
@@ -63,7 +78,7 @@ struct GameViewToolbars: ViewModifier {
                 //ShareLink(item: generateGameToExport())
                 if appSettings.value.displayShareMenu {
                     ShareLink(items: [generateSavegameExport()]) { data in
-                        SharePreview("Puzzle Savegame", image: Image("puzzles-logo"))
+                        SharePreview("\(gameName) Savegame", image: Image("PuzzlesReloaded-Icon-Light"))
                     } label: {
                         Image(systemName: "square.and.arrow.up")
                             .accessibilityHint("Share current game with others")

@@ -318,6 +318,7 @@ struct GameView: View {
         // MARK: Toolbar View
         .modifier(GameViewToolbars(
             frontend: frontend,
+            gameName: game.gameConfig.name,
             gameAdditionalMenuOptions: overflowMenuControls,
             displayClearButton: game.gameConfig.displayClearButtonInToolbar,
             exitGame: exitGame,
