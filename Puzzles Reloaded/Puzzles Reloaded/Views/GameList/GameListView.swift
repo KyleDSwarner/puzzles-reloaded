@@ -306,6 +306,8 @@ struct GameListView: View {
         .onChange(of: searchText) { old, new in
             print("New Query: \(new)")
         }
+        
+        // MARK: Game Not Found overlay
         .overlay {
             if !searchText.isEmpty && filteredGames.isEmpty {
                 ContentUnavailableView {
