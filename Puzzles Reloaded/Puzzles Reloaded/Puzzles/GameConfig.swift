@@ -32,6 +32,7 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
     var imageName: String
     var isExperimental: Bool
     var savegameIdentifier: String
+    var searchTerms: [String]
     
     // var instructions: String?
     // var controlInfo: String?
@@ -79,6 +80,7 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
             
             self.numericButtonsBuilder = { _ in []}
             self.darkModeColorReplacements = [:]
+            self.searchTerms = []
     }
     
     // MARK: Localized Strings
@@ -111,6 +113,11 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
     
     func setSaveIdentifier(_ saveIdentifier: String) -> Self {
         self.savegameIdentifier = saveIdentifier
+        return self
+    }
+    
+    func addSearchTerms(_ searchTerms: [String]) -> Self {
+        self.searchTerms.append(contentsOf: searchTerms)
         return self
     }
     

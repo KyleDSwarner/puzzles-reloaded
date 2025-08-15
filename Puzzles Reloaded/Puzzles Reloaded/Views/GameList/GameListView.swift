@@ -20,6 +20,7 @@ struct GameListView: View {
     @State private var settingsPageDisplayed = false
     @State private var welcomeMessageDisplayed = false
     @State private var showingSavegameFailAlert = false
+    @State private var searchText: String = ""
     
     
     let columns = [
@@ -32,10 +33,32 @@ struct GameListView: View {
     
     var allGames: [Game] {
         gameManager.filterGameList(category: .none, showExperimentalGames: appSettings.value.showExperimentalGames)
+        
     }
     
     var hiddenGames: [Game] {
         gameManager.filterGameList(category: .hidden, showExperimentalGames: appSettings.value.showExperimentalGames)
+    }
+    
+    var filteredGames: [Game] {
+        return filterGameListBySearchTerm(gameManager.getGameList(showHiddenGames: isHiddenSectionExpanded))
+    }
+    
+    // Return a boolean if a search term would include results IF it included previously hidden games
+    func wouldSearchFindHiddenGames() -> Bool {
+        let games = filterGameListBySearchTerm(hiddenGames)
+        return !games.isEmpty
+    }
+    
+    func filterGameListBySearchTerm(_ games: [Game]) -> [Game] {
+        let searchTerm = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        return games.filter({ game in
+            searchTerm.isEmpty
+            || game.gameConfig.name.localizedCaseInsensitiveContains(searchTerm) // Search the game name
+            || game.gameConfig.savegameIdentifier.localizedCaseInsensitiveContains(searchTerm) // Search the savegame idenfitifier
+            || game.gameConfig.searchTerms.contains(where: { $0.localizedCaseInsensitiveContains(searchTerm) }) // Search additional search terms configured in the app
+        })
     }
     
     init() {
@@ -69,6 +92,22 @@ struct GameListView: View {
         //UINavigationBar.appearance().tintColor = .white
     }
     
+    // Function managed imported *.sgtp savegame
+    func handleImportedSavegame(_ url: URL) {
+        print("Opening imported savegame: %s", url.absoluteString)
+        
+        if let savegame = GameIdentifier.openSavegameFromURL(url) {
+            let loadingResult = identifyAndOpenGame(savegame: savegame)
+            
+            if loadingResult == false {
+                showingSavegameFailAlert = true
+            }
+        } else {
+            showingSavegameFailAlert = true
+        }
+    }
+    
+    // From a savegame extracted from a *sgtp file, itentify & process the game
     func identifyAndOpenGame(savegame: SaveContext) -> Bool {
         guard let gameName = GameIdentifier.identifyGame(savegame) else {
             return false
@@ -103,7 +142,29 @@ struct GameListView: View {
                     WelcomeMessageView(welcomeMessageDisplayed: $welcomeMessageDisplayed)
                 }
                 
-                if(appSettings.value.gameListView == .listView) {
+                // MARK: Search Results
+                if(!searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
+                    if(appSettings.value.gameListView == .listView) {
+                        List {
+                            ForEach(filteredGames) { gameModel in
+                                GameListLargeItem(game: gameModel)
+                            }
+                        }
+                        .padding()
+                    } else {
+                        // Search Grid View
+                        ScrollView {
+                            LazyVGrid(columns: columns, alignment: .leading) {
+                                ForEach(filteredGames) { gameModel in
+                                    GameListGridItem(game: gameModel)
+                                }
+                            }
+                            .padding()
+                        }
+                    }
+                }
+                
+                else if(appSettings.value.gameListView == .listView) {
                     List {
                         if(!favoriteGames.isEmpty) {
                             Section("Favorites") {
@@ -223,26 +284,36 @@ struct GameListView: View {
                 }
                 //EditButton()
             }
+            // MARK: Open *.sgpt
             .onOpenURL { url in
-                print("Open URL: %s\n", url.absoluteString)
-                let save = try! String(contentsOf: url)
-                print(save)
-                
-                if let savegame = GameIdentifier.openSavegameFromURL(url) {
-                    let loadingResult = identifyAndOpenGame(savegame: savegame)
-                    
-                    if loadingResult == false {
-                        showingSavegameFailAlert = true
-                    }
-                } else {
-                    showingSavegameFailAlert = true
-                }
-
+                handleImportedSavegame(url)
             }
             .alert("Save Import Failed", isPresented: $showingSavegameFailAlert) {
                 Button("OK", role: .cancel) { }
             } message: {
                 Text("The file you tried to import is not a valid savegame.")
+            }
+        }
+        .searchable(text: $searchText, placement: .automatic, prompt: "Find a Game")
+        .textInputAutocapitalization(.never)
+        .onChange(of: searchText) { old, new in
+            print("New Query: \(new)")
+        }
+        .overlay {
+            if !searchText.isEmpty && filteredGames.isEmpty {
+                ContentUnavailableView {
+                    Label("No Games Found", systemImage: "magnifyingglass")
+                } description: {
+                    Text("'\(searchText)' does not match any games")
+                } actions: {
+                    if !isHiddenSectionExpanded, wouldSearchFindHiddenGames() {
+                        Button("Include Hidden Games") {
+                            isHiddenSectionExpanded = true
+                        }
+                            .modifier(ButtonDesigner())
+                            .modifier(ButtonTextColor())
+                    }
+                }
             }
         }
     }

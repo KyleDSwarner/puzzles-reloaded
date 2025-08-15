@@ -44,6 +44,7 @@ extension Puzzles {
         //let numButtons = Int(gameId.split(separator: ":")[0])
         return Puzzles.createButtonControls(numButtons ?? 0, keycodes: Puzzles.AlphaButtons)
     })
+    .addSearchTerms(["Kombi"])
     .setDarkModeColors([
         1: (Theming.background, "Innter Background"),
         2: (Theming.white, "Grid"),
@@ -58,6 +59,7 @@ extension Puzzles {
         identifier: "ascent",
         internalGame: ascent
     )
+        .addSearchTerms(["Hidato"])
     .setDarkModeColors([
         1: (Theming.veryDarkGray, "Lowlight - Selected Field"),
         2: (Theming.darkGray, "Highlight - Line & Endpoints"),
@@ -83,6 +85,7 @@ extension Puzzles {
         11: (Theming.text, "Numbers")
         //6: (Theming.veryDarkGray, "Error")
     ])
+    .addSearchTerms(["Battleships"])
     
     // MARK: Bricks
     static let puzzle_bricks = GameConfig(
@@ -96,6 +99,7 @@ extension Puzzles {
         4: (Theming.enteredTextBlue, "Shaded Boxes")
         
     ])
+    .addSearchTerms(["Tawamurenga"])
 
     
     // MARK: Clusters
@@ -106,6 +110,7 @@ extension Puzzles {
     .setDarkModeColors([
         1: (Theming.text, "Grid"),
     ])
+    .addSearchTerms(["Kurasuta"])
     
     // MARK: Mathrax
     static let puzzle_mathrax = GameConfig(
@@ -148,6 +153,7 @@ extension Puzzles {
         10: (Theming.darkGray, "Goal Background"),
         //11: (Theming.warningRed, "Goal")
     ])
+    .addSearchTerms(["Roma", "Arrows"])
     
     // MARK: Salad
     static let puzzle_salad = GameConfig(
@@ -231,6 +237,7 @@ extension Puzzles {
         2: (Theming.turboBlue, "Line"),
         3: (Theming.black, "Number"),
     ])
+    .addSearchTerms(["Tatebo Yokobo"])
     
     static let puzzle_subsets = GameConfig(
         identifier: "subsets",

@@ -76,9 +76,29 @@ class GameManager {
         })
     }
     
-    func filterGameList(category: GameCategory, showExperimentalGames: Bool) -> [Game] {
+   
+    
+
+}
+
+// MARK: Game Manager Filters
+extension GameManager {
+    func filterGameList(category: GameCategory, showExperimentalGames: Bool = false) -> [Game] {
         gameModel.filter { game in
             game.settings.category == category && (showExperimentalGames || !game.gameConfig.isExperimental)
+        }
+    }
+    
+    func getGameList(showHiddenGames: Bool, showExperimentalGames: Bool = false) -> [Game] {
+        gameModel.filter { game in
+            (showHiddenGames == true || game.settings.category != .hidden)
+                && (showExperimentalGames || !game.gameConfig.isExperimental)
+        }
+    }
+    
+    func getNonHiddenGames(showExperimentalGames: Bool = false) -> [Game] {
+        gameModel.filter { game in
+            game.settings.category != .hidden && (showExperimentalGames || !game.gameConfig.isExperimental)
         }
     }
     
@@ -100,7 +120,5 @@ class GameManager {
             game.settings.category == .hidden
         }
     }
-    
-
 }
 

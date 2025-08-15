@@ -71,6 +71,7 @@ struct PuzzleKeycodes {
     
     static let ClearButton = ButtonPress(keycode: 8) //ASCII value of 'Backspace'. Just trust me on this.
     static let MarksButton = ButtonPress(for: "m") // "m" pretty consistently triggers the "add all marks" functionality in games
+    static let HintButton = ButtonPress(for: "h")
     static let SolveButton = ButtonPress(keycode: UI_SOLVE)
     static let UndoButton = ButtonPress(keycode: UI_UNDO)
     static let RedoButton = ButtonPress(keycode: UI_REDO)
@@ -171,6 +172,7 @@ class ControlConfig: Hashable, @unchecked Sendable {
 extension ControlConfig {
     // Some Defaults
     static let MarksControl = ControlConfig(label: String(localized: "Marks"), command: PuzzleKeycodes.MarksButton, imageName: "square.and.pencil")
+    static let HintControl = ControlConfig(label: String(localized: "Hint"), command: PuzzleKeycodes.HintButton, imageName: "questionmark.circle")
 }
 
 struct ArrowPress {

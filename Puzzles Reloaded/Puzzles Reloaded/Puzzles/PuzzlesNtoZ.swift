@@ -56,7 +56,9 @@ extension Puzzles {
             ControlConfig(label: "Shuffle Blocks", command: ButtonPress(for: "j")),
         ]
 
-    ).setDarkModeColors([
+    )
+        .addSearchTerms(["FreeNet", "NetWalk"])
+    .setDarkModeColors([
         1: (Theming.veryDarkGray, "Locked Tile"),
         2: (Theming.veryDarkGray, "Gridlines"),
         3: (Theming.midGray, "Wire"),
@@ -88,6 +90,7 @@ extension Puzzles {
         4: (Theming.veryVeryDarkGray, "Line Maybe"), //Deemphasis
         //5: (Theming.turboBlue, "Line No")
     ])
+    .addSearchTerms(["Five Cells"])
     
     // MARK: Pattern
     static let puzzle_pattern = GameConfig(
@@ -99,6 +102,7 @@ extension Puzzles {
             ControlConfig(label: "Clear", shortPress: PuzzleKeycodes.middleKeypress, longPress: .none, imageName: "square.slash"),
         ]
     )
+    .addSearchTerms(["Nonograms"])
     .setDarkModeColors([
         3: (Theming.text, "Text"),
     ])
@@ -112,8 +116,8 @@ extension Puzzles {
     .setDarkModeColors([
         3: (Theming.darkGray, "Black Box"),
         4: (Theming.lightGray, "White Box")
-        //8: (Theming.turboBlue, "Drag On")
     ])
+    .addSearchTerms(["Masyu"])
     
     // MARK: Pegs
     static let puzzle_pegs = GameConfig(
@@ -126,6 +130,7 @@ extension Puzzles {
         2: (Theming.darkGray, "Lowlight")
         //3: (Theming.boxBlue, "Pegs")
     ])
+    .addSearchTerms(["Peg Solitaire"])
     
     // MARK: Range
     static let puzzle_range = GameConfig(
@@ -137,6 +142,7 @@ extension Puzzles {
         //2: (Theming.warningRed, "Error"),
         3: (Theming.darkGray, "Lowlight")
     ])
+    .addSearchTerms(["Kurodoko", "Kuromasu"])
     
     // MARK: Rectangles
     static let puzzle_rectangles = GameConfig(
@@ -182,41 +188,7 @@ extension Puzzles {
         // 14: (Theming.veryDarkGray, "Dim Arrow"), //d0
         // 15: (Theming.veryDarkGray, "Dim Arrow 2"), //x0
     ])
-    
-    /*
-     
-     enum {
-         COL_BACKGROUND,
-     COL_HIGHLIGHT, 1
-     COL_LOWLIGHT, 2
-         COL_GRID,  3
-     COL_CURSOR, 4
-     COL_ERROR, 5
-     COL_DRAG_ORIGIN, 6
-         COL_ARROW, 7
-     COL_ARROW_BG_DIM, 8
-         COL_NUMBER, 9
-     COL_NUMBER_SET,10
-     COL_NUMBER_SET_MID, 11
-         COL_B0,                             /* background colours */
-         COL_M0 =   COL_B0 + 1*NBACKGROUNDS, /* mid arrow colours */
-         COL_D0 =   COL_B0 + 2*NBACKGROUNDS, /* dim arrow colours */
-         COL_X0 =   COL_B0 + 3*NBACKGROUNDS, /* dim arrow colours */
-         NCOLOURS = COL_B0 + 4*NBACKGROUNDS
-     };
-     
-     <color name="signpost_night_colour_arrow">#999999</color>
-         <color name="signpost_night_colour_arrow_bg_dim">#cccccc</color>
-         <color name="signpost_night_colour_number">#000000</color>
-         <color name="signpost_night_colour_number0">#888888</color>
-         <color name="signpost_night_colour_number_set">#aaaaff</color>
-         <color name="signpost_night_colour_number_set_mid">#4444ee</color>
-         <color name="signpost_night_colour_empty">#dddddd</color>
-         <color name="signpost_night_colour_b0">#000000</color>
-         <color name="signpost_night_colour_m0">#555555</color>
-         <color name="signpost_night_colour_d0">#000000</color>
-         <color name="signpost_night_colour_x0">#000000</color>
-     */
+    .addSearchTerms(["Pfeilpfad", "Arrow Path", "Arrows"])
     
     // MARK: Singles
     static let puzzle_singles = GameConfig(
@@ -228,6 +200,7 @@ extension Puzzles {
         4: (Theming.veryDarkGray, "White"),
         5: (Theming.midGray, "Black Color")
     ])
+    .addSearchTerms(["Hitori"])
     
     // MARK: Sixteen
     static let puzzle_sixteen = GameConfig(
@@ -291,6 +264,7 @@ extension Puzzles {
         return Puzzles.createButtonControls(numButtons, keycodes: Puzzles.HexidecimalButtons)
             
     })
+    .addSearchTerms(["Sudoku"])
     .setDarkModeColors([
         //1: (Theming.text, "Text"),
         1: (Theming.veryDarkGray, "X Diagonals"),
@@ -346,6 +320,7 @@ extension Puzzles {
         let numButtons = Int(gameId.split(separator: ":")[0])
         return Puzzles.createButtonControls(numButtons ?? 0)
     })
+    .addSearchTerms(["Skyscrapers"])
     .setDarkModeColors([
         1: (Theming.text, "Grid"),
         2: (Theming.enteredTextBlue, "User Entered Guess")
@@ -413,6 +388,7 @@ extension Puzzles {
             ControlConfig(label: String(localized: "Zombie"), command: ButtonPress(for: "Z"), imageName: "zombie", isSystemImage: false, displayTextWithIcon: false),
         ]
     )
+    .addSearchTerms(["Haunted Mirror Maze"])
     .setDarkModeColors([
         1: (Theming.text, "Grid"),
         2: (Theming.text, "Text"),
@@ -427,7 +403,9 @@ extension Puzzles {
             ControlConfig.MarksControl,
             ControlConfig(label: String(localized: "Hints"), command: ButtonPress(for: "H"), imageName: "plus.square")
         ]
-    ).numericButtonsBuilder({gameId in
+    )
+        .addSearchTerms(["Futoshiki"])
+        .numericButtonsBuilder({gameId in
         // Game ID: 4:0,0,0,0D,0,0,0,0,2D,0D,0,0,0,0,0,3U,
         // Adjancent Game ID: 6a:0,0RD,0DL,0D,0D,0D,1,0UR,0UL,0U,0U,...
         
@@ -463,6 +441,7 @@ extension Puzzles {
             ControlConfig(label: String(localized: "Clear"), shortPress: PuzzleKeycodes.middleKeypress, longPress: PuzzleKeycodes.leftKeypress, imageName: "square.slash")
         ]
     )
+    .addSearchTerms(["Futoshiki"])
     .setDarkModeColors([
         1: (Theming.darkGray, "Grid"),
         2: (Theming.midGray, "Empty Grid"),
@@ -480,4 +459,5 @@ extension Puzzles {
         2: (Theming.white, "Line"),
         4: (Theming.white, "Outline")
     ])
+    .addSearchTerms(["Planarity"])
 }

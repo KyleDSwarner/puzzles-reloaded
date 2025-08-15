@@ -90,7 +90,8 @@ extension Puzzles {
     // MARK: Fifteen
     static let puzzle_fifteen = GameConfig(
         identifier: "fifteen",
-        internalGame: fifteen
+        internalGame: fifteen,
+        // overflowMenuControls: [ControlConfig.HintControl] Disabled because it's very unweidly!
     )
     .setDarkModeColors([
         //1: (Theming.white, "Grid"),
@@ -160,6 +161,7 @@ extension Puzzles {
         internalGame: galaxies,
         allowSingleFingerPanning: false
     )
+    .addSearchTerms(["Tentai", "Spiral"])
     .setDarkModeColors([
         //1: (Theming.white, "Grid"),
         1: (Theming.darkGray, "Background for Completed Squares"),
@@ -174,6 +176,7 @@ extension Puzzles {
         internalGame: guess,
         allowSingleFingerPanning: false
     )
+        .addSearchTerms(["Mastermind"])
         .setDarkModeColors([
             1: (Theming.darkGray, "Grid"),
             //1: (Theming.darkGray, "Background for Completed Squares"),
@@ -219,11 +222,13 @@ extension Puzzles {
             let numButtons = Int(gameId.split(separator: ":")[0])
             return Puzzles.createButtonControls(numButtons ?? 0)
     })
+        .addSearchTerms(["KenKen", "Ken Ken"])
     .setDarkModeColors([
         1: (Theming.text, "Grid"),
         2: (Theming.text, "User Entry"),
         3: (Theming.darkGray, "Highlight"),
     ])
+    
     
     // MARK: Light Up
     static let puzzle_lightup = GameConfig(
@@ -256,6 +261,7 @@ extension Puzzles {
         internalGame: loopy,
         allowSingleFingerPanning: true
     )
+    .addSearchTerms(["Slitherlink", "Loop"])
     .setDarkModeColors([
         1: (Theming.white, "Foreground"),
         2: (Theming.darkGray, "Line Unknown"), // The highlighter Yellow Monstrosity
@@ -319,11 +325,13 @@ extension Puzzles {
         16: (Theming.darkGray, "Highlight"),
         17: (Theming.veryDarkGray, "Lowlight")
     ])
+    .addSearchTerms(["Minesweeper"])
 
     // MARK: Mosaic
     static let puzzle_mosaic = GameConfig(
         identifier: "mosaic",
         internalGame: mosaic
     )
+        .addSearchTerms(["Magipic", "Count and Darken"])
     
 }
