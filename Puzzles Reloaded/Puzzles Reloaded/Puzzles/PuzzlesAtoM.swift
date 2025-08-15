@@ -56,7 +56,7 @@ extension Puzzles {
     .setDarkModeColors([
         //1: (Theming.white, "Grid"),
         1: (Theming.text, "Primary Grid Color"),
-        2: (Theming.lightGray, "Highlight - Finished Puzzle"),
+        2: (Theming.veryDarkGray, "Highlight - Finished Puzzle"),
         //4: (Theming.turboBlue, "Selected Box"),
         5: (Theming.darkGray, "Marked and Locked Islands"),
         6: (Theming.veryDarkGray, "Hint"), // Mark Neighbors
