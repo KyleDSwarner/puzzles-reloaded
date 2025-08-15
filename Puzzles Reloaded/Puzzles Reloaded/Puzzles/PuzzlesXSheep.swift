@@ -59,11 +59,11 @@ extension Puzzles {
         internalGame: ascent
     )
     .setDarkModeColors([
-        1: (Theming.veryDarkGray, "Selected Field"),
-        2: (Theming.darkGray, "Line & Endpoints"),
-        3: (Theming.text, "Border and Entered Clues"),
+        1: (Theming.veryDarkGray, "Lowlight - Selected Field"),
+        2: (Theming.darkGray, "Highlight - Line & Endpoints"),
+        3: (Theming.white, "Border and Entered Clues"),
         //4: (Theming.turboBlue, "Line"),
-        5: (Theming.highlightBlueText, "Immutable Text"),
+        5: (Theming.enteredTextBlue, "Immutable Text"),
         //6: (Theming.veryDarkGray, "Error")
     ])
     

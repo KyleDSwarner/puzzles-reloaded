@@ -41,9 +41,9 @@ struct GameViewToolbars: ViewModifier {
             if currentPreset >= 0, frontend.gamePresets.count >= currentPreset {
                 let presetName = frontend.gamePresets[currentPreset].title
                 
-                filename = "\(gameName) \(presetName)"
+                filename = "\(gameName) - \(presetName)"
             } else {
-                filename = "\(gameName) Custom Game"
+                filename = "\(gameName) - Custom Game"
             }
             
             return (filename, savegame)
