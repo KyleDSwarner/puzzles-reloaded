@@ -68,6 +68,9 @@ struct GameListView: View {
     // MARK: Toolbar Design Configuration
     func configureToolbarDisplay() {
         #if os(iOS)
+        if #available(iOS 26.0, *) {
+            // Do nothing - our navbar appearances should be disabled once glass comes into play
+        } else {
             let navbarAppearance = UINavigationBarAppearance()
             navbarAppearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
             navbarAppearance.backgroundColor = UIColor.systemBackground.withAlphaComponent(0.7)
@@ -87,6 +90,7 @@ struct GameListView: View {
             UINavigationBar.appearance().standardAppearance = navbarAppearance
             UINavigationBar.appearance().compactAppearance = navbarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navbarAppearance
+        }
         #endif
         
         //UINavigationBar.appearance().tintColor = .white
@@ -143,26 +147,29 @@ struct GameListView: View {
                 }
                 
                 // MARK: Search Results
-                if(!searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && filteredGames.count > 0) {
-                    if(appSettings.value.gameListView == .listView) {
-                        List {
-                            Section("\(filteredGames.count) games found") {
-                                ForEach(filteredGames) { gameModel in
-                                    GameListLargeItem(game: gameModel)
-                                }
-                            }
-                        }
-                    } else {
-                        // Search Grid View
-                        ScrollView {
-                            LazyVGrid(columns: columns, alignment: .leading) {
+                if(!searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
+                    // Check for filtered games is nested as a 2nd if to ensure the "no games found" overlay can display on its own if a search is in progress.
+                    if(filteredGames.count > 0) {
+                        if(appSettings.value.gameListView == .listView) {
+                            List {
                                 Section("\(filteredGames.count) games found") {
                                     ForEach(filteredGames) { gameModel in
-                                        GameListGridItem(game: gameModel)
+                                        GameListLargeItem(game: gameModel)
                                     }
                                 }
                             }
-                            .padding()
+                        } else {
+                            // Search Grid View
+                            ScrollView {
+                                LazyVGrid(columns: columns, alignment: .leading) {
+                                    Section("\(filteredGames.count) games found") {
+                                        ForEach(filteredGames) { gameModel in
+                                            GameListGridItem(game: gameModel)
+                                        }
+                                    }
+                                }
+                                .padding()
+                            }
                         }
                     }
                 }
