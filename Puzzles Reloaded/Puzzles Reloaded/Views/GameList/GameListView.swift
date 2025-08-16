@@ -261,7 +261,7 @@ struct GameListView: View {
             .navigationDestination(for: Game.self) { gameModel in
                 GameView(game: gameModel)
             }
-            .navigationTitle("Simon Tatham Puzzles")
+            .navigationTitle("Puzzles Reloaded")
             .toolbar {
                 if(appSettings.value.gameListView == .gridView && !gameManager.hiddenGames.isEmpty) {
                     Button() {

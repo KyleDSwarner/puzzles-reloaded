@@ -357,7 +357,7 @@ extension Puzzles {
         6: (Theming.black, "Track Clue"),
         //7: (Theming.turboBlue, "Sleeper (Bottom of Track)"),
         8: (Theming.darkGray, "Drag On"),
-        11: (Theming.darkGray, "Flash"),
+        11: (Theming.white, "Flash"),
         12: (Theming.veryDarkGray, "Error Background")
     ])
     
@@ -443,8 +443,11 @@ extension Puzzles {
     )
     .addSearchTerms(["Futoshiki"])
     .setDarkModeColors([
-        1: (Theming.darkGray, "Grid"),
-        2: (Theming.midGray, "Empty Grid"),
+        1: (Theming.midGray, "Grid"),
+        2: (Theming.darkGray, "Empty Grid"),
+        //3: (Theming.lightGray, "White Squares"),
+        //4: (Theming.turboBlue, "Color 1 Highlight"),
+        6: (Theming.veryDarkGray, "Black Squares")
     ])
     
     // MARK: Untangle

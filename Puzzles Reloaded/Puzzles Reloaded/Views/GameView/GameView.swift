@@ -233,6 +233,10 @@ struct GameView: View {
                         // print("width: \(geometry.size.width), height: \(geometry.size.height)")
                         currentGeometry = geometry.size
                     }
+                    .onChange(of: frontend.puzzleImage) {
+                        // There have been enough bugs where the image finishes drawing, but an update is never called and the undo/redo status doesn't properly reflect the internal state.
+                        frontend.updateFrontendFlags()
+                    }
                     
                     if frontend.displayLoadingScreen {
                         VStack {

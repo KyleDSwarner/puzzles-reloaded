@@ -77,6 +77,8 @@ struct SettingsView: View {
                                     Text("Light").tag(AppTheme.light)
                                     Text("Dark").tag(AppTheme.dark)
                                 }
+                            } footer: {
+                            Text("Dark mode is a new feature and may have some quirks. Please reach out with any issues!")
                             }
                         }
                         

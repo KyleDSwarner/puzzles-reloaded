@@ -84,7 +84,7 @@ struct GameViewToolbars: ViewModifier {
                             .accessibilityHint("Share current game with others")
                     }
                 }
-                if FeatureFlags.EnableThemeDebugger {
+                if DebugFlags.EnableThemeDebugger {
                     Button {
                         appSettings.value.appTheme = appSettings.value.appTheme == .dark ? .light : .dark
                     } label: {

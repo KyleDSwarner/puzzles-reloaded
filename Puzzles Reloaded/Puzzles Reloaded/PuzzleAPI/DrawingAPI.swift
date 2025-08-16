@@ -61,7 +61,7 @@ class DrawingAPI {
     static func constructAPI() -> drawing_api {
         return drawing_api(
             version: 1,
-            draw_text: drawTextWrapper,
+            draw_text: drawText,
             draw_rect: drawRect,
             draw_line: drawLine,
             draw_polygon: drawPolygon,
@@ -111,7 +111,7 @@ func retrieveFrontendFromDrawing(_ drawing: UnsafeMutablePointer<drawing>?) -> F
     let pointer = drawing?.pointee.handle.bindMemory(to: Frontend.self, capacity: 1)
     
     guard let pointer = pointer else {
-        //fuck
+        //aw shoot
         fatalError("Drawing object was not available while drawing API within code. Cannot continue.")
     }
     
@@ -170,7 +170,8 @@ func adjustedYAsFloat(_ y: Float) -> Int {
 
 // MARK: Text Drawing Methods
 
-func drawTextWrapper(drawing: UnsafeMutablePointer<drawing>?, x: Int32, y: Int32, fontType: Int32, fontSize: Int32, align: Int32, color: Int32, textPointer: UnsafePointer<CChar>?) {
+func drawText(drawing: UnsafeMutablePointer<drawing>?, x: Int32, y: Int32, fontType: Int32, fontSize: Int32, align: Int32, color: Int32, textPointer: UnsafePointer<CChar>?) {
+    debug("Draw Text Called")
     
     guard let text = textPointer else {
         return
@@ -274,7 +275,7 @@ func drawRect(drawing: UnsafeMutablePointer<drawing>?, x: Int32, y: Int32, width
  Draw a line on the puzzle image given two points and color. The thickness of this line is always consistent.
  */
 func drawLine(drawing: UnsafeMutablePointer<drawing>?, x1: Int32, y1: Int32, x2: Int32, y2: Int32, color: Int32) {
-    // print("Draw Line: Called")
+    debug("Draw Line: Called")
     
     getImageManager(drawing: drawing).drawLine(
         from: CGPoint(x: Int(x1), y: adjustedY(y1)),
@@ -300,7 +301,7 @@ func drawThickLine(drawing: UnsafeMutablePointer<drawing>?, thickness: Float, x1
  Draw a polygon shape using an array of points and the outline color. A fill color can optionally be provided.
  */
 func drawPolygon(drawing: UnsafeMutablePointer<drawing>?, coordinates: UnsafePointer<Int32>?, nPoints: Int32, fillColor: Int32, outlineColor: Int32) {
-    //print("Draw Polygon Called, outlineColor: \(Int(outlineColor)), fill Color: \(Int(fillColor))")
+    debug("Draw Polygon Called, outlineColor: \(Int(outlineColor)), fill Color: \(Int(fillColor))")
     
     let numPoints = Int(nPoints)
     
@@ -322,7 +323,7 @@ func drawPolygon(drawing: UnsafeMutablePointer<drawing>?, coordinates: UnsafePoi
 }
 
 func drawCircle(drawing: UnsafeMutablePointer<drawing>?, cx: Int32, cy: Int32, radius: Int32, fillColor: Int32, outlineColor: Int32) {
-    //print("Called: Draw Circle")
+    debug("Called: Draw Circle")
     
     getImageManager(drawing: drawing).drawCircle(x: Int(cx), y: adjustedY(cy), radius: Int(radius),
         outlineColor: getColorByIndex(drawing: drawing, colorIndex: outlineColor),
@@ -336,11 +337,9 @@ func drawCircle(drawing: UnsafeMutablePointer<drawing>?, cx: Int32, cy: Int32, r
 func drawUpdate(drawing: UnsafeMutablePointer<drawing>?, x: Int32, y: Int32, w: Int32, h: Int32) {
     
     // The intention of this function is to update only a section of the puzzle image based on need. However, iOS is pretty effecient in spitting out new bitmaps and splitting sections out would actually be _more_ intensive.
-    // So instead, any update to the image is immediately reflected, and this function is a no-op.
+    // So instead, any update to the image forces a complete refresh of the image.
     
-    // There are a few potential bugs in implementing the puzzle this way (lines in Tents, for example), so this may need to be revisited in the future.
-    
-    //print("!!! Called: Draw Update: x:\(Int(x)) y:\(Int(y)) size \(Int(w))x\(Int(h))")
+    debug("!!! Called: Draw Update: x:\(Int(x)) y:\(Int(y)) size \(Int(w))x\(Int(h))")
     //getImageManager(frontend: frontend).updateRect(x: Int(x), y: adjustedY(y, height: h), width: Int(w), height: Int(h))
     retrieveFrontendFromDrawing(drawing).refreshImage()
 }
@@ -356,7 +355,7 @@ func forceImageUpdate(drawing: UnsafeMutablePointer<drawing>?) {
 // MARK: Clipping Methods
 
 func clipSegment(drawing: UnsafeMutablePointer<drawing>?, x: Int32, y: Int32, width: Int32, height: Int32) {
-    //print("Called: Clip")
+    debug("Called: Clip")
     
     getImageManager(drawing: drawing).clipArea(x: Int(x), y: adjustedY(y, height: height), width: Int(width), height: Int(height))
 }
@@ -420,7 +419,7 @@ func freeBlitter(drawing: UnsafeMutablePointer<drawing>?, blitterPointer: Opaque
  The width and height were already provided during `newBlitter`, this function provides the x & y coordinates of where that section should be taken.
  */
 func saveBlitter(drawing: UnsafeMutablePointer<drawing>?, blitterPointer: OpaquePointer?, x: Int32, y: Int32) {
-    // print("--- Saving Blitter! X:\(Int(x)) Y:\(Int(y)) --- ")
+    debug("--- Saving Blitter! X:\(Int(x)) Y:\(Int(y)) --- ")
     
     let intermediatePointer = UnsafePointer<Blitter>(blitterPointer)
     
@@ -467,7 +466,7 @@ func saveBlitter(drawing: UnsafeMutablePointer<drawing>?, blitterPointer: Opaque
  You'll see this called during animations of items sliding across the screen or in response to a drag event.
  */
 func loadBlitter(drawing: UnsafeMutablePointer<drawing>?, blitterPointer: OpaquePointer?, x: Int32, y: Int32) {
-    // print("-- Loading Blitter... --")
+    debug("-- Loading Blitter... --")
     let intermediatePointer = UnsafePointer<Blitter>(blitterPointer)
     
     if let blitter = intermediatePointer?.pointee {
@@ -491,6 +490,12 @@ func loadBlitter(drawing: UnsafeMutablePointer<drawing>?, blitterPointer: Opaque
         // Provide the stored image in the blitter for redraw to the main image
         getImageManager(drawing: drawing).placeImageFragment(image: blitter.img, x: xPosition, y: yPosition, width: blitter.widthAdjusted, height: blitter.heightAdjusted)
         
+    }
+}
+
+func debug(_ message: String) {
+    if DebugFlags.EnableDrawingDebugLogs {
+        print("Drawing API: \(message)")
     }
 }
 

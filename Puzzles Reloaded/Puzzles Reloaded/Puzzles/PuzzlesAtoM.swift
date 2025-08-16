@@ -198,6 +198,7 @@ extension Puzzles {
         3: (Theming.darkGray, "Lowlight"),
         6: (Theming.darkGray, "Mines"),
         8: (Theming.midGray, "Walls"),
+        9: (Theming.white, "Hint Arrow")
         //1: (Theming.darkGray, "Background for Completed Squares"),
         //3: (Theming.midGray, "Dots"),
         //5: (Theming.darkGray, "Empty Field"),

@@ -13,7 +13,7 @@ struct LicenseView: View {
         VStack {
             ScrollView {
                 Text("""
-                Copyright 2024 Kyle Swarner
+                Copyright 2025 Kyle Swarner
                 
                 The notice below applies to source code as distributed at
                 https://github.com/KyleDSwarner/puzzles-reloaded and does not apply to
