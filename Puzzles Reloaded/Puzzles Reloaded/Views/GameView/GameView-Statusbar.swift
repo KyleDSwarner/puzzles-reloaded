@@ -36,6 +36,7 @@ struct GameViewStatusbar: View {
                     } label: {
                         Image(systemName: "plus.circle")
                             .accessibilityHint("Start a new game")
+                            .modifier(StatusbarOptionalPaddingDesigner())
                     }
                     
                     .modifier(ButtonDesigner())
@@ -51,6 +52,7 @@ struct GameViewStatusbar: View {
                     } label: {
                         Image(systemName: "arrow.circlepath")
                             .accessibilityHint("Restart the current game")
+                            .modifier(StatusbarOptionalPaddingDesigner())
                     }
                     .modifier(ButtonDesigner())
                     .modifier(ButtonTextColor())
@@ -118,6 +120,17 @@ struct StatusbarDesigner: ViewModifier {
             content.glassEffect(.regular, in: RoundedRectangle(cornerRadius: 5.0))
         } else {
             content.background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
+        }
+    }
+}
+
+struct StatusbarOptionalPaddingDesigner: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content
+        } else {
+            content
+                .padding(5) //This padding is bascially the one difference between this and other button designs
         }
     }
 }
