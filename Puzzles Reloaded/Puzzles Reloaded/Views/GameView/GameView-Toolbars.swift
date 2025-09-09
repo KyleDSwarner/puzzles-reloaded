@@ -25,6 +25,7 @@ struct GameViewToolbars: ViewModifier {
     var undoMove: () -> Void
     var redoMove: () -> Void
     var autosolvePuzzle: () -> Void
+    var removePuzzleFocus: () -> Void
     
     func generateSavegameExport() -> SavegameExporter {
         
@@ -92,12 +93,14 @@ struct GameViewToolbars: ViewModifier {
                     }
                 }
                 Button {
+                    removePuzzleFocus()
                     helpPageDisplayed = true
                 } label: {
                     Image(systemName: "questionmark.circle")
                         .accessibilityHint("Open the help page")
                 }
                 Button() {
+                    removePuzzleFocus()
                     settingsPageDisplayed = true
                 } label: {
                     Image(systemName: "gearshape")
@@ -125,9 +128,11 @@ struct GameViewToolbars: ViewModifier {
                     if(appSettings.value.displayCustomLoadMenu) {
                         Menu("Load By...", systemImage: "folder") {
                             Button("Game ID") { // Display Advanced Game Options?
+                                removePuzzleFocus()
                                 displayingGameIdView = true
                             }
                             Button("Random Seed") {
+                                removePuzzleFocus()
                                 displayingCustomSeedView = true
                             }
                         }
@@ -236,6 +241,7 @@ struct GameViewToolbars: ViewModifier {
                     // Display custom game menu if the game allows
                     if frontend.midend.canConfigureGameParams() {
                         Button {
+                            removePuzzleFocus()
                             customGameSettingsDisplayed = true
                         } label: {
                             Label("Custom", systemImage: "chevron.right")

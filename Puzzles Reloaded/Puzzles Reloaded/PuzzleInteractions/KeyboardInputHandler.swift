@@ -11,69 +11,37 @@ import SwiftUI
 class KeyboardInputHandler {
     
     private var frontend: Frontend
-    private var gameConfig: GameConfig
-    
-    private var gameControls: [ControlConfig] = []
-    
-    private var currentGameId: String = ""
     
     init(frontend: Frontend) {
         self.frontend = frontend
-        self.gameConfig = frontend.game.gameConfig
     }
     
     func handleKeypress(keypress: KeyPress) -> KeyPress.Result {
         // print("Keypress Pressed: \(keypress.characters)")
         
-        //let keypress: Character = something.first
         guard let keypressChar = keypress.characters.first else {
             return .ignored
         }
         
         var commandToFire = -1
         
-        // Regnerate locally cached controls when we detect a change to the game ID
-        if currentGameId != frontend.gameId {
-            currentGameId = frontend.gameId
-            gameControls = gameConfig.numericButtonsBuilder(frontend.gameId)
-            
-            print("Touch Controls: \(gameControls)")
-            
-            if gameControls.isEmpty {
-                print("Empty, so filling with \(gameConfig.buttonControls)")
-                gameControls = gameConfig.buttonControls
-            }
-            
-            // Append the overflow menu controls so we can check it all at once
-            gameControls.append(contentsOf: gameConfig.overflowMenuControls)
-        }
-        
-        // TODO: Is any of this part necessary? If we're going to ASCII everything, does this matter AT ALL?
-        // If there's a numeric button builder & we have a game ID, let's check that.
-        if let gameControl = gameControls.first(where: { $0.buttonCommand?.character != nil}), let controlCharacter = gameControl.buttonCommand?.character, controlCharacter.uppercased() == keypressChar.uppercased() {
-            print("Matching Control: \(controlCharacter)")
-            // commandToFire = gameControl.buttonCommand?.keycode ?? -1
-        }
-        
         // If the game Control isn't yet found, move on to built-in commands:
         
-        if commandToFire == -1 {
-            switch keypress.key {
-            case .upArrow:
-                commandToFire = CURSOR_UP
-            case .downArrow:
-                commandToFire = CURSOR_DOWN
-            case .leftArrow:
-                commandToFire = CURSOR_LEFT
-            case .rightArrow:
-                commandToFire = CURSOR_RIGHT
-            case .return:
-                commandToFire = CURSOR_SELECT
-            case .space:
-                commandToFire = CURSOR_SELECT2
-            default:
-                commandToFire = -1
-            }
+        switch keypress.key {
+        case .upArrow:
+            commandToFire = CURSOR_UP
+        case .downArrow:
+            commandToFire = CURSOR_DOWN
+        case .leftArrow:
+            commandToFire = CURSOR_LEFT
+        case .rightArrow:
+            commandToFire = CURSOR_RIGHT
+        case .return:
+            commandToFire = CURSOR_SELECT
+        case .space:
+            commandToFire = CURSOR_SELECT2
+        default:
+            commandToFire = -1
         }
         
         // Otherwise, let's just convert it to the ascii value and see wtf happens:
@@ -82,7 +50,6 @@ class KeyboardInputHandler {
             commandToFire = Int(keypressChar.asciiValue ?? 0)
         }
         
-        print("Applying Modifiers")
         if keypress.modifiers.contains(.command) || keypress.modifiers.contains(.control) {
             print("Control button detected, modding")
             commandToFire = commandToFire | MOD_CTRL
@@ -124,17 +91,6 @@ class KeyboardInputHandler {
          One option common to all games allows you to turn off the one-key shortcuts like ‘N’ for new game or ‘Q’ for quit, so that there's less chance of hitting them by accident. You can still access the same shortcuts with the Ctrl key.
          */
         
-        // We should also check the overflow Menu
-        
-        //if controlOptions.buil
-        
-        //controlOptions.first(where: { $0.buttonCommand?.keycode != nil})
-        
-        // Check if input is valid from touch controls (Sudoku, etc, 1-0)
-        
-        // check for solve, undo, hints, etc.
-        
-        // Check for arrow keys
         
         // If keypress is still -1, fall out
         if commandToFire == -1 {
@@ -153,61 +109,6 @@ class KeyboardInputHandler {
         
         return .ignored
     }
-    
-    func generateControls() -> [ControlConfig] {
-        return []
-    }
-    
-    func convertKeypress(keypress: KeyPress) -> Int {
-        switch keypress.key {
-        case .upArrow:
-            return CURSOR_UP
-        case .downArrow:
-            return CURSOR_UP
-        case .leftArrow:
-            return CURSOR_LEFT
-        case .rightArrow:
-            return CURSOR_RIGHT
-        default:
-            return -1
-        }
-    }
-    
-    
-    /*
-    //UIPress *press;
-    for (press in presses) {
-        if (press.key != nil) {
-            int sendKey = -1;
-            if (
-                ourgame->can_solve
-                && press.key.modifierFlags & UIKeyModifierControl
-                && [press.key.charactersIgnoringModifiers isEqual: @"s"]
-            ) {
-                sendKey = UI_SOLVE;
-            } else if ([press.key.charactersIgnoringModifiers length] == 1) {
-                sendKey = [press.key.charactersIgnoringModifiers characterAtIndex:0];
-            } else {
-                switch (press.key.keyCode) {
-                    case UIKeyboardHIDUsageKeyboardLeftArrow:
-                        sendKey = CURSOR_LEFT;
-                        break;
-                    case UIKeyboardHIDUsageKeyboardUpArrow:
-                        sendKey = CURSOR_UP;
-                        break;
-                    case UIKeyboardHIDUsageKeyboardRightArrow:
-                        sendKey = CURSOR_RIGHT;
-                        break;
-                    case UIKeyboardHIDUsageKeyboardDownArrow:
-                        sendKey = CURSOR_DOWN;
-                        break;
-                }
-            }
-            if (sendKey != -1) {
-                midend_process_key(me, -1, -1, sendKey);
-            }
-        }
-    }
-     */
+
     
 }

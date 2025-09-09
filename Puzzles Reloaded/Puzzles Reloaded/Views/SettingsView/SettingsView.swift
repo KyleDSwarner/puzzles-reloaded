@@ -62,6 +62,16 @@ struct SettingsView: View {
                         } footer: {
                             Text("Enable swiping back to exit puzzles. May interfere with long presses in some games!")
                         }
+                        
+                        Section {
+                            Toggle("Enable Physical Keyboard", isOn: $appSettings.value.enableHardwareKeyboard)
+                            if appSettings.value.enableHardwareKeyboard {
+                                NavigationLink("View Keyboard Shortcuts") { KeyboardCommandsView() }
+                            }
+                        } footer: {
+                            Text("Toggle whether or not you want inputs from physical keyboards to control the game.")
+                        }
+                
                     }
                     .navigationTitle("Controls")
                     .navigationBarTitleDisplayMode(.inline)
@@ -283,6 +293,63 @@ struct SettingsView: View {
               else { fatalError("Expected a valid URL") }
           UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
         }
+}
+
+struct KeyboardCommandsView: View {
+    
+    var body: some View {
+        List {
+            Section {
+                HStack(alignment: .center) {
+                    Text("New Game")
+                        .bold()
+                    Spacer()
+                    Text("N, Ctrl+N")
+                }
+                HStack(alignment: .center) {
+                    Text("Solve Puzzle")
+                        .bold()
+                    Spacer()
+                    Text("S, Ctrl+S")
+                }
+                HStack(alignment: .center) {
+                    Text("Undo")
+                        .bold()
+                    Spacer()
+                    Text("U, Ctrl+Z, Ctrl+_, *")
+                }
+                HStack(alignment: .center) {
+                    Text("Redo")
+                        .bold()
+                    Spacer()
+                    Text("R, Ctrl+R, #")
+                }
+                HStack(alignment: .center) {
+                    Text("Exit Game")
+                        .bold()
+                    Spacer()
+                    Text("Escape")
+                }
+            }
+            
+            Section {
+                HStack(alignment: .center) {
+                    Text("Marks")
+                        .bold()
+                    Spacer()
+                    Text("M")
+                }
+                HStack(alignment: .center) {
+                    Text("Hint")
+                        .bold()
+                    Spacer()
+                    Text("H")
+                }
+            } header: {
+                Text("Supported By Some Puzzles")
+            }
+        }.navigationTitle("Keyboard Commands")
+    }
 }
 
 #Preview {

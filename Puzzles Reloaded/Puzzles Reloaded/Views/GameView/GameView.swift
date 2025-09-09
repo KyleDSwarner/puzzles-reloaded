@@ -167,7 +167,7 @@ struct GameView: View {
                                 .interpolation(.high)
                                 .scaledToFit()
                                 .focusable()
-                                // .focused($imageIsFocused) Disabled for now as it breaks keyboard entry on other pages
+                                .focused($imageIsFocused) // Check keyboard entry on other pages
                             #if os(iOS)
                                 .overlay {
                                     // MARK: Puzzle Interactions & Gestures
@@ -176,14 +176,7 @@ struct GameView: View {
                             #endif
                                 .transformEffect(puzzleImageTransformation)
                                 // MARK: Keyboard Handling
-                                .onKeyPress { key in                                    
-                                    if key.key == .escape {
-                                        self.exitGame()
-                                        return .handled
-                                    }
-                                    
-                                    return self.keyboardHandler?.handleKeypress(keypress: key) ?? KeyPress.Result.ignored
-                                }
+                                
                                 // Instead of using transformEffect, this setup emulates the translations that are initially applied by our CGAFfineTransform
                                 // This way, we're able to apply animations!
                                 //.modifier(ModdedPuzzleImage(translation: puzzleImageTransformation, anchor: anchor))
@@ -292,6 +285,21 @@ struct GameView: View {
         #endif
         .navigationBarBackButtonHidden(!appSettings.value.enableSwipeBack)
         .background(Color("Puzzle Background"))
+        
+        // MARK: Keybaord Handling
+        .onKeyPress { key in
+            if(appSettings.value.enableHardwareKeyboard == false) {
+                print("Ignoring Keypress based on user setting")
+                return .ignored
+            }
+            
+            if key.key == .escape {
+                self.exitGame()
+                return .handled
+            }
+            
+            return self.keyboardHandler?.handleKeypress(keypress: key) ?? KeyPress.Result.ignored
+        }
 
         //.toolbarBackground(Color(UIColor.red), for: .navigationBar)
         
@@ -300,22 +308,22 @@ struct GameView: View {
         //.toolbarBackground(Color.gray, for: .bottomBar)
         //.toolbarBackground(.visible, for: .bottomBar)
         // MARK: Help Page Sheet
-        .sheet(isPresented: $helpPageDisplayed) {
+        .sheet(isPresented: $helpPageDisplayed, onDismiss: reapplyFocusToPuzzleImage) {
             GameHelpView(game: game.gameConfig)
         }
         // MARK: Game ID Sheet
-        .sheet(isPresented: $displayingGameIdView) {
+        .sheet(isPresented: $displayingGameIdView, onDismiss: reapplyFocusToPuzzleImage) {
             CustomGameIDView(frontend: frontend, newGameCallback: newGame)
         }
         // MARK: Custom Seed Sheet
-        .sheet(isPresented: $displayingCustomSeedView) {
+        .sheet(isPresented: $displayingCustomSeedView, onDismiss: reapplyFocusToPuzzleImage) {
             CustomGameSeedView(frontend: frontend, newGameCallback: newGame)
         }
         // MARK: Settings Page Sheet
-        .sheet(isPresented: $settingsPageDisplayed) {
+        .sheet(isPresented: $settingsPageDisplayed, onDismiss: reapplyFocusToPuzzleImage) {
             SettingsView(game: game, frontend: frontend, refreshSettingsCallback: refreshSettings)
         }
-        .sheet(isPresented: $customGameSettingsDisplayed) {
+        .sheet(isPresented: $customGameSettingsDisplayed, onDismiss: reapplyFocusToPuzzleImage) {
             GameCustomSettingsView(gameTitle: game.gameConfig.name, frontend: frontend, newGameCallback: newGame)
                //  .presentationDetents([.medium, .large]) (Not rendering correctly on iPads)
         }
@@ -333,6 +341,7 @@ struct GameView: View {
             undoMove: undoMove,
             redoMove: redoMove,
             autosolvePuzzle: triggerAutosolver,
+            removePuzzleFocus: removeImageFocus,
             helpPageDisplayed: $helpPageDisplayed,
             settingsPageDisplayed: $settingsPageDisplayed,
             displayingGameIdView: $displayingGameIdView,
@@ -343,6 +352,10 @@ struct GameView: View {
         .onAppear {
             gameFirstLoad()
         }
+        .onAppear {
+            print("Appeared!")
+                //   self.hasFocus = viewModel.hasFocus    // << read !!
+                }
         // MARK: On Disappear: Save data when leaving
         .onDisappear {
             saveUserData()
@@ -439,6 +452,16 @@ struct GameView: View {
         print("!!! Puzzle Autosolver used")
         self.gameAutosolved = true
         frontend.midend.solvePuzzle()
+    }
+    
+    func removeImageFocus() {
+        print("Removing focus from puzzle image")
+        imageIsFocused = false
+    }
+    
+    func reapplyFocusToPuzzleImage() {
+        print("Reapplying focus to the puzzle image")
+        imageIsFocused = true
     }
     
 }
