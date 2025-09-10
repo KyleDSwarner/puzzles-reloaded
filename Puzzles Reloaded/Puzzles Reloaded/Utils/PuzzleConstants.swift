@@ -11,6 +11,7 @@ import Foundation
 struct PuzzleConstants {
     
     static let puzzleSize = 1024 // Given to the puzzle midend & our CGContext to build the image. This needs to be consistent across several areas in the app!
+    static let DirectTouchDragzone = 5.0 // Add a small amount of deadzone for direct touches to allow for a little bit of unintentioanl movement
     static let PencilDragDeadzone = 15.0 //Ignore drags from pencils until they are this far away from origin. Allows for more consistent long press functionality when using the pencil.
     
     static let animationRedrawDelay: TimeInterval = 0.01

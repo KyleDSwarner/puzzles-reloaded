@@ -46,7 +46,7 @@ class KeyboardInputHandler {
         
         // Otherwise, let's just convert it to the ascii value and see wtf happens:
         if commandToFire == -1 {
-            print("Trying ascii value for \(keypress.characters)")
+            print("Keypress received: \(keypress.characters)")
             commandToFire = Int(keypressChar.asciiValue ?? 0)
         }
         

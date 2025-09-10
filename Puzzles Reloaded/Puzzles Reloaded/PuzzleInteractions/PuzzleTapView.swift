@@ -82,27 +82,11 @@ class PuzzleTapView: UIView {
         
         let adjustedLocation = adjustedTapLocation(point: location)
         
-        // Mouse handling logic is disabled: Rely on short/long presses for now.
-        // This code is not properly handling right clicks and cannot be relied upon
-        
-        /*
-        let type = touch.type
-        
-        if type == .indirectPointer { // Mouse Click!
-            mouseLeftClick = true
-            print("Touch Begain: INDIRECT POINTER LEFT CLICK")
-            handleMouseClick(.LEFT, location: location, event: event)
-            return
-        }
-         */
-        
-        
         // Store the initial location for later use
         initialTouchLocation = adjustedLocation
         
-        // send(location, forEvent: .started)
-    
-        
+        /*
+         This code is unused as no games set `useArrowKeys` - but keeping for posterity in case it's needed later.
         if let mouseCommand = frontend?.controlOption.shortPress {
             if mouseCommand.useArrowKeys == true {
                 arrowKeyTapLocation = adjustedLocation
@@ -110,22 +94,32 @@ class PuzzleTapView: UIView {
                     // We'll fire a command for every _tilesize_ pixels we move in any direction
             }
         }
+        */
         
         // MARK: Long Press Trigger
         // If there's no long press configured, don't start the timer!
         if frontend?.controlOption.longPress != nil {
-            
-            // Long press timer is based on user settings & defaults to 500ms. `withTimeInterval` is in seconds, so this value is divided by 1000.
-            longPressTimer = Timer.scheduledTimer(withTimeInterval: appSettings.value.longPressTime / 1000, repeats: false) {_ in
-                Task { @MainActor in
-                    self.isLongPress = true
-                    self.triggerLongPressEffects()
-                    self.sendKeyDown(at: location)
+            // MARK: Secondary / Right Click Detection
+            if touch.type == .indirectPointer && event?.buttonMask == .secondary {
+                // If this is a secondary click, ALWAYS consider it a long press.
+                startLongPress(at: location)
+                return
+            } else {
+                // Long press timer is based on user settings & defaults to 500ms. `withTimeInterval` is in seconds, so this value is divided by 1000.
+                longPressTimer = Timer.scheduledTimer(withTimeInterval: appSettings.value.longPressTime / 1000, repeats: false) {_ in
+                    Task { @MainActor in
+                        self.startLongPress(at: location)
+                    }
                 }
             }
-            
-            
         }
+    
+    }
+    
+    func startLongPress(at location: CGPoint)  {
+        isLongPress = true
+        self.triggerLongPressEffects()
+        self.sendKeyDown(at: location) // We send the original location, not the adjusted one, because `sendKeyDown` already adjusts.
     }
 
     // MARK: Touch Dragging
@@ -139,7 +133,7 @@ class PuzzleTapView: UIView {
         }
         
         guard isSingleFingerNavEnabled == false else {
-            // print("Ignoring movement - single finger nav is enabled")
+            print("Ignoring movement - single finger nav is enabled")
             return
         }
         
@@ -153,17 +147,21 @@ class PuzzleTapView: UIView {
         
         let adjustedLocation = adjustedTapLocation(point: location)
         
+        //let isDirectTouch = touch.type == .direct // .pencil, .indirect, or .indirectPointer
+        
+        let deadzoneValue = touch.type == .direct ? PuzzleConstants.DirectTouchDragzone : PuzzleConstants.PencilDragDeadzone
         
         /*
-         MARK: Apple Pencil Logic
+         MARK: Apple Pencil & Mouse Dragzone Logic
          Pencils detect very small movement and trigger this movement function, making is very difficult to hold steady to trigger long press functions.
          When long press logic is present, compare the current location to the pencil drag deadzone, and only continue once the pencil exceeds that distance.
          */
-        if touch.type == .pencil && !dragDeadzoneExceeded && frontend?.controlOption.longPress != nil  {
+        if !dragDeadzoneExceeded && frontend?.controlOption.longPress != nil  {
             let xOffsetFromOrigin = abs(adjustedLocation.x - initialTouchLocation.x)
             let yOffsetFromOrigin = abs(adjustedLocation.y - initialTouchLocation.y)
             
-            if xOffsetFromOrigin > PuzzleConstants.PencilDragDeadzone || yOffsetFromOrigin > PuzzleConstants.PencilDragDeadzone {
+            if xOffsetFromOrigin > deadzoneValue || yOffsetFromOrigin > deadzoneValue {
+                // print("Deadzone Exceeded")
                 dragDeadzoneExceeded = true
                 // Continue on and short-circuit this logic from occurring again
             } else {
@@ -271,18 +269,6 @@ class PuzzleTapView: UIView {
             return
         }
         
-        /*
-         let type = touch.type
-         
-        if type == .indirectPointer {
-            print("Left click in progress? \(mouseLeftClick)")
-            let mouseType: MouseClickType = mouseLeftClick ? .LEFT : .RIGHT
-            handleMouseClick(mouseType,  location: location, buttonReleased: true, event: event)
-            resetTouchInfo()
-            return // Short Circuit, don't fire the rest of it!
-        }
-         */
-        
         // If this is a long press or if we're dragging, we've already sent the 'down' command - we just need to fire up.
         let command = getCorrectCommand()
         
@@ -298,54 +284,11 @@ class PuzzleTapView: UIView {
             // And we always need to sent the keyup command
             sendKeypress(command: command?.up, location: location)
             
-
-            
             frontend?.movesTakenInGame = true // This boolean lets us better know when we should/should not save the user's game
-            
         }
         
         // Reset Values
         resetTouchInfo()
-    }
-    
-    // MARK: Mouse Click Handling
-    private func handleMouseClick(_ type: MouseClickType, location: CGPoint, buttonReleased: Bool = false, event uiEvent: UIEvent?) {
-        //guard mouseEventHandled == false, let event = uiEvent else {
-        //    print("Mouse Event already handled, bypassing")
-        //    return
-        //}
-        
-        guard let event = uiEvent else {
-            return
-        }
-        
-        let raiseLeftControl = event.modifierFlags.contains(.control) || event.modifierFlags.contains(.command)
-        
-        print("type: \(type) raising left control: \(raiseLeftControl)")
-        
-        // To prevent left & right click handling logic from both firing & conflicting, this boolean short-circuits the mouse handling logic.
-        mouseEventHandled = true
-        
-        if type == .RIGHT || raiseLeftControl == true {
-            print("RIGHT CLICK")
-            let rightClick = PuzzleKeycodes.rightKeypress
-            
-            // Right clicks happen all at once via `touchEnded`, so we need to send both down & up commands.
-            sendKeypress(command: rightClick.down, location: location)
-            sendKeypress(command: rightClick.up, location: location, physicalFeedbackType: .SHORT)
-            //return MouseClickEvent(command: RIGHT_BUTTON, feedbackType: .SHORT)
-        } else {
-            print("LEFT CLICK")
-            let leftClick = PuzzleKeycodes.leftKeypress
-            let command = buttonReleased ? leftClick.up : leftClick.down
-            let feedback: FeedbackType = buttonReleased ? .SHORT : .NONE
-            
-            sendKeypress(command: command, location: location, physicalFeedbackType: feedback)
-            //sendKeypress(command: LEFT_BUTTON, physicalFeedbackType: .SHORT)
-        }
-        
-        
-        //sendKeypress(command: mouseClick.up, physicalFeedbackType: .SHORT)
     }
     
     /**
