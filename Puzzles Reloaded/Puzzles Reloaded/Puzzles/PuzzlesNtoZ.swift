@@ -176,15 +176,19 @@ extension Puzzles {
         internalGame: signpost
     )
     .setDarkModeColors([
-        1: (Theming.midGray, "Highlight"),
-        2: (Theming.veryDarkGray, "Lowlight"),
+        0: (Theming.midGray, "Background Color"),
+        //1: (Theming.midGray, "Highlight"),
+        //2: (Theming.veryDarkGray, "Lowlight"),
         3: (Theming.darkGray, "Grid"),
-        7: (Theming.darkGray, "Arrow"),
-        8: (Theming.veryDarkGray, "Dim Arrow"),
-        // 10: (Theming.black, "Text color for Locked Squares"),
+        //6: (Theming.enteredTextGreen, "Drag Origin"),
+        //7: (Theming.veryDarkGray, "Arrow"),
+        //8: (Theming.midGray, "Dimmed Arrow (Deemphasized)"),
+        //10: (Theming.black, "Text color for Preset Squares"),
         //11: (Theming.veryDarkGray, "Locked-In Number"),
-        12: (Theming.lightGray, "Background for Locked Squares"),
-        //13: (Theming.enteredTextGreen, "Mid Arrow"),
+        //12: (Theming.midGray, "Background for Locked Squares (b0)"),
+        //13: (Theming.veryVeryDarkGray, "Mid Arrow M0"),
+        //14: (Theming.background, "Dim Arrows D0"),
+        //15: (Theming.background, "Dim Arrows x0")
         // 14: (Theming.veryDarkGray, "Dim Arrow"), //d0
         // 15: (Theming.veryDarkGray, "Dim Arrow 2"), //x0
     ])

@@ -201,9 +201,16 @@ class Frontend: @unchecked Sendable {
             var darkModeColors = [CGColor]()
             
             for index in colors.indices {
-                if index == 0 {
-                    // Always repalce index 0 with the background color
-                    darkModeColors.append(Theming.background)
+                if index == 0  {
+                    
+                    // Allow games to provide their own background color, if needed.
+                    if let backgroundColor = game.gameConfig.darkModeColorReplacements[0] {
+                        darkModeColors.append(backgroundColor.color)
+                    }
+                    else {
+                        // Otherwise provide the default background color automatically
+                        darkModeColors.append(Theming.background)
+                    }
                 }
                 else if let replacementColor = game.gameConfig.darkModeColorReplacements[index] {
                     // If there's a replacement color in the game config, use that color
