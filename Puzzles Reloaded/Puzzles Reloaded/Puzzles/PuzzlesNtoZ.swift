@@ -275,6 +275,7 @@ extension Puzzles {
         2: (Theming.darkGray, "Grid"),
         3: (Theming.text, "Clue"),
         4: (Theming.enteredTextBlue, "User Entered Value"),
+        5: (Theming.darkGray, "Highlight"),
         //7: (CGColor(red: 0.533, green: 0.533, blue: 1, alpha: 1), "Pencil Marks"),
         8: (Theming.text, "Killer Mode Data")
     ])

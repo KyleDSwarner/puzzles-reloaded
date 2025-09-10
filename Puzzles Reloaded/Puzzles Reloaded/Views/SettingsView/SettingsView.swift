@@ -325,6 +325,12 @@ struct KeyboardCommandsView: View {
                     Text("R, Ctrl+R, #")
                 }
                 HStack(alignment: .center) {
+                    Text("Clear Square")
+                        .bold()
+                    Spacer()
+                    Text("Backspace, Delete")
+                }
+                HStack(alignment: .center) {
                     Text("Exit Game")
                         .bold()
                     Spacer()
