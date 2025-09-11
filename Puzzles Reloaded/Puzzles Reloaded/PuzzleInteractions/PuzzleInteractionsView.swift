@@ -48,7 +48,6 @@ struct PuzzleInteractionsView: UIViewRepresentable {
         let coordinator = Coordinator(self)
         coordinator.setupOrientationNotifications()
         return coordinator
-            
     }
 
     func updateUIView(_ uiView: PuzzleTapView, context: Context) {

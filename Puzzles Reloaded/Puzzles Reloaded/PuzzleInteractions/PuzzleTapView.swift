@@ -96,11 +96,15 @@ class PuzzleTapView: UIView {
         }
         */
         
+        // MARK: Secondary / Right Click Detection
+        // If this is a right click from a mouse AND the setting is enabled, we go straight to the long press handler
+        let isRightClick = touch.type == .indirectPointer && event?.buttonMask == .secondary && appSettings.value.enableRightClick
+        
         // MARK: Long Press Trigger
         // If there's no long press configured, don't start the timer!
         if frontend?.controlOption.longPress != nil {
-            // MARK: Secondary / Right Click Detection
-            if touch.type == .indirectPointer && event?.buttonMask == .secondary {
+            // Skip straight to the long press handling if this is a right click shortcut
+            if isRightClick {
                 // If this is a secondary click, ALWAYS consider it a long press.
                 startLongPress(at: location)
                 return

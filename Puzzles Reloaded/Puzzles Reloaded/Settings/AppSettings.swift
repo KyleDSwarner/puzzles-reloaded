@@ -30,6 +30,7 @@ struct AppSettings: Codable {
     var displayCustomLoadMenu: Bool = false
     var displayShareMenu: Bool = true
     var enableHardwareKeyboard: Bool = true
+    var enableRightClick: Bool = true
     var gameListView: GameListViewSetting = GameListViewSetting.listView
     var appTheme: AppTheme = AppTheme.auto
     
@@ -44,7 +45,7 @@ struct AppSettings: Codable {
     }
     
     enum CodingsKeys: String, CodingKey {
-        case enableHaptics, enableSounds, showExperimentalGames, disableGameStatusbar, showFirstRunMessage, enableSwipeBack, enableStatistics, gameListView, appTheme, longPressTime, displayCustomLoadMenu, displayShareMenu, enableHardwareKeyboard
+        case enableHaptics, enableSounds, showExperimentalGames, disableGameStatusbar, showFirstRunMessage, enableSwipeBack, enableStatistics, gameListView, appTheme, longPressTime, displayCustomLoadMenu, displayShareMenu, enableHardwareKeyboard, enableRightClick
     }
     
     /**
@@ -68,6 +69,7 @@ struct AppSettings: Codable {
         displayShareMenu = try values.decodeIfPresent(Bool.self, forKey: .displayShareMenu) ?? true
         
         enableHardwareKeyboard = try values.decodeIfPresent(Bool.self, forKey: .enableHardwareKeyboard) ?? true
+        enableRightClick = try values.decodeIfPresent(Bool.self, forKey: .enableRightClick) ?? true
         
     }
 }

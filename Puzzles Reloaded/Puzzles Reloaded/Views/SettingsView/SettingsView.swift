@@ -64,6 +64,13 @@ struct SettingsView: View {
                         }
                         
                         Section {
+                            Toggle("Mouse Secondary Click", isOn: $appSettings.value.enableRightClick)
+                        } footer: {
+                            Text("Controls if secondary/right clicks from a mouse or trackpad acts as a shortcut for long press actions.")
+                        }
+                        
+                        Section {
+                            
                             Toggle("Enable Physical Keyboard", isOn: $appSettings.value.enableHardwareKeyboard)
                             if appSettings.value.enableHardwareKeyboard {
                                 NavigationLink("View Keyboard Shortcuts") { KeyboardCommandsView() }
