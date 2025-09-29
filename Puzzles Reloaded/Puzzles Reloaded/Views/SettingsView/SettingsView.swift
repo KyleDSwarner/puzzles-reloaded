@@ -60,7 +60,7 @@ struct SettingsView: View {
                         Section {
                             Toggle("Swipe to Exit Game", isOn: $appSettings.value.enableSwipeBack)
                         } footer: {
-                            Text("Enable swiping back to exit puzzles. May interfere with long presses in some games!")
+                            Text("Enable swiping back to exit puzzles. Use with caution: very likely to interfere with interactions in some games!")
                         }
                         
                         Section {
