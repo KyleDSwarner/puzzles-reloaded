@@ -150,10 +150,10 @@ extension Puzzles {
         internalGame: rect
     )
     .setDarkModeColors([
-       
+        1: (Theming.darkGray, "Correct"),
         2: (Theming.white, "Drawn Line"),
         3: (Theming.text, "Text"),
-        1: (Theming.white, "Grid"),
+        4: (Theming.midGray, "Inner Gridlines"),
     ])
     
     // MARK: Samegame
