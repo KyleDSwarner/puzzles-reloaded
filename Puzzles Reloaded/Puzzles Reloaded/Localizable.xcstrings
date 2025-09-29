@@ -205,7 +205,7 @@
     "Enable Physical Keyboard" : {
 
     },
-    "Enable swiping back to exit puzzles. May interfere with interactions in some games!" : {
+    "Enable swiping back to exit puzzles. Use with caution: very likely to interfere with interactions in some games!" : {
 
     },
     "Enables the display of menu to load game menus by specific game IDs and seeds." : {
