@@ -66,14 +66,12 @@ struct GameViewToolbars: ViewModifier {
             if !appSettings.value.enableSwipeBack {
                 // Add a separate back button when swipeBack is disabled.
                 ToolbarItem(placement: .topBarLeading) {
-                    Button {
+                    Button("Back", systemImage: "chevron.backward") {
                         exitGame()
-                    } label: {
-                        Image(systemName: "chevron.backward")
-                            .accessibilityHint("Exit game and return to main menu")
                     }
                 }
             }
+             
             
             ToolbarItemGroup(placement: .topBarTrailing) {
                 //ShareLink(item: generateGameToExport())

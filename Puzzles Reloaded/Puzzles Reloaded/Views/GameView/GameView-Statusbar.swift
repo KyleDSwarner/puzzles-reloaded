@@ -23,7 +23,7 @@ struct GameViewStatusbar: View {
         VStack {
             Spacer()
             HStack {
-                if(frontend.gameHasStatusbar) {
+                if(frontend.gameHasStatusbar && !frontend.statusbarText.isEmpty) {
                     Text(frontend.statusbarText)
                         .padding(8)
                         .modifier(StatusbarDesigner())
