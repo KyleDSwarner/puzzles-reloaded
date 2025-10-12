@@ -143,13 +143,13 @@ extension Puzzles {
         internalGame: rome
     )
     .setDarkModeColors([
-        1: (Theming.midGray, "Highlight"),
-        2: (Theming.darkGray, "Lowlight"),
-        3: (Theming.midGray, "Border"),
-        4: (Theming.lightGray, "Fixed Arrow"),
+        1: (Theming.darkGray, "Highlight"),
+        2: (Theming.veryDarkGray, "Lowlight"),
+        3: (Theming.white, "Border"),
+        4: (Theming.white, "Fixed Arrow"),
         5: (Theming.enteredTextGreen, "Guessed Arrow"),
         8: (Theming.enteredTextBlue, "Arrow Entry"),
-        9: (Theming.midGray, "Error Background"),
+        9: (Theming.warningRed, "Error Background"),
         10: (Theming.darkGray, "Goal Background"),
         //11: (Theming.warningRed, "Goal")
     ])
