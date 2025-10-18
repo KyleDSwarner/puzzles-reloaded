@@ -328,7 +328,8 @@ extension Puzzles {
     .addSearchTerms(["Skyscrapers"])
     .setDarkModeColors([
         1: (Theming.text, "Grid"),
-        2: (Theming.enteredTextBlue, "User Entered Guess")
+        2: (Theming.enteredTextBlue, "User Entered Guess"),
+        3: (Theming.darkGray, "Highlight"),
     ])
     
     /*
