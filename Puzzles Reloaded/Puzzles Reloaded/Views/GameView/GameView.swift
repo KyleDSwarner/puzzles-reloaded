@@ -69,6 +69,7 @@ struct GameView: View {
     }
     
     func exitGame() {
+        imageIsFocused = false // Release focus to prevent any navigation issues down the line
         dismiss()
     }
     
@@ -168,6 +169,7 @@ struct GameView: View {
                                 .scaledToFit()
                                 .focusable()
                                 .focused($imageIsFocused) // Check keyboard entry on other pages
+                                .focusEffectDisabled()
                             #if os(iOS)
                                 .overlay {
                                     // MARK: Puzzle Interactions & Gestures
