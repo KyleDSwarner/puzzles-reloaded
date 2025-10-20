@@ -9,8 +9,10 @@
 import SwiftUI
 
 struct GameListLargeItem: View {
-       
+    
     var game: Game
+    
+    @Binding var navigationPath: NavigationPath
     
     var gameConfig: GameConfig {
         game.gameConfig
@@ -21,7 +23,9 @@ struct GameListLargeItem: View {
     }
     
     var body: some View {
-        NavigationLink(value: game) {
+        Button {
+            self.navigationPath.append(game)
+        } label: {
             HStack(alignment: .top) {
                 /*
                 if editMode?.wrappedValue.isEditing == true {
@@ -67,8 +71,10 @@ struct GameListLargeItem: View {
                 }
                 
             }
+            .tint(.primary) // Keep default color during searches
             //.border(.blue)
         }
+        .focusable(true)
         .swipeActions(allowsFullSwipe: false) {
             GameContextMenu(game: game)
         }
@@ -79,9 +85,10 @@ struct GameListLargeItem: View {
 }
 
 #Preview {
+    @Previewable @State var navigationPath = NavigationPath()
     NavigationStack {
         List {
-            GameListLargeItem(game: Game.exampleGameModel)
+            GameListLargeItem(game: Game.exampleGameModel, navigationPath: $navigationPath)
         }
     }
 }

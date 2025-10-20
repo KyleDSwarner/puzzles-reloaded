@@ -154,7 +154,7 @@ struct GameListView: View {
                             List {
                                 Section("\(filteredGames.count) games found") {
                                     ForEach(filteredGames) { gameModel in
-                                        GameListLargeItem(game: gameModel)
+                                        GameListLargeItem(game: gameModel, navigationPath: $navPath)
                                     }
                                 }
                             }
@@ -179,7 +179,7 @@ struct GameListView: View {
                         if(!favoriteGames.isEmpty) {
                             Section("Favorites") {
                                 ForEach(favoriteGames) { gameModel in
-                                    GameListLargeItem(game: gameModel)
+                                    GameListLargeItem(game: gameModel, navigationPath: $navPath)
                                 }
                             }
                         }
@@ -187,7 +187,7 @@ struct GameListView: View {
                         if(!allGames.isEmpty) {
                             Section("All Games") {
                                 ForEach(allGames) { gameModel in
-                                    GameListLargeItem(game: gameModel)
+                                    GameListLargeItem(game: gameModel, navigationPath: $navPath)
                                 }
                             }
                         }
@@ -195,7 +195,7 @@ struct GameListView: View {
                         if(!hiddenGames.isEmpty) {
                             Section("Hidden Games", isExpanded: $isHiddenSectionExpanded) {
                                 ForEach(hiddenGames) { gameModel in
-                                    GameListLargeItem(game: gameModel)
+                                    GameListLargeItem(game: gameModel, navigationPath: $navPath)
                                 }
                             }
                         }

@@ -354,10 +354,6 @@ struct GameView: View {
         .onAppear {
             gameFirstLoad()
         }
-        .onAppear {
-            print("Appeared!")
-                //   self.hasFocus = viewModel.hasFocus    // << read !!
-                }
         // MARK: On Disappear: Save data when leaving
         .onDisappear {
             saveUserData()

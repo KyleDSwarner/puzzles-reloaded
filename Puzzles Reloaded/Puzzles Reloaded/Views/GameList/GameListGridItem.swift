@@ -10,6 +10,7 @@ import SwiftUI
 
 struct GameListGridItem: View {
     
+    
     @State private var showDetails = false
     var game: Game
     //var updateCategory: (Game, GameCategory) -> Void
@@ -51,8 +52,10 @@ struct GameListGridItem: View {
                 }
                 
             }
+            
         }
         .buttonStyle(PlainButtonStyle())
+        .focusable()
     }
 }
 
