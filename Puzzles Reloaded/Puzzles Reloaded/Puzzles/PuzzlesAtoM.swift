@@ -265,7 +265,8 @@ extension Puzzles {
     .addSearchTerms(["Slitherlink", "Loop"])
     .setDarkModeColors([
         1: (Theming.white, "Foreground"),
-        2: (Theming.darkGray, "Line Unknown"), // The highlighter Yellow Monstrosity
+        2: (Theming.darkGray, "Line Unknown"), // The highlighter Yellow Monstrosity 
+        3: (Theming.enteredTextGreen, "Highlight & Flashing"),
         5: (Theming.white, "Satisfied Number"),
         6: (Theming.veryDarkGray, "Faint Line")
         
