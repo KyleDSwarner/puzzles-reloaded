@@ -59,9 +59,10 @@ extension Puzzles {
     )
         .addSearchTerms(["FreeNet", "NetWalk"])
     .setDarkModeColors([
-        1: (Theming.veryDarkGray, "Locked Tile"),
-        2: (Theming.veryDarkGray, "Gridlines"),
-        3: (Theming.midGray, "Wire"),
+        0: (Theming.darkGray, "Background")
+        //1: (Theming.veryDarkGray, "Locked Tile"),
+        //2: (Theming.veryDarkGray, "Gridlines"),
+        //3: (Theming.midGray, "Wire"),
         //4: (Theming.boxBlue, "Endpoint"),
         //5: (Theming.highlightTeal, "Powered Wire")
     ])
