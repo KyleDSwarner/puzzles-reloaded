@@ -356,8 +356,8 @@ extension Puzzles {
     )
     .setSaveIdentifier("Train Tracks")
     .setDarkModeColors([
-        1: (Theming.midGray, "Track Background"),
-        2: (Theming.text, "Grid"),
+        1: (Theming.midGrayMuted, "Track Background"),
+        2: (Theming.darkGray, "Grid"),
         3: (Theming.text, "Clue"),
         5: (Theming.darkGray, "User Entered Track"),
         6: (Theming.black, "Track Clue"),

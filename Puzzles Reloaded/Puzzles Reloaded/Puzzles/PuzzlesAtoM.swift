@@ -264,13 +264,28 @@ extension Puzzles {
     )
     .addSearchTerms(["Slitherlink", "Loop"])
     .setDarkModeColors([
-        1: (Theming.white, "Foreground"),
-        2: (Theming.darkGray, "Line Unknown"), // The highlighter Yellow Monstrosity 
-        3: (Theming.enteredTextGreen, "Highlight & Flashing"),
-        5: (Theming.white, "Satisfied Number"),
-        6: (Theming.veryDarkGray, "Faint Line")
+        0: (Theming.midGray, "Background"), // Different background reduces contrast between black/white, reducing Hermann Grid illusion
+        1: (Theming.black, "Foreground"),
+        2: (Theming.mutedYellow, "Line Unknown"), // The highlighter Yellow Monstrosity
+        //3: (Theming.enteredTextGreen, "Highlight & Flashing"),
+        4: (Theming.desaturatedRed, "Mistake"),
+        5: (Theming.black, "Satisfied Number"),
+        6: (Theming.midGrayMuted, "Faint Line")
         
     ])
+    
+    /*
+     enum {
+         COL_BACKGROUND,
+         COL_FOREGROUND,
+         COL_LINEUNKNOWN,
+         COL_HIGHLIGHT,
+         COL_MISTAKE,
+         COL_SATISFIED,
+         COL_FAINT,
+         NCOLOURS
+     };
+     */
     
     // MARK: Magnets
     static let puzzle_magnets = GameConfig(
