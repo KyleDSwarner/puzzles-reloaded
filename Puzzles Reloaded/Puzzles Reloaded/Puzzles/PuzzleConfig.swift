@@ -11,7 +11,7 @@ import Foundation
 struct Puzzles {
     
     static var allPuzzles: [GameConfig] {
-        puzzlesAtoM + puzzlesNtoZ + puzzlesXsheep
+        puzzlesAtoM + puzzlesNtoZ + puzzlesXsheep + puzzlesAndersHolst
     }
     
     static var allPuzzlesSorted: [GameConfig] {

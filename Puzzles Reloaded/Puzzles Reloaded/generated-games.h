@@ -55,3 +55,10 @@ GAME(undead)
 GAME(unequal)
 GAME(unruly)
 GAME(untangle)
+
+// Anders Holst
+GAME(alphacrypt)
+GAME(factorcross)
+GAME(identifier)
+GAME(kakuro)
+GAME(supermaze)

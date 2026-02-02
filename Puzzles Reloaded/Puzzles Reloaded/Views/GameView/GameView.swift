@@ -89,16 +89,12 @@ struct GameView: View {
         singleFingerScrolling = game.settings.singleFingerPanningEnabled
         
         Task {
-            let saveGame: String? = game.settings.saveGame
+            let saveGame: String? = game.settings.retrieveSave()
             let isLoadingFromSavedGame: Bool = saveGame != nil
             
             if isLoadingFromSavedGame {
                 // Games that are being loaded should not be logged to stats again - set the flag to true to disable future checks.
                 self.gameLoggedToStats = true
-                
-                // Intentionally clear out the existing save as we're loading
-                // This hellp prevent any errors that arise from malformed saves from reoccurring
-                game.settings.saveGame = nil
             }
             
             await frontend.beginGame(isFirstLoad: true, withSaveGame: saveGame, withPreferences: game.settings.userPrefs)
@@ -404,6 +400,11 @@ struct GameView: View {
     func cancelGameGenerationAndRegernateMidend() {
         frontend.cancelNewGame()
         
+        // Reset the user game selection settings; This helps get the game out of any potential bad states
+        print("Resetting game settings")
+        frontend.game.settings.customDefaultPreset = []
+        frontend.game.settings.selectedDefaultPreset = 0
+        
         /*
          Cancelling a game in places tends to desync the internal state of the puzzle midend, causing assertion failues when the user creates another game.
          This recreates the midend from scratch to avoid these issues (and has the added benefit of resetting the custom game settings, which feels cleaner)
@@ -434,7 +435,7 @@ struct GameView: View {
             print("Game not saved: nothing to store")
         }
         // Save the game, or null it out if the game should not be saved
-        game.settings.saveGame = save?.saveToString()
+        game.settings.persistSavegame(save?.saveToString())
         
         
         let prefs = frontend.midend.saveUserPrefs()

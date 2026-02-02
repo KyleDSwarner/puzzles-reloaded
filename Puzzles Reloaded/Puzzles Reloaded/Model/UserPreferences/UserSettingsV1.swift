@@ -22,7 +22,7 @@ enum UserSettingsSchemaV1: VersionedSchema {
         var category: GameCategory = GameCategory.none
         var stats: GameStats = GameStats()
         var singleFingerPanningEnabled: Bool = false
-        var saveGame: String? // Saved game, piped from the internal puzzle app
+        private var saveGame: String? // Saved game, piped from the internal puzzle app
         var userPrefs: String? // String from the puzzle code to store internal user preferences
         var selectedDefaultPreset: Int?
         var customDefaultPreset: [CustomMenuItem] = [] // This is populated from the game's custom menu settings view
@@ -63,6 +63,19 @@ enum UserSettingsSchemaV1: VersionedSchema {
             self.saveGame = nil
         }
         
+        /** Retrieve savegame from storage, if available.
+             Additionally removes the existing game from storage; This is to prevent any saves in a bad state from affecting the app more than once if it fails to deserialize.
+         */
+        func retrieveSave() -> String? {
+            let save = self.saveGame
+            abandonSave()
+            return save
+        }
+        
+        func persistSavegame(_ save: String?) {
+            self.saveGame = save
+        }
+        
         /**
          When a new game is started and at least one move is taken, this function increments the play counter & logs the game information to the history log.
          */
@@ -99,6 +112,7 @@ enum UserSettingsSchemaV1: VersionedSchema {
             stats.resetStats()
             self.playHistory = []
         }
+        
     }
     
     struct GameStats: Codable {

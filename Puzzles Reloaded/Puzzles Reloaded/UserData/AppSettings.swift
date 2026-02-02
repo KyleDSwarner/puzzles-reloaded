@@ -22,7 +22,7 @@ struct AppSettings: Codable {
     
     var enableHaptics: Bool = true
     var enableSounds: Bool = true
-    var showExperimentalGames: Bool = false // Deprecated
+    var showExperimentalGames: Bool = false
     var disableGameStatusbar: Bool = false
     var showFirstRunMessage: Bool = true
     var enableSwipeBack: Bool = false
@@ -57,7 +57,7 @@ struct AppSettings: Codable {
         showFirstRunMessage = try values.decodeIfPresent(Bool.self, forKey: .showFirstRunMessage) ?? true
         enableHaptics = try values.decodeIfPresent(Bool.self, forKey: .enableHaptics) ?? true
         enableSounds = try values.decodeIfPresent(Bool.self, forKey: .enableSounds) ?? true
-        // showExperimentalGames = try values.decodeIfPresent(Bool.self, forKey: .showExperimentalGames) ??
+        showExperimentalGames = try values.decodeIfPresent(Bool.self, forKey: .showExperimentalGames) ?? false
         enableSwipeBack = try values.decodeIfPresent(Bool.self, forKey: .enableSwipeBack) ?? false
         enableStatistics = try values.decodeIfPresent(Bool.self, forKey: .enableStatistics) ?? true
         gameListView = try values.decodeIfPresent(GameListViewSetting.self, forKey: .gameListView) ?? GameListViewSetting.listView

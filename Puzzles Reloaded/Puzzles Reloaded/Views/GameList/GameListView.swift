@@ -123,7 +123,7 @@ struct GameListView: View {
             print("Game Found! Loading \(game.gameConfig.identifier)")
             
             // Load the imported savegame into the game's context
-            game.settings.saveGame = savegame.saveToString()
+            game.settings.persistSavegame(savegame.saveToString())
             
             // Navigate to the game!
             navPath.append(game)

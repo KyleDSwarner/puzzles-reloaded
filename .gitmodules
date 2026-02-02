@@ -4,3 +4,6 @@
 [submodule "submodules/simon-tatham-puzzles"]
 	path = submodules/simon-tatham-puzzles
 	url = https://git.tartarus.org/simon/puzzles.git
+[submodule "submodules/sgt-puzzles-aho-extensions"]
+	path = submodules/sgt-puzzles-aho-extensions
+	url = git@github.com:Anders-Holst/sgt-puzzles-aho-extensions.git

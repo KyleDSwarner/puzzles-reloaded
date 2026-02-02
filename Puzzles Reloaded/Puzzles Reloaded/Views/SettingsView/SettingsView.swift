@@ -117,6 +117,15 @@ struct SettingsView: View {
                             Text("Enables the display of the share button within game options.")
                         }
                         
+                        if FeatureFlags.EnableExperiementalGamesDisplay {
+                            Section {
+                                Toggle("Show Experimental Games", isOn: $appSettings.value.showExperimentalGames)
+                            } footer: {
+                                Text("Add games marked as experimental to the games list. These are newer games to the collection that may some some usability or performance issues. Feel free to report any issues to help improve these games!")
+                            }
+                            
+                        }
+                        
                         
                     }
                     .navigationTitle("Appearance")
@@ -235,6 +244,7 @@ struct SettingsView: View {
                             AboutView()
                         }
                         Toggle("Display First Run Message", isOn: $appSettings.value.showFirstRunMessage)
+                        
                         Button("Rate the App") {
                             requestReview()
                         }
@@ -244,16 +254,6 @@ struct SettingsView: View {
                 /*
                  
                 These sections are designed, but at the moment don't do anything
-                 
-                Section {
-                    
-                    Picker("Theme", selection: $appSettings.value.appTheme) {
-                        Text("Auto (Follow Device)").tag(AppTheme.auto)
-                        Text("Light").tag(AppTheme.light)
-                        Text("Dark").tag(AppTheme.dark)
-                    }
-                    
-                }
                 Section {
                     Toggle("Experimental Games", isOn: $appSettings.value.showExperimentalGames)
                 } footer: {

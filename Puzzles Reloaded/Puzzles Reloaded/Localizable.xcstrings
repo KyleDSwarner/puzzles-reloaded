@@ -88,6 +88,9 @@
     "About Puzzles Reloaded" : {
 
     },
+    "Add games marked as experimental to the games list. These are newer games to the collection that may some some usability or performance issues. Feel free to report any issues to help improve these games!" : {
+
+    },
     "All Games" : {
 
     },
@@ -443,6 +446,9 @@
 
     },
     "Shift" : {
+
+    },
+    "Show Experimental Games" : {
 
     },
     "Simon Tatham" : {
