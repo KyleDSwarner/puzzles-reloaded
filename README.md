@@ -1,6 +1,6 @@
 # Puzzles Reloaded
 
-An implementation of the [Simon Tatham Portable Puzzle Collection](https://www.chiark.greenend.org.uk/~sgtatham/puzzles/) for iOS & macOS.
+An implementation of the [Simon Tatham Portable Puzzle Collection](https://www.chiark.greenend.org.uk/~sgtatham/puzzles/) for iOS & iPadOS
 
 In addition to the games from the main collections, it also provides a set of new games by [x-sheep](https://github.com/x-sheep/puzzles-unreleased). 50 games in total are currently supported!
 
