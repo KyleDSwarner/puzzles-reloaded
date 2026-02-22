@@ -4,7 +4,8 @@ An implementation of the [Simon Tatham Portable Puzzle Collection](https://www.c
 
 In addition to the games from the main collections, it also provides a set of new games by [x-sheep](https://github.com/x-sheep/puzzles-unreleased). 50 games in total are currently supported!
 
-Get it here: [Puzzles Reloaded iOS](https://apps.apple.com/us/app/puzzles-reloaded/id6504365885)
+[<img width="240" height="80" alt="Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917" src="https://github.com/user-attachments/assets/60ed9838-7c80-43b6-83a9-f3e99a0fccbc" />](https://apps.apple.com/us/app/puzzles-reloaded/id6504365885)
+
 
 ## Reporting issues
 
