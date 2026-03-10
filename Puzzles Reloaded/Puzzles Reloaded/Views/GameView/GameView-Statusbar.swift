@@ -34,8 +34,8 @@ struct GameViewStatusbar: View {
                     Button {
                         newGame()
                     } label: {
-                        Image(systemName: "plus.circle")
-                            .accessibilityHint("Start a new game")
+                        Label("New Game", systemImage: "plus.circle")
+                            //.accessibilityHint("Start a new game")
                             .modifier(StatusbarOptionalPaddingDesigner())
                     }
                     
@@ -50,8 +50,8 @@ struct GameViewStatusbar: View {
                     Button {
                         frontend.midend.restartGame()
                     } label: {
-                        Image(systemName: "arrow.circlepath")
-                            .accessibilityHint("Restart the current game")
+                        Label("Restart", systemImage: "arrow.circlepath")
+                            //.accessibilityHint("Restart the current game")
                             .modifier(StatusbarOptionalPaddingDesigner())
                     }
                     .modifier(ButtonDesigner())

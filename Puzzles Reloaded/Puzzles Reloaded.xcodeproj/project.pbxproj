@@ -21,9 +21,7 @@
 		921DF8D32F31161700945CB7 /* alphacrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 921DF8CC2F31161700945CB7 /* alphacrypt.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		921DF8D42F31161700945CB7 /* factorcross.c in Sources */ = {isa = PBXBuildFile; fileRef = 921DF8CD2F31161700945CB7 /* factorcross.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		921DF8D52F31161700945CB7 /* kakuro.c in Sources */ = {isa = PBXBuildFile; fileRef = 921DF8CF2F31161700945CB7 /* kakuro.c */; settings = {COMPILER_FLAGS = "-w"; }; };
-		921DF8E22F313C1300945CB7 /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921DF8E12F313C1300945CB7 /* GameSettings.swift */; };
-		921DF8E52F313C4200945CB7 /* GameStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921DF8E42F313C4200945CB7 /* GameStats.swift */; };
-		921DF8E72F31450E00945CB7 /* midend.c in Sources */ = {isa = PBXBuildFile; fileRef = 921DF8E62F31450E00945CB7 /* midend.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		921DF8E22F313C1300945CB7 /* UserGameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921DF8E12F313C1300945CB7 /* UserGameData.swift */; };
 		9226A9352E4E605900256EA1 /* SavegameExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9226A9342E4E605900256EA1 /* SavegameExporter.swift */; };
 		9226A9382E4FB31C00256EA1 /* magnets.c in Sources */ = {isa = PBXBuildFile; fileRef = 9226A9362E4FB31C00256EA1 /* magnets.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		9226A9392E4FB31C00256EA1 /* undead.c in Sources */ = {isa = PBXBuildFile; fileRef = 9226A9372E4FB31C00256EA1 /* undead.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -140,11 +138,12 @@
 		924181742CEFBEE600BBB09E /* GlobalStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924181732CEFBEE600BBB09E /* GlobalStatsView.swift */; };
 		9260A0282E4CC5FC006D7FBD /* PuzzlesReloaded-Icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 9260A0272E4CC5FC006D7FBD /* PuzzlesReloaded-Icon.icon */; };
 		928969142CF3A68D004CB7D9 /* untangle.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64A42C00BED00027DF54 /* untangle.c */; settings = {COMPILER_FLAGS = "-w -include Untangle-Config.h"; }; };
-		928969162CF3BB9F004CB7D9 /* UserSettingsV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928969152CF3BB9F004CB7D9 /* UserSettingsV2.swift */; };
-		928969182CF3BC28004CB7D9 /* UserSettingsMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928969172CF3BC28004CB7D9 /* UserSettingsMigration.swift */; };
-		9289691E2CF3D03F004CB7D9 /* UserSettingsV1_1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289691D2CF3D03F004CB7D9 /* UserSettingsV1_1.swift */; };
 		928B22FD2E4B6AC000E90C5B /* GameIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B22FC2E4B6AC000E90C5B /* GameIdentifier.swift */; };
 		929145A32E45420C00524E0E /* subsets.c in Sources */ = {isa = PBXBuildFile; fileRef = 929145A12E45296800524E0E /* subsets.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		9299A0002F6047DF00EFF65B /* midend.c in Sources */ = {isa = PBXBuildFile; fileRef = 923E64D42C00BF490027DF54 /* midend.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		9299A0022F604CB600EFF65B /* CustomGamePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299A0012F604CB600EFF65B /* CustomGamePreset.swift */; };
+		9299A0042F604D3600EFF65B /* GameplayHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299A0032F604D3600EFF65B /* GameplayHistory.swift */; };
+		9299A0062F604DDA00EFF65B /* GameplayStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299A0052F604DDA00EFF65B /* GameplayStats.swift */; };
 		92AEB9472EF1F633002D0052 /* tents.c in Sources */ = {isa = PBXBuildFile; fileRef = 92AEB9462EF1F633002D0052 /* tents.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		92B341392C11E90D006A4466 /* Midend-UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B341382C11E90D006A4466 /* Midend-UserData.swift */; };
 		92B55D522C0F410900517280 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 92B55D512C0F410900517280 /* Localizable.xcstrings */; };
@@ -177,8 +176,7 @@
 		921DF8CE2F31161700945CB7 /* identifier.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = identifier.c; path = "../submodules/sgt-puzzles-aho-extensions/identifier.c"; sourceTree = SOURCE_ROOT; };
 		921DF8CF2F31161700945CB7 /* kakuro.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = kakuro.c; path = "../submodules/sgt-puzzles-aho-extensions/kakuro.c"; sourceTree = SOURCE_ROOT; };
 		921DF8D02F31161700945CB7 /* supermaze.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = supermaze.c; path = "../submodules/sgt-puzzles-aho-extensions/supermaze.c"; sourceTree = SOURCE_ROOT; };
-		921DF8E12F313C1300945CB7 /* GameSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
-		921DF8E42F313C4200945CB7 /* GameStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStats.swift; sourceTree = "<group>"; };
+		921DF8E12F313C1300945CB7 /* UserGameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGameData.swift; sourceTree = "<group>"; };
 		921DF8E62F31450E00945CB7 /* midend.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = midend.c; path = "../local-games/midend.c"; sourceTree = SOURCE_ROOT; };
 		9226A9342E4E605900256EA1 /* SavegameExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavegameExporter.swift; sourceTree = "<group>"; };
 		9226A9362E4FB31C00256EA1 /* magnets.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = magnets.c; path = "../local-games/magnets.c"; sourceTree = SOURCE_ROOT; };
@@ -315,11 +313,11 @@
 		9241816E2CEA719C00BBB09E /* SingleGameStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleGameStatsView.swift; sourceTree = "<group>"; };
 		924181732CEFBEE600BBB09E /* GlobalStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStatsView.swift; sourceTree = "<group>"; };
 		9260A0272E4CC5FC006D7FBD /* PuzzlesReloaded-Icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = "PuzzlesReloaded-Icon.icon"; sourceTree = "<group>"; };
-		928969152CF3BB9F004CB7D9 /* UserSettingsV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsV2.swift; sourceTree = "<group>"; };
-		928969172CF3BC28004CB7D9 /* UserSettingsMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsMigration.swift; sourceTree = "<group>"; };
-		9289691D2CF3D03F004CB7D9 /* UserSettingsV1_1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsV1_1.swift; sourceTree = "<group>"; };
 		928B22FC2E4B6AC000E90C5B /* GameIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameIdentifier.swift; sourceTree = "<group>"; };
 		929145A12E45296800524E0E /* subsets.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = subsets.c; path = "../submodules/x-sheep-puzzles/subsets.c"; sourceTree = SOURCE_ROOT; };
+		9299A0012F604CB600EFF65B /* CustomGamePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomGamePreset.swift; sourceTree = "<group>"; };
+		9299A0032F604D3600EFF65B /* GameplayHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayHistory.swift; sourceTree = "<group>"; };
+		9299A0052F604DDA00EFF65B /* GameplayStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayStats.swift; sourceTree = "<group>"; };
 		92AEB9462EF1F633002D0052 /* tents.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = tents.c; path = "../local-games/tents.c"; sourceTree = SOURCE_ROOT; };
 		92B341382C11E90D006A4466 /* Midend-UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Midend-UserData.swift"; sourceTree = "<group>"; };
 		92B55D512C0F410900517280 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -378,7 +376,7 @@
 				921DF8E32F313C3600945CB7 /* Model */,
 				923E64362C00B96E0027DF54 /* AppSettings.swift */,
 				923E643A2C00B96E0027DF54 /* UserPreferences.swift */,
-				921DF8E12F313C1300945CB7 /* GameSettings.swift */,
+				921DF8E12F313C1300945CB7 /* UserGameData.swift */,
 			);
 			path = UserData;
 			sourceTree = "<group>";
@@ -386,7 +384,9 @@
 		921DF8E32F313C3600945CB7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				921DF8E42F313C4200945CB7 /* GameStats.swift */,
+				9299A0012F604CB600EFF65B /* CustomGamePreset.swift */,
+				9299A0032F604D3600EFF65B /* GameplayHistory.swift */,
+				9299A0052F604DDA00EFF65B /* GameplayStats.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -776,9 +776,6 @@
 			children = (
 				92C23B032C9DAD55001078FE /* GameUserSettings.swift */,
 				92C23B042C9DAD55001078FE /* UserSettingsV1.swift */,
-				9289691D2CF3D03F004CB7D9 /* UserSettingsV1_1.swift */,
-				928969152CF3BB9F004CB7D9 /* UserSettingsV2.swift */,
-				928969172CF3BC28004CB7D9 /* UserSettingsMigration.swift */,
 			);
 			path = UserPreferences;
 			sourceTree = "<group>";
@@ -882,6 +879,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9299A0002F6047DF00EFF65B /* midend.c in Sources */,
 				929145A32E45420C00524E0E /* subsets.c in Sources */,
 				923E651F2C00C7880027DF54 /* guess.c in Sources */,
 				923E64FF2C00C00A0027DF54 /* ascent.c in Sources */,
@@ -894,6 +892,7 @@
 				923E64852C00BE620027DF54 /* penrose-legacy.c in Sources */,
 				9208F0002C29FDB900FD14BD /* PresetMenuItem.swift in Sources */,
 				923E64F82C00C00A0027DF54 /* sticks.c in Sources */,
+				9299A0022F604CB600EFF65B /* CustomGamePreset.swift in Sources */,
 				923E65212C00C7880027DF54 /* dominosa.c in Sources */,
 				923E643C2C00B96E0027DF54 /* AppSettings.swift in Sources */,
 				923E64E62C00BFBA0027DF54 /* lightup.c in Sources */,
@@ -901,7 +900,7 @@
 				923E64332C00B9680027DF54 /* DrawingAPI.swift in Sources */,
 				923E64202C00B94E0027DF54 /* PuzzleConfig.swift in Sources */,
 				923E64552C00B97A0027DF54 /* SoundEffects.swift in Sources */,
-				921DF8E22F313C1300945CB7 /* GameSettings.swift in Sources */,
+				921DF8E22F313C1300945CB7 /* UserGameData.swift in Sources */,
 				923E651E2C00C7880027DF54 /* mosaic.c in Sources */,
 				923E65252C00C81E0027DF54 /* tdq.c in Sources */,
 				923E64E72C00BFBA0027DF54 /* map.c in Sources */,
@@ -912,7 +911,6 @@
 				923E646A2C00B9890027DF54 /* GameControlsView.swift in Sources */,
 				923E643F2C00B96E0027DF54 /* SettingsView.swift in Sources */,
 				923E64B42C00BEDE0027DF54 /* singles.c in Sources */,
-				9289691E2CF3D03F004CB7D9 /* UserSettingsV1_1.swift in Sources */,
 				923E65202C00C7880027DF54 /* slant.c in Sources */,
 				9226A93D2E4FBB2A00256EA1 /* GlassViewModifiers.swift in Sources */,
 				92C9E6462C80B496004F9944 /* WelcomeMessageView.swift in Sources */,
@@ -925,11 +923,11 @@
 				923E64912C00BE940027DF54 /* cube.c in Sources */,
 				9208EFFE2C29FB7000FD14BD /* PuzzleConstants.swift in Sources */,
 				9213E9BF2D34515900AE7092 /* Theming.swift in Sources */,
+				9299A0062F604DDA00EFF65B /* GameplayStats.swift in Sources */,
 				923E64B12C00BED00027DF54 /* towers.c in Sources */,
 				923E64862C00BE620027DF54 /* penrose.c in Sources */,
 				9226A9352E4E605900256EA1 /* SavegameExporter.swift in Sources */,
 				923E65152C00C74A0027DF54 /* hat.c in Sources */,
-				928969182CF3BC28004CB7D9 /* UserSettingsMigration.swift in Sources */,
 				923E64FD2C00C00A0027DF54 /* rome.c in Sources */,
 				922D3DDD2C5D0F2F00DD7300 /* PuzzleStatus.swift in Sources */,
 				923E64D62C00BF490027DF54 /* loopgen.c in Sources */,
@@ -940,7 +938,6 @@
 				923E65082C00C25D0027DF54 /* flip.c in Sources */,
 				9226A9382E4FB31C00256EA1 /* magnets.c in Sources */,
 				9226A9392E4FB31C00256EA1 /* undead.c in Sources */,
-				928969162CF3BB9F004CB7D9 /* UserSettingsV2.swift in Sources */,
 				923E651C2C00C7880027DF54 /* mines.c in Sources */,
 				923E64532C00B97A0027DF54 /* PuzzleInteractionsView.swift in Sources */,
 				923E64522C00B97A0027DF54 /* PuzzleInteractionCodes.swift in Sources */,
@@ -968,7 +965,6 @@
 				921DF8C92F31158F00945CB7 /* PuzzlesAndersHolst.swift in Sources */,
 				923E645C2C00B9840027DF54 /* GameListGridItem.swift in Sources */,
 				923E64C32C00BF120027DF54 /* pegs.c in Sources */,
-				921DF8E52F313C4200945CB7 /* GameStats.swift in Sources */,
 				923E64CC2C00BF2D0027DF54 /* netslide.c in Sources */,
 				923E64F62C00C00A0027DF54 /* seismic.c in Sources */,
 				924181742CEFBEE600BBB09E /* GlobalStatsView.swift in Sources */,
@@ -1026,8 +1022,8 @@
 				92BBCF0C2C17B09500893703 /* GameCustomSettingsView.swift in Sources */,
 				923E64932C00BE940027DF54 /* flood.c in Sources */,
 				928969142CF3A68D004CB7D9 /* untangle.c in Sources */,
+				9299A0042F604D3600EFF65B /* GameplayHistory.swift in Sources */,
 				923E65002C00C00A0027DF54 /* crossing.c in Sources */,
-				921DF8E72F31450E00945CB7 /* midend.c in Sources */,
 				923E64F92C00C00A0027DF54 /* mathrax.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

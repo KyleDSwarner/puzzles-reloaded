@@ -12,7 +12,7 @@ enum CustomMenuType: Codable {
     case INT, STRING, BOOLEAN, CHOICE
 }
 
-struct CustomMenuItem: Codable {
+struct CustomMenuItem: Codable, Hashable {
     var index: Int
     var type: CustomMenuType
     var title: String
@@ -65,7 +65,7 @@ class CustomConfigMenu: Codable {
     }
 }
 
-struct ChoiceMenuOption: Codable {
+struct ChoiceMenuOption: Codable, Hashable {
     let id: Int
     let name: String
 }

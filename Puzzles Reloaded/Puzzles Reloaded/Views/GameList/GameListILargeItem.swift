@@ -18,10 +18,6 @@ struct GameListLargeItem: View {
         game.gameConfig
     }
     
-    var gameSettings: GameUserSettings {
-        game.settings
-    }
-    
     var body: some View {
         Button {
             self.navigationPath.append(game)

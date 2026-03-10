@@ -130,6 +130,7 @@ class Frontend: @unchecked Sendable {
         self.displayLoadingScreen = false
         
         // Cancel the current game task to free up cycles
+        // The puzzles C code does not support task cancelling so this will not actually stop stuck puzzle generation loops, but will keep the UI running.
         gameGenerationTask?.cancel()
         
         self.gameGenerationTimer.invalidate()
@@ -289,15 +290,12 @@ extension Frontend {
     
     func setPuzzlePreset(defaultPreset: PresetMenuItem) {
         print("Saving Preset as Default: \(defaultPreset.title)")
-        game.settings.selectedDefaultPreset = defaultPreset.id
-        game.settings.customDefaultPreset = []
+        game.settings.updateDefaultGamePreset(withId: defaultPreset.id)
     }
     
     func setPuzzlePreset(customPreset: [CustomMenuItem]) {
         print("Saving Custom Presets!")
-        game.settings.customDefaultPreset = customPreset
-        game.settings.selectedDefaultPreset = nil
-        
+        game.settings.updateDefaultGamePreset(withPresetConfig: customPreset)
     }
 }
 

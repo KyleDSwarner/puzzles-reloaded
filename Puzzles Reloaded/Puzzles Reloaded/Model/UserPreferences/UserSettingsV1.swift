@@ -47,6 +47,16 @@ enum UserSettingsSchemaV1: VersionedSchema {
             }
         }
         
+        func updateDefaultGamePreset(withId presetId: Int) {
+            self.selectedDefaultPreset = presetId
+            self.customDefaultPreset = []
+        }
+        
+        func updateDefaultGamePreset(withPresetConfig presetConfig: [CustomMenuItem]) {
+            self.customDefaultPreset = presetConfig
+            self.selectedDefaultPreset = nil
+        }
+        
         var isFavorite: Bool {
             self.category == .favorite
         }
