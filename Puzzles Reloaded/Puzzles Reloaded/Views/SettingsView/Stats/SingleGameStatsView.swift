@@ -15,7 +15,7 @@ struct GameStatsView: View {
     // Game, to be provided when the settings menu is selected from within a game
     var game: Game
     
-    var gameStats: UserSettingsSchemaV1.GameStats {
+    var gameStats: GameStats {
         game.settings.stats
     }
     
@@ -63,7 +63,7 @@ struct GameStatsView: View {
                 
             }
             
-            if !game.settings.playHistory.isEmpty {
+            if !sortedGameHistory.isEmpty {
                 Section {
                     List {
                         ForEach(sortedGameHistory) { playHistory in

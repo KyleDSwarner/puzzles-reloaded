@@ -1999,6 +1999,61 @@
         }
       }
     },
+    "supermaze_controls" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\n\nUsing the mouse, you can left-click on a square next to the ball where you want to move. If there is an open door between the squares, the ball will move. When there are two balls, if one of them is in a nearby square and can move, it will move. If it is ambiguous, the one that moved last time will move. If you want to change which to move, left-click on the other ball. To operate a lever, or take a key, or move through a portal, you use eiher the left or right button. To move in stairs, use the left button for up and the right button for down. Also, in the Basic variant you can use the right button to temporarily reveal all doors, and in the Tandem variant you can use the right button to temporarily test what would happen with the doors if you put a ball in a room (or lift an existing ball up from the magic floor tiles which operate the doors).\n\nYou an also operate the game with the keys. Use arrows to move in a direction possible to move. When there are two balls, use Return to switch which one to move. Either Return or Space is used to operate levers, keys and portals. Use Return to move upwards in stairs and Space to move downwards. In Basic mode, Space temorarily reveals the doors, and in Tandem mode Space will temporarily lift the active ball to see what happens with the doors.\n\nIf you get stuck in some variant, you can get some hints, by selecting Solve in the menu. Nothing will change visualy in the board, but from now on, every time you press \"s\", the ball will move one step closer towards the goal. You can mix walking yourself and pressing \"s\" - wherever you are in the maze it will take you one step in the right direction. (After having solved a maze myself, I usually do Restart and Solve, and step through with \"s\", to check if I had found the fastest solution.)"
+          }
+        }
+      }
+    },
+    "supermaze_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navigate your way through the Supermaze"
+          }
+        }
+      }
+    },
+    "supermaze_instructions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Author: Anders Holst\n\nThe objective is to move the ball (or two balls in one variant) from the entrance to the exit of the maze. The maze variants each have different challenges applied to the puzzle and impact how you navigate through.\n\nThis game contains six variants of super-mazes and one ordinary two-dimensional type of maze. A super-maze, as introduced by Robert Abbot, is a stateful maze, such that the possible moves depend on the current state. \n"
+          }
+        }
+      }
+    },
+    "supermaze_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supermaze"
+          }
+        }
+      }
+    },
+    "supermaze_params" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There are seven variants of mazes to choose from:\n\nBasic: This is an ordinary two-dimensional maze, just to see that the generator works. Boring and simple. To make it marginally more challenging, the open doors will reveal themselves only when you are next to them. You can temporarily reveal them all with the right button or space bar, but they will close again as soon as you start moving.\n\nTandem: There are two balls that need to be moved through the maze, but the doors depend on in which rooms the balls are. It is deterministic, but may seem quite perplexing. (Each room has an xor-mask to change the status of the doors.) Also note that it is a quite valid (and sometimes necessary) move, to move one ball back out of the entrance, or back in from the exit, to enable the other ball to move. It is rather difficult but quite possible to solve. (Note that effectively this is a four-dimensional maze, since the \"state\" depends on the position of both balls, and each has two coordinates.)\n\n3D: As is evident from the name, this is an ordinary 3-dimensional maze, with stairs going up and down between the floors. The entrance is on the lowest floor and the exit on the highest floor. You only see one floor at a time. No perplexing state changes.\n\nFloors: Similar to 3D, but instead of stairs there are \"direct portals\" between different floors. (Or are they trampolines?) Each floor has its own color, which is also shown in the portals that go there.\n\nKeys: Here there are doors of different colors, and you need a key of the corresponding color to go through. Once you find a key it can be used repeatedly. This is an attempt to make a non-reversible maze (you can only get a key, not lose it), with a generator designed for reversible mazes... Unfortunately it does not work perfectly, so the mazes tend to be either too easy, or impossible for the generator to find.\n\nLevers: Here too the doors are colored, and they can be operated by levers of the matching color. However, each lever of a certain color opens some and closes some doors. This is the most puzzle-like variant, since you see the full board and need to figure out which levers to pull in which order to make it through. In \"extra tricky\" mode, which is recommended, this can be quite challenging.\n\nCombined: This variant combines 3D, keys and levers. Unfortunately it is not possible to use \"extra tricky\" mode, since it is too hard for the generator to find a suitable maze then. It can be quite entertaining nevertheless.\n\nOther options are: The size (width and height) of the maze, the number of Floors or Keys or Levers in the corresponding variants (or all three in Combined), and \"Extra tricky\" mode, which means that there is a bottleneck somewhere that has to be passed. This is recommended for all the variants where the generator can manage it (not Combined, or Keys of too high key count), since it makes it more challenging and interesting."
+          }
+        }
+      }
+    },
     "tents_controls" : {
       "extractionState" : "manual",
       "localizations" : {

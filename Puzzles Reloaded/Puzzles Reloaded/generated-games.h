@@ -57,8 +57,9 @@ GAME(unruly)
 GAME(untangle)
 
 // Anders Holst
-GAME(alphacrypt)
-GAME(factorcross)
-GAME(identifier)
-GAME(kakuro)
-GAME(supermaze)
+// Currently disabled: These require modifications to the midend
+//GAME(alphacrypt)
+//GAME(factorcross)
+//GAME(identifier)
+//GAME(kakuro)
+//GAME(supermaze)
