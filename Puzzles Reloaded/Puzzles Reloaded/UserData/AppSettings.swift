@@ -12,6 +12,10 @@ enum GameListViewSetting: Codable {
     case listView, gridView
 }
 
+enum GameListSortOrder: Codable {
+    case name, nameReversed, playCountHigh, playCountLow
+}
+
 enum AppTheme: Codable {
     case auto, light, dark
 }
@@ -32,6 +36,8 @@ struct AppSettings: Codable {
     var enableHardwareKeyboard: Bool = true
     var enableRightClick: Bool = true
     var gameListView: GameListViewSetting = GameListViewSetting.listView
+    var gameListSortOrder: GameListSortOrder = .name
+    var gameListDisplayHidden: Bool = false
     var appTheme: AppTheme = AppTheme.auto
     
     var longPressTime: Double = 500.0 // in ms
@@ -45,7 +51,7 @@ struct AppSettings: Codable {
     }
     
     enum CodingsKeys: String, CodingKey {
-        case enableHaptics, enableSounds, showExperimentalGames, disableGameStatusbar, showFirstRunMessage, enableSwipeBack, enableStatistics, gameListView, appTheme, longPressTime, displayCustomLoadMenu, displayShareMenu, enableHardwareKeyboard, enableRightClick
+        case enableHaptics, enableSounds, showExperimentalGames, disableGameStatusbar, showFirstRunMessage, enableSwipeBack, enableStatistics, gameListView, appTheme, longPressTime, displayCustomLoadMenu, displayShareMenu, enableHardwareKeyboard, enableRightClick, gameListSortOrder, gameListDisplayHidden
     }
     
     /**
@@ -61,6 +67,8 @@ struct AppSettings: Codable {
         enableSwipeBack = try values.decodeIfPresent(Bool.self, forKey: .enableSwipeBack) ?? false
         enableStatistics = try values.decodeIfPresent(Bool.self, forKey: .enableStatistics) ?? true
         gameListView = try values.decodeIfPresent(GameListViewSetting.self, forKey: .gameListView) ?? GameListViewSetting.listView
+        gameListSortOrder = try values.decodeIfPresent(GameListSortOrder.self, forKey: .gameListSortOrder) ?? GameListSortOrder.name
+        gameListDisplayHidden = try values.decodeIfPresent(Bool.self, forKey: .gameListDisplayHidden) ?? false
         longPressTime = try values.decodeIfPresent(Double.self, forKey: .longPressTime) ?? 500.0
         
         appTheme = try values.decodeIfPresent(AppTheme.self, forKey: .appTheme) ?? AppTheme.auto

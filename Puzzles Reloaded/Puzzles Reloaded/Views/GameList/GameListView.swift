@@ -20,6 +20,7 @@ struct GameListView: View {
     @State private var settingsPageDisplayed = false
     @State private var welcomeMessageDisplayed = false
     @State private var showingSavegameFailAlert = false
+    @State private var gameSortOptionsViewDisplayed = false
     @State private var searchText: String = ""
     
     
@@ -28,21 +29,51 @@ struct GameListView: View {
     ]
     
     var favoriteGames: [Game] {
-        gameManager.filterGameList(category: .favorite, showExperimentalGames: appSettings.value.showExperimentalGames)
+        retrieveAndSortGameList(category: .favorite)
     }
     
     var allGames: [Game] {
-        gameManager.filterGameList(category: .none, showExperimentalGames: appSettings.value.showExperimentalGames)
-        
+        retrieveAndSortGameList(category: .none)
     }
     
     var hiddenGames: [Game] {
-        gameManager.filterGameList(category: .hidden, showExperimentalGames: appSettings.value.showExperimentalGames)
+        retrieveAndSortGameList(category: .hidden)
     }
     
     var filteredGames: [Game] {
-        return filterGameListBySearchTerm(gameManager.getGameList(showHiddenGames: isHiddenSectionExpanded))
+        return filterGameListBySearchTerm(gameManager.getGameList(showHiddenGames: appSettings.value.gameListDisplayHidden))
     }
+    
+    func retrieveAndSortGameList(category: GameCategory) -> [Game] {
+        
+        let gameList = gameManager.gameModel.filter { game in
+            game.settings.category == category && (!game.gameConfig.isExperimental || appSettings.value.showExperimentalGames)
+        }
+        
+        return sortGameList(gameList)
+    }
+    
+    func sortGameList(_ games: [Game]) -> [Game] {
+        var gameList: [Game] = []
+        let sortOrder = appSettings.value.gameListSortOrder
+        
+        if sortOrder == .name || sortOrder == .nameReversed {
+            gameList = games.sorted(by: {$0.gameConfig.identifier < $1.gameConfig.identifier})
+        }
+        
+        else if sortOrder == .playCountHigh || sortOrder == .playCountLow {
+            gameList = games.sorted(by: { $0.settings.stats.gamesPlayed > $1.settings.stats.gamesPlayed})
+
+        }
+        
+        // Reverse the order, if needed
+        if sortOrder == .nameReversed || sortOrder == .playCountLow {
+            gameList.reverse()
+        }
+        
+        return gameList
+    }
+    
     
     // Return a boolean if a search term would include results IF it included previously hidden games
     func wouldSearchFindHiddenGames() -> Bool {
@@ -192,8 +223,8 @@ struct GameListView: View {
                             }
                         }
                         
-                        if(!hiddenGames.isEmpty) {
-                            Section("Hidden Games", isExpanded: $isHiddenSectionExpanded) {
+                        if(!hiddenGames.isEmpty && appSettings.value.gameListDisplayHidden) {
+                            Section("Hidden Games") {
                                 ForEach(hiddenGames) { gameModel in
                                     GameListLargeItem(game: gameModel, navigationPath: $navPath)
                                 }
@@ -225,7 +256,7 @@ struct GameListView: View {
                                 .padding(.bottom)
                             }
                             
-                            if(isHiddenSectionExpanded && !gameManager.hiddenGames.isEmpty) {
+                            if(!hiddenGames.isEmpty && appSettings.value.gameListDisplayHidden) {
                                 Section("Hidden Games") {
                                     ForEach(hiddenGames) { gameModel in
                                         GameListGridItem(game: gameModel)
@@ -258,38 +289,25 @@ struct GameListView: View {
             .sheet(isPresented: $settingsPageDisplayed) {
                 SettingsView()
             }
+            .sheet(isPresented: $gameSortOptionsViewDisplayed) {
+                GameListDisplayOptionsView()
+            }
             .navigationDestination(for: Game.self) { gameModel in
                 GameView(game: gameModel)
             }
             .navigationTitle("Puzzles Reloaded")
             .toolbar {
-                if(appSettings.value.gameListView == .gridView && !gameManager.hiddenGames.isEmpty) {
-                    Button() {
-                        isHiddenSectionExpanded.toggle()
-                    } label: {
-                        if(isHiddenSectionExpanded) {
-                            Image(systemName: "eye")
-                        } else { // "grid"
-                            Image(systemName: "eye.slash")
-                        }
-                    }
-                }
                 Button {
-                    appSettings.value.toggleGameListView()
+                    gameSortOptionsViewDisplayed = true
                 } label: {
-                    if(appSettings.value.gameListView == .listView) {
-                        Image(systemName: "rectangle.grid.1x2")
-                    } else { // "grid"
-                        Image(systemName: "square.grid.3x3")
-                    }
-                    
+                    Image(systemName: "arrow.up.arrow.down")
+                        .accessibilityHint("Open game list sorting options menu")
                 }
                 Button {
                     settingsPageDisplayed = true
                 } label: {
                     Image(systemName: "gearshape")
                 }
-                //EditButton()
             }
             // MARK: Open *.sgpt
             .onOpenURL { url in
