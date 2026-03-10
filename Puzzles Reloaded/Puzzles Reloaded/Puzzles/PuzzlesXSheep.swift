@@ -27,7 +27,6 @@ extension Puzzles {
     // MARK: ABCD
     static let puzzle_abcd = GameConfig(
         identifier: "abcd",
-        customParamInfo: String(localized: "abcd_params", table: "Puzzles"),
         internalGame: abcd,
         overflowMenuControls: [
             ControlConfig.MarksControl
@@ -45,6 +44,7 @@ extension Puzzles {
         return Puzzles.createButtonControls(numButtons ?? 0, keycodes: Puzzles.AlphaButtons)
     })
     .addSearchTerms(["Kombi"])
+    .addHelpPageEntries(gameParameters: String(localized: "abcd_params", table: "Puzzles"))
     .setDarkModeColors([
         1: (Theming.background, "Innter Background"),
         2: (Theming.white, "Grid"),
@@ -72,7 +72,6 @@ extension Puzzles {
     // MARK: Boats
     static let puzzle_boats = GameConfig(
         identifier: "boats",
-        customParamInfo: String(localized: "boats_params", table: "Puzzles"),
         internalGame: boats
     )
     .setDarkModeColors([
@@ -86,6 +85,8 @@ extension Puzzles {
         //6: (Theming.veryDarkGray, "Error")
     ])
     .addSearchTerms(["Battleships"])
+    .addHelpPageEntries(gameParameters: String(localized: "boats_params", table: "Puzzles"))
+
     
     // MARK: Bricks
     static let puzzle_bricks = GameConfig(
@@ -115,7 +116,6 @@ extension Puzzles {
     // MARK: Mathrax
     static let puzzle_mathrax = GameConfig(
         identifier: "mathrax",
-        customParamInfo: String(localized: "mathrax_params", table: "Puzzles"),
         internalGame: mathrax
     )
     .numericButtonsBuilder({ gameId in
@@ -129,6 +129,8 @@ extension Puzzles {
         let numButtons = Int(gameId.split(separator: ":")[0])
         return Puzzles.createButtonControls(numButtons ?? 0)
     })
+    .addHelpPageEntries(gameParameters: String(localized: "mathrax_params", table: "Puzzles"))
+
     .setDarkModeColors([
         1: (Theming.darkGray, "Highlight - Clue Circles"),
         2: (Theming.veryDarkGray, "Lowlight - Selected Fields"),
@@ -158,7 +160,6 @@ extension Puzzles {
     // MARK: Salad
     static let puzzle_salad = GameConfig(
         identifier: "salad",
-        customParamInfo: String(localized: "salad_params", table: "Puzzles"),
         internalGame: salad
     )    
     .numericButtonsBuilder({ gameId in
@@ -197,6 +198,7 @@ extension Puzzles {
         //return Puzzles.createButtonControls(numButtons ?? 0)
         return buttonControls
     })
+    .addHelpPageEntries(gameParameters: String(localized: "salad_params", table: "Puzzles"))
     .setDarkModeColors([
         1: (Theming.midGray, "Highlight"),
         2: (Theming.darkGray, "Lowlight"),
@@ -229,7 +231,6 @@ extension Puzzles {
     // MARK: Sticks
     static let puzzle_sticks = GameConfig(
         identifier: "sticks",
-        customParamInfo: String(localized: "sticks_params", table: "Puzzles"),
         internalGame: sticks
     )
     .setDarkModeColors([
@@ -237,13 +238,14 @@ extension Puzzles {
         2: (Theming.turboBlue, "Line"),
         3: (Theming.black, "Number"),
     ])
+    .addHelpPageEntries(gameParameters: String(localized: "sticks_params", table: "Puzzles"))
     .addSearchTerms(["Tatebo Yokobo"])
     
     static let puzzle_subsets = GameConfig(
         identifier: "subsets",
-        customParamInfo: String(localized: "subsets_params", table: "Puzzles"),
         internalGame: subsets
     )
+    .addHelpPageEntries(gameParameters: String(localized: "subsets_params", table: "Puzzles"))
     .setDarkModeColors([
         1: (Theming.midGray, "Inner Background - Guessing Squares"),
         2: (Theming.white, "Grid"),

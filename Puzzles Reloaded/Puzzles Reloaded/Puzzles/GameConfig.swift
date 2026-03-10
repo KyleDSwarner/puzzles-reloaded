@@ -34,10 +34,8 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
     var savegameIdentifier: String
     var searchTerms: [String]
     
-    // var instructions: String?
-    // var controlInfo: String?
-    var customParamInfo: String?
-    var userParamInfo: String?
+    var helpGameParametersText: String?
+    var helpUserParametersText: String?
     
     var touchControls: [ControlConfig]
     var buttonControls: [ControlConfig]
@@ -54,8 +52,6 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
     
     init(
         identifier: String,
-        customParamInfo: String? = nil,
-        userParamInfo: String? = nil,
         imageName: String? = nil,
         internalGame: game,
         isExperimental: Bool = false,
@@ -82,9 +78,19 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
             self.darkModeColorReplacements = [:]
             self.searchTerms = []
     }
+
+    var hasCustomControls: Bool {
+        !touchControls.isEmpty || !buttonControls.isEmpty
+    }
     
-    // MARK: Localized Strings
-    
+    static let exampleGame = GameConfig(
+        identifier: "signpost",
+        imageName: "signpost",
+        internalGame: net)
+}
+
+// MARK: Extensions for localized text
+extension GameConfig {
     var name: String {
         let nameKey = "\(self.identifier)_name"
         return String(localized: String.LocalizationValue(nameKey), table: "Puzzles")
@@ -104,7 +110,10 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
         let controlsKey = "\(self.identifier)_controls"
         return String(localized: String.LocalizationValue(controlsKey), table: "Puzzles")
     }
-    
+}
+
+// MARK: View Modifiers for config
+extension GameConfig {
     func numericButtonsBuilder(_ numericButtonsBuilder: @escaping NumButtonsFunction) -> Self {
         self.numericButtonsBuilder = numericButtonsBuilder
         self.displayClearButtonInToolbar = true
@@ -121,43 +130,14 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
         return self
     }
     
-    /*
-    func setDarkModeColorsefef(_ replacements: [ColorReplacement]) -> Self {
-        //self.darkModeColorReplacements = replacements
-        return self
-    }
-    
-    func setDarkModeColors(_ replacements: [(id: Int, color: CGColor)]) -> Self {
-        self.darkModeColorReplacements = replacements
-        return self
-    }
-     */
-    
     func setDarkModeColors(_ replacements: [Int: ColorReplacement]) -> Self {
         self.darkModeColorReplacements = replacements
         return self
     }
     
-    
-    var hasCustomControls: Bool {
-        !touchControls.isEmpty || !buttonControls.isEmpty
+    func addHelpPageEntries(gameParameters: String? = nil, userParameters: String? = nil) -> Self {
+        self.helpGameParametersText = gameParameters
+        self.helpUserParametersText = userParameters
+        return self
     }
-    
-    static let exampleGame = GameConfig(
-        identifier: "signpost",
-        customParamInfo: "Information about custom parameters go here",
-        userParamInfo: "Information about user parameters go here",
-        imageName: "signpost",
-        internalGame: net)
 }
-
-/*
-struct ColorReplacement {
-    let id: Int
-    let color: CGColor
-}
- */
-
-//let thingy: ColorReplacement = ColorReplacement(id: <#T##Int#>, color: <#T##CGColor#>)
-
-//let things: [ColorReplacement] = [.init(1, CGColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>))]

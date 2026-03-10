@@ -160,7 +160,6 @@ extension Puzzles {
     // MARK: Samegame
     static let puzzle_samegame = GameConfig(
         identifier: "samegame",
-        customParamInfo: String(localized: "samegame_params", table: "Puzzles"),
         internalGame: samegame,
         isExperimental: false)
     .setSaveIdentifier("Same Game")
@@ -169,6 +168,7 @@ extension Puzzles {
         12: (Theming.midGray, "Highlight"),
         13: (Theming.darkGray, "Lowlight")
     ])
+    .addHelpPageEntries(gameParameters: String(localized: "samegame_params", table: "Puzzles"))
     
     
     // MARK: Signpost
@@ -236,7 +236,6 @@ extension Puzzles {
     // MARK: Solo
     static let puzzle_solo = GameConfig(
         identifier: "solo",
-        customParamInfo: String(localized: "solo_params", table: "Puzzles"),
         internalGame: solo,
         displayClearButtonInToolbar: true,
         overflowMenuControls: [
@@ -270,6 +269,7 @@ extension Puzzles {
             
     })
     .addSearchTerms(["Sudoku"])
+    .addHelpPageEntries(gameParameters: String(localized: "solo_params", table: "Puzzles"))
     .setDarkModeColors([
         //1: (Theming.text, "Text"),
         1: (Theming.veryDarkGray, "X Diagonals"),
