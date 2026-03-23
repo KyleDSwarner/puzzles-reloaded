@@ -135,19 +135,6 @@ extension Puzzles {
         //3: (Theming.warningRed, "Lowlight")
     ])
     
-    /*
-    enum {
-        COL_BACKGROUND,
-        COL_WRONG,
-        COL_RIGHT,
-        COL_GRID,
-        COL_DIAG,
-        COL_HINT,
-        COL_CURSOR,
-        NCOLOURS
-    };
-     */
-    
     // MARK: Flood
     static let puzzle_flood = GameConfig(
         identifier: "flood",
@@ -167,7 +154,8 @@ extension Puzzles {
         1: (Theming.darkGray, "Background for Completed Squares"),
         3: (Theming.midGray, "Dots"),
         5: (Theming.white, "Grid"),
-        6: (Theming.midGray, "Game Border")
+        6: (Theming.midGray, "Game Border"),
+        7: (Theming.enteredTextGreen, "Arrows")
     ])
     
     // MARK: Guess
