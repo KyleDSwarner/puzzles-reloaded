@@ -48,6 +48,9 @@ class Frontend: @unchecked Sendable {
     var currentPreset: Int = -1 // Indicates the ID of the preset selected.
     var gamePresets: [PresetMenuItem] = []
     
+    // Identifier if the short/long press controls have been swapped by the user
+    var shortLongPressControlSwapped = false
+    
     /** Split up the presets menu to prevent the menus from getting too large. If there's more than 10 items, split down the first 8 & overflow the rest.*/
     var gamePresetsPrimaryMenu: [PresetMenuItem] {
         guard gamePresets.count > 10 else {
@@ -234,6 +237,10 @@ class Frontend: @unchecked Sendable {
     func getColor(_ index: Int) -> CGColor {
         return colors[index]
         // TODO: Dark Mode Adjustments here!
+    }
+    
+    func gameHasLongPress() -> Bool {
+        return controlOption.longPress != nil
     }
     
     /**

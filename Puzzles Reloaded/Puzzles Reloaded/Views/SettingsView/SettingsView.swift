@@ -43,18 +43,23 @@ struct SettingsView: View {
                     Form {
                         Section {
                             HStack {
-                                Text("Long Press Duration")
+                                Text("Long Press Control Delay")
                                 Spacer()
                                 Text("\(appSettings.value.longPressTime.formatted(.number.precision(.fractionLength(0))))ms")
-                                //Text(Duration.milliseconds(appSettings.value.longPressTime.cle
                             }
-                            Slider(value: $appSettings.value.longPressTime, in: 125...1000, step: 125) {
+                            Slider(value: $appSettings.value.longPressTime, in: 100...1000, step: 50) {
                                 Text("Long Press Duration")
                             } minimumValueLabel: {
-                                Text("125ms")
+                                Text("100ms")
                             } maximumValueLabel: {
                                 Text("1s")
                             }
+                        }
+                        
+                        Section {
+                            Toggle("Enable Short/Long Tap Swap Toggle", isOn: $appSettings.value.enableShortLongPressSwapToggle)
+                        } footer: {
+                            Text("Adds an additional toggle to the bottom of the screen which switches the actions of short and long pressed within the game until disabled.")
                         }
                         
                         Section {

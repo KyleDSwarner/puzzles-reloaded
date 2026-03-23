@@ -177,6 +177,7 @@ struct GameViewToolbars: ViewModifier {
                 
                 Spacer()
                 
+                // MARK: Clear Button
                 if displayClearButton {
                     Button() {
                         clearSelection()
@@ -186,6 +187,8 @@ struct GameViewToolbars: ViewModifier {
                     }
                 }
                 
+
+                // MARK: Undo / Redo
                 Button() {
                     undoMove()
                 } label: {
@@ -194,6 +197,8 @@ struct GameViewToolbars: ViewModifier {
                 }
                 .disabled(!frontend.canUndo)
                 
+
+                
                 Button() {
                     redoMove()
                 } label: {
@@ -201,6 +206,24 @@ struct GameViewToolbars: ViewModifier {
                         .accessibilityLabel("Redo previous move")
                 }
                 .disabled(!frontend.canRedo)
+                
+                // MARK: Short/Long Press Swap Toggle
+                if appSettings.value.enableShortLongPressSwapToggle && frontend.gameHasLongPress() {
+                    Button() {
+                        withAnimation {
+                            frontend.shortLongPressControlSwapped.toggle()
+                        }
+                    } label: {
+                        if frontend.shortLongPressControlSwapped {
+                            Image(systemName: "hand.tap")
+                                .accessibilityLabel("Swap long and short press")
+                        } else {
+                            Image(systemName: "hand.rays")
+                                .accessibilityLabel("Swap long and short press")
+                        }
+                        
+                    }
+                }
                 
                 Spacer()
                 

@@ -24,6 +24,7 @@ class PuzzleTapView: UIView {
     private var longPressTimer = Timer()
     
     private var isLongPress = false
+    private var keypressDownFired = false
     private var isDragging = false
     private var dragDeadzoneExceeded = false
     private var initialTouchLocation: CGPoint = .zero
@@ -85,6 +86,10 @@ class PuzzleTapView: UIView {
         // Store the initial location for later use
         initialTouchLocation = adjustedLocation
         
+        // If the user has swapped the short/long controls, we default `isLongPress` to true.
+        isLongPress = frontend?.shortLongPressControlSwapped == true && frontend?.gameHasLongPress() == true // Defaults to True. If the user has swapped these controls, we need to do the opposite of what we'd normally do!
+        print("Setup: Long press is \(isLongPress)")
+        
         /*
          This code is unused as no games set `useArrowKeys` - but keeping for posterity in case it's needed later.
         if let mouseCommand = frontend?.controlOption.shortPress {
@@ -121,7 +126,10 @@ class PuzzleTapView: UIView {
     }
     
     func startLongPress(at location: CGPoint)  {
-        isLongPress = true
+        
+        isLongPress = frontend?.shortLongPressControlSwapped == false // Defaults to True. If the user has swapped these controls, we need to do the opposite of what we'd normally do!
+        keypressDownFired = true // Mark to indcate that we've already send the "keyDown" command. This is managed separately from `isLongPress` to handle when user swaps the commands.
+        print("Long Pressed: Swapped isLongPress to \(isLongPress)")
         self.triggerLongPressEffects()
         self.sendKeyDown(at: location) // We send the original location, not the adjusted one, because `sendKeyDown` already adjusts.
     }
@@ -232,10 +240,16 @@ class PuzzleTapView: UIView {
             }            
             
         } else {
+            
+            guard let command = command else {
+                print("Command toggled while nil; Returning to protect app")
+                return
+            }
+            
             // MARK: Usual Tap & Drag Commands Based on mouseclicks & drags
-            if !isDragging && !isLongPress && !mouseLeftClick && command != nil {
+            if !isDragging && !keypressDownFired && !mouseLeftClick {
                 // We need to send the short press' keyDown command - but only the first time.
-                sendKeypress(command: command!.down, location: location, physicalFeedbackType: .SHORT)
+                sendKeypress(command: command.down, location: location, physicalFeedbackType: .SHORT)
                 //self.frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: command!.down)
                 //self.triggerShortPressEffects()
             }
@@ -243,7 +257,7 @@ class PuzzleTapView: UIView {
             isDragging = true
             
             // Then we need to send a DRAG command to the correct
-            sendKeypress(command: command!.drag, location: location, physicalFeedbackType: .NONE)
+            sendKeypress(command: command.drag, location: location, physicalFeedbackType: .NONE)
             //self.frontend?.midend.sendKeypress(x: Int(adjustedLocation.x), y: Int(adjustedLocation.y), keypress: command!.drag)
         }
         
@@ -280,7 +294,7 @@ class PuzzleTapView: UIView {
         if command != nil && command?.useArrowKeys == false {
             
             // If we haven't started a long press or started dragging, we need to send the keydown command
-            if !isLongPress && !isDragging {
+            if !keypressDownFired && !isDragging {
                 // triggerShortPressEffects() // For short presses, play the haptic & sound effects (if enabled)
                 sendKeypress(command: command?.down, location: location, physicalFeedbackType: .SHORT)
             }
@@ -335,6 +349,7 @@ class PuzzleTapView: UIView {
     
     func resetTouchInfo() {
         isLongPress = false
+        keypressDownFired = false
         isDragging = false
         dragDeadzoneExceeded = false
         longPressTimer.invalidate()
