@@ -215,10 +215,11 @@ struct GameViewToolbars: ViewModifier {
                         }
                     } label: {
                         if frontend.shortLongPressControlSwapped {
-                            Image(systemName: "hand.tap")
+                            
+                            Image(systemName: "hand.tap.fill")
                                 .accessibilityLabel("Swap long and short press")
                         } else {
-                            Image(systemName: "hand.rays")
+                            Image(systemName: "hand.tap")
                                 .accessibilityLabel("Swap long and short press")
                         }
                         
