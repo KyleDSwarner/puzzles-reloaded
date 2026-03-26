@@ -12,6 +12,8 @@ struct GameViewToolbars: ViewModifier {
     
     @AppStorage(AppSettings.key) var appSettings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
 
+    @State private var shortLongSwapToggleVisible: Bool = false
+    
     var frontend: Frontend
     var gameName: String
     var gameAdditionalMenuOptions: [ControlConfig]
@@ -59,6 +61,19 @@ struct GameViewToolbars: ViewModifier {
     
     func body(content: Content) -> some View {
         content
+        // MARK: Short/Long Toggle Change Detection
+        // (We sync up the app settings with a @State object here so redraws of the toolbar trigger correctly)
+        .onAppear {
+            shortLongSwapToggleVisible = appSettings.value.enableShortLongPressSwapToggle
+        }
+        .onChange(of: appSettings.value.enableShortLongPressSwapToggle) {
+            shortLongSwapToggleVisible = appSettings.value.enableShortLongPressSwapToggle
+            
+            // Reset the swap toggle if the user turns off the setting
+            if appSettings.value.enableShortLongPressSwapToggle == false {
+                frontend.shortLongPressControlSwapped = false
+            }
+        }
         // MARK: Toolbar
 #if os(iOS) // This toolbar doesn't function on macOS targets
         .toolbar {
@@ -187,7 +202,7 @@ struct GameViewToolbars: ViewModifier {
                     }
                 }
                 
-
+                
                 // MARK: Undo / Redo
                 Button() {
                     undoMove()
@@ -197,7 +212,7 @@ struct GameViewToolbars: ViewModifier {
                 }
                 .disabled(!frontend.canUndo)
                 
-
+                
                 
                 Button() {
                     redoMove()
@@ -208,7 +223,7 @@ struct GameViewToolbars: ViewModifier {
                 .disabled(!frontend.canRedo)
                 
                 // MARK: Short/Long Press Swap Toggle
-                if appSettings.value.enableShortLongPressSwapToggle && frontend.gameHasLongPress() {
+                if shortLongSwapToggleVisible && frontend.gameHasLongPress() {
                     Button() {
                         withAnimation {
                             frontend.shortLongPressControlSwapped.toggle()
@@ -224,6 +239,7 @@ struct GameViewToolbars: ViewModifier {
                         }
                         
                     }
+                    
                 }
                 
                 Spacer()
@@ -275,7 +291,9 @@ struct GameViewToolbars: ViewModifier {
                 }
                 .menuOrder(.fixed)
             }
+            
         }
+        .id(shortLongSwapToggleVisible) // Forces a redraw to get spacers correct when new buttons appear
         #endif
     }
 }
