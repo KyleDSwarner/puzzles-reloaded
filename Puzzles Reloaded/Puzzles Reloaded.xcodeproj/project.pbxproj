@@ -158,6 +158,7 @@
 		92D61AD92C9DF4C500447349 /* CustomGameSeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D61AD82C9DF4C500447349 /* CustomGameSeedView.swift */; };
 		92D8D8692C57C4CD00E1E9E3 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */; };
 		92D8D86B2C57CA7800E1E9E3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 92D8D86A2C57CA7800E1E9E3 /* README.md */; };
+		92E517E42FBB9B8C004663B7 /* GameConfigOverrides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E517E32FBB9B8C004663B7 /* GameConfigOverrides.swift */; };
 		92E7FE2E2C3F15C70020C1F5 /* EffectsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */; };
 		92F6946A2C6BE2480023D830 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F694692C6BE2480023D830 /* LicenseView.swift */; };
 /* End PBXBuildFile section */
@@ -335,6 +336,7 @@
 		92D724732C1C71A90021AD89 /* Puzzles-Reloaded-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Puzzles-Reloaded-Info.plist"; sourceTree = SOURCE_ROOT; };
 		92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		92D8D86A2C57CA7800E1E9E3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		92E517E32FBB9B8C004663B7 /* GameConfigOverrides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfigOverrides.swift; sourceTree = "<group>"; };
 		92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsManager.swift; sourceTree = "<group>"; };
 		92F694692C6BE2480023D830 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -757,6 +759,7 @@
 				92F6946B2C6BEAEF0023D830 /* About */,
 				923E64392C00B96E0027DF54 /* SettingsView.swift */,
 				92123DDE2C19E5570020DB69 /* CustomGameConfigView.swift */,
+				92E517E32FBB9B8C004663B7 /* GameConfigOverrides.swift */,
 			);
 			path = SettingsView;
 			sourceTree = "<group>";
@@ -968,6 +971,7 @@
 				923E64D52C00BF490027DF54 /* matching.c in Sources */,
 				921DF8C92F31158F00945CB7 /* PuzzlesAndersHolst.swift in Sources */,
 				923E645C2C00B9840027DF54 /* GameListGridItem.swift in Sources */,
+				92E517E42FBB9B8C004663B7 /* GameConfigOverrides.swift in Sources */,
 				923E64C32C00BF120027DF54 /* pegs.c in Sources */,
 				923E64CC2C00BF2D0027DF54 /* netslide.c in Sources */,
 				923E64F62C00C00A0027DF54 /* seismic.c in Sources */,
@@ -1200,7 +1204,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 1.10;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "Simon Tatham Puzzles Reloaded";
@@ -1253,7 +1257,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 1.10;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "$(TARGET_NAME)";

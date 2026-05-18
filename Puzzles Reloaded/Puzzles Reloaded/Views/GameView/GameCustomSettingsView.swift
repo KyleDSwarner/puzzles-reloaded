@@ -35,7 +35,7 @@ struct GameCustomSettingsView: View {
         NavigationStack {
                 Form {
                     Section {
-                        CustomGameConfigView(gameMenu: $gameMenu)
+                        CustomGameConfigView(gameName: gameTitle, gameMenu: $gameMenu, isCustomOptionsMenu: true)
                     }
                     
                     Section {

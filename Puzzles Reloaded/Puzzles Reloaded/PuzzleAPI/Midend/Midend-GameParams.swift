@@ -158,15 +158,21 @@ extension Midend {
                     //print("This is a string value: \(title)")
                     let value = String(cString: configItem.u.string.sval)
                     
-                    // Determine if this is an integer value or not
-                    let intValue = Int(value)
+                    let configOptionOverrides = GameConfigOverrides.findOverride(field: title)
                     
-                    if let unwrappedInt = intValue {
-                        //print("Integer Value found: \(unwrappedInt)")
-                        customConfigMenu.addIntMenuItem(index: index, title: title, currentValue: unwrappedInt)
-                    } else {
-                        //print("String found: \(value)")
-                        //let newMenuItem = StringMenuItem(title: title, value: String(cString: configItem.u.string.sval), index: index)
+                    let forceString = configOptionOverrides?.forceString ?? false
+                    let isDecimalValue = configOptionOverrides?.isDecimalValue ?? false
+                    
+                    // Use decimals if our override config allows it - most values don't need this
+                    if isDecimalValue && !forceString, let decimalValue = Double(value) {
+                        customConfigMenu.addDecimalManuItem(index: index, title: title, currentValue: decimalValue)
+                    }
+                    // Otherwise, check if this resolves to an integer.
+                    else if !forceString, let intValue = Int(value) {
+                        customConfigMenu.addIntMenuItem(index: index, title: title, currentValue: intValue)
+                    }
+                    // This is just a string
+                    else {
                         customConfigMenu.addStringMenuItem(index: index, title: title, currentValue: String(cString: configItem.u.string.sval))
                     }
                     
@@ -184,8 +190,6 @@ extension Midend {
                     let choices = String(cString: configItem.u.choices.choicenames)
                     let delimiter = choices.first
                     let splitChoices = choices.split(separator: delimiter!)
-                    
-                    
                     
                     let selection = Int(configItem.u.choices.selected)
                     
@@ -263,6 +267,9 @@ extension Midend {
             case .INT:
                 //print("\(userSelection.title) Int == \(userSelection.intValue)")
                 let pointer = PuzzleUtils.stringToPointer(String(userSelection.intValue))
+                config[userSelection.index].u.string.sval = pointer
+            case .DECIMAL:
+                let pointer = PuzzleUtils.stringToPointer(String(userSelection.decimalValue))
                 config[userSelection.index].u.string.sval = pointer
             case .STRING:
                 //print("\(userSelection.title) String == \(userSelection.stringValue)")

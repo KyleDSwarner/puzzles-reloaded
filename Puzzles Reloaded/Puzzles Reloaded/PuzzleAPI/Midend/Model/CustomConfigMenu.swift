@@ -9,7 +9,7 @@
 import Foundation
 
 enum CustomMenuType: Codable {
-    case INT, STRING, BOOLEAN, CHOICE
+    case INT, DECIMAL, STRING, BOOLEAN, CHOICE
 }
 
 struct CustomMenuItem: Codable, Hashable {
@@ -18,6 +18,7 @@ struct CustomMenuItem: Codable, Hashable {
     var title: String
     
     var intValue : Int
+    var decimalValue: Double = -1
     
     var stringValue: String
     
@@ -26,15 +27,37 @@ struct CustomMenuItem: Codable, Hashable {
     var choiceIndex: Int
     var choices: [ChoiceMenuOption]
     
-    init(index: Int, type: CustomMenuType, title: String, intValue: Int = -1, stringValue: String = "", boolValue: Bool = false, choiceIndex: Int = -1, choices: [ChoiceMenuOption] = []) {
+    init(index: Int, type: CustomMenuType, title: String, intValue: Int = -1, decimalValue: Double = -1, stringValue: String = "", boolValue: Bool = false, choiceIndex: Int = -1, choices: [ChoiceMenuOption] = []) {
         self.index = index
         self.type = type
         self.title = title
         self.intValue = intValue
+        self.decimalValue = decimalValue
         self.stringValue = stringValue
         self.boolValue = boolValue
         self.choiceIndex = choiceIndex
         self.choices = choices
+    }
+    
+    enum CodingsKeys: String, CodingKey {
+        case index, type, title, intValue, decimalValue, stringValue, boolValue, choiceIndex, choices
+    }
+    
+    /**
+        Custom decoder method allows for smooth migrations when we add or remove fields, otherwise data will be lost when the decoder can't create the new model.
+     */
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        index = try values.decodeIfPresent(Int.self, forKey: .index) ?? 0
+        type = try values.decodeIfPresent(CustomMenuType.self, forKey: .type) ?? .STRING
+        title = try values.decodeIfPresent(String.self, forKey: .title) ?? ""
+        intValue = try values.decodeIfPresent(Int.self, forKey: .intValue) ?? -1
+        decimalValue = try values.decodeIfPresent(Double.self, forKey: .decimalValue) ?? 0.0
+        stringValue = try values.decodeIfPresent(String.self, forKey: .stringValue) ?? ""
+        boolValue = try values.decodeIfPresent(Bool.self, forKey: .boolValue) ?? false
+        choiceIndex = try values.decodeIfPresent(Int.self, forKey: .choiceIndex) ?? -1
+        choices = try values.decodeIfPresent([ChoiceMenuOption].self, forKey: .choices) ?? []
     }
     
 }
@@ -50,6 +73,10 @@ class CustomConfigMenu: Codable {
     
     func addMenuItem(_ newItem: CustomMenuItem) {
         menu.append(newItem)
+    }
+    
+    func addDecimalManuItem(index: Int, title: String, currentValue: Double) {
+        menu.append(CustomMenuItem(index: index, type: .DECIMAL, title: title, decimalValue: currentValue))
     }
     
     func addIntMenuItem(index: Int, title: String, currentValue: Int) {

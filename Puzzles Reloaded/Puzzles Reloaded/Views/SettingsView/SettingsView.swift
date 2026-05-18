@@ -153,7 +153,7 @@ struct SettingsView: View {
                             }
                             
                             if !gameSettingsMenu.isEmpty {
-                                CustomGameConfigView(gameMenu: $gameSettingsMenu)
+                                CustomGameConfigView(gameName: game.gameConfig.name, gameMenu: $gameSettingsMenu)
                             }
                             
                         } header: {
