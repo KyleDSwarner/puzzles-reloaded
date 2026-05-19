@@ -107,7 +107,6 @@ struct CustomGameConfigDecimalView: View {
                 Text("\(Int(maxValue))")
             }
             .accessibilityHidden(true)
-            .border(.pink)
             
         }
     }
@@ -144,7 +143,6 @@ struct CustomGameConfigIntView: View {
                 
             Stepper("", value: menuItem.intValue, in: minValue...maxValue)
                 .accessibilityHidden(true)
-                .border(.yellow)
         }
     }
 }

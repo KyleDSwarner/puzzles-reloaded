@@ -133,6 +133,17 @@
         }
       }
     },
+    "blackbox_help_num_balls" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter a value ('3') or a range ('3-6')"
+          }
+        }
+      }
+    },
     "blackbox_instructions" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -173,6 +184,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Find the fleet in the grid"
+          }
+        }
+      }
+    },
+    "boats_help_fleet_configuration" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Customize the fleet by entering a list of numbers. Each number indicates how many times a boat of a specific size appears. For example, the configuration 3,2,1 represents 3 boats of size 1, 2 boats of size 2, and 1 boat of size 3."
           }
         }
       }
@@ -783,9 +805,6 @@
         }
       }
     },
-    "Key" : {
-      "extractionState" : "manual"
-    },
     "lightup_controls" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1038,6 +1057,17 @@
         }
       }
     },
+    "mines_help_ensure_solubility" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When on (by default), Mines will ensure that the entire grid can be fully deduced starting from the initial open space. Turn off for a harder game that may involve guessing."
+          }
+        }
+      }
+    },
     "mines_instructions" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1082,6 +1112,17 @@
         }
       }
     },
+    "mosaic_help_agressive_generation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When on, the game generator will try harder to eliminate unnecessary clues on the board. This slows down generation, so it's not recommended for boards larger than ~30×30."
+          }
+        }
+      }
+    },
     "mosaic_instructions" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1122,6 +1163,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rotate each tile to reassemble the network"
+          }
+        }
+      }
+    },
+    "net_help_barrier_probability" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decimal value from 0-1. Higher values mean higher probability of walls."
           }
         }
       }
@@ -1302,6 +1354,17 @@
         }
       }
     },
+    "pearl_help_allow_unsoluble" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Off by default, this enables simpler game generation that allows for larger grids and more clues, but does not guarantee unique solutions or that a solution can be logically deduced."
+          }
+        }
+      }
+    },
     "pearl_instructions" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1430,6 +1493,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Divide the grid into rectangles with areas equal to the numbers"
+          }
+        }
+      }
+    },
+    "rectangles_help_expansion_factor" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifies game generation settings to prefer larger rectangles. Setting an expansion factor of around 0.5 tends to make the game more difficult, and tends to reward a less deductive and more intuitive playing style. Too high, and the game will become trivial."
           }
         }
       }
@@ -1573,6 +1647,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clear the grid by removing touching groups of the same colour squares"
+          }
+        }
+      }
+    },
+    "samegame_help_ensure_solubility" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If enabled (the default), generated grids are guaranteed to have at least one solution."
+          }
+        }
+      }
+    },
+    "samegame_help_scoring_system" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controls the precise mechanism used for scoring. With the default system, ‘(n-2)^2’, only regions of three squares or more will score any points at all. With the alternative ‘(n-1)^2’ system, regions of two squares score a point each, and larger regions score relatively more points."
           }
         }
       }
@@ -1797,6 +1893,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "To play Solo, simply tap in any empty square and then type a digit or letter on the keyboard to fill that square. If you make a mistake, tap the square again and press the Clear button to remove the guess (or use the Undo feature).\n\nIf you long press in a square and then type a number, that number will be entered in the square as a ‘pencil mark’. You can have pencil marks for multiple numbers in the same square. Squares containing filled-in numbers cannot also contain pencil marks.\n\nThe game pays no attention to pencil marks, so exactly what you use them for is up to you: you can use them as reminders that a particular square needs to be re-examined once you know more about a particular number, or you can use them as lists of the possible numbers in a given square, or anything else you feel like.\n\nTo erase a single pencil mark, long press in the square and type the same number again.\n\nAll pencil marks in a square are erased when you enter a guess or when you clear the square."
+          }
+        }
+      }
+    },
+    "solo_custom_note" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Note: Enabling too many options may prevent the app from finding a valid puzzle and could get stuck in generation. Cancel or restart the app if you run in to any issues!"
           }
         }
       }

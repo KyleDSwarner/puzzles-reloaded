@@ -25,29 +25,29 @@ struct GameConfigNote {
 }
 
 struct GameConfigOverrides {
+    // Game notes give us a way to add help text to the bottom of any custom game menu page for extra info.
     static let gameNotes: [GameConfigNote] = [
-        GameConfigNote(gameName: "Solo", note: "Note: Enabling too many options may prevent the app from finding a valid puzzle and could get stuck in generation. Cancel or restart the app if you run in to any issues!")
+        GameConfigNote(gameName: "Solo", note: String(localized: "solo_custom_note", table: "Puzzles"))
     ]
     
     static let allHelpTexts: [GameConfigOption] = [
-        GameConfigOption(gameName: "Net", helpField: "Barrier probability", isDecimalValue: true, minValue: 0, maxValue: 1, customHelpText: "Decimal value from 0-1. Higher values mean higher probability of walls."),
-        GameConfigOption(gameName: "Netslide", helpField: "Barrier probability", isDecimalValue: true, minValue: 0, maxValue: 1, customHelpText: "Decimal value from 0-1. Higher values mean higher probability of walls."),
-        GameConfigOption(gameName: "Black Box", helpField: "No. of balls", forceString: true, preferDeciKeyboard: true, customHelpText: "Enter a value ('3') or a range ('3-6')"),
-        GameConfigOption(gameName: "Rectangles", helpField: "Expansion factor", isDecimalValue: true, minValue: 0, maxValue: 1, customHelpText: "Modifies game generation settings to prefer larger rectangles. Setting an expansion factor of around 0.5 tends to make the game more difficult, and tends to reward a less deductive and more intuitive playing style. Too high, and the game will become trivial."),
-        GameConfigOption(gameName: "Pearl", helpField: "Allow unsoluble", customHelpText: "Enables simpler game generation that allows for larger grids and more clues, but does not guarantee unique solutions or that a solution can be logically deduced."),
-        GameConfigOption(gameName: "Boats", helpField: "Fleet configuration", customHelpText: "Customize the fleet by entering a list of numbers. Each number indicates how many times a boat of a specific size appears. For example, the configuration 3,2,1 represents 3 boats of size 1, 2 boats of size 2, and 1 boat of size 3."),
-        GameConfigOption(gameName: "Mines", helpField: "Ensure solubility", customHelpText: "When on (by default), Mines will ensure that the entire grid can be fully deduced starting from the initial open space. Turn off for a harder game that may involve guessing."),
-        GameConfigOption(gameName: "Mosaic", helpField: "Aggressive generation (longer)", customHelpText: "When on, the game generator will try harder to eliminate unnecessary clues on the board. This slows down generation, so it's not recommended for boards larger than ~30×30."),
-        GameConfigOption(gameName: "Same Game", helpField: "Scoring system", customHelpText: "Controls the precise mechanism used for scoring. With the default system, ‘(n-2)^2’, only regions of three squares or more will score any points at all. With the alternative ‘(n-1)^2’ system, regions of two squares score a point each, and larger regions score relatively more points."),
-        GameConfigOption(gameName: "Same Game", helpField: "Ensure solubility", customHelpText: "If enabled (the default), generated grids are guaranteed to have at least one solution."),
+        GameConfigOption(gameName: "Net", helpField: "Barrier probability", isDecimalValue: true, minValue: 0, maxValue: 1, customHelpText: String(localized: "net_help_barrier_probability", table: "Puzzles")),
+        GameConfigOption(gameName: "Netslide", helpField: "Barrier probability", isDecimalValue: true, minValue: 0, maxValue: 1, customHelpText: String(localized: "net_help_barrier_probability", table: "Puzzles")),
+        GameConfigOption(gameName: "Black Box", helpField: "No. of balls", forceString: true, preferDeciKeyboard: true, customHelpText: String(localized: "blackbox_help_num_balls", table: "Puzzles")),
+        GameConfigOption(gameName: "Rectangles", helpField: "Expansion factor", isDecimalValue: true, minValue: 0, maxValue: 1, customHelpText: String(localized: "rectangles_help_expansion_factor", table: "Puzzles")),
+        GameConfigOption(gameName: "Pearl", helpField: "Allow unsoluble", customHelpText: String(localized: "pearl_help_allow_unsoluble", table: "Puzzles")),
+        GameConfigOption(gameName: "Boats", helpField: "Fleet configuration", customHelpText: String(localized: "boats_help_fleet_configuration", table: "Puzzles")),
+        GameConfigOption(gameName: "Mines", helpField: "Ensure solubility", customHelpText: String(localized: "mines_help_ensure_solubility", table: "Puzzles")),
+        GameConfigOption(gameName: "Mosaic", helpField: "Aggressive generation (longer)", customHelpText: String(localized: "mosaic_help_agressive_generation", table: "Puzzles")),
+        GameConfigOption(gameName: "Same Game", helpField: "Scoring system", customHelpText: String(localized: "samegame_help_scoring_system", table: "Puzzles")),
+        GameConfigOption(gameName: "Same Game", helpField: "Ensure solubility", customHelpText: String(localized: "samegame_help_ensure_solubility", table: "Puzzles")),
     ]
     
     static func findOverride(gameName: String, field: String) -> GameConfigOption? {
-        print("Looking for help info for game \(gameName) and field \(field)")
         return allHelpTexts.first(where: { $0.gameName == gameName && $0.helpField.caseInsensitiveCompare(field) == .orderedSame })
     }
     
-    // This method does not lock by the game name.
+    // This method does not lock by the game name. Used by midend to look up overrides
     static func findOverride(field: String) -> GameConfigOption? {
         return allHelpTexts.first(where: { $0.helpField.caseInsensitiveCompare(field) == .orderedSame })
     }
