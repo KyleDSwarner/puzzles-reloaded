@@ -36,7 +36,7 @@ struct GameConfigOverrides {
         GameConfigOption(gameName: "Black Box", helpField: "No. of balls", forceString: true, preferDeciKeyboard: true, customHelpText: String(localized: "blackbox_help_num_balls", table: "Puzzles")),
         GameConfigOption(gameName: "Rectangles", helpField: "Expansion factor", isDecimalValue: true, minValue: 0, maxValue: 1, customHelpText: String(localized: "rectangles_help_expansion_factor", table: "Puzzles")),
         GameConfigOption(gameName: "Pearl", helpField: "Allow unsoluble", customHelpText: String(localized: "pearl_help_allow_unsoluble", table: "Puzzles")),
-        GameConfigOption(gameName: "Boats", helpField: "Fleet configuration", customHelpText: String(localized: "boats_help_fleet_configuration", table: "Puzzles")),
+        GameConfigOption(gameName: "Boats", helpField: "Fleet configuration", preferDeciKeyboard: true, customHelpText: String(localized: "boats_help_fleet_configuration", table: "Puzzles")),
         GameConfigOption(gameName: "Mines", helpField: "Ensure solubility", customHelpText: String(localized: "mines_help_ensure_solubility", table: "Puzzles")),
         GameConfigOption(gameName: "Mosaic", helpField: "Aggressive generation (longer)", customHelpText: String(localized: "mosaic_help_agressive_generation", table: "Puzzles")),
         GameConfigOption(gameName: "Same Game", helpField: "Scoring system", customHelpText: String(localized: "samegame_help_scoring_system", table: "Puzzles")),
