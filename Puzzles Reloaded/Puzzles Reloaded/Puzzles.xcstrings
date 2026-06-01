@@ -1,18 +1,6 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@_controls" : {
-
-    },
-    "%@_description" : {
-
-    },
-    "%@_instructions" : {
-
-    },
-    "%@_name" : {
-
-    },
     "abcd_controls" : {
       "extractionState" : "manual",
       "localizations" : {

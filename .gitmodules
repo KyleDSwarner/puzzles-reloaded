@@ -7,3 +7,6 @@
 [submodule "submodules/sgt-puzzles-aho-extensions"]
 	path = submodules/sgt-puzzles-aho-extensions
 	url = git@github.com:Anders-Holst/sgt-puzzles-aho-extensions.git
+[submodule "submodules/steffen-bauer-puzzles"]
+	path = submodules/steffen-bauer-puzzles
+	url = git@github.com:SteffenBauer/sgtpuzzles-extended.git

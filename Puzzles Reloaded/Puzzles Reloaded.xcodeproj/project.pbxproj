@@ -158,6 +158,7 @@
 		92D61AD92C9DF4C500447349 /* CustomGameSeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D61AD82C9DF4C500447349 /* CustomGameSeedView.swift */; };
 		92D8D8692C57C4CD00E1E9E3 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */; };
 		92D8D86B2C57CA7800E1E9E3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 92D8D86A2C57CA7800E1E9E3 /* README.md */; };
+		92E1E8892FCE1CAC00141044 /* AnimatableTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E1E8882FCE1CAC00141044 /* AnimatableTransform.swift */; };
 		92E517E42FBB9B8C004663B7 /* GameConfigOverrides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E517E32FBB9B8C004663B7 /* GameConfigOverrides.swift */; };
 		92E7FE2E2C3F15C70020C1F5 /* EffectsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */; };
 		92F6946A2C6BE2480023D830 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F694692C6BE2480023D830 /* LicenseView.swift */; };
@@ -336,6 +337,7 @@
 		92D724732C1C71A90021AD89 /* Puzzles-Reloaded-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Puzzles-Reloaded-Info.plist"; sourceTree = SOURCE_ROOT; };
 		92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		92D8D86A2C57CA7800E1E9E3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		92E1E8882FCE1CAC00141044 /* AnimatableTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableTransform.swift; sourceTree = "<group>"; };
 		92E517E32FBB9B8C004663B7 /* GameConfigOverrides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfigOverrides.swift; sourceTree = "<group>"; };
 		92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsManager.swift; sourceTree = "<group>"; };
 		92F694692C6BE2480023D830 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 				92E7FE2C2C3F15B80020C1F5 /* Effects */,
 				923E644C2C00B97A0027DF54 /* PuzzleInteractionsView.swift */,
 				923E64492C00B97A0027DF54 /* GestureNavigationCoordinator.swift */,
+				92E1E8882FCE1CAC00141044 /* AnimatableTransform.swift */,
 				923E644D2C00B97A0027DF54 /* PuzzleTapView.swift */,
 				923E644B2C00B97A0027DF54 /* PuzzleInteractionCodes.swift */,
 				92339D5B2C737718002D84FF /* KeyboardInputHandler.swift */,
@@ -965,6 +968,7 @@
 				923E64C52C00BF120027DF54 /* palisade.c in Sources */,
 				92AEB9472EF1F633002D0052 /* tents.c in Sources */,
 				923E65122C00C72C0027DF54 /* spectre.c in Sources */,
+				92E1E8892FCE1CAC00141044 /* AnimatableTransform.swift in Sources */,
 				923E64CE2C00BF340027DF54 /* misc.c in Sources */,
 				923E649E2C00BEBC0027DF54 /* findloop.c in Sources */,
 				9241816F2CEA719C00BBB09E /* SingleGameStatsView.swift in Sources */,
@@ -1204,7 +1208,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.10;
+				MARKETING_VERSION = 1.11;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "Simon Tatham Puzzles Reloaded";
@@ -1257,7 +1261,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.10;
+				MARKETING_VERSION = 1.11;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kds.Puzzles-Reloaded";
 				PRODUCT_NAME = "$(TARGET_NAME)";
