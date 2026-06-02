@@ -159,6 +159,7 @@
 		92D8D8692C57C4CD00E1E9E3 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */; };
 		92D8D86B2C57CA7800E1E9E3 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 92D8D86A2C57CA7800E1E9E3 /* README.md */; };
 		92E1E8892FCE1CAC00141044 /* AnimatableTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E1E8882FCE1CAC00141044 /* AnimatableTransform.swift */; };
+		92E1E88D2FCF0F2100141044 /* group.c in Sources */ = {isa = PBXBuildFile; fileRef = 92E1E88C2FCF0F2100141044 /* group.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		92E517E42FBB9B8C004663B7 /* GameConfigOverrides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E517E32FBB9B8C004663B7 /* GameConfigOverrides.swift */; };
 		92E7FE2E2C3F15C70020C1F5 /* EffectsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */; };
 		92F6946A2C6BE2480023D830 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F694692C6BE2480023D830 /* LicenseView.swift */; };
@@ -338,6 +339,7 @@
 		92D8D8682C57C4CD00E1E9E3 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		92D8D86A2C57CA7800E1E9E3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		92E1E8882FCE1CAC00141044 /* AnimatableTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableTransform.swift; sourceTree = "<group>"; };
+		92E1E88C2FCF0F2100141044 /* group.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = group.c; path = "../submodules/simon-tatham-puzzles/unfinished/group.c"; sourceTree = SOURCE_ROOT; };
 		92E517E32FBB9B8C004663B7 /* GameConfigOverrides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfigOverrides.swift; sourceTree = "<group>"; };
 		92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsManager.swift; sourceTree = "<group>"; };
 		92F694692C6BE2480023D830 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 				923E65052C00C25D0027DF54 /* flip.c */,
 				923E648B2C00BE940027DF54 /* flood.c */,
 				923E65042C00C25D0027DF54 /* galaxies.c */,
+				92E1E88C2FCF0F2100141044 /* group.c */,
 				923E65192C00C7880027DF54 /* guess.c */,
 				923E64E02C00BFBA0027DF54 /* inertia.c */,
 				923E64DE2C00BFBA0027DF54 /* keen.c */,
@@ -1017,6 +1020,7 @@
 				923E65312C00D75E0027DF54 /* GameHelpView.swift in Sources */,
 				923E64C82C00BF1C0027DF54 /* nullgame.c in Sources */,
 				92E7FE2E2C3F15C70020C1F5 /* EffectsManager.swift in Sources */,
+				92E1E88D2FCF0F2100141044 /* group.c in Sources */,
 				923E645D2C00B9840027DF54 /* GameListILargeItem.swift in Sources */,
 				923E650B2C00C4AC0027DF54 /* tree234.c in Sources */,
 				923E64B92C00BEED0027DF54 /* samegame.c in Sources */,

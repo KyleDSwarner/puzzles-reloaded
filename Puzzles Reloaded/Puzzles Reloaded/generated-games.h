@@ -17,6 +17,7 @@ GAME(filling)
 GAME(flip)
 GAME(flood)
 GAME(galaxies)
+GAME(group) //Experimental puzzle
 GAME(guess)
 GAME(inertia)
 GAME(keen)

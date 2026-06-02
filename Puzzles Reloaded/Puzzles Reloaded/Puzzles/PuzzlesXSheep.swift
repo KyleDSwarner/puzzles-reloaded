@@ -44,7 +44,7 @@ extension Puzzles {
         return Puzzles.createButtonControls(numButtons ?? 0, keycodes: Puzzles.AlphaButtons)
     })
     .addSearchTerms(["Kombi"])
-    .addHelpPageEntries(gameParameters: String(localized: "abcd_params", table: "Puzzles"))
+    .addHelpPageEntries(gameParameters: "abcd_params")
     .setDarkModeColors([
         1: (Theming.background, "Innter Background"),
         2: (Theming.white, "Grid"),
@@ -85,7 +85,7 @@ extension Puzzles {
         //6: (Theming.veryDarkGray, "Error")
     ])
     .addSearchTerms(["Battleships"])
-    .addHelpPageEntries(gameParameters: String(localized: "boats_params", table: "Puzzles"))
+    .addHelpPageEntries(gameParameters: "boats_params")
 
     
     // MARK: Bricks
@@ -129,7 +129,7 @@ extension Puzzles {
         let numButtons = Int(gameId.split(separator: ":")[0])
         return Puzzles.createButtonControls(numButtons ?? 0)
     })
-    .addHelpPageEntries(gameParameters: String(localized: "mathrax_params", table: "Puzzles"))
+    .addHelpPageEntries(gameParameters: "mathrax_params")
 
     .setDarkModeColors([
         1: (Theming.darkGray, "Highlight - Clue Circles"),
@@ -198,7 +198,7 @@ extension Puzzles {
         //return Puzzles.createButtonControls(numButtons ?? 0)
         return buttonControls
     })
-    .addHelpPageEntries(gameParameters: String(localized: "salad_params", table: "Puzzles"))
+    .addHelpPageEntries(gameParameters: "salad_params")
     .setDarkModeColors([
         1: (Theming.midGray, "Highlight"),
         2: (Theming.darkGray, "Lowlight"),
@@ -238,14 +238,14 @@ extension Puzzles {
         2: (Theming.turboBlue, "Line"),
         3: (Theming.black, "Number"),
     ])
-    .addHelpPageEntries(gameParameters: String(localized: "sticks_params", table: "Puzzles"))
+    .addHelpPageEntries(gameParameters: "sticks_params")
     .addSearchTerms(["Tatebo Yokobo"])
     
     static let puzzle_subsets = GameConfig(
         identifier: "subsets",
         internalGame: subsets
     )
-    .addHelpPageEntries(gameParameters: String(localized: "subsets_params", table: "Puzzles"))
+    .addHelpPageEntries(gameParameters: "subsets_params")
     .setDarkModeColors([
         1: (Theming.midGray, "Inner Background - Guessing Squares"),
         2: (Theming.white, "Grid"),

@@ -168,7 +168,7 @@ extension Puzzles {
         12: (Theming.midGray, "Highlight"),
         13: (Theming.darkGray, "Lowlight")
     ])
-    .addHelpPageEntries(gameParameters: String(localized: "samegame_params", table: "Puzzles"))
+    .addHelpPageEntries(gameParameters: "samegame_params")
     
     
     // MARK: Signpost
@@ -269,7 +269,7 @@ extension Puzzles {
             
     })
     .addSearchTerms(["Sudoku"])
-    .addHelpPageEntries(gameParameters: String(localized: "solo_params", table: "Puzzles"))
+    .addHelpPageEntries(gameParameters: "solo_params")
     .setDarkModeColors([
         //1: (Theming.text, "Text"),
         1: (Theming.veryDarkGray, "X Diagonals"),

@@ -29,7 +29,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You're given an empty grid, and several rows of numbers on the side. Your goal is to write a letter in every empty cell, following these rules:\n\n1. The numbers on the edge indicate how many instances of a specific letter appear in that row or column.\n2. Identical letters can not be horizontally or vertically adjacent.\n\nThe inventor of this type is unknown. This puzzle is also known under the names ABCD Puzzle, ABC-Kombi or ABCD-Rätsel."
+            "value" : "You're given an empty grid, and several rows of numbers on the side. Your goal is to write a letter in every empty cell, following these rules:\n\n1. The numbers on the edge indicate how many instances of a specific letter appear in that row or column.\n2. Identical letters can not be horizontally or vertically adjacent.\n\nThe inventor of this type is unknown. This puzzle is also known under the names ABCD Puzzle, ABC-Kombi or ABCD-Rätsel.\n\nABCD was contributed to this puzzle collection by Lennard Sprong."
           }
         }
       }
@@ -46,11 +46,12 @@
       }
     },
     "abcd_params" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "1. Width, Height\nSize of the grid in squares (excluding the size of the numbers on the edge).\n\n2. Letters\nThe amount of different letters that can appear in the puzzle.\n\n3. Remove clues\nWhen enabled, the difficulty is increased by hiding certain number clues.\n\n4. Allow diagonal touching\nWhen disabled, letters cannot be diagonally adjacent (in addition to letters not being orthogonally adjacent)."
+            "value" : "- **Width, Height:** Size of the grid in squares (excluding the size of the numbers on the edge).\n\n- **Letters:** The number of different letters that can appear in the puzzle.\n\n- **Remove clues:** When enabled, the difficulty is increased by hiding certain number clues.\n\n- **Allow diagonal touching:** When disabled, letters cannot be diagonally adjacent (in addition to letters not being orthogonally adjacent)."
           }
         }
       }
@@ -72,7 +73,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Place each number once to create a path."
+            "value" : "Place each number once to create a path"
           }
         }
       }
@@ -83,7 +84,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You're given a grid, with several numbers inside. Your objective is to place each number exactly once, so a path is formed from the lowest number (i.e. 1) to the highest number. Two numbers that are in sequence must be horizontally, vertically or diagonally adjacent.\n\nThe puzzle can be played on a rectangular or hexagonal grid. It's also possible to play on a rectangular grid while not allowing the path to move diagonally.\n\nIn the alternate game mode 'Edges', the grid is surrounded by numbers placed inside arrows. An arrow points to the row, column or diagonal where this number appears in the path.\n\nThis puzzle is invented by Gyora Benedek, and is known as Hidato (or the non-trademarked name Hidoku). Edges mode is an implementation of 1to25 invented by Jeff Widderich."
+            "value" : "You're given a grid, with several numbers inside. Your objective is to place each number exactly once, so a path is formed from the lowest number (i.e. 1) to the highest number. Two numbers that are in sequence must be horizontally, vertically or diagonally adjacent.\n\nThe puzzle can be played on a rectangular or hexagonal grid. It's also possible to play on a rectangular grid while not allowing the path to move diagonally.\n\nIn the alternate game mode 'Edges', the grid is surrounded by numbers placed inside arrows. An arrow points to the row, column or diagonal where this number appears in the path.\n\nThis puzzle is invented by Gyora Benedek, and is known as Hidato (or the non-trademarked name Hidoku). Edges mode is an implementation of 1to25 invented by Jeff Widderich.\n\nAscent was contributed to this puzzle collection by Lennard Sprong."
           }
         }
       }
@@ -193,7 +194,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You're given a grid, and a list of boats which must be located inside that grid. Boats can be rotated. Two boats cannot be horizontally, vertically or diagonally adjacent.\n\nThe numbers on the side indicate the amount of cells inside that row or column which are occupied by a boat.\n\nSome boat segments are given (corner pieces, centers, or single-length boats), along with their orientation.\n\nAt the bottom of the puzzle is a list of every boat that must be placed in the grid. When a boat is found, it is automatically crossed off of this list. Make sure a boat is surrounded by water on all sides, to indicate that it cannot possibly grow any further.\n\nThis puzzle is best known as Battleships."
+            "value" : "You're given a grid, and a list of boats which must be located inside that grid. Boats can be rotated. Two boats cannot be horizontally, vertically or diagonally adjacent.\n\nThe numbers on the side indicate the amount of cells inside that row or column which are occupied by a boat.\n\nSome boat segments are given (corner pieces, centers, or single-length boats), along with their orientation.\n\nAt the bottom of the puzzle is a list of every boat that must be placed in the grid. When a boat is found, it is automatically crossed off of this list. Make sure a boat is surrounded by water on all sides, to indicate that it cannot possibly grow any further.\n\nThis puzzle is best known as Battleships.\n\nBoats was contributed to this puzzle collection by Lennard Sprong."
           }
         }
       }
@@ -210,6 +211,7 @@
       }
     },
     "boats_params" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -247,7 +249,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The objective of this game is to shade some number of cells in the hexagonal grid while following these rules:\n\n1. Each shaded cell must have at least one shaded cell below it (unless it's on the bottom row).\n2. There can’t be 3 or more shaded cells in a horizontal row.\n3. A number indicates the amount of shaded cells around it.\n4. Cells with numbers cannot be shaded.\n\nThis genre was invented by Nikoli under the name Tawamurenga."
+            "value" : "The objective of this game is to shade some number of cells in the hexagonal grid while following these rules:\n\n1. Each shaded cell must have at least one shaded cell below it (unless it's on the bottom row).\n2. There can’t be 3 or more shaded cells in a horizontal row.\n3. A number indicates the amount of shaded cells around it.\n4. Cells with numbers cannot be shaded.\n\nThis genre was invented by Nikoli under the name Tawamurenga.\n\nBricks was written & contributed to this puzzle collection by Lennard Sprong."
           }
         }
       }
@@ -335,7 +337,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You're given a grid, with several dots inside colored squares. Your objective is to fill every empty space with one of two colors while following these rules:\n\n- Tiles which are adjacent to 1 other tile of the same color are denoted with a dot. All of these tiles are given.\n- All other tiles must be adjacent to 2 or more tiles of the same color.\n\nThis puzzle type was invented by Inaba Naoki under the name クラスター, or literally Kurasuta, which Google Translate names 'Cluster'."
+            "value" : "You're given a grid, with several dots inside colored squares. Your objective is to fill every empty space with one of two colors while following these rules:\n\n- Tiles which are adjacent to 1 other tile of the same color are denoted with a dot. All of these tiles are given.\n- All other tiles must be adjacent to 2 or more tiles of the same color.\n\nThis puzzle type was invented by Inaba Naoki under the name クラスター, or literally Kurasuta, which Google Translate names 'Cluster'.\n\nClusters was contributed to this puzzle collection by Lennard Sprong."
           }
         }
       }
@@ -657,6 +659,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Galaxies"
+          }
+        }
+      }
+    },
+    "group_controls" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To place a letter, tap in a square to select it, then press the corresponding letter button. To erase a letter, tap to select a square and then press the clear button (or backspace on a keyboard).\n\nLong press in a square and then type a letter to add or remove the number as a pencil mark, indicating letters that you think might go in that square.\n\nYou can rearrange the order of elements in the rows and columns by dragging the column or row headings back and forth. (The rows and columns will stay in sync with each other.) \n\nAlso, tapping between two row or column headings will add or remove a thick line between those two rows and the corresponding pair of columns (which is useful if you're considering a subgroup and its cosets)."
+          }
+        }
+      }
+    },
+    "group_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complete the grid to create a Cayley table"
+          }
+        }
+      }
+    },
+    "group_instructions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fill in the grid with the letters shown to the top and left of it, so that the full grid is a valid Cayley table for a group.\n\nNote: This is a complex puzzle; If you don't already know what a group is, I don't really recommend trying to play this game. But if you want to try anyway, the above is equivalent to saying that the following conditions must be satisfied:\n\n1. **Latin square:** Every row and column must contain exactly one of each letter.\n\n2. **Identity:** There must be some letter _e_ such that, for all _a_, the letter in row _e_ column _a_ and the one in row a column _e_ are both _a_. In the default mode, this letter is always _e_ and its row and column are filled in for you; by reconfiguring the game using the Type menu, you can select a mode in which you have to work out which letter is the identity.\n\n3. **Inverses:** For every letter _a_, there must be some letter _b_ (which may sometimes be the same letter as _a_) such that the letters in row _a_ column _b_ and in row _b_ column _a_ are both the identity letter (as defined above).\n\n4. **Associativity:** For every combination of letters _a_, _b_, and _c_, denote the letter in row a column _b_ by _d_, and the one in row _b_ column _c_ by _e_. Then the letters in row _d_ column _c_ and in row _a_ column _e_ must be the same.\n"
+          }
+        }
+      }
+    },
+    "group_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Group"
           }
         }
       }
@@ -997,7 +1043,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You have a square grid; each square may contain a digit from 1 to the size of the grid, and some squares have clues overlapping them. Your objective is to fill the grid with numbers so that no number appears more than once in a row or column, and all clues are satisfied.\n\nThe following clues can appear:\n\n- An 'E' indicates that the four adjacent digits are even.\n- An 'O' indicates that the four adjacent digits are odd.\n- An '=' indicates that diagonally adjacent digits are equal.\n- A number indicates the result of the given operation when applied to each pair of diagonally adjacent digits. (topleft * bottomright) = (topright * bottomleft).\n\nThe inventor of Mathrax is unknown."
+            "value" : "You have a square grid; each square may contain a digit from 1 to the size of the grid, and some squares have clues overlapping them. Your objective is to fill the grid with numbers so that no number appears more than once in a row or column, and all clues are satisfied.\n\nThe following clues can appear:\n\n- An 'E' indicates that the four adjacent digits are even.\n- An 'O' indicates that the four adjacent digits are odd.\n- An '=' indicates that diagonally adjacent digits are equal.\n- A number indicates the result of the given operation when applied to each pair of diagonally adjacent digits. (topleft * bottomright) = (topright * bottomleft).\n\nThe inventor of Mathrax is unknown. \n\nMathrax was contributed to this puzzle collection by Lennard Sprong."
           }
         }
       }
@@ -1014,6 +1060,7 @@
       }
     },
     "mathrax_params" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1546,7 +1593,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You're given a grid that has been divided into areas, containing arrows and one or more goals (represented by circles). Your goal is to fill every empty space with an arrow pointing up, down, left or right while following these rules:\n\n- Every outlined area contains different arrows.\n- Following the arrows must lead to one of the circled goals.\n\nThis type was invented by Nikoli, who name it Roma."
+            "value" : "You're given a grid that has been divided into areas, containing arrows and one or more goals (represented by circles). Your goal is to fill every empty space with an arrow pointing up, down, left or right while following these rules:\n\n- Every outlined area contains different arrows.\n- Following the arrows must lead to one of the circled goals.\n\nThis type was invented by Nikoli, who name it Roma.\n\nRome was contributed to this puzzle collection by Lennard Sprong."
           }
         }
       }
@@ -1590,7 +1637,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You have a square grid; each square may contain a character from A (or 1) to a given maximum. Your objective is to put characters in some of the squares, so each character appears exactly once in each row and column.\n\nThe rules vary depending on the game mode:\n\nABC End View mode: Letters on the edge show which letter appears first when 'looking' into the grid.\n\nNumber Ball mode: Squares with a ball must contain a number. Squares with a cross must remain empty.\n\nNumber Ball was invented by Inaba Naoki.\n\nSubsets was made for this puzzle collection by Lennard Sprong."
+            "value" : "You have a square grid; each square may contain a character from A (or 1) to a given maximum. Your objective is to put characters in some of the squares, so each character appears exactly once in each row and column.\n\nThe rules vary depending on the game mode:\n\nABC End View mode: Letters on the edge show which letter appears first when 'looking' into the grid.\n\nNumber Ball mode: Squares with a ball must contain a number. Squares with a cross must remain empty.\n\nNumber Ball was invented by Inaba Naoki.\n\nSalad was made for this puzzle collection by Lennard Sprong."
           }
         }
       }
@@ -1968,7 +2015,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "You are given a grid filled with hubs with numbers on them. Your objective is to draw lines between them while following these rules:\n\n- You can only draw a line starting from a hub's point. If there is no point visible, you cannot draw a line.\n- Only one line can be drawn between two hubs.\n- The number indicates the amount of lines starting from a hub.\n- Lines cannot cross each other.\n- All hubs must form a single connected group.\n\nThe inventor of this puzzle type is unknown."
+            "value" : "You are given a grid filled with hubs with numbers on them. Your objective is to draw lines between them while following these rules:\n\n- You can only draw a line starting from a hub's point. If there is no point visible, you cannot draw a line.\n- Only one line can be drawn between two hubs.\n- The number indicates the amount of lines starting from a hub.\n- Lines cannot cross each other.\n- All hubs must form a single connected group.\n\nThe inventor of this puzzle type is unknown.\n\nSpokes was contributed to this puzzle collection by Lennard Sprong."
           }
         }
       }
@@ -2510,5 +2557,5 @@
       }
     }
   },
-  "version" : "1.0"
+  "version" : "1.1"
 }

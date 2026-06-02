@@ -19,6 +19,7 @@ extension Puzzles {
         puzzle_flip,
         puzzle_flood,
         puzzle_galaxies,
+        puzzle_group,
         puzzle_guess,
         puzzle_intertia,
         puzzle_keen,
@@ -157,6 +158,29 @@ extension Puzzles {
         6: (Theming.midGray, "Game Border"),
         7: (Theming.enteredTextGreen, "Arrows")
     ])
+    
+    // MARK: Group
+    static let puzzle_group = GameConfig(
+        identifier: "group",
+        internalGame: group,
+    )
+        .setDarkModeColors([
+            1: (Theming.lightGray, "Grid and Immutable Values"),
+            2: (Theming.enteredTextBlue, "User Entered Value"),
+            3: (Theming.darkGray, "Highlight"),
+            6: (Theming.veryDarkGray, "Diagonal"),
+        ])
+        .numericButtonsBuilder({ gameId in
+            // Game ID Example: 6:1_2_3_4_5_6_2_1c4_3a1_2b4e5e6e
+            
+            guard !gameId.isEmpty else {
+                return []
+            }
+            
+            let numButtons = Int(gameId.split(separator: ":")[0])
+            return Puzzles.createButtonControls(numButtons ?? 0, keycodes: Puzzles.AlphaButtons)
+            
+        })
     
     // MARK: Guess
     static let puzzle_guess = GameConfig(

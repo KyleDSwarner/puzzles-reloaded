@@ -34,8 +34,8 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
     var savegameIdentifier: String
     var searchTerms: [String]
     
-    var helpGameParametersText: String?
-    var helpUserParametersText: String?
+    var helpGameParametersText: AttributedString?
+    var helpUserParametersText: AttributedString?
     
     var touchControls: [ControlConfig]
     var buttonControls: [ControlConfig]
@@ -101,14 +101,14 @@ extension GameConfig {
         return String(localized: String.LocalizationValue(descriptionKey), table: "Puzzles")
     }
     
-    var instructions: String {
+    var instructions: AttributedString {
         let instructionsKey = "\(self.identifier)_instructions"
-        return String(localized: String.LocalizationValue(instructionsKey), table: "Puzzles")
+        return AttributedString(localized: String.LocalizationValue(instructionsKey), table: "Puzzles")
     }
     
-    var controlInfo: String {
+    var controlInfo: AttributedString {
         let controlsKey = "\(self.identifier)_controls"
-        return String(localized: String.LocalizationValue(controlsKey), table: "Puzzles")
+        return AttributedString(localized: String.LocalizationValue(controlsKey), table: "Puzzles")
     }
 }
 
@@ -136,8 +136,14 @@ extension GameConfig {
     }
     
     func addHelpPageEntries(gameParameters: String? = nil, userParameters: String? = nil) -> Self {
-        self.helpGameParametersText = gameParameters
-        self.helpUserParametersText = userParameters
+        if let gameParams = gameParameters {
+            self.helpGameParametersText = AttributedString(localized: String.LocalizationValue(gameParams), table: "Puzzles")
+        }
+        
+        if let userParams = userParameters {
+            self.helpUserParametersText = AttributedString(localized: String.LocalizationValue(userParams), table: "Puzzles")
+        }
+        
         return self
     }
 }
