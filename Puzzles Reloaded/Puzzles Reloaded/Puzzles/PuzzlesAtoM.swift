@@ -171,14 +171,22 @@ extension Puzzles {
             6: (Theming.veryDarkGray, "Diagonal"),
         ])
         .numericButtonsBuilder({ gameId in
-            // Game ID Example: 6:1_2_3_4_5_6_2_1c4_3a1_2b4e5e6e
+            // Game ID Example: 6:1_2_3_4_5_6_2_1c4_3a1_2b4e5e6e, or
+            // 16i:a15zl8f11n3g10ze3g11zf10b2u10d15c14zj6o11c7_9t (with no identity provided)
             
             guard !gameId.isEmpty else {
                 return []
             }
             
-            let numButtons = Int(gameId.split(separator: ":")[0])
-            return Puzzles.createButtonControls(numButtons ?? 0, keycodes: Puzzles.AlphaButtons)
+            let digitRegex = /\d+/
+                
+            let gameInfo = gameId.split(separator: ":")[0]
+            let matches = gameInfo.matches(of: digitRegex)
+            
+            let numButtons = Int(matches[0].output)
+            
+            return Puzzles.createButtonControls(numButtons ?? 8, keycodes: Puzzles.AlphaButtons)
+            
             
         })
     

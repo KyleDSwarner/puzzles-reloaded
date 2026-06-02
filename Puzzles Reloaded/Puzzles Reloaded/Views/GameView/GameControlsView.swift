@@ -150,7 +150,7 @@ struct GameControlsView: View, Equatable {
                                 ButtonLabel(control: numericButtons[index])
                                     .frame(maxHeight: 30)
                             }
-                            .frame(minWidth: 30, minHeight: 30)
+                            .frame(minWidth: 35, minHeight: 35)
                             .modifier(ButtonDesigner())
                         }
                         

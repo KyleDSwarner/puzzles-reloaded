@@ -247,7 +247,7 @@ extension Puzzles {
          We have several game IDs we need to look for here:
             Standard grid: 3x3:b4_5e3_6a1e5b3_2a9a4a2a8a5_4_7k7_8_9a1a2a7a6a1_8b9e2a8_6e9_5b
             Jigsaw grid: 12j:.... (we just extract the number before the j)
-            Jigsaw gris with x: 9jx:.... (We still need the first number, but taking extra care of the additional x in our regex)
+            Jigsaw grid with x: 9jx:.... (We still need the first number, but taking extra care of the additional x in our regex)
          
             To process these values, we extract all numbers preceeding the colon & multiply them together.
          */
