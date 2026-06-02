@@ -11,7 +11,7 @@ import Foundation
 struct Puzzles {
     
     static var allPuzzles: [GameConfig] {
-        puzzlesAtoM + puzzlesNtoZ + puzzlesXsheep // + puzzlesAndersHolst
+        puzzlesAtoM + puzzlesNtoZ + puzzlesXsheep + puzzlesSteffenBauer // + puzzlesAndersHolst
     }
     
     static var allPuzzlesSorted: [GameConfig] {
@@ -26,7 +26,7 @@ extension Puzzles {
     
     static let NumericButtons = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
     static let HexidecimalButtons = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"] // Used by Solo, which supports up to 31 characters.
-    static let AlphaButtons = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"] // Used by ABCD
+    static let AlphaButtons = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"] // Used by ABCD & Group
     
     /**
      Given a button count and a keycode array, iterate & create an array of control buttons for the game

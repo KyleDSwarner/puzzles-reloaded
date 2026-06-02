@@ -619,6 +619,50 @@
         }
       }
     },
+    "flow_controls" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap a square or left click with a mouse to cycle between black, white, and empty squares. Long pressing or right clicking a square reverses the direction"
+          }
+        }
+      }
+    },
+    "flow_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find a path, matching the clues"
+          }
+        }
+      }
+    },
+    "flow_instructions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fill in every square on the grid either black or white, following these rules:\n\n1. Each numbered clue indicates how many **black** cells around the clue.\n\n2. All **white** cells must form a connected area (horizontally or vertically connected)\n\n3. No cell in the grid may be blank"
+          }
+        }
+      }
+    },
+    "flow_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flow"
+          }
+        }
+      }
+    },
     "galaxies_controls" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2552,6 +2596,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Untangle"
+          }
+        }
+      }
+    },
+    "walls_controls" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap & drag between two squares to a line between them. You can drag through multiple squares, extending your line through each.\n\nLong press on a border between two cells to place a wall indicating a boundary your line should not cross."
+          }
+        }
+      }
+    },
+    "walls_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find a path through a maze of walls"
+          }
+        }
+      }
+    },
+    "walls_instructions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The objective of this game is to find a path through the given maze of walls, following these rules:\n\n1. The path enters the grid from one open border, and leaves the grid through another open border.\n2. All grid cells are visited once.\n3. The path may not cross itself or form loops.\n4. The path cannot go through a wall.\n\nThis is an implementation of the excellent puzzle Alcazar, which I found in the Android store quite some time ago. Unfortunately, the developers of it don't seem to have time to maintain it anymore and pulled it from the Android store.\n\nWalls was contributed to this collection by Stefan Bauer."
+          }
+        }
+      }
+    },
+    "walls_name" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walls"
           }
         }
       }
