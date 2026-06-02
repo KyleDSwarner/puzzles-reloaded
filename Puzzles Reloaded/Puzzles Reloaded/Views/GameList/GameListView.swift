@@ -22,6 +22,7 @@ struct GameListView: View {
     @State private var showingSavegameFailAlert = false
     @State private var gameSortOptionsViewDisplayed = false
     @State private var searchText: String = ""
+    @State private var whatsNewDisplayed = false
     
     
     let columns = [
@@ -278,6 +279,13 @@ struct GameListView: View {
                 
                 if appSettings.value.showFirstRunMessage == true {
                     welcomeMessageDisplayed = true
+                    // Prevent the What's New message from appearing for new users
+                    appSettings.value.lastSeenReleaseNotesVersion = ReleaseNotesStore.latest.buildNumber
+                }
+                
+                // Show "What's New" on first launch of a new version
+                else if appSettings.value.lastSeenReleaseNotesVersion < ReleaseNotesStore.latest.buildNumber || DebugFlags.AlwaysShowWhatsNewMessage {
+                    whatsNewDisplayed = true
                 }
             }
             // Detects changes to the welcome message settings & updates the flags accordingly
@@ -291,6 +299,10 @@ struct GameListView: View {
             }
             .sheet(isPresented: $gameSortOptionsViewDisplayed) {
                 GameListDisplayOptionsView()
+            }
+            .sheet(isPresented: $whatsNewDisplayed) {
+                ReleaseNotesView(navPath: $navPath, isFromSettingsMenu: false)
+                    .environment(gameManager)
             }
             .navigationDestination(for: Game.self) { gameModel in
                 GameView(game: gameModel)

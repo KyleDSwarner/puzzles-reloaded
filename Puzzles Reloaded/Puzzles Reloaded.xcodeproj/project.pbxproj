@@ -163,6 +163,8 @@
 		92E1E88F2FCF141500141044 /* PuzzlesSteffenBauer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E1E88E2FCF141500141044 /* PuzzlesSteffenBauer.swift */; };
 		92E1E8932FCF149300141044 /* walls.c in Sources */ = {isa = PBXBuildFile; fileRef = 92E1E8922FCF149300141044 /* walls.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		92E1E8942FCF149300141044 /* flow.c in Sources */ = {isa = PBXBuildFile; fileRef = 92E1E8912FCF149300141044 /* flow.c */; settings = {COMPILER_FLAGS = "-w"; }; };
+		92E1E8982FCF672500141044 /* ReleaseNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E1E8962FCF672500141044 /* ReleaseNotesView.swift */; };
+		92E1E8992FCF672500141044 /* ReleaseNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E1E8952FCF672500141044 /* ReleaseNotes.swift */; };
 		92E517E42FBB9B8C004663B7 /* GameConfigOverrides.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E517E32FBB9B8C004663B7 /* GameConfigOverrides.swift */; };
 		92E7FE2E2C3F15C70020C1F5 /* EffectsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */; };
 		92F6946A2C6BE2480023D830 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F694692C6BE2480023D830 /* LicenseView.swift */; };
@@ -346,6 +348,8 @@
 		92E1E88E2FCF141500141044 /* PuzzlesSteffenBauer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuzzlesSteffenBauer.swift; sourceTree = "<group>"; };
 		92E1E8912FCF149300141044 /* flow.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = flow.c; path = "../submodules/steffen-bauer-puzzles/flow.c"; sourceTree = SOURCE_ROOT; };
 		92E1E8922FCF149300141044 /* walls.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = walls.c; path = "../submodules/steffen-bauer-puzzles/walls.c"; sourceTree = SOURCE_ROOT; };
+		92E1E8952FCF672500141044 /* ReleaseNotes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseNotes.swift; sourceTree = "<group>"; };
+		92E1E8962FCF672500141044 /* ReleaseNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseNotesView.swift; sourceTree = "<group>"; };
 		92E517E32FBB9B8C004663B7 /* GameConfigOverrides.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConfigOverrides.swift; sourceTree = "<group>"; };
 		92E7FE2D2C3F15C70020C1F5 /* EffectsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsManager.swift; sourceTree = "<group>"; };
 		92F694692C6BE2480023D830 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
@@ -470,6 +474,7 @@
 				921DF8E02F3137FE00945CB7 /* UserData */,
 				924181692CE92E7F00BBB09E /* Themes */,
 				924181702CEFBC1200BBB09E /* Intents */,
+				92E1E89C2FCF768600141044 /* ReleaseNotes */,
 				92B55D582C0F95B200517280 /* Utils */,
 				92B55D512C0F410900517280 /* Localizable.xcstrings */,
 				92B55D532C0F46A500517280 /* Puzzles.xcstrings */,
@@ -588,6 +593,7 @@
 		923E646C2C00B9A30027DF54 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				92E1E89B2FCF760100141044 /* ReleaseNotes */,
 				923E645A2C00B9840027DF54 /* GameList */,
 				923E64652C00B9890027DF54 /* GameView */,
 				923E652F2C00D7490027DF54 /* HelpView */,
@@ -809,6 +815,22 @@
 			path = "Steffen-Bauer";
 			sourceTree = "<group>";
 		};
+		92E1E89B2FCF760100141044 /* ReleaseNotes */ = {
+			isa = PBXGroup;
+			children = (
+				92E1E8962FCF672500141044 /* ReleaseNotesView.swift */,
+			);
+			path = ReleaseNotes;
+			sourceTree = "<group>";
+		};
+		92E1E89C2FCF768600141044 /* ReleaseNotes */ = {
+			isa = PBXGroup;
+			children = (
+				92E1E8952FCF672500141044 /* ReleaseNotes.swift */,
+			);
+			path = ReleaseNotes;
+			sourceTree = "<group>";
+		};
 		92E7FE2C2C3F15B80020C1F5 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
@@ -952,6 +974,8 @@
 				92123DDF2C19E5570020DB69 /* CustomGameConfigView.swift in Sources */,
 				923E64912C00BE940027DF54 /* cube.c in Sources */,
 				9208EFFE2C29FB7000FD14BD /* PuzzleConstants.swift in Sources */,
+				92E1E8982FCF672500141044 /* ReleaseNotesView.swift in Sources */,
+				92E1E8992FCF672500141044 /* ReleaseNotes.swift in Sources */,
 				9213E9BF2D34515900AE7092 /* Theming.swift in Sources */,
 				9299A0062F604DDA00EFF65B /* GameplayStats.swift in Sources */,
 				923E64B12C00BED00027DF54 /* towers.c in Sources */,

@@ -40,6 +40,7 @@ struct AppSettings: Codable {
     var gameListDisplayHidden: Bool = false
     var appTheme: AppTheme = AppTheme.auto
     var enableShortLongPressSwapToggle: Bool = false
+    var lastSeenReleaseNotesVersion: Int = 0
     
     var longPressTime: Double = 500.0 // in ms
     
@@ -52,7 +53,7 @@ struct AppSettings: Codable {
     }
     
     enum CodingsKeys: String, CodingKey {
-        case enableHaptics, enableSounds, showExperimentalGames, disableGameStatusbar, showFirstRunMessage, enableSwipeBack, enableStatistics, gameListView, appTheme, longPressTime, displayCustomLoadMenu, displayShareMenu, enableHardwareKeyboard, enableRightClick, gameListSortOrder, gameListDisplayHidden, enableShortLongPressSwapToggle
+        case enableHaptics, enableSounds, showExperimentalGames, disableGameStatusbar, showFirstRunMessage, enableSwipeBack, enableStatistics, gameListView, appTheme, longPressTime, displayCustomLoadMenu, displayShareMenu, enableHardwareKeyboard, enableRightClick, gameListSortOrder, gameListDisplayHidden, enableShortLongPressSwapToggle, lastSeenReleaseNotesVersion
     }
     
     /**
@@ -80,6 +81,7 @@ struct AppSettings: Codable {
         enableHardwareKeyboard = try values.decodeIfPresent(Bool.self, forKey: .enableHardwareKeyboard) ?? true
         enableRightClick = try values.decodeIfPresent(Bool.self, forKey: .enableRightClick) ?? true
         enableShortLongPressSwapToggle = try values.decodeIfPresent(Bool.self, forKey: .enableShortLongPressSwapToggle) ?? false
+        lastSeenReleaseNotesVersion = try values.decodeIfPresent(Int.self, forKey: .lastSeenReleaseNotesVersion) ?? 0
         
     }
 }

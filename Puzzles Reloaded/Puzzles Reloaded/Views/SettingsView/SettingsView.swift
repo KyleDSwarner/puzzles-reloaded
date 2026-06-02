@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(GameManager.self) var gameManager: GameManager // Unused here but passed to release notes
     
     // The settings page doesn't use the UserPreferences shared class to avoid an odd bug where the settings buttons didn't work correctly on first press
     @AppStorage(AppSettings.key) var appSettings: CodableWrapper<AppSettings> = AppSettings.initialStorage()
@@ -274,6 +275,11 @@ struct SettingsView: View {
                     Section {
                         NavigationLink("About Puzzles Reloaded") {
                             AboutView()
+                        }
+                        NavigationLink("Release Notes") {
+                            let navPath = Binding.constant(NavigationPath())
+                            return ReleaseNotesView(navPath: navPath, isFromSettingsMenu: true)
+                                .environment(gameManager)
                         }
                         Toggle("Display First Run Message", isOn: $appSettings.value.showFirstRunMessage)
                         
