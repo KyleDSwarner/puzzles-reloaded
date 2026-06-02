@@ -17,6 +17,7 @@ struct UserGameData: Codable, Hashable {
     var gameplayHistory: [GameplayHistory] = []
     
     var singleFingerPanningEnabled: Bool = false
+    var doubleTapLongPressEnabled: Bool = false
     
     // Savegames & preferences stored from puzzles app (strings deserialized to objects)
     private var saveGame: String? // Saved game, piped from the internal puzzle app
@@ -143,7 +144,7 @@ extension UserGameData {
     }
     
     enum CodingsKeys: String, CodingKey {
-        case gameName, category, stats, singleFingerPanningEnabled, saveGame, userPrefs, selectedDefaultPreset, customDefaultPreset, customPuzzlePresets, gameplayHistory
+        case gameName, category, stats, singleFingerPanningEnabled, doubleTapLongPressEnabled, saveGame, userPrefs, selectedDefaultPreset, customDefaultPreset, customPuzzlePresets, gameplayHistory
     }
     
     /**
@@ -156,6 +157,7 @@ extension UserGameData {
         category = try values.decodeIfPresent(GameCategory.self, forKey: .category) ?? GameCategory.none
         stats = try values.decodeIfPresent(GameplayStats.self, forKey: .stats) ?? GameplayStats()
         singleFingerPanningEnabled = try values.decodeIfPresent(Bool.self, forKey: .singleFingerPanningEnabled) ?? false
+        doubleTapLongPressEnabled = try values.decodeIfPresent(Bool.self, forKey: .doubleTapLongPressEnabled) ?? false
         saveGame = try values.decodeIfPresent(String?.self, forKey: .saveGame) ?? nil
         userPrefs = try values.decodeIfPresent(String?.self, forKey: .userPrefs) ?? nil
         selectedDefaultPreset = try values.decodeIfPresent(Int?.self, forKey: .selectedDefaultPreset) ?? nil

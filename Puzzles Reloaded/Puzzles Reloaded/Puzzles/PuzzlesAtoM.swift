@@ -105,6 +105,7 @@ extension Puzzles {
     static let puzzle_filling = GameConfig(
         identifier: "filling",
         internalGame: filling,
+        allowDoubleTapLongPress: true,
         displayClearButtonInToolbar: true
     ).numericButtonsBuilder({ gameId in
         // Filling always displays all 10 number buttons as any number can be used at any size.
@@ -112,7 +113,6 @@ extension Puzzles {
         return Puzzles.createButtonControls(10)
     })
         .setDarkModeColors([
-            //1: (Theming.white, "Grid"),
             1: (Theming.white, "Grid"),
             2: (Theming.darkGray, "Highlight Selection"),
             3: (Theming.veryDarkGray, "Locked Box Highlight"),
@@ -186,8 +186,6 @@ extension Puzzles {
             let numButtons = Int(matches[0].output)
             
             return Puzzles.createButtonControls(numButtons ?? 8, keycodes: Puzzles.AlphaButtons)
-            
-            
         })
     
     // MARK: Guess
@@ -199,11 +197,8 @@ extension Puzzles {
         .addSearchTerms(["Mastermind"])
         .setDarkModeColors([
             1: (Theming.darkGray, "Grid"),
-            //1: (Theming.darkGray, "Background for Completed Squares"),
-            //3: (Theming.midGray, "Dots"),
             5: (Theming.darkGray, "Empty Field"),
             16: (Theming.enteredTextGreen, "Correct Guess"),
-            //6: (Theming.midGray, "Game Border")
         ])
     
     // MARK: Inertia
@@ -219,11 +214,6 @@ extension Puzzles {
         6: (Theming.darkGray, "Mines"),
         8: (Theming.midGray, "Walls"),
         9: (Theming.white, "Hint Arrow")
-        //1: (Theming.darkGray, "Background for Completed Squares"),
-        //3: (Theming.midGray, "Dots"),
-        //5: (Theming.darkGray, "Empty Field"),
-        //16: (Theming.enteredTextGreen, "Correct Guess"),
-        //6: (Theming.midGray, "Game Border")
     ])
 
     
@@ -232,7 +222,7 @@ extension Puzzles {
         identifier: "keen",
         internalGame: keen,
         allowSingleFingerPanning: false,
-        displayClearButtonInToolbar: true
+        allowDoubleTapLongPress: true
     ).numericButtonsBuilder({gameId in
             // 6:_a3_a_a3_aa_a3ba_7aa_10a3,m100d3s3a5a9d2a10m6m4s2s2d3m8m60a5s2
         
@@ -261,21 +251,6 @@ extension Puzzles {
         1: (Theming.midGray, "Grid"),
     ])
     
-    /*
-     enum {
-         COL_BACKGROUND,
-         COL_GRID,
-         COL_BLACK,                   /* black */
-         COL_LIGHT,                   /* white */
-         COL_LIT,                   /* yellow */
-         COL_ERROR,                   /* red */
-         COL_CURSOR,
-         NCOLOURS
-     };
-     
-     <color name="lightup_night_colour_black">#666666</color>
-     */
-    
     // MARK: Loopy
     static let puzzle_loopy = GameConfig(
         identifier: "loopy",
@@ -294,19 +269,6 @@ extension Puzzles {
         
     ])
     
-    /*
-     enum {
-         COL_BACKGROUND,
-         COL_FOREGROUND,
-         COL_LINEUNKNOWN,
-         COL_HIGHLIGHT,
-         COL_MISTAKE,
-         COL_SATISFIED,
-         COL_FAINT,
-         NCOLOURS
-     };
-     */
-    
     // MARK: Magnets
     static let puzzle_magnets = GameConfig(
         identifier: "magnets",
@@ -323,17 +285,6 @@ extension Puzzles {
         //9: (Theming.warningRed, "Positive Pole")
         
     ])
-    /*
-     
-     enum {
-         COL_BACKGROUND, COL_HIGHLIGHT, COL_LOWLIGHT,
-         COL_TEXT, COL_ERROR, COL_CURSOR, COL_DONE,
-         COL_NEUTRAL, COL_NEGATIVE, COL_POSITIVE, COL_NOT, /* COL_SYMBOL */
-         NCOLOURS
-     };
-     <color name="magnets_night_colour_highlight">#888888</color>
-         <color name="magnets_night_colour_text">#ffffff</color>
-     */
     
     // MARK: Map
     static let puzzle_map = GameConfig(

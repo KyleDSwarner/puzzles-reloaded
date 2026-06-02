@@ -46,6 +46,7 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
     // Optionally provide a custom function that returns the number of numeric buttons to display for the given game type
     var numericButtonsBuilder: NumButtonsFunction
     var allowSingleFingerPanning: Bool // <-- Games that require dragging to select multiple boxes will need two-finger panning.
+    var allowDoubleTapLongPress: Bool // <-- Games where a second tap in the same cell triggers a long press action.
     var displayClearButtonInToolbar: Bool // <-- Many games need a clear button, this boolean adds it to the toolbar, next to undo/redo
     
     var internalGame: game // The reference to the game representation from the c code.
@@ -56,6 +57,7 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
         internalGame: game,
         isExperimental: Bool = false,
         allowSingleFingerPanning: Bool = false,
+        allowDoubleTapLongPress: Bool = false,
         displayClearButtonInToolbar: Bool = false,
         touchControls: [ControlConfig] = [],
         buttonControls: [ControlConfig] = [],
@@ -70,6 +72,7 @@ class GameConfig: Identifiable, Hashable, @unchecked Sendable {
             
             self.displayClearButtonInToolbar = displayClearButtonInToolbar
             self.allowSingleFingerPanning = allowSingleFingerPanning
+            self.allowDoubleTapLongPress = allowDoubleTapLongPress
             self.touchControls = touchControls
             self.buttonControls = buttonControls
             self.overflowMenuControls = overflowMenuControls

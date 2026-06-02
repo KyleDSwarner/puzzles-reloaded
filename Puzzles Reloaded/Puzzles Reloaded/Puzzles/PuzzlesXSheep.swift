@@ -28,6 +28,7 @@ extension Puzzles {
     static let puzzle_abcd = GameConfig(
         identifier: "abcd",
         internalGame: abcd,
+        allowDoubleTapLongPress: true,
         overflowMenuControls: [
             ControlConfig.MarksControl
         ]
@@ -116,7 +117,8 @@ extension Puzzles {
     // MARK: Mathrax
     static let puzzle_mathrax = GameConfig(
         identifier: "mathrax",
-        internalGame: mathrax
+        internalGame: mathrax,
+        allowDoubleTapLongPress: true
     )
     .numericButtonsBuilder({ gameId in
         // Game ID: 5:r4f,eM4dA6aS1A6A5a
@@ -160,7 +162,8 @@ extension Puzzles {
     // MARK: Salad
     static let puzzle_salad = GameConfig(
         identifier: "salad",
-        internalGame: salad
+        internalGame: salad,
+        allowDoubleTapLongPress: true
     )    
     .numericButtonsBuilder({ gameId in
         // Game ID:

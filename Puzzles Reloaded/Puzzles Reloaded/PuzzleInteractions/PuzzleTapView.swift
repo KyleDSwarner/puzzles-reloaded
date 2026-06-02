@@ -18,6 +18,7 @@ class PuzzleTapView: UIView {
     
     var frontend: Frontend?
     var isSingleFingerNavEnabled = false
+    var isDoubleTapLongPressEnabled = false
     
     private var effectsManager = EffectsManager()
 
@@ -31,6 +32,11 @@ class PuzzleTapView: UIView {
     private var arrowKeyTapLocation: CGPoint = .zero
     private var mouseLeftClick = false
     private var mouseEventHandled = false
+    
+    // Double-tap to long press: tracks the last completed tap position for matching
+    private var lastTapLocation: CGPoint? = nil
+    private var doubleTapTriggeredThisTap: Bool = false // Set true when double-tap fires; prevents recording in touchesEnded
+    private let doubleTapPositionThreshold: CGFloat = 12.0 // Deadzone in puzzle coordinates
     
     // Our main initializer, making sure interaction is enabled.
     override init(frame: CGRect) {
@@ -88,7 +94,6 @@ class PuzzleTapView: UIView {
         
         // If the user has swapped the short/long controls, we default `isLongPress` to true.
         isLongPress = frontend?.shortLongPressControlSwapped == true && frontend?.gameHasLongPress() == true // Defaults to True. If the user has swapped these controls, we need to do the opposite of what we'd normally do!
-        print("Setup: Long press is \(isLongPress)")
         
         /*
          This code is unused as no games set `useArrowKeys` - but keeping for posterity in case it's needed later.
@@ -104,6 +109,20 @@ class PuzzleTapView: UIView {
         // MARK: Secondary / Right Click Detection
         // If this is a right click from a mouse AND the setting is enabled, we go straight to the long press handler
         let isRightClick = touch.type == .indirectPointer && event?.buttonMask == .secondary && appSettings.value.enableRightClick
+        
+        // MARK: Double-Tap to Long Press Detection
+        // If the feature is enabled and the previous tap was in the same position, trigger a long press immediately.
+        if isDoubleTapLongPressEnabled, let lastLoc = lastTapLocation, frontend?.controlOption.longPress != nil {
+            let xOffset = abs(adjustedLocation.x - lastLoc.x)
+            let yOffset = abs(adjustedLocation.y - lastLoc.y)
+            if xOffset < doubleTapPositionThreshold && yOffset < doubleTapPositionThreshold {
+                // Second tap in same position → treat as long press, then reset for next short press
+                lastTapLocation = nil
+                doubleTapTriggeredThisTap = true
+                startLongPress(at: location)
+                return
+            }
+        }
         
         // MARK: Long Press Trigger
         // If there's no long press configured, don't start the timer!
@@ -305,6 +324,14 @@ class PuzzleTapView: UIView {
             frontend?.movesTakenInGame = true // This boolean lets us better know when we should/should not save the user's game
         }
         
+        // MARK: Double-Tap Recording
+        // Record the position of completed non-drag taps for double-tap matching on the next tap.
+        // Skip if this tap was itself a double-tap trigger — we already reset lastTapLocation above.
+        if isDoubleTapLongPressEnabled && !isDragging && !doubleTapTriggeredThisTap {
+            let adjustedEndLocation = adjustedTapLocation(point: location)
+            lastTapLocation = adjustedEndLocation
+        }
+        
         // Reset Values
         resetTouchInfo()
     }
@@ -357,6 +384,7 @@ class PuzzleTapView: UIView {
         arrowKeyTapLocation = .zero
         mouseLeftClick = false
         mouseEventHandled = false
+        doubleTapTriggeredThisTap = false
     }
     
     func triggerShortPressEffects() {

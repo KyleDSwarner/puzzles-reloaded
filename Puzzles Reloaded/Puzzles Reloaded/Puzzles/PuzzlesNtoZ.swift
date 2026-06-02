@@ -237,6 +237,7 @@ extension Puzzles {
     static let puzzle_solo = GameConfig(
         identifier: "solo",
         internalGame: solo,
+        allowDoubleTapLongPress: true,
         displayClearButtonInToolbar: true,
         overflowMenuControls: [
             ControlConfig.MarksControl
@@ -306,6 +307,7 @@ extension Puzzles {
         identifier: "towers",
         internalGame: towers,
         isExperimental: false,
+        allowDoubleTapLongPress: true,
         displayClearButtonInToolbar: true,
 
         buttonControls: [
@@ -405,6 +407,7 @@ extension Puzzles {
     static let puzzle_unequal = GameConfig(
         identifier: "unequal",
         internalGame: unequal,
+        allowDoubleTapLongPress: true,
         
         overflowMenuControls: [
             ControlConfig.MarksControl,

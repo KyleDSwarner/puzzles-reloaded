@@ -18,6 +18,7 @@ struct PuzzleInteractionsView: UIViewRepresentable {
     var puzzleFrontend: Frontend
     
     var allowSingleFingerPanning: Bool
+    var allowDoubleTapLongPress: Bool
 
     func makeUIView(context: Context) -> PuzzleTapView {
         // Create the underlying UIView, passing in our configuration
@@ -39,6 +40,7 @@ struct PuzzleInteractionsView: UIViewRepresentable {
         
         view.frontend = puzzleFrontend
         view.isSingleFingerNavEnabled = allowSingleFingerPanning
+        view.isDoubleTapLongPressEnabled = allowDoubleTapLongPress
         
         
         return view
@@ -51,6 +53,7 @@ struct PuzzleInteractionsView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: PuzzleTapView, context: Context) {
+        uiView.isDoubleTapLongPressEnabled = allowDoubleTapLongPress
         uiView.isSingleFingerNavEnabled = allowSingleFingerPanning
         
         setPanRecognizerNumTouches(context.coordinator.panRecognizer)

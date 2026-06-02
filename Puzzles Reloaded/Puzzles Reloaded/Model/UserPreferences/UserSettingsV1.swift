@@ -22,6 +22,7 @@ enum UserSettingsSchemaV1: VersionedSchema {
         var category: GameCategory = GameCategory.none
         var stats: GameStats = GameStats()
         var singleFingerPanningEnabled: Bool = false
+        var doubleTapLongPressEnabled: Bool = false // Enables the ability for a single tap to alternate between short/long press for games opted-in
         private var saveGame: String? // Saved game, piped from the internal puzzle app
         var userPrefs: String? // String from the puzzle code to store internal user preferences
         var selectedDefaultPreset: Int?

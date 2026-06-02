@@ -42,6 +42,7 @@ struct GameView: View {
     @State var puzzleImageTransformation: CGAffineTransform = .identity
     
     @State private var singleFingerScrolling: Bool = false
+    @State private var doubleTapLongPress: Bool = false
     
     var game: Game
     private var keyboardHandler: KeyboardInputHandler?
@@ -87,6 +88,9 @@ struct GameView: View {
         
         // Update the single finger scrolling value
         singleFingerScrolling = game.settings.singleFingerPanningEnabled
+        
+        // Update the double-tap long press value
+        doubleTapLongPress = game.settings.doubleTapLongPressEnabled
         
         Task {
             let saveGame: String? = game.settings.retrieveSave()
@@ -169,7 +173,7 @@ struct GameView: View {
                             #if os(iOS)
                                 .overlay {
                                     // MARK: Puzzle Interactions & Gestures
-                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $tapAnchor, puzzleFrontend: frontend, allowSingleFingerPanning: singleFingerScrolling)
+                                    PuzzleInteractionsView(transform: $puzzleImageTransformation, anchor: $tapAnchor, puzzleFrontend: frontend, allowSingleFingerPanning: singleFingerScrolling, allowDoubleTapLongPress: doubleTapLongPress)
                                 }
                             #endif
                                 .modifier(AnimatableTransform(puzzleImageTransformation))
@@ -368,6 +372,11 @@ struct GameView: View {
             // Syncronize the finger panning settings to the model
             game.settings.singleFingerPanningEnabled = singleFingerScrolling
         }
+        // MARK: Double-Tap Long Press Sync
+        .onChange(of: doubleTapLongPress) {
+            // Synchronize the double-tap long press settings to the model
+            game.settings.doubleTapLongPressEnabled = doubleTapLongPress
+        }
         // MARK: Background & App Terminate notifications
         #if os(iOS)
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification), perform: { output in
@@ -388,6 +397,7 @@ struct GameView: View {
      */
     func refreshSettings() {
         singleFingerScrolling = game.settings.singleFingerPanningEnabled
+        doubleTapLongPress = game.settings.doubleTapLongPressEnabled
     }
     
     func cancelGameGenerationAndRegernateMidend() {

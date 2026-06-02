@@ -25,7 +25,7 @@ struct SettingsView: View {
      Determines if there are any game-specific settings to display
      */
     var displayGameSettingsMenu: Bool {
-        !gameSettingsMenu.isEmpty || game?.gameConfig.allowSingleFingerPanning == true
+        !gameSettingsMenu.isEmpty || game?.gameConfig.allowSingleFingerPanning == true || game?.gameConfig.allowDoubleTapLongPress == true
     }
     
     var body: some View {
@@ -142,6 +142,8 @@ struct SettingsView: View {
                     
                     if displayGameSettingsMenu {
                         Section {
+                            
+                            
                             if game.gameConfig.allowSingleFingerPanning {
                                 let singleFingerNavBinding = Binding<Bool>(get: { game.settings.singleFingerPanningEnabled}, set: {
                                     game.settings.singleFingerPanningEnabled = $0
@@ -149,7 +151,32 @@ struct SettingsView: View {
                                         refreshSettingsCallback() // Function callback triggers a refresh of settings back on the main game page
                                     }
                                 })
-                                Toggle("Single finger scrolling", isOn: singleFingerNavBinding)
+                                
+                                VStack(alignment: .leading) {
+                                    Toggle("Single finger scrolling", isOn: singleFingerNavBinding)
+                                    Text("Enable scrolling with a single finger instead of two")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                        .padding([.top], 3)
+                                }
+                            }
+                            
+                            if game.gameConfig.allowDoubleTapLongPress {
+                                let doubleTapLongPressBinding = Binding<Bool>(get: { game.settings.doubleTapLongPressEnabled }, set: {
+                                    game.settings.doubleTapLongPressEnabled = $0
+                                    if let refreshSettingsCallback = refreshSettingsCallback {
+                                        refreshSettingsCallback()
+                                    }
+                                })
+                                
+                                VStack(alignment: .leading) {
+                                    Toggle("Alternate Short/Long Tap Actions", isOn: doubleTapLongPressBinding)
+                                    Text("Alternate the short & long press action when tapping within the same tile")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                        .padding([.top], 3)
+                                }
+                                
                             }
                             
                             if !gameSettingsMenu.isEmpty {
