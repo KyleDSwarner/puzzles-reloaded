@@ -41,7 +41,7 @@ struct GameListView: View {
     }
     
     var filteredGames: [Game] {
-        return filterGameListBySearchTerm(gameManager.getGameList(showHiddenGames: appSettings.value.gameListDisplayHidden))
+        return filterGameListBySearchTerm(gameManager.getGameList(showHiddenGames: appSettings.value.gameListDisplayHidden || isHiddenSectionExpanded))
     }
     
     func retrieveAndSortGameList(category: GameCategory) -> [Game] {
