@@ -67,6 +67,12 @@ struct AboutView: View {
                             .font(.caption)
                     }
                     
+                    VStack(alignment: .leading) {
+                        Text("Steffen Bauer")
+                        Text("Contributor of new puzzles & variations to this collection")
+                            .font(.caption)
+                    }
+                    
                 } header: {
                     Text("Special Thanks", comment: "Heading on about page")
                 }
