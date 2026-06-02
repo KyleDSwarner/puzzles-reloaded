@@ -281,7 +281,6 @@ struct SettingsView: View {
                             return ReleaseNotesView(navPath: navPath, isFromSettingsMenu: true)
                                 .environment(gameManager)
                         }
-                        Toggle("Display First Run Message", isOn: $appSettings.value.showFirstRunMessage)
                         
                         Button("Rate the App") {
                             requestReview()

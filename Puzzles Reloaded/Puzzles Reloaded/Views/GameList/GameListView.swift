@@ -18,11 +18,11 @@ struct GameListView: View {
     @State private var navPath = NavigationPath()
     @State private var isHiddenSectionExpanded = false
     @State private var settingsPageDisplayed = false
-    @State private var welcomeMessageDisplayed = false
     @State private var showingSavegameFailAlert = false
     @State private var gameSortOptionsViewDisplayed = false
     @State private var searchText: String = ""
     @State private var whatsNewDisplayed = false
+    @State private var showWelcomeSheet = false
     
     
     let columns = [
@@ -172,12 +172,6 @@ struct GameListView: View {
         NavigationStack(path: $navPath) {
             VStack {
                 
-                // MARK: First Run Message
-                // Note: `welcomeMessageDisplayed` is a separate boolean in order for animations to work properly. Toggling animations based on the appSettings wrapper didn't work properly.
-                if(appSettings.value.showFirstRunMessage && welcomeMessageDisplayed) {
-                    WelcomeMessageView(welcomeMessageDisplayed: $welcomeMessageDisplayed)
-                }
-                
                 // MARK: Search Results
                 if(!searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
                     // Check for filtered games is nested as a 2nd if to ensure the "no games found" overlay can display on its own if a search is in progress.
@@ -277,8 +271,8 @@ struct GameListView: View {
                 
                 gameManager.createGamesList(with: modelContext)
                 
-                if appSettings.value.showFirstRunMessage == true {
-                    welcomeMessageDisplayed = true
+                if appSettings.value.showFirstRunMessage == true || DebugFlags.AlwaysShowWelcomeMessage {
+                    showWelcomeSheet = true
                     // Prevent the What's New message from appearing for new users
                     appSettings.value.lastSeenReleaseNotesVersion = ReleaseNotesStore.latest.buildNumber
                 }
@@ -288,11 +282,8 @@ struct GameListView: View {
                     whatsNewDisplayed = true
                 }
             }
-            // Detects changes to the welcome message settings & updates the flags accordingly
-            .onChange(of: appSettings.value.showFirstRunMessage) { _, newValue in
-                withAnimation {
-                    welcomeMessageDisplayed = newValue
-                }
+            .sheet(isPresented: $showWelcomeSheet) {
+                WelcomeMessageView()
             }
             .sheet(isPresented: $settingsPageDisplayed) {
                 SettingsView()

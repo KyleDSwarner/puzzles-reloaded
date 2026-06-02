@@ -11,5 +11,6 @@ import Foundation
 struct DebugFlags {
     static let EnableThemeDebugger = false
     static let EnableDrawingDebugLogs = false
+    static let AlwaysShowWelcomeMessage = false
     static let AlwaysShowWhatsNewMessage = false
 }
