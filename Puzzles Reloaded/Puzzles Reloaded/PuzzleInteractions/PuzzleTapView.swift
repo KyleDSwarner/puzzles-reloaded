@@ -36,7 +36,7 @@ class PuzzleTapView: UIView {
     // Double-tap to long press: tracks the last completed tap position for matching
     private var lastTapLocation: CGPoint? = nil
     private var doubleTapTriggeredThisTap: Bool = false // Set true when double-tap fires; prevents recording in touchesEnded
-    private let doubleTapPositionThreshold: CGFloat = 12.0 // Deadzone in puzzle coordinates
+    private let doubleTapPositionThreshold: CGFloat = 25.0 // Deadzone in puzzle coordinates
     
     // Our main initializer, making sure interaction is enabled.
     override init(frame: CGRect) {
