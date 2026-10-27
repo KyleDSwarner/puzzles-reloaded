@@ -198,8 +198,11 @@ struct SettingsView: View {
                         }
                     }
                     
-                    NavigationLink("Game Statistics") {
-                        GameStatsView(game: game)
+                    // disable game-specific statistics views if stats is disabled at app level
+                    if appSettings.value.enableStatistics {
+                        NavigationLink("Game Statistics") {
+                            GameStatsView(game: game)
+                        }
                     }
                     
                     NavigationLink("View Game Parameters") {

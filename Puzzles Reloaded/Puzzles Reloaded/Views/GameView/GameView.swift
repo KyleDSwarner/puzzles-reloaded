@@ -199,8 +199,10 @@ struct GameView: View {
                                         // MARK: Set game as WON
                                         if gameWon == false && gameAutosolved == false {
                                             gameWon = true
-                                            game.settings.updateStatsForWonGame(gameId: frontend.gameId)
-                                            // game.settings.stats.gameWon(gameId: frontend.gameId)
+                                            
+                                            if appSettings.value.enableStatistics {
+                                                game.settings.updateStatsForWonGame(gameId: frontend.gameId)
+                                            }
                                         }
                                         withAnimation(.easeInOut(duration: 0.5)) {
                                             puzzleImageTransformation = .identity
@@ -367,13 +369,10 @@ struct GameView: View {
             if gameLoggedToStats == false && newValue == true {
                 print("!!! Game Started! New Game ID: \(frontend.gameId)")
                 
-                self.game.settings.updateStatsForNewGame(gameId: frontend.gameId, gameDescription: getCurrentGameDescription())
+                if appSettings.value.enableStatistics {
+                    self.game.settings.updateStatsForNewGame(gameId: frontend.gameId, gameDescription: getCurrentGameDescription())
+                }
             }
-            /*
-            self.game.settings.stats.updateStats_NewGame(
-                gameId: frontend.gameId,
-                gameDescription: getCurrentGameDescription())
-             */
         }
         // MARK: Single Finger Navigation Sync
         .onChange(of: singleFingerScrolling) {

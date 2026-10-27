@@ -59,49 +59,58 @@ struct GlobalStatsView: View {
     
     var body: some View {
         Form {
-            Section {
-                HStack {
-                    Text("Total Games Played")
-                    Spacer()
-                    Text("\(totalGamesPlayed)")
-                }
-                
-                HStack {
-                    Text("Total Games Won")
-                    Spacer()
-                    Text("\(totalGamesWon)")
-                }
-                
-                if let formattedWinPercentage = formattedWinPercentage {
-                    HStack {
-                        Text("Win Percentage")
-                        Spacer()
-                        Text(formattedWinPercentage)
-                    }
-                }
-                
-            }
             
-            if totalGamesPlayed > 0 {
+            if appSettings.value.enableStatistics {
+                
                 Section {
-                    List {
-                        ForEach(gamesSortedByPlays) { game in
-                            NavigationLink {
-                                GameStatsView(game: game)
-                            } label: {
-                                HStack {
-                                    Text(game.gameConfig.name)
-                                    Spacer()
-                                    Text("\(game.settings.stats.gamesPlayed) Games")
+                    HStack {
+                        Text("Total Games Played")
+                        Spacer()
+                        Text("\(totalGamesPlayed)")
+                    }
+                    
+                    HStack {
+                        Text("Total Games Won")
+                        Spacer()
+                        Text("\(totalGamesWon)")
+                    }
+                    
+                    if let formattedWinPercentage = formattedWinPercentage {
+                        HStack {
+                            Text("Win Percentage")
+                            Spacer()
+                            Text(formattedWinPercentage)
+                        }
+                    }
+                    
+                }
+                
+                if totalGamesPlayed > 0 {
+                    Section {
+                        List {
+                            ForEach(gamesSortedByPlays) { game in
+                                NavigationLink {
+                                    GameStatsView(game: game)
+                                } label: {
+                                    HStack {
+                                        Text(game.gameConfig.name)
+                                        Spacer()
+                                        Text("\(game.settings.stats.gamesPlayed) Games")
+                                    }
                                 }
                             }
                         }
+                    } header: {
+                        Text("Most Frequently Played")
                     }
-                } header: {
-                    Text("Most Frequently Played")
                 }
             }
 
+            Section {
+                Toggle("Enable Statistics", isOn: $appSettings.value.enableStatistics)
+            } footer: {
+                Text("Disabling statistics will hide & prevent changes to all win statistics and game history across the app. Statistics are local only to you and never leave the app.")
+            }
             
             Section {
                 Button("Reset Game Stats") {
