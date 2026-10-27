@@ -20,49 +20,21 @@ struct GameViewStatusbar: View {
     
     var body: some View {
         
-        VStack {
-            Spacer()
+        // Prefer a single row when everything fits; otherwise flow into two rows (status text on top, buttons below).
+        // `.fixedSize` on the single-row candidate reports its ideal (unwrapped) width so ViewThatFits can't be fooled
+        // by the text quietly wrapping to multiple lines inside the HStack.
+        ViewThatFits(in: .horizontal) {
             HStack {
-                if(frontend.gameHasStatusbar && !frontend.statusbarText.isEmpty) {
-                    Text(frontend.statusbarText)
-                        .padding(8)
-                        .modifier(StatusbarDesigner())
-                        .modifier(ButtonTextColor())
-                }
-                
-                if displayNewGameButton {
-                    Button {
-                        newGame()
-                    } label: {
-                        Label("New Game", systemImage: "plus.circle")
-                            //.accessibilityHint("Start a new game")
-                            .modifier(StatusbarOptionalPaddingDesigner())
-                    }
-                    
-                    .modifier(ButtonDesigner())
-                    .modifier(ButtonTextColor())
-                    //.background(.thinMaterial, in: RoundedRectangle(cornerRadius: 5.0))
-                    
-                    //.transition(AnyTransition.opacity.combined(with: .slide))
-                }
-                
-                if displayRestartButton {
-                    Button {
-                        frontend.midend.restartGame()
-                    } label: {
-                        Label("Restart", systemImage: "arrow.circlepath")
-                            //.accessibilityHint("Restart the current game")
-                            .modifier(StatusbarOptionalPaddingDesigner())
-                    }
-                    .modifier(ButtonDesigner())
-                    .modifier(ButtonTextColor())
-                    //.transition(AnyTransition.opacity.combined(with: .slide))
-                }
-                
-                
+                statusbarText
+                statusbarButtons
+            }
+            .fixedSize(horizontal: true, vertical: false)
+
+            VStack(alignment: .center, spacing: 6) {
+                statusbarText
+                statusbarButtons
             }
         }
-        .frame(height: currentGeometry.width < 600 ? 80 : 40) // <-- Keep a minimum height on this stack to prevent puzzle resizing when the new game button appears
         // MARK: New Game & Restart Button Popup Config
         .onChange(of: frontend.puzzleStatus) { old, new in
             // When the game is solved, animate the appearance of the new game button
@@ -82,6 +54,42 @@ struct GameViewStatusbar: View {
             }
         }
         
+    }
+    
+    @ViewBuilder
+    private var statusbarText: some View {
+        if(frontend.gameHasStatusbar && !frontend.statusbarText.isEmpty) {
+            Text(frontend.statusbarText)
+                .padding(8)
+                .modifier(StatusbarDesigner())
+                .modifier(ButtonTextColor())
+        }
+    }
+    
+    private var statusbarButtons: some View {
+        HStack {
+            if displayNewGameButton {
+                Button {
+                    newGame()
+                } label: {
+                    Label("New Game", systemImage: "plus.circle")
+                        .modifier(StatusbarOptionalPaddingDesigner())
+                }
+                .modifier(ButtonDesigner())
+                .modifier(ButtonTextColor())
+            }
+            
+            if displayRestartButton {
+                Button {
+                    frontend.midend.restartGame()
+                } label: {
+                    Label("Restart", systemImage: "arrow.circlepath")
+                        .modifier(StatusbarOptionalPaddingDesigner())
+                }
+                .modifier(ButtonDesigner())
+                .modifier(ButtonTextColor())
+            }
+        }
     }
 }
 

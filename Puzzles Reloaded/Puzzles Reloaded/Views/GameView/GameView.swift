@@ -29,6 +29,7 @@ struct GameView: View {
     @State private var scaleFactor: CGFloat = 1.0
     @State private var translation: CGSize = .zero
     @State private var currentGeometry: CGSize = .zero
+    @State private var statusbarHeight: CGFloat = 0 // Rendered height of the statusbar; used to reserve space when overlaying would cover the puzzle
     
     @FocusState private var imageIsFocused: Bool
     @State private var frontend: Frontend
@@ -159,6 +160,11 @@ struct GameView: View {
     var body: some View {
         VStack {            
             GeometryReader { geometry in
+                // Space to reserve at the bottom of the puzzle area for the statusbar. Normally zero - the statusbar floats
+                // in the puzzle's vertical letterboxing. It becomes nonzero when the puzzle is height-constrained (e.g. iPhone
+                // landscape) and has no letterbox, where overlaying would draw the statusbar on top of the puzzle image.
+                let inset = statusbarInset(in: geometry.size)
+                
                 ZStack {
                     VStack {
                         if let puzzleImage = frontend.puzzleImage {
@@ -209,14 +215,14 @@ struct GameView: View {
                                 }
 
                                 .blur(radius: frontend.currentGameInvalidated ? 5 : 0)
-                                .frame(width: min(geometry.size.width, 800), height: min(geometry.size.height, 800))
+                                .frame(width: min(geometry.size.width, 800), height: min(geometry.size.height - inset, 800))
                                 //.frame(width: min(geometry.size.width, 600), height: min(geometry.size.height, 600)) // 600px set as maximum default size: This limits puzzles from getting too large on ipads
                             
                                 
                         }
                         
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height) // take up all available space to center puzzle on the screen
+                    .frame(width: geometry.size.width, height: geometry.size.height - inset) // take up all available space to center puzzle on the screen
                     .onChange(of: geometry.size) {
                         // print("width: \(geometry.size.width), height: \(geometry.size.height)")
                         currentGeometry = geometry.size
@@ -248,17 +254,19 @@ struct GameView: View {
                             .background(.thinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                         }
-                        .frame(width: geometry.size.width, height: geometry.size.height) // take up all available space to center puzzle on the screen
+                        .frame(width: geometry.size.width, height: geometry.size.height - inset) // take up all available space to center puzzle on the screen
                     }
                 }
                 
             }
-            
-            Spacer()
-            
-            // MARK: Statusbar & Button Popups
-            if(!appSettings.value.disableGameStatusbar) {
-                GameViewStatusbar(frontend: frontend, newGame: newGame, restartGame: restartGame, currentGeometry: currentGeometry)
+            .overlay(alignment: .bottom) {
+                // MARK: Statusbar & Button Popups
+                // Rendered as an overlay so it floats above the puzzle without consuming layout space (which would resize the puzzle image).
+                // When the puzzle has no vertical letterbox to float in, `statusbarInset(in:)` reserves a strip for it instead,
+                // so the statusbar lands in reserved space rather than on top of the puzzle image.
+                if(!appSettings.value.disableGameStatusbar) {
+                    gameStatusbar
+                }
             }
             
             // MARK: Game Controls View
@@ -400,6 +408,50 @@ struct GameView: View {
         doubleTapLongPress = game.settings.doubleTapLongPressEnabled
     }
     
+    /**
+        The statusbar with its rendered height measured, so `statusbarInset(in:)` can decide when space must be reserved for it.
+     */
+    var gameStatusbar: some View {
+        GameViewStatusbar(frontend: frontend, newGame: newGame, restartGame: restartGame, currentGeometry: currentGeometry)
+            .background(
+                GeometryReader { geo in
+                    Color.clear.preference(key: StatusbarHeightKey.self, value: geo.size.height)
+                }
+            )
+            .onPreferenceChange(StatusbarHeightKey.self) { newHeight in
+                statusbarHeight = newHeight
+            }
+    }
+    
+    /**
+        Amount of space to reserve at the bottom of the puzzle area for the statusbar.
+     
+        The statusbar normally floats as an overlay inside the puzzle's vertical letterboxing. When the puzzle is height-constrained
+        (e.g. iPhone landscape, where the smallest screen dimension is vertical) there is no letterbox, so overlaying would draw the
+        statusbar on top of the puzzle image - in that case space is reserved instead, letting the puzzle resize only when an overlap
+        would actually occur.
+     
+        Always evaluated against the full puzzle area (the GeometryReader's size never changes as a result of the inset), so the
+        decision cannot oscillate between the two layouts.
+     */
+    func statusbarInset(in size: CGSize) -> CGFloat {
+        guard !appSettings.value.disableGameStatusbar, statusbarHeight > 0 else { return 0 }
+        guard let puzzleImage = frontend.puzzleImage, puzzleImage.height > 0 else { return 0 }
+        
+        // Mirror of the frame the puzzle image is drawn into
+        let frameWidth = min(size.width, 800)
+        let frameHeight = min(size.height, 800)
+        
+        // Image height after aspect-fitting into that frame
+        let aspectRatio = CGFloat(puzzleImage.width) / CGFloat(puzzleImage.height)
+        let fittedImageHeight = min(frameHeight, frameWidth / aspectRatio)
+        
+        // Vertical slack between the bottom of the drawn puzzle and the bottom of the puzzle area
+        let clearance = (size.height - frameHeight) / 2 + (frameHeight - fittedImageHeight) / 2
+        
+        return clearance >= statusbarHeight ? 0 : statusbarHeight
+    }
+    
     func cancelGameGenerationAndRegernateMidend() {
         frontend.cancelNewGame()
         
@@ -466,6 +518,15 @@ struct GameView: View {
         imageIsFocused = true
     }
     
+}
+
+/// Measures the rendered height of the game statusbar so GameView can reserve space for it when needed
+struct StatusbarHeightKey: PreferenceKey {
+    static var defaultValue: CGFloat { 0 } // Computed (not stored) to satisfy Swift 6's global mutable state rules
+    
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
+    }
 }
 
 #Preview {
