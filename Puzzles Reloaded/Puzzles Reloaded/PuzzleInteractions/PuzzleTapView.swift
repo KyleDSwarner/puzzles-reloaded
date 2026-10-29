@@ -366,6 +366,9 @@ class PuzzleTapView: UIView {
         if keypressResponse == PuzzleInteractionResponse.someEffect {
             effectsManager.triggerEffect(feedbackType: physicalFeedbackType)
         }
+        
+        // Ensure frontend flags (primarily undo/redo) are properly updated after a press
+        frontend?.updateFrontendFlags()
     }
 
     // Triggered when the user's touch is interrupted, e.g. by a low battery alert.
