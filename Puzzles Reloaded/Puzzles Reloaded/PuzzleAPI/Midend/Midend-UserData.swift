@@ -75,9 +75,17 @@ func midend_readFile(context: UnsafeMutableRawPointer?, buffer: UnsafeMutableRaw
 extension Midend {
     
     /**
-     Saves user-configured game settings to a string
+     Saves user-configured game settings to a string.
+     Returns nil only if preferences could not be produced; if the midend is temporarily unavailable
+     (e.g. saving while a game is still being created), the last-known prefs are returned so callers
+     don't overwrite stored preferences with nothing.
      */
     func saveUserPrefs() -> String? {
+        guard hasMidend, let midendPointer else {
+            print("Skipping preference save: midend not available")
+            return cachedPrefs
+        }
+        
         let newSave = SaveContext()
         
         withUnsafePointer(to: newSave) { savePointer in
@@ -91,6 +99,11 @@ extension Midend {
         
         guard preferences != nil else {
             print("No user preferences provided")
+            return
+        }
+        
+        guard hasMidend, let midendPointer else {
+            print("Skipping preference load: midend not available")
             return
         }
         
@@ -112,7 +125,12 @@ extension Midend {
  Extension methods for saving & loading saved games
  */
 extension Midend {
-    func saveGame() -> SaveContext {
+    /// Serializes the current game, or nil if there is no midend to serialize.
+    func saveGame() -> SaveContext? {
+        guard hasMidend, let midendPointer else {
+            print("Skipping game save: midend not available")
+            return nil
+        }
         
         var newSave = SaveContext()
         
@@ -126,6 +144,11 @@ extension Midend {
     func readSave(_ savegame: SaveContext?) {
         
         guard let save = savegame else {
+            return
+        }
+        
+        guard hasMidend, let midendPointer else {
+            print("Skipping savegame load: midend not available")
             return
         }
         

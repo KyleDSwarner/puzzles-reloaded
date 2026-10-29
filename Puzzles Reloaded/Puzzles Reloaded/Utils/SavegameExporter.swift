@@ -16,7 +16,11 @@ extension UTType {
 
 struct SavegameExporter : Transferable {
     
-    let generateSavegame: @Sendable () -> (filename: String, save: SaveContext)
+    let generateSavegame: @Sendable () -> (filename: String, save: SaveContext?)
+    
+    enum ExportError: Error {
+        case saveUnavailable
+    }
     
     static var transferRepresentation: some TransferRepresentation {
 
@@ -34,7 +38,16 @@ struct SavegameExporter : Transferable {
             
             
             let saveInfo = exporter.generateSavegame()
-            let data = saveInfo.save.prefData as String
+            
+            guard let save = saveInfo.save else {
+                // The midend wasn't available when the export was requested (e.g. it was still being recreated).
+                // Note: errors thrown from a FileRepresentation export are not surfaced by ShareLink itself,
+                // so log here to keep the failure visible while debugging.
+                print("Savegame export failed: midend unavailable")
+                throw ExportError.saveUnavailable
+            }
+            
+            let data = save.prefData as String
             
             let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent(saveInfo.filename, conformingTo: .puzzleSavegame)
             
@@ -44,4 +57,17 @@ struct SavegameExporter : Transferable {
         })
     }
     
+}
+
+/**
+ Provides a user-facing message for export failures, so the error reads clearly if/when it is
+ surfaced (e.g. via an alert in a caller that chooses to catch it).
+ */
+extension SavegameExporter.ExportError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .saveUnavailable:
+            return "This puzzle isn't ready to share right now. Please try again in a moment."
+        }
+    }
 }

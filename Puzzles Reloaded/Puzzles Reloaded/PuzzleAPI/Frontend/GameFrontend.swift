@@ -117,6 +117,13 @@ class Frontend: @unchecked Sendable {
             self.displayLoadingScreen = false
             self.currentGameInvalidated = false
             
+            // The midend could have been torn down (or failed to initialize) while the game was generating.
+            // Bail out before calling further midend functions that would crash on a nil pointer.
+            guard midend.hasMidend else {
+                print("Game generation finished but midend is unavailable - skipping draw")
+                return
+            }
+            
             // Initialize the game and find the correct image boundaries
             self.imageManager = PuzzleImageManager(width: dimensions.x, height: dimensions.y)
             
@@ -180,7 +187,7 @@ class Frontend: @unchecked Sendable {
         self.canSolve = midend.isPuzzleAutoSolvable()
     }
     
-    func saveGame() -> SaveContext {        
+    func saveGame() -> SaveContext? {        
         return midend.saveGame()
     }
     

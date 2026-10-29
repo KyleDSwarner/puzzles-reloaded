@@ -18,12 +18,31 @@ class Midend {
     var midendPointer: OpaquePointer? = nil
     var game: game?
     
+    /// True only when a live midend exists. Callers should check this before invoking midend C functions,
+    /// since the imported C API takes a non-optional pointer and will crash rather than no-op.
+    private(set) var hasMidend: Bool = false
+    
+    /// Last successfully serialized preference string. Used as a fallback when the midend is unavailable
+    /// (e.g. saving while a game is still being created), so we don't wipe the user's stored prefs.
+    private(set) var cachedPrefs: String?
+    
     init(game: game) {
         self.game = game
     }
     
     func setMidendPointer(midendPointer: OpaquePointer?) {
         self.midendPointer = midendPointer
+        self.hasMidend = midendPointer != nil
+    }
+    
+    /**
+     Explicitly release the current midend pointer without creating a replacement.
+     Used before recreating the midend so any in-flight save/load sees a safely-nil pointer
+     instead of a midend that's being torn down.
+     */
+    func dropMidend() {
+        self.midendPointer = nil
+        self.hasMidend = false
     }
     
     func setGame(_ thegame: game) {
@@ -119,7 +138,15 @@ class Midend {
         
         let midend: OpaquePointer? = midend_new(OpaquePointer(frontendPointer), gamePointer, drawingApi, frontendPointer /* frontend again? */) // OpaquePointer to Midend object
         
+        // If midend_new somehow failed, make sure we don't leave a stale 'valid' flag behind.
+        guard let midend else {
+            self.midendPointer = nil
+            self.hasMidend = false
+            return
+        }
+        
         self.midendPointer = midend
+        self.hasMidend = true
         frontend.gameHasStatusbar = midend_wants_statusbar(midend)
         buildGameColors(midend: midend, frontend: frontend)
         
@@ -156,6 +183,13 @@ class Midend {
     }
     
     func initGame(savegame: String? = nil, preferences: String? = nil) async -> (x: Int, y: Int) {
+        
+        // Bail out early if the midend never came up (or was torn down) - calling into C with a nil
+        // pointer would crash instead of failing gracefully.
+        guard hasMidend else {
+            print("initGame skipped: midend not available")
+            return (x: 0, y: 0)
+        }
         
         // If present, load user preferences
         if preferences != nil {

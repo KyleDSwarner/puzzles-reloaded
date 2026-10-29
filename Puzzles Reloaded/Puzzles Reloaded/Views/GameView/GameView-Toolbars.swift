@@ -32,6 +32,11 @@ struct GameViewToolbars: ViewModifier {
     func generateSavegameExport() -> SavegameExporter {
         
         return SavegameExporter() {
+            // Fail fast if the midend isn't available
+            guard frontend.midend.hasMidend else {
+                return (gameName, nil)
+            }
+            
             frontend.midend.restartGame() // Restart the game to give users on shared games a clean slate.
             let savegame = frontend.saveGame()
             frontend.undoMove() // Undo the move so the restart is not persistent for the user.

@@ -463,6 +463,7 @@ struct GameView: View {
          Cancelling a game in places tends to desync the internal state of the puzzle midend, causing assertion failues when the user creates another game.
          This recreates the midend from scratch to avoid these issues (and has the added benefit of resetting the custom game settings, which feels cleaner)
          */
+        frontend.midend.dropMidend() // Mark the old midend unavailable before replacing it, so concurrent save/load calls safely no-op.
         frontend.midend.createMidend(frontend: &frontend)
     }
     
