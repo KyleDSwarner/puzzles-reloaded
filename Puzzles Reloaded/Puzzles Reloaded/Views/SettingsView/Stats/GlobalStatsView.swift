@@ -104,20 +104,23 @@ struct GlobalStatsView: View {
                         Text("Most Frequently Played")
                     }
                 }
+
+                Section {
+                    Button("Reset Game Stats") {
+                        print("Resetting Game Stats")
+                        showingClearStatsDialog = true
+                    }
+                }
             }
+
+            
+            
+
 
             Section {
                 Toggle("Enable Statistics", isOn: $appSettings.value.enableStatistics)
             } footer: {
                 Text("Disabling statistics will hide & prevent changes to all win statistics and game history across the app. Statistics are local only to you and never leave the app.")
-            }
-            
-            Section {
-                Button("Reset Game Stats") {
-                    print("Resetting Game Stats")
-                    showingClearStatsDialog = true
-                }
-                
             }
             
         }
