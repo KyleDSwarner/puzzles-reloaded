@@ -113,12 +113,18 @@ struct GlobalStatsView: View {
                 }
             }
 
-            
-            
-
-
             Section {
-                Toggle("Enable Statistics", isOn: $appSettings.value.enableStatistics)
+                Toggle(
+                    "Enable Statistics",
+                    isOn: Binding(
+                        get: { appSettings.value.enableStatistics },
+                        set: { isEnabled in
+                            withAnimation {
+                                appSettings.value.enableStatistics = isEnabled
+                            }
+                        }
+                    )
+                )
             } footer: {
                 Text("Disabling statistics will hide & prevent changes to all win statistics and game history across the app. Statistics are local only to you and never leave the app.")
             }
