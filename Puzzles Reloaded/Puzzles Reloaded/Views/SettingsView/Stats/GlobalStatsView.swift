@@ -84,6 +84,7 @@ struct GlobalStatsView: View {
                     }
                     
                 }
+                .transition(.opacity.combined(with: .move(edge: .top)))
                 
                 if totalGamesPlayed > 0 {
                     Section {
@@ -103,6 +104,7 @@ struct GlobalStatsView: View {
                     } header: {
                         Text("Most Frequently Played")
                     }
+                    .transition(.opacity.combined(with: .move(edge: .top)))
                 }
 
                 Section {
@@ -111,20 +113,11 @@ struct GlobalStatsView: View {
                         showingClearStatsDialog = true
                     }
                 }
+                .transition(.opacity.combined(with: .move(edge: .top)))
             }
 
             Section {
-                Toggle(
-                    "Enable Statistics",
-                    isOn: Binding(
-                        get: { appSettings.value.enableStatistics },
-                        set: { isEnabled in
-                            withAnimation {
-                                appSettings.value.enableStatistics = isEnabled
-                            }
-                        }
-                    )
-                )
+                Toggle("Enable Statistics", isOn: $appSettings.value.enableStatistics)
             } footer: {
                 Text("Disabling statistics will hide & prevent changes to all win statistics and game history across the app. Statistics are local only to you and never leave the app.")
             }
@@ -141,6 +134,7 @@ struct GlobalStatsView: View {
                     showingClearStatsDialog = false
                 }
             }
+        .animation(.easeInOut(duration: 0.25), value: appSettings.value.enableStatistics)
         .navigationTitle("Statistics")
         .navigationBarTitleDisplayMode(.inline)
     }
